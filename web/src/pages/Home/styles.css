@@ -1,0 +1,39 @@
+.main-container {
+    flex: 1;
+    
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  
+    margin: -5rem 30rem 2rem;
+    padding: 3rem;
+
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    background: var(--color-box-base);
+  }
+  
+  .db-container {
+    flex: 1;
+    display: flex;
+    padding: 40px;    
+    align-items: center;
+    flex-direction: column;
+
+    background: #1e457e;
+    height: 300px;
+    border: 10px solid;
+    border-color: #1e457e;
+  }
+  .db-container h1 {
+    color: white;
+  }
+
+  .forms-content-label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  
+  font: 400 2rem Montserrat;
+  justify-content: flex-end;
+
+}
