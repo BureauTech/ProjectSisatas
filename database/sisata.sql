@@ -11,10 +11,14 @@ USE sisata
     asdf
 */
 
-CREATE TABLE usuario (
+CREATE TABLE Usuario (
 
 );
 
-CREATE TABLE usuario (
+CREATE TABLE Uf (
+    
+);
+
+CREATE TABLE Perfil(
     
 );
