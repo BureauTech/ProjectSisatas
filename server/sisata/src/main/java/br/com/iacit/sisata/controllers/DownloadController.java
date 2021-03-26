@@ -1,6 +1,12 @@
 package br.com.iacit.sisata.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -16,32 +22,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.iacit.sisata.exports.EscritorExcel;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/download")
 public class DownloadController {
 	
-	@GetMapping("/ata/excel/{ata}")
-	public ResponseEntity<Resource> AtaExcel(@PathVariable("ata") int id_ata) throws IOException {
+	@GetMapping("/ata/excel")
+	public ResponseEntity<Resource> AtaExcel() throws IOException, URISyntaxException {
 		
 		 HttpHeaders header = new HttpHeaders();
 	        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=ata.xlsx");
+	        //header.setContentType(new MediaType("applicaton", "octet-stream", StandardCharsets.UTF_8));
 	        header.add("Cache-Control", "no-cache, no-store, must-revalidate");
 	        header.add("Pragma", "no-cache");
 	        header.add("Expires", "0");
 			
-
-	        //Path path = Paths.get(//file.getAbsolutePath());
-	        //ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
-
-	        /*
+	        byte[] ata = new EscritorExcel().getAta();
+	        ByteArrayResource resource = new ByteArrayResource(ata);
+	        //byte[] resource = new EscritorExcel().getAta();
+	        
 	        return ResponseEntity.ok()
 	                .headers(header)
-	                .contentLength(file.length())
+	                .contentLength(ata.length)
 	                .contentType(MediaType.parseMediaType("application/octet-stream"))
 	                .body(resource);
-			*/
+			
 	        
-	        return null;
+	        
 	}
 }
