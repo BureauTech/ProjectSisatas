@@ -9,7 +9,7 @@ import br.com.iacit.models.ConexaoEmail;
 
 
 @SuppressWarnings("deprecation")
-public class Envio {
+public class EnvioEmail {
 	//ConexaoEmail cone = new ConexaoEmail();
 	public static void EnviaSimples(ConexaoEmail cone) {
 		try {
