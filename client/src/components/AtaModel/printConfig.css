@@ -1,0 +1,57 @@
+@page {
+  size: A4;
+  margin: 0 auto;
+  padding: 0;
+}
+@media print {
+  html,
+  body {
+    padding: 0;
+    background-color: silver;
+  }
+  /* } */
+  /* #root {
+    background-color: white;
+    box-shadow: inset 0 0 0 1000px silver;
+    margin: 0;
+    width: 210mm;
+    height: 297mm;
+    margin-bottom: 10px;
+  } */
+
+  .no-print {
+    display: none;
+  }
+}
+/*
+  .print,
+  .MuiContainer-root {
+    display: block; */
+/* box-shadow: inset 0 0 0 1000px gold; */
+/* background-color: rgb(233, 233, 233) !important;
+    width: 178mm !important;
+    padding: 0 !important;
+    margin: 0 auto;
+  }
+
+  .header-print { */
+/* margin-top: 1.25cm; */
+/* height: 4.44cm;
+  }
+  .hd1 {
+    border-right: 0px !important;
+  }
+
+  .main-print {
+    margin-top: 0;
+    border: 1px solid black;
+    padding-top: 0;
+  }
+  h2 {
+    margin: 0;
+  }
+  .header-content {
+    border: 1px solid black;
+    height: 2.42cm;
+  }
+} */
