@@ -1,24 +1,29 @@
-html,
+/* html,
 body {
   padding: 0;
   background-color: silver;
-}
-#root {
+} */
+/* #root {
   background-color: white;
   margin: 0 auto;
   width: 210mm;
   height: 297mm;
   margin-bottom: 10px;
-}
+} */
+/* html,
+body,
+#root,
+.App {
+  width: 100vw;
+  height: 100vh;
+} */
 
 .no-print {
   display: block;
 }
 
-.print,
-.MuiContainer-root {
-  display: block;
-  background-color: rgb(233, 233, 233) !important;
+.print {
+  display: none !important;
   width: 178mm !important;
   padding: 0 !important;
   margin: 0 auto;

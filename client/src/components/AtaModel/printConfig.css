@@ -1,57 +1,34 @@
 @page {
   size: A4;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
 }
+
 @media print {
+  * {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.43;
+  }
   html,
   body {
     padding: 0;
-    background-color: silver;
+    height: 10px;
   }
-  /* } */
-  /* #root {
-    background-color: white;
-    box-shadow: inset 0 0 0 1000px silver;
-    margin: 0;
-    width: 210mm;
-    height: 297mm;
-    margin-bottom: 10px;
-  } */
 
   .no-print {
-    display: none;
+    display: none !important;
   }
-}
-/*
-  .print,
-  .MuiContainer-root {
-    display: block; */
-/* box-shadow: inset 0 0 0 1000px gold; */
-/* background-color: rgb(233, 233, 233) !important;
-    width: 178mm !important;
-    padding: 0 !important;
-    margin: 0 auto;
+  .blue {
+    box-shadow: inset 1px 1px 10px 100px #c6d9f1 !important;
   }
-
-  .header-print { */
-/* margin-top: 1.25cm; */
-/* height: 4.44cm;
+  .page {
+    page-break-after: always;
   }
-  .hd1 {
-    border-right: 0px !important;
+  .print {
+    margin-top: 0.5cm;
+    display: block !important;
   }
-
-  .main-print {
-    margin-top: 0;
-    border: 1px solid black;
-    padding-top: 0;
+  .second {
+    margin-top: 1.25cm;
   }
-  h2 {
-    margin: 0;
-  }
-  .header-content {
-    border: 1px solid black;
-    height: 2.42cm;
-  }
-} */
+} ;
