@@ -10,8 +10,6 @@ A web app for tracking and management of meeting records.
 
 # How to Run
 
-</br>
-
 ## Server
 
 On the [***server/sisata***](./server/sisata) folder: </br></br>
@@ -43,8 +41,6 @@ docker run -p 8080:8080 {image-id}
 </br>
 
 # Progress
-
-</br>
 
 ## Sprint 1
 
