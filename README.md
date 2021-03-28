@@ -19,7 +19,7 @@ It can be ran directly with maven by the command:
 mvn spring-boot:run
 ```
 
-and it will be available on http://localhost/8080
+and it will be available on [localhost:8080](http://localhost/8080)
 
 or
 
@@ -37,6 +37,19 @@ docker run -p 8080:8080 {image-id}
 
 
 ## Client
+On the [***client/***](./client) folder: </br></br>
+
+1. Download node modules
+```
+npm install
+```
+
+2. Starting the application 
+```
+npm start
+```
+
+Now available on [localhost:3000](http://localhost/3000)
 
 </br>
 
