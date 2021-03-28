@@ -72,6 +72,8 @@ Interactive screen prototypes can be found here: https://bit.ly/3dgpchg
 
 - [Use Case Diagram (DCU)](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
 
+- [Screen's Prototypes](https://github.com/BureauTech/ProjectSisatas/blob/prod/sprint-1/docs/Prototipo_telas_v1.pdf) 
+
 </br>
 
 ### Server
