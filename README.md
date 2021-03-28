@@ -5,10 +5,6 @@ A web app for tracking and management of meeting records.
 </br>
 
 # Technologies
-- Spring Framework
-- Maven
-- ReactJS
-- MaterialUI
 
 </br>
 
@@ -115,4 +111,8 @@ Testing with button that calls the browser's printing function.
 ### [![GitHub Badge](https://img.shields.io/github/followers/Denis-Lima?label=Denis-Lima&style=for-the-badge&color=black&link=https://github.com/Denis-Lima)](https://github.com/Denis-Lima) - DEV Team<br/> 
 
 ### [![GitHub Badge](https://img.shields.io/github/followers/WeDias?label=WeDias&style=for-the-badge&color=black&link=https://github.com/WeDias)](https://github.com/WeDias) - DEV Team<br/>
+
+
+
+
 
