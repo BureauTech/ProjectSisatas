@@ -6,8 +6,6 @@ A web app for tracking and management of meeting records.
 
 # Technologies
 
-
-
 </br>
 
 # How to Run
@@ -16,6 +14,7 @@ A web app for tracking and management of meeting records.
 
 ## Server
 
+On the [***server/sisata***](./server/sisata) folder: </br></br>
 It can be ran directly with maven by the command:
 
 ```
@@ -38,15 +37,13 @@ docker build -t bureau/sisata
 docker run -p 8080:8080 {image-id}
 ```
 
+
 ## Client
 
-
-
-## Database
-
-
+</br>
 
 # Progress
+
 
 ## Sprint 1
 
