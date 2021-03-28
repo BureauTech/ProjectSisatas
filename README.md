@@ -60,7 +60,7 @@ Now available on [localhost:3000](http://localhost/3000)
 
 ### Prototypes
 
-Interactive screen prototypes can be found here: https://bit.ly/3dgpchg
+Interactive screen prototypes can be found here: https://bit.ly/SISATAS
 
 </br>
 
