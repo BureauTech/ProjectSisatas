@@ -5,6 +5,10 @@ A web app for tracking and management of meeting records.
 </br>
 
 # Technologies
+- Spring Framework
+- Maven
+- ReactJS
+- MaterialUI
 
 </br>
 
