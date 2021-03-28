@@ -116,7 +116,3 @@ Testing with button that calls the browser's printing function.
 
 ### [![GitHub Badge](https://img.shields.io/github/followers/WeDias?label=WeDias&style=for-the-badge&color=black&link=https://github.com/WeDias)](https://github.com/WeDias) - DEV Team<br/>
 
-
-
-
-
