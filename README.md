@@ -2,19 +2,19 @@
 
 A web app for tracking and management of meeting records.
 
-## Table of Contents
-
-[TOC]
+</br>
 
 # Technologies
 
 
 
+</br>
+
 # How to Run
 
-## Server
+</br>
 
-### maven
+## Server
 
 It can be ran directly with maven by the command:
 
@@ -24,7 +24,7 @@ mvn spring-boot:run
 
 and it will be available on http://localhost/8080
 
-### Docker
+or
 
 1. Building the Docker Image:
 
@@ -37,8 +37,6 @@ docker build -t bureau/sisata
 ```
 docker run -p 8080:8080 {image-id}
 ```
-
-
 
 ## Client
 
@@ -68,13 +66,18 @@ Use Case Diagram  (DCU)
 
 ### Server
 
-Implementation of the excel export functionality
+Created .xlsx minute template.
+Implementation of the excel export functionality, although with a enconging bug that is planned
+to be solved on the next Sprint.
+
+![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/assets/gifs/download_excel.gif)
 
 ### Client
 
-Template de ATA em HTML criado, teste com um botão que ao clicar, chama a função imprimir do navegador e gera o template.
-Segue o GIF e o PDF gerado.
+Created .html template. 
+Testing with button that calls the browser's printing function.
 
+![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/assets/gifs/download_pdf.gif)
 
 
 # Project Contributors 
