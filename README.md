@@ -60,19 +60,17 @@ Now available on [localhost:3000](http://localhost/3000)
 
 ### Prototypes
 
-Interactive screen prototypes can be found here:
-
-https://bit.ly/3dgpchg
+Interactive screen prototypes can be found here: https://bit.ly/3dgpchg
 
 </br>
 
 ### Documentation
 
-Project Backlog
+- [Project Backlog](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
 
-Entity Relationship Document (DER)
+- [Entity Relationship Document (DER)]
 
-Use Case Diagram  (DCU)
+- [Use Case Diagram (DCU)](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
 
 </br>
 
