@@ -44,6 +44,7 @@ docker run -p 8080:8080 {image-id}
 
 # Progress
 
+</br>
 
 ## Sprint 1
 
@@ -53,6 +54,8 @@ Interactive screen prototypes can be found here:
 
 https://bit.ly/3dgpchg
 
+</br>
+
 ### Documentation
 
 Project Backlog
@@ -61,6 +64,8 @@ Entity Relationship Document (DER)
 
 Use Case Diagram  (DCU)
 
+</br>
+
 ### Server
 
 Created .xlsx minute template.
@@ -68,6 +73,8 @@ Implementation of the excel export functionality, although with a enconging bug 
 to be solved on the next Sprint.
 
 ![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/assets/gifs/download_excel.gif)
+
+</br>
 
 ### Client
 
