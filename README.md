@@ -12,6 +12,15 @@ A web app for tracking and management of meeting records.
 - MaterialUI
 
 </br>
+# Spotlight
+
+## Front-end prototype
+
+
+
+Interactive screen prototypes can be found here: https://bit.ly/SISATAS
+
+<br/>
 
 # How to Run
 
@@ -60,29 +69,22 @@ Now available on [localhost:3000](http://localhost/3000)
 </br>
 
 # Progress
-
 ## Sprint 1
-
 ### Prototypes
-
 Interactive screen prototypes can be found here: https://bit.ly/SISATAS
 
 </br>
 
 ### Documentation
-
 - [Project Backlog](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
-
-- [Entity Relationship Document (DER)]
-
+- [Entity Relationship (DER)(Conceptual)](https://github.com/BureauTech/ProjectSisatas/blob/master/docs/DER_Conceitual_SISATA_Final.png)
+- [Entity Relationship (DER)(Logical)](https://github.com/BureauTech/ProjectSisatas/blob/master/docs/DER_Logico_SISATA_Final.png)
 - [Use Case Diagram (DCU)](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
-
 - [Screen's Prototypes](https://github.com/BureauTech/ProjectSisatas/blob/prod/sprint-1/docs/Prototipo_telas_v1.pdf) 
 
 </br>
 
 ### Server
-
 Created .xlsx minute template.
 Implementation of the excel export functionality, although with a enconging bug that is planned
 to be solved on the next Sprint.
@@ -92,12 +94,10 @@ to be solved on the next Sprint.
 </br>
 
 ### Client
-
 Created .html template. 
 Testing with button that calls the browser's printing function.
 
 ![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/assets/gifs/download_pdf.gif)
-
 
 # Authors
 
