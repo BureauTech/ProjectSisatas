@@ -12,6 +12,7 @@ A web app for tracking and management of meeting records.
 - MaterialUI
 
 </br>
+
 #Spotlight
 
 ## Front-end prototype
