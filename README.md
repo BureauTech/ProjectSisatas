@@ -9,6 +9,9 @@ A web app for tracking and management of meeting records.
 ## Front-end prototype
 
 
+![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/gifs/telas.gif)
+
+<br/>
 
 Interactive screen prototypes can be found here: https://bit.ly/SISATAS
 
