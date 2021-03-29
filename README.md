@@ -13,7 +13,7 @@ A web app for tracking and management of meeting records.
 
 </br>
 
-#Spotlight
+# Spotlight
 
 ## Front-end prototype
 
