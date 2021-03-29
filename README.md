@@ -4,15 +4,6 @@ A web app for tracking and management of meeting records.
 
 </br>
 
-# Technologies
-
-- Spring Framework
-- Maven
-- ReactJS
-- MaterialUI
-
-</br>
-
 # Spotlight
 
 ## Front-end prototype
@@ -22,6 +13,15 @@ A web app for tracking and management of meeting records.
 Interactive screen prototypes can be found here: https://bit.ly/SISATAS
 
 <br/>
+
+# Technologies
+
+- Spring Framework
+- Maven
+- ReactJS
+- MaterialUI
+
+</br>
 
 # How to Run
 
