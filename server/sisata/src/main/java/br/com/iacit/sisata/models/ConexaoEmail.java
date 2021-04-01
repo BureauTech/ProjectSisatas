@@ -1,4 +1,4 @@
-package br.com.iacit.models;
+package br.com.iacit.sisata.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
