@@ -15,6 +15,11 @@ const theme = createMuiTheme({
       contrastText: "#FFF",
     },
   },
+  typography: {
+    button: {
+      textTransform: "none",
+    },
+  },
 });
 
 ReactDOM.render(
