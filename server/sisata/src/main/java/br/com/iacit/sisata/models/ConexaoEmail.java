@@ -1,11 +1,8 @@
-package br.com.iacit.models;
+package br.com.iacit.sisata.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
+//@Entity
 public class ConexaoEmail {
-	@Id
+	//@Id
 	public String userEnviar = ""; //usuario (email sem dominio)
 	public String senhaEnviar = ""; //senha do email
 	public String emailEnviar = ""; //email que vai enviar a mensagem
