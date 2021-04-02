@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/create">
+          <Route path="/createata">
             <AtaHeader ata={ata} />
           </Route>
         </Switch>
