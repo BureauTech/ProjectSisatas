@@ -7,6 +7,7 @@ import {
   Input,
 } from "@material-ui/core";
 import { Component } from "react";
+import "./AtaHeader.css";
 
 // Alterando css de componentes
 const styles = (theme) => ({
@@ -51,10 +52,19 @@ class AtaHeader extends Component {
   render() {
     const { classes, ata } = this.props;
 
+    // recebe último ID do banco e soma 1
+    const somarIdAta = (id) => {
+      let parte1 = id.split("/")[0];
+      const parte2 = id.split("/")[1];
+      parte1 = (Number(parte1) + 1).toString();
+      console.log(parte1.length);
+      if (parte1.length === 1) parte1 = "0" + parte1;
+      return parte1 + "/" + parte2;
+    };
+
     return (
       <Container>
         <Grid container>
-          <Typography>Cabeçalho</Typography>
           <Grid
             container
             className={classes.grid}
@@ -71,7 +81,7 @@ class AtaHeader extends Component {
                 </Grid>
                 <Grid container justify="center">
                   <Typography className={classes.biggerText}>
-                    {ata.id}
+                    {somarIdAta(ata.id)}
                   </Typography>
                 </Grid>
               </Grid>
