@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AtaHeader from "./components/CreateAta/AtaHeader";
+import Menu from "./components/Menu/Menu"
 
 function App() {
   const ata = {
@@ -11,6 +12,9 @@ function App() {
         <Switch>
           <Route path="/create">
             <AtaHeader ata={ata} />
+          </Route>
+          <Route path="/menu">
+            <Menu />
           </Route>
         </Switch>
       </Router>
