@@ -7,7 +7,7 @@ import {
   Input,
 } from "@material-ui/core";
 import { Component } from "react";
-import "./AtaHeader.css";
+import "./Components.css";
 
 // Alterando css de componentes
 const styles = (theme) => ({

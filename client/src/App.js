@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AtaHeader from "./components/CreateAta/AtaHeader";
+import ProjectParticipants from "./components/CreateAta/ProjectParticipants";
 
 function App() {
   const ata = {
@@ -11,6 +12,7 @@ function App() {
         <Switch>
           <Route path="/createata">
             <AtaHeader ata={ata} />
+            <ProjectParticipants />
           </Route>
         </Switch>
       </Router>

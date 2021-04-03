@@ -1,0 +1,10 @@
+input[type="time"],
+input[type="date"] {
+  text-align: center !important;
+}
+
+@media screen and (min-width: 600px) and (max-width: 960px) {
+  .inputsGrid {
+    margin-right: 20px !important;
+  }
+}
