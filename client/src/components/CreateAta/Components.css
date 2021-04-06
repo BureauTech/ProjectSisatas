@@ -3,8 +3,36 @@ input[type="date"] {
   text-align: center !important;
 }
 
+.largeIcon {
+  height: 3rem !important;
+  width: 3rem !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 @media screen and (min-width: 600px) and (max-width: 960px) {
   .inputsGrid {
     margin-right: 20px !important;
+    margin-bottom: 10px !important;
+  }
+  .center {
+    justify-content: center !important;
+  }
+  .largeIcon {
+    height: 2.6rem !important;
+    width: 2.6rem !important;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .space-around {
+    justify-content: space-evenly !important;
+  }
+  .largeIcon {
+    height: 4rem !important;
+    width: 4rem !important;
   }
 }
