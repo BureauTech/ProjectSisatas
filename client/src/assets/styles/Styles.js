@@ -11,6 +11,7 @@ const styles = (theme) => ({
     color: "black",
     width: "100%",
     paddingLeft: "0.4rem",
+    borderBottom: "none",
   },
   biggerText: {
     color: "white",
