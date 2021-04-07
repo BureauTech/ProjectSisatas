@@ -13,7 +13,7 @@ function App() {
           <Route path="/create">
             <AtaHeader ata={ata} />
           </Route>
-          <Route path="/menu">
+          <Route path="/">
             <Menu />
           </Route>
         </Switch>

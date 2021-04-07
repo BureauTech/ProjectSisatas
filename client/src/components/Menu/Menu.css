@@ -1,0 +1,12 @@
+icon-active {
+    background-color: #26BAF4 !important;
+    color: #FFF !important;
+}
+
+link {
+    color: #C0C0C0 !important;
+}
+
+link:hover {
+    text-decoration: none !important;
+}
