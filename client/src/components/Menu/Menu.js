@@ -96,9 +96,6 @@ const useStyles = makeStyles((theme) => ({
     text: {
         marginLeft: '7px',
         color: "#6D6D6D",
-        '&:hover': {
-            textDecoration: 'none',
-        }
     }
 
 }));
@@ -167,15 +164,15 @@ export default function Menu() {
                 <Divider />
                 <List>
                     <Typography>
-                        <Link href=''>
+                        <Link href='' underline='none'>
                             <ListItem button key='home'>
                                 <ListItemIcon ><NotificationsNoneOutlinedIcon className={classes.icons} onClick={activeIcon} /></ListItemIcon>
-                                <ListItemText primary='Home/Atualizações' className={classes.text} activeClassName="icon-active" />
+                                <ListItemText primary='Home/Atualizações' className={classes.text} />
                             </ListItem>
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href='new-record'>
+                        <Link href='new-record' underline='none'>
                             <ListItem button key='new-record'>
                                 <ListItemIcon><PostAddOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Nova Ata' className={classes.text} />
@@ -183,7 +180,7 @@ export default function Menu() {
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="show-records">
+                        <Link href="show-records" underline='none'>
                             <ListItem button key='show-records'>
                                 <ListItemIcon><AssignmentOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Exibir Atas' className={classes.text} />
@@ -191,7 +188,7 @@ export default function Menu() {
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="reports">
+                        <Link href="reports" underline='none'>
                             <ListItem button key='reports'>
                                 <ListItemIcon><AssessmentOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Relatórios' className={classes.text} />
@@ -199,7 +196,7 @@ export default function Menu() {
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="profile">
+                        <Link href="profile" underline='none'>
                             <ListItem button key='profile'>
                                 <ListItemIcon><AccountCircleOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Perfil de Usuário' className={classes.text} />
@@ -207,7 +204,7 @@ export default function Menu() {
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="users-list">
+                        <Link href="users-list" underline='none'>
                             <ListItem button key='users-list'>
                                 <ListItemIcon><PeopleAltOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Usuários Cadastrados' className={classes.text} />
@@ -215,7 +212,7 @@ export default function Menu() {
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="exit">
+                        <Link href="exit" underline='none'>
                             <ListItem button key='exit'>
                                 <ListItemIcon><ExitToAppOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Sair' className={classes.text} />
