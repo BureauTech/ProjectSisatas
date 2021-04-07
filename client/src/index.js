@@ -19,6 +19,8 @@ const theme = createMuiTheme({
     button: {
       textTransform: "none",
     },
+    fontFamily: "Montserrat",
+    fontWeightRegular: "400",
   },
 });
 
