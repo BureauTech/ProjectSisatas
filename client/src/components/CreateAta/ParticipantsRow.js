@@ -1,10 +1,12 @@
 import {
   FormLabel,
   Grid,
+  IconButton,
   Input,
   TextField,
   withStyles,
 } from "@material-ui/core";
+import { AddCircle } from "@material-ui/icons";
 import { Autocomplete } from "@material-ui/lab";
 import { Component } from "react";
 import { styles } from "../../assets/styles/Styles";
@@ -92,6 +94,7 @@ class ParticipantsRow extends Component {
                   <TextField
                     {...params}
                     className={classes.textField}
+                    style={{ padding: 0 }}
                     name="participante"
                     disableUnderline
                   />
@@ -128,6 +131,11 @@ class ParticipantsRow extends Component {
                 disableUnderline
               />
             </Grid>
+          </Grid>
+          <Grid container justify="flex-end">
+            <IconButton>
+              <AddCircle className="largeIcon" />
+            </IconButton>
           </Grid>
         </Grid>
       </Grid>

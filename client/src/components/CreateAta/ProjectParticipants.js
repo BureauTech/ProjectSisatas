@@ -24,7 +24,7 @@ class ProjectParticipants extends Component {
               container
               justify="flex-start"
               alignItems="center"
-              style={{ marginBottom: 10 }}
+              style={{ marginBottom: 30 }}
             >
               <FormLabel className={classes.normalText}>Projeto</FormLabel>
               <Grid item xs={12} sm={5} md={4}>

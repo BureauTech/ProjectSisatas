@@ -37,7 +37,10 @@ input[type="date"] {
     justify-content: space-evenly !important;
   }
   .largeIcon {
-    height: 4rem !important;
-    width: 4rem !important;
+    height: 3rem !important;
+    width: 3rem !important;
+  }
+  .inputsGrid {
+    margin-bottom: 5px !important;
   }
 }
