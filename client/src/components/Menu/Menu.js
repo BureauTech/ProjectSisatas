@@ -113,9 +113,9 @@ export default function Menu() {
         setOpen(false);
     };
 
-    const activeIcon = () => {
-
-    }
+    const iconSelected = () => {
+        console.log('clicou')
+    };
 
     return (
         <div className={classes.root}>
@@ -164,9 +164,9 @@ export default function Menu() {
                 <Divider />
                 <List>
                     <Typography>
-                        <Link href='' underline='none'>
-                            <ListItem button key='home'>
-                                <ListItemIcon ><NotificationsNoneOutlinedIcon className={classes.icons} onClick={activeIcon} /></ListItemIcon>
+                        <Link href='home' underline='none'>
+                            <ListItem button key='home' onClick={iconSelected}>
+                                <ListItemIcon ><NotificationsNoneOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Home/Atualizações' className={classes.text} />
                             </ListItem>
                         </Link>
