@@ -19,47 +19,19 @@ class ProjectParticipants extends Component {
     return (
       <Container>
         <Grid container className={classes.grid}>
-          <Grid
-            container
-            justify="flex-start"
-            alignItems="center"
-            spacing={2}
-            style={{ marginBottom: 10 }}
-          >
-            <FormLabel className={classes.normalText}>Projeto</FormLabel>
-            <Grid item xs={12} sm={4} md={4}>
-              <Input className={classes.textField} disableUnderline />
-            </Grid>
-          </Grid>
-          <Grid container justify="space-between">
-            <Grid container justify="flex-start">
-              <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-                <FormLabel className={classes.normalText}>
-                  Participante
-                </FormLabel>
-                <Grid item md={11}>
-                  <Input className={classes.textField} disableUnderline />
-                </Grid>
-              </Grid>
-              <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-                <FormLabel className={classes.normalText}>Área</FormLabel>
-                <Grid item md={11}>
-                  <Input className={classes.textField} disableUnderline />
-                </Grid>
-              </Grid>
-              <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-                <FormLabel className={classes.normalText}>Telefone</FormLabel>
-                <Grid item md={11}>
-                  <Input className={classes.textField} disableUnderline />
-                </Grid>
-              </Grid>
-              <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-                <FormLabel className={classes.normalText}>E-mail</FormLabel>
-                <Grid item md={11}>
-                  <Input className={classes.textField} disableUnderline />
-                </Grid>
+          <Grid item xs={12}>
+            <Grid
+              container
+              justify="flex-start"
+              alignItems="center"
+              style={{ marginBottom: 10 }}
+            >
+              <FormLabel className={classes.normalText}>Projeto</FormLabel>
+              <Grid item xs={12} sm={5} md={4}>
+                <Input className={classes.textField} disableUnderline />
               </Grid>
             </Grid>
+            <ParticipantsRow />
           </Grid>
         </Grid>
       </Container>
