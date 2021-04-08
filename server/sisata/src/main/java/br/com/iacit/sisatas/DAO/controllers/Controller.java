@@ -1,4 +1,4 @@
-package br.com.iacit.sisata.DAO.controllers;
+package br.com.iacit.sisatas.DAO.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

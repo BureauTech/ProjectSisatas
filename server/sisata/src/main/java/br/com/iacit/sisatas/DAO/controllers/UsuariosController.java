@@ -1,4 +1,4 @@
-package br.com.iacit.sisata.DAO.controllers;
+package br.com.iacit.sisatas.DAO.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.iacit.sisata.DAO.models.Users;
-import br.com.iacit.sisata.DAO.repository.UsersRepository;
+import br.com.iacit.sisatas.DAO.models.Usuarios;
+import br.com.iacit.sisatas.DAO.repository.UsuariosRepository;
 
 @Controller
-public class UsersController {
+public class UsuariosController {
 
-	@Autowired
-	private UsersRepository up;
+	/*
+	 * @Autowired private UsuariosRepository up;
+	 */
 
 	/*
 	 * @author: Daniel S. Oliveira
@@ -39,11 +40,11 @@ public class UsersController {
 	 * "perfil.per_id": pode ser 1 para Administrador, 2 para Gerente ou 3 para Usuários.
 	 */
 
-	@RequestMapping(value = "/cadastrar-usuarios", method = RequestMethod.POST)
-	public String cadastrar(Users usuario) {
-		up.save(usuario);
-		return "redirect:/usuarios"; // retorno utilizado para testar o código.
-	}
+	/*
+	 * @RequestMapping(value = "/cadastrar-usuarios", method = RequestMethod.POST)
+	 * public String cadastrar(Usuarios usuario) { up.save(usuario); return
+	 * "redirect:/usuarios"; // retorno utilizado para testar o código. }
+	 */
 
 	/*
 	 * @author: Daniel S. Oliveira
@@ -56,14 +57,12 @@ public class UsersController {
 	 * URL: localhost:8080/usuarios"
 	 * 
 	 */
-	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)
-	public ModelAndView listarUsuarios() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("usuarios");
-		Iterable<Users> users = up.findAll();
-		mv.addObject("listaUsers", users);
-		return mv;
-	}
+	/*
+	 * @RequestMapping(value = "/usuarios", method = RequestMethod.GET) public
+	 * ModelAndView listarUsuarios() { ModelAndView mv = new ModelAndView();
+	 * mv.setViewName("usuarios"); Iterable<Usuarios> users = up.findAll();
+	 * mv.addObject("listaUsers", users); return mv; }
+	 */
 	
 	/*
 	 * @author: Daniel S. Oliveira
@@ -78,11 +77,10 @@ public class UsersController {
 	 * 
 	 */
 
-	@RequestMapping(value = "/excluir-usuario/{usu_id}", method = RequestMethod.GET)
-	public String excluir(@PathVariable int usu_id) {
-		Users userSelect = up.findById(usu_id);
-		up.delete(userSelect);
-		return "redirect:/usuarios";
-	}
-
+	/*
+	 * @RequestMapping(value = "/excluir-usuario/{usu_id}", method =
+	 * RequestMethod.GET) public String excluir(@PathVariable int usu_id) { Usuarios
+	 * userSelect = up.findById(usu_id); up.delete(userSelect); return
+	 * "redirect:/usuarios"; }
+	 */
 }

@@ -1,4 +1,4 @@
-package br.com.iacit.sisata;
+package br.com.iacit.sisatas;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

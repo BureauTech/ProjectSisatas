@@ -1,4 +1,4 @@
-package br.com.iacit.sisata.DAO;
+package br.com.iacit.sisatas.DAO;
 
 import javax.sql.DataSource;
 

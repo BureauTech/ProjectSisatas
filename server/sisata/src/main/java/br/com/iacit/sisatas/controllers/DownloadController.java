@@ -1,4 +1,4 @@
-package br.com.iacit.sisata.controllers;
+package br.com.iacit.sisatas.controllers;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.iacit.sisata.exports.EscritorExcel;
+import br.com.iacit.sisatas.exports.EscritorExcel;
 
 @CrossOrigin
 @RestController

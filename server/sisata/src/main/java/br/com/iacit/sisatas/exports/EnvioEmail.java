@@ -1,11 +1,11 @@
-package br.com.iacit.sisata.exports;
+package br.com.iacit.sisatas.exports;
 
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 
-import br.com.iacit.sisata.models.ConexaoEmail;
+import br.com.iacit.sisatas.models.ConexaoEmail;
 
 
 @SuppressWarnings("deprecation")
