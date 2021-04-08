@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import ProjectParticipants from "./components/CreateAta/ProjectParticipants";
+import Pauta from "./components/CreateAta/Pauta";
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/createata">
-            <ProjectParticipants />
+            <Pauta />
           </Route>
         </Switch>
       </Router>
