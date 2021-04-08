@@ -21,7 +21,7 @@ import {
 } from "@material-ui/core";
 import { AddCircle, Cancel, Delete, ExpandMore } from "@material-ui/icons";
 import { Autocomplete } from "@material-ui/lab";
-import { Component, forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { styles } from "../../assets/styles/Styles";
 import "./Components.css";
 
@@ -29,53 +29,82 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-class ParticipantsRow extends Component {
-  constructor() {
-    super();
-    this.state = {
-      listaParticipantes: [
-        {
-          nome: "Denis Lima",
-          area: "Dev",
-          telefone: "12 123456789",
-          email: "denis@bureautech.com",
-        },
-        {
-          nome: "Charles Ferreira",
-          area: "PO",
-          telefone: "12 123456439",
-          email: "charles@bureautech.com",
-        },
-        {
-          nome: "Bia Coutinho",
-          area: "Dev",
-          telefone: "12 1267796789",
-          email: "bia@bureautech.com",
-        },
-      ],
-      listaAdicionados: [],
-      atual: {
-        nome: "",
-        email: "",
-        telefone: "",
-        area: "",
-      },
-      isOpen: false,
-    };
-  }
-  existeParticipante = (novo) => {
+const ParticipantsRow = (props) => {
+  const { classes } = props;
+
+  const [listaParticipantes, setListaParticipantes] = useState([
+    {
+      nome: "Denis Lima",
+      area: "Dev",
+      telefone: "12 123456789",
+      email: "denis@bureautech.com",
+    },
+    {
+      nome: "Charles Ferreira",
+      area: "PO",
+      telefone: "12 123456439",
+      email: "charles@bureautech.com",
+    },
+    {
+      nome: "Bia Coutinho",
+      area: "Dev",
+      telefone: "12 1267796789",
+      email: "bia@bureautech.com",
+    },
+  ]);
+
+  const [listaAdicionados, setListaAdicionados] = useState([]);
+  const [atual, setAtual] = useState({
+    nome: "",
+    email: "",
+    telefone: "",
+    area: "",
+  });
+  const [isOpen, setIsOpen] = useState(false);
+  const [checkeds, setCheckeds] = useState([]);
+
+  // Pega o value dos checkbox marcados e coloca em ordem decrescente
+  const pegarCheckbox = (value) => {
+    if (!checkeds.includes(value)) {
+      const novoArray = [...checkeds, value].sort((a, b) => {
+        return b - a;
+      });
+      setCheckeds(novoArray);
+    } else {
+      const novoArray = checkeds
+        .filter((num) => num !== value)
+        .sort((a, b) => {
+          return b - a;
+        });
+      setCheckeds(novoArray);
+    }
+  };
+
+  const handleDelete = () => {
+    if (checkeds.length) {
+      let newArray = [...listaAdicionados];
+      checkeds.forEach((value) => {
+        newArray.splice(value, 1);
+      });
+      setListaAdicionados(newArray);
+      document
+        .querySelectorAll('input[type="checkbox"]')
+        .forEach((checkbox) => {
+          if (checkbox.checked) {
+            checkbox.click();
+          }
+        });
+      setCheckeds([]);
+    }
+  };
+
+  // Verifica se o participante já existe na lista de adicionados
+  const existeParticipante = (novo) => {
     let existe = false;
-    console.log(novo);
 
-    // se não
-    // if (!novo || Object.values(novo)[0].length) {
-    //   return existe;
-    // }
-
-    for (let i = 0; i < this.state.listaAdicionados.length; i++) {
-      const each = this.state.listaAdicionados[i];
+    for (let i = 0; i < listaAdicionados.length; i++) {
+      const each = listaAdicionados[i];
       if (each.nome === novo.nome && each.email === novo.email) {
-        console.log("Igual");
         existe = true;
         break;
       }
@@ -84,219 +113,215 @@ class ParticipantsRow extends Component {
     return existe;
   };
 
-  pegarParticipante = (participante) => {
-    this.setState({
-      atual: participante
+  // Rastreia o participante atualmente escolhido
+  const pegarParticipante = (participante) => {
+    setAtual(
+      participante
         ? participante
         : {
             nome: "",
             email: "",
             telefone: "",
             area: "",
-          },
-    });
+          }
+    );
   };
 
-  adicionarParticipante = (novo) => {
-    const existe = this.existeParticipante(novo);
+  // Adicionar o participante escolhido na lista, limpar os inputs ao adicionar
+  const adicionarParticipante = (novo) => {
+    const existe = existeParticipante(novo);
+    // Verifica se não é um objeto vazio
     const temNome = Object.values(novo)[0].length;
     if (!existe && temNome) {
-      this.setState({
-        listaAdicionados: [...this.state.listaAdicionados, novo],
-        atual: {
-          nome: "",
-          email: "",
-          telefone: "",
-          area: "",
-        },
+      setAtual({
+        nome: "",
+        email: "",
+        telefone: "",
+        area: "",
       });
+      setListaAdicionados([...listaAdicionados, novo]);
+
+      // Limpa o campo "Participante"
       document.querySelector(".MuiAutocomplete-clearIndicator").click();
     }
   };
 
-  handleClick = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
+  // Alterna entre os estados "Open" e "Close" da lista
+  const handleClick = () => {
+    setIsOpen(!isOpen);
   };
 
-  render() {
-    const { classes } = this.props;
+  // ORDERNAR A LISTA DE PARTICIPANTES EM ORDEM ALFABÉTICA, SEPARADO EM GRUPOS NO SELECT/AUTOCOMPLETE
+  const options = listaParticipantes.map((option) => {
+    const firstLetter = option.nome[0].toUpperCase();
+    return {
+      firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
+      ...option,
+    };
+  });
 
-    // ORDERNAR A LISTA DE PARTICIPANTES EM ORDEM ALFABÉTICA, SEPARADO EM GRUPOS NO SELECT/AUTOCOMPLETE
-    const options = this.state.listaParticipantes.map((option) => {
-      const firstLetter = option.nome[0].toUpperCase();
-      return {
-        firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
-        ...option,
-      };
-    });
-
-    return (
-      <Grid item xs={12}>
-        <Grid container justify="flex-start">
-          <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-            <FormLabel htmlFor="participante" className={classes.normalText}>
-              Participante
-            </FormLabel>
-            <Grid item md={11}>
-              <Autocomplete
-                id="participante"
-                className="no-margin"
-                style={{ width: "100%" }}
-                options={options.sort(
-                  (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
-                )}
-                groupBy={(option) => option.firstLetter}
-                getOptionLabel={(option) => option.nome}
-                onChange={(e, value) => this.pegarParticipante(value)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    className={classes.textField}
-                    style={{ padding: 0 }}
-                    name="participante"
-                    disableUnderline
-                  />
-                )}
-              />
-            </Grid>
+  return (
+    <Grid item xs={12}>
+      <Grid container justify="flex-start">
+        {checkeds.map((teste) => (
+          <Typography>{teste}</Typography>
+        ))}
+        {/* INPUT - PARTICIPANTE */}
+        <Grid item xs={12} sm={5} md={3} className="inputsGrid">
+          <FormLabel htmlFor="participante" className={classes.normalText}>
+            Participante
+          </FormLabel>
+          <Grid item md={11}>
+            <Autocomplete
+              id="participante"
+              className="no-margin"
+              style={{ width: "100%" }}
+              options={options.sort(
+                (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
+              )}
+              groupBy={(option) => option.firstLetter}
+              getOptionLabel={(option) => option.nome}
+              onChange={(e, value) => pegarParticipante(value)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  className={classes.textField}
+                  style={{ padding: 0 }}
+                  name="participante"
+                  disableUnderline
+                />
+              )}
+            />
           </Grid>
-          <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-            <FormLabel className={classes.normalText}>Área</FormLabel>
-            <Grid item md={11}>
-              <Input
-                className={classes.textField}
-                value={this.state.atual.area}
-                disableUnderline
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-            <FormLabel className={classes.normalText}>Telefone</FormLabel>
-            <Grid item md={11}>
-              <Input
-                className={classes.textField}
-                value={this.state.atual.telefone}
-                disableUnderline
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-            <FormLabel className={classes.normalText}>E-mail</FormLabel>
-            <Grid item md={11}>
-              <Input
-                className={classes.textField}
-                value={this.state.atual.email}
-                disableUnderline
-              />
-            </Grid>
-          </Grid>
-          <Grid container justify="flex-end">
-            <IconButton
-              onClick={() => this.adicionarParticipante(this.state.atual)}
-            >
-              <AddCircle className="largeIcon" />
-            </IconButton>
-          </Grid>
-          <Grid container justify="center">
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={this.handleClick}
-            >
-              Lista de participantes
-            </Button>
-            <Dialog
-              open={this.state.isOpen}
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={this.handleClick}
-            >
-              <DialogTitle>Lista de participantes</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  {this.state.listaAdicionados.length !== 0 &&
-                    this.state.listaAdicionados.map((dados, index) => {
-                      console.log(dados, index);
-                      return (
-                        <Accordion key={index}>
-                          <AccordionSummary expandIcon={<ExpandMore />}>
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  onChange={(e) =>
-                                    console.log(e.target.checked)
-                                  }
-                                  value={index}
-                                />
-                              }
-                              label={dados.nome}
-                              onClick={(event) => event.stopPropagation()}
-                              onFocus={(event) => event.stopPropagation()}
-                            />
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            <Grid
-                              container
-                              justify="space-between"
-                              className="light"
-                            >
-                              <Grid item>
-                                <Typography style={{ padding: 10 }}>
-                                  {dados.area}
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Typography style={{ padding: 10 }}>
-                                  {dados.telefone}
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Typography style={{ padding: 10 }}>
-                                  {dados.email}
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          </AccordionDetails>
-                        </Accordion>
-                      );
-                    })}
-                </DialogContentText>
-              </DialogContent>
-              <Grid container justify="flex-end">
-                <Grid item>
-                  <DialogActions>
-                    <Button
-                      onClick={this.handleClick}
-                      color="secondary"
-                      variant="contained"
-                    >
-                      <Delete />
-                      Remover
-                    </Button>
-                  </DialogActions>
-                </Grid>
-                <Grid item>
-                  <DialogActions>
-                    <Button
-                      onClick={this.handleClick}
-                      color="secondary"
-                      variant="contained"
-                    >
-                      <Cancel />
-                      Fechar
-                    </Button>
-                  </DialogActions>
-                </Grid>
-              </Grid>
-            </Dialog>
-          </Grid>
-          <Grid></Grid>
         </Grid>
+        {/* INPUT - AREA */}
+        <Grid item xs={12} sm={5} md={3} className="inputsGrid">
+          <FormLabel className={classes.normalText}>Área</FormLabel>
+          <Grid item md={11}>
+            <Input
+              className={classes.textField}
+              value={atual.area}
+              disableUnderline
+            />
+          </Grid>
+        </Grid>
+        {/* INPUT - TELEFONE */}
+        <Grid item xs={12} sm={5} md={3} className="inputsGrid">
+          <FormLabel className={classes.normalText}>Telefone</FormLabel>
+          <Grid item md={11}>
+            <Input
+              className={classes.textField}
+              value={atual.telefone}
+              disableUnderline
+            />
+          </Grid>
+        </Grid>
+        {/* INPUT - EMAIL */}
+        <Grid item xs={12} sm={5} md={3} className="inputsGrid">
+          <FormLabel className={classes.normalText}>E-mail</FormLabel>
+          <Grid item md={11}>
+            <Input
+              className={classes.textField}
+              value={atual.email}
+              disableUnderline
+            />
+          </Grid>
+        </Grid>
+        <Grid container justify="flex-end">
+          <IconButton onClick={() => adicionarParticipante(atual)}>
+            <AddCircle className="largeIcon" />
+          </IconButton>
+        </Grid>
+        <Grid container justify="center">
+          <Button variant="contained" color="secondary" onClick={handleClick}>
+            Lista de participantes
+          </Button>
+          <Dialog
+            open={isOpen}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClick}
+          >
+            <DialogTitle>Lista de participantes</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {listaAdicionados.length !== 0 &&
+                  listaAdicionados.map((dados, index) => {
+                    return (
+                      <Accordion key={index}>
+                        <AccordionSummary expandIcon={<ExpandMore />}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                onChange={(e) => pegarCheckbox(e.target.value)}
+                                value={index}
+                              />
+                            }
+                            label={dados.nome}
+                            onClick={(event) => event.stopPropagation()}
+                            onFocus={(event) => event.stopPropagation()}
+                          />
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <Grid
+                            container
+                            justify="space-between"
+                            className="light"
+                          >
+                            <Grid item>
+                              <Typography style={{ padding: 10 }}>
+                                {dados.area}
+                              </Typography>
+                            </Grid>
+                            <Grid item>
+                              <Typography style={{ padding: 10 }}>
+                                {dados.telefone}
+                              </Typography>
+                            </Grid>
+                            <Grid item>
+                              <Typography style={{ padding: 10 }}>
+                                {dados.email}
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                        </AccordionDetails>
+                      </Accordion>
+                    );
+                  })}
+              </DialogContentText>
+            </DialogContent>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <DialogActions>
+                  <Button
+                    onClick={handleDelete}
+                    color="secondary"
+                    variant="contained"
+                  >
+                    <Delete />
+                    Remover
+                  </Button>
+                </DialogActions>
+              </Grid>
+              <Grid item>
+                <DialogActions>
+                  <Button
+                    onClick={handleClick}
+                    color="secondary"
+                    variant="contained"
+                  >
+                    <Cancel />
+                    Fechar
+                  </Button>
+                </DialogActions>
+              </Grid>
+            </Grid>
+          </Dialog>
+        </Grid>
+        <Grid></Grid>
       </Grid>
-    );
-  }
-}
+    </Grid>
+  );
+};
 
 export default withStyles(styles, { withTheme: true })(ParticipantsRow);
