@@ -4,11 +4,13 @@ import {
   TextareaAutosize,
   withStyles,
 } from "@material-ui/core";
+import { useState } from "react";
 import { styles } from "../../assets/styles/Styles";
 import "./Components.css";
 
 const Pauta = (props) => {
   const { classes } = props;
+  const [pauta, setPauta] = useState("");
 
   return (
     <Container>
@@ -18,6 +20,8 @@ const Pauta = (props) => {
             <TextareaAutosize
               rowsMin={5}
               rowsMax={5}
+              value={pauta}
+              onChange={(e) => setPauta(e.target.value)}
               style={{
                 width: "100%",
                 fontSize: "1.8rem",
