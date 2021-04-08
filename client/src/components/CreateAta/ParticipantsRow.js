@@ -163,9 +163,6 @@ const ParticipantsRow = (props) => {
   return (
     <Grid item xs={12}>
       <Grid container justify="flex-start">
-        {checkeds.map((teste) => (
-          <Typography>{teste}</Typography>
-        ))}
         {/* INPUT - PARTICIPANTE */}
         <Grid item xs={12} sm={5} md={3} className="inputsGrid">
           <FormLabel htmlFor="participante" className={classes.normalText}>
