@@ -3,6 +3,22 @@ input[type="date"] {
   text-align: center !important;
 }
 
+.MuiAutocomplete-input {
+  padding-left: 0.4rem !important;
+}
+
+.primary {
+  background-color: #3379fa !important;
+}
+
+.secondary {
+  background-color: #26baf4 !important;
+}
+
+.light {
+  background-color: #d5e3fd !important;
+}
+
 .largeIcon {
   height: 3rem !important;
   width: 3rem !important;

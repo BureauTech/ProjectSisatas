@@ -1,15 +1,33 @@
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  FormControlLabel,
   FormLabel,
   Grid,
   IconButton,
   Input,
+  Slide,
   TextField,
+  Typography,
   withStyles,
 } from "@material-ui/core";
-import { AddCircle } from "@material-ui/icons";
+import { AddCircle, Cancel, Delete, ExpandMore } from "@material-ui/icons";
 import { Autocomplete } from "@material-ui/lab";
-import { Component } from "react";
+import { Component, forwardRef } from "react";
 import { styles } from "../../assets/styles/Styles";
+import "./Components.css";
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 class ParticipantsRow extends Component {
   constructor() {
@@ -36,9 +54,35 @@ class ParticipantsRow extends Component {
         },
       ],
       listaAdicionados: [],
-      atual: {},
+      atual: {
+        nome: "",
+        email: "",
+        telefone: "",
+        area: "",
+      },
+      isOpen: false,
     };
   }
+  existeParticipante = (novo) => {
+    let existe = false;
+    console.log(novo);
+
+    // se não
+    // if (!novo || Object.values(novo)[0].length) {
+    //   return existe;
+    // }
+
+    for (let i = 0; i < this.state.listaAdicionados.length; i++) {
+      const each = this.state.listaAdicionados[i];
+      if (each.nome === novo.nome && each.email === novo.email) {
+        console.log("Igual");
+        existe = true;
+        break;
+      }
+    }
+
+    return existe;
+  };
 
   pegarParticipante = (participante) => {
     this.setState({
@@ -54,10 +98,26 @@ class ParticipantsRow extends Component {
   };
 
   adicionarParticipante = (novo) => {
+    const existe = this.existeParticipante(novo);
+    const temNome = Object.values(novo)[0].length;
+    if (!existe && temNome) {
+      this.setState({
+        listaAdicionados: [...this.state.listaAdicionados, novo],
+        atual: {
+          nome: "",
+          email: "",
+          telefone: "",
+          area: "",
+        },
+      });
+      document.querySelector(".MuiAutocomplete-clearIndicator").click();
+    }
+  };
+
+  handleClick = () => {
     this.setState({
-      listaAdicionados: [...this.state.listaAdicionados, novo],
+      isOpen: !this.state.isOpen,
     });
-    console.log(this.state.listaAdicionados);
   };
 
   render() {
@@ -133,10 +193,106 @@ class ParticipantsRow extends Component {
             </Grid>
           </Grid>
           <Grid container justify="flex-end">
-            <IconButton>
+            <IconButton
+              onClick={() => this.adicionarParticipante(this.state.atual)}
+            >
               <AddCircle className="largeIcon" />
             </IconButton>
           </Grid>
+          <Grid container justify="center">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={this.handleClick}
+            >
+              Lista de participantes
+            </Button>
+            <Dialog
+              open={this.state.isOpen}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={this.handleClick}
+            >
+              <DialogTitle>Lista de participantes</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  {this.state.listaAdicionados.length !== 0 &&
+                    this.state.listaAdicionados.map((dados, index) => {
+                      console.log(dados, index);
+                      return (
+                        <Accordion key={index}>
+                          <AccordionSummary expandIcon={<ExpandMore />}>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  onChange={(e) =>
+                                    console.log(e.target.checked)
+                                  }
+                                  value={index}
+                                />
+                              }
+                              label={dados.nome}
+                              onClick={(event) => event.stopPropagation()}
+                              onFocus={(event) => event.stopPropagation()}
+                            />
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <Grid
+                              container
+                              justify="space-between"
+                              className="light"
+                            >
+                              <Grid item>
+                                <Typography style={{ padding: 10 }}>
+                                  {dados.area}
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography style={{ padding: 10 }}>
+                                  {dados.telefone}
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography style={{ padding: 10 }}>
+                                  {dados.email}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </AccordionDetails>
+                        </Accordion>
+                      );
+                    })}
+                </DialogContentText>
+              </DialogContent>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <DialogActions>
+                    <Button
+                      onClick={this.handleClick}
+                      color="secondary"
+                      variant="contained"
+                    >
+                      <Delete />
+                      Remover
+                    </Button>
+                  </DialogActions>
+                </Grid>
+                <Grid item>
+                  <DialogActions>
+                    <Button
+                      onClick={this.handleClick}
+                      color="secondary"
+                      variant="contained"
+                    >
+                      <Cancel />
+                      Fechar
+                    </Button>
+                  </DialogActions>
+                </Grid>
+              </Grid>
+            </Dialog>
+          </Grid>
+          <Grid></Grid>
         </Grid>
       </Grid>
     );
