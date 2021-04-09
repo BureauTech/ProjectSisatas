@@ -1,18 +1,17 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Pauta from "./components/CreateAta/Pauta";
+import Register from "./components/RegisterUser/Register";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/createata">
-            <Pauta />
+          <Route path="/registeruser">
+            <Register/>
           </Route>
         </Switch>
       </Router>
     </div>
   );
 }
-
 export default App;
