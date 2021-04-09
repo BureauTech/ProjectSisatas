@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AtaHeader from "./components/CreateAta/AtaHeader";
+import UserFilter from "./components/UserList/UserFilter";
 import Menu from "./components/Menu/Menu"
 
 function App() {
@@ -10,8 +10,8 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/create">
-            <AtaHeader ata={ata} />
+          <Route path="/userlist">
+            <UserFilter ata={ata} />
           </Route>
           <Route path="/">
             <Menu />
