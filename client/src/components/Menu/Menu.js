@@ -91,7 +91,6 @@ const useStyles = makeStyles((theme) => ({
     icons: {
         width: '50px',
         height: '50px',
-        textDecoration: 'none',
         '&:active': {
             color: theme.palette.secondary.main
         }
@@ -100,9 +99,12 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '7px',
         color: "#6D6D6D",
     },
+    iconitem: {
+        minWidth: '65px',
+    },
     iconselected: {
         color: theme.palette.secondary.main,
-        textDecoration: 'none'
+        minWidth: '65px',
     },
     link: {
         textDecoration: 'none'
@@ -178,7 +180,7 @@ export default function Menu() {
                         <Link to='/' className={classes.link}>
                             <ListItem button key='home'>
                                 <ListItemIcon
-                                    className={active === 0 ? classes.iconselected : console.log('false')}
+                                    className={active === 0 ? classes.iconselected : classes.iconitem}
                                     onClick={(e) => handleIconSelected(0)}>
                                     <NotificationsNoneOutlinedIcon className={classes.icons} />
                                 </ListItemIcon>
@@ -189,7 +191,7 @@ export default function Menu() {
                     <Typography>
                         <Link to='new-record' className={classes.link}>
                             <ListItem button key='new-record'>
-                                <ListItemIcon className={active === 1 ? classes.iconselected : console.log('false')}
+                                <ListItemIcon className={active === 1 ? classes.iconselected : classes.iconitem}
                                     onClick={(e) => handleIconSelected(1)}><PostAddOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Nova Ata' className={classes.text} />
                             </ListItem>
@@ -198,7 +200,7 @@ export default function Menu() {
                     <Typography>
                         <Link to="show-records" className={classes.link}>
                             <ListItem button key='show-records'>
-                                <ListItemIcon className={active === 2 ? classes.iconselected : console.log('false')}
+                                <ListItemIcon className={active === 2 ? classes.iconselected : classes.iconitem}
                                     onClick={(e) => handleIconSelected(2)}><AssignmentOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Exibir Atas' className={classes.text} />
                             </ListItem>
@@ -207,7 +209,7 @@ export default function Menu() {
                     <Typography>
                         <Link to="reports" className={classes.link}>
                             <ListItem button key='reports'>
-                                <ListItemIcon className={active === 3 ? classes.iconselected : console.log('false')}
+                                <ListItemIcon className={active === 3 ? classes.iconselected : classes.iconitem}
                                     onClick={(e) => handleIconSelected(3)}><AssessmentOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Relatórios' className={classes.text} />
                             </ListItem>
@@ -216,7 +218,7 @@ export default function Menu() {
                     <Typography>
                         <Link to="profile" className={classes.link}>
                             <ListItem button key='profile'>
-                                <ListItemIcon className={active === 4 ? classes.iconselected : console.log('false')}
+                                <ListItemIcon className={active === 4 ? classes.iconselected : classes.iconitem}
                                     onClick={(e) => handleIconSelected(4)}><AccountCircleOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Perfil de Usuário' className={classes.text} />
                             </ListItem>
@@ -225,7 +227,7 @@ export default function Menu() {
                     <Typography>
                         <Link to="users-list" className={classes.link}>
                             <ListItem button key='users-list'>
-                                <ListItemIcon className={active === 5 ? classes.iconselected : console.log('false')}
+                                <ListItemIcon className={active === 5 ? classes.iconselected : classes.iconitem}
                                     onClick={(e) => handleIconSelected(5)}><PeopleAltOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Usuários Cadastrados' className={classes.text} />
                             </ListItem>
@@ -234,7 +236,7 @@ export default function Menu() {
                     <Typography>
                         <Link to="exit" className={classes.link}>
                             <ListItem button key='exit'>
-                                <ListItemIcon className={active === 6 ? classes.iconselected : console.log('false')}
+                                <ListItemIcon className={active === 6 ? classes.iconselected : classes.iconitem}
                                     onClick={(e) => handleIconSelected(6)}><ExitToAppOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Sair' className={classes.text} />
                             </ListItem>
