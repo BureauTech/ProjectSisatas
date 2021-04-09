@@ -22,7 +22,12 @@ const ProjectParticipants = (props) => {
             alignItems="center"
             style={{ marginBottom: 30 }}
           >
-            <FormLabel className={classes.normalText}>Projeto</FormLabel>
+            <FormLabel
+              className={classes.normalText}
+              style={{ marginRight: 15 }}
+            >
+              Projeto
+            </FormLabel>
             <Grid item xs={12} sm={5} md={4}>
               <Input className={classes.textField} disableUnderline />
             </Grid>
