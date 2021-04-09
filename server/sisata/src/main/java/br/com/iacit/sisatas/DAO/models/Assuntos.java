@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +27,14 @@ public class Assuntos implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ass_id;
+	@Column(nullable = false, length = 30)
 	private String ass_assunto;
+	@Column(nullable = false)
 	private Date ass_prazo;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "fk_ata_id", referencedColumnName = "ata_id") // OK
+	private Atas contemAssuntos;
 	
 	@ManyToMany
 	@JoinTable(name = "Resposavel",
@@ -36,6 +43,6 @@ public class Assuntos implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "fk_pk_usu_id", referencedColumnName = "usu_id") 
 																										
 	)
-	private List<Usuarios> responsavelUsuarios; // OK
+	private List<Usuarios> responsavelAssuntos; // OK
 
 }

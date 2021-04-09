@@ -1,29 +1,30 @@
 package br.com.iacit.sisatas.DAO.models;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "perfis")
-public class Perfis implements Serializable{
-
+public class Perfis implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private int per_id;
+	private Long per_id;
+	@Column(nullable = false, length = 15)
 	private String per_nome;
 	
-	@OneToMany
-	@JoinColumn(name = "fk_per_id", referencedColumnName = "per_id") // OK
-	private List<Usuarios> pertenceUsuarios;	
-
 }

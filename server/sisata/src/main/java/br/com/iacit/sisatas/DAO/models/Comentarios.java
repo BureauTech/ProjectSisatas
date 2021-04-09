@@ -2,8 +2,8 @@ package br.com.iacit.sisatas.DAO.models;
 
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,11 +22,13 @@ public class Comentarios implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int com_id;
+	@Column(nullable = false, length = 300)
 	public String com_descricao;
+	@Column(nullable = false)
 	public DateFormat com_data;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fk_rev_id", referencedColumnName = "rev_id")
-	public Revisoes revisao;
+	@JoinColumn(name = "fk_rev_id", referencedColumnName = "rev_id") // OK
+	public Revisoes contemRevisao;
 
 }
