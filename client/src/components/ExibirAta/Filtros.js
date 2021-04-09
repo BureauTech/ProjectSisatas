@@ -1,18 +1,17 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Input, FormLabel, Select, MenuItem } from "@material-ui/core";
+import SearchIcon from '@material-ui/icons/Search';
 
-const imgLupa =
-  "https://images.vexels.com/media/users/3/136335/isolated/preview/58bc9a0e0787485f7bdccec5a9b48a17-iacute-cone-de-lupa-com-sombras-by-vexels.png";
+
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: "100%%",
+        width: "90%",
         padding: 5,
-        color: "#fff",
+        color: "#3379FA",
     },
     grid: {
         borderRadius: "20px",
-        width: "100%",
         backgroundColor: "#3379FA",
         alignItems: "center",
         marginLeft: 1,
@@ -22,27 +21,32 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Montserrat",
         fontSize: 30,
         whiteSpace: "nowrap",
+        marginLeft: 20,
+        paddingLeft: 10,
     },
     input: {
         background: "#fff",
         border: "none",
         borderRadius: "10px",
-        width: "75%",
+        width: "100%",
         height: 30,
         disableUnderline: "true",
         marginBottom: 60,
         whiteSpace: "nowrap",
         fontSize: 30,
+        paddingRight: 20,
+        marginTop: 20,
 
     },
     inputDate: {
         background: "#fff",
         border: "none",
         borderRadius: "10px",
-        width: "75%",
+        width: "100%",
         height: 30,
         disableUnderline: "true",
         marginBottom: 60,
+        marginTop: 20,
         fontSize: 20,
 
     },
@@ -51,7 +55,8 @@ const useStyles = makeStyles((theme) => ({
         height: 60,
         backgroundColor: "#fff",
         borderRadius: 10,
-        marginTop: -50,
+        marginTop: -40,
+        marginRight: 20,
     }
 }));
 
@@ -61,31 +66,37 @@ export default function Filtros() {
         <div className={classes.root}>
           <form>
             <Grid container spacing={5} alignItems="center" justify="flex-start" className={classes.grid}>
-                <Grid item xs={12} sm={12} md={12} justify="center">
-                    <Grid md={12} xl={6} xs={12} container  alignItems="center" direction="row">
-                        <Grid item xs={12} sm={6} md={3}>
-                        <Grid md={10} sm={12} xs={12}>
+                <Grid item xs={12} sm={12} md={12} lg={12} justify="center">
+
+                    <Grid md={12} xl={6} xs={12} lg={12} container className={classes.grid} justify="space-between" alignItems="center" direction="row">
+                        <Grid item xs={12} sm={6} md={3} lg={4}>
+                        <Grid md={8} sm={12} xs={12} lg={8}>
                             <FormLabel className={classes.label} htmlFor="id">ID </FormLabel>
                             <Input id="id" className={classes.input} disableUnderline={true}/> 
                         </Grid>
                           
-                          <Grid md={10} sm={12} xs={12}>
+                          <Grid md={8} sm={12} xs={12} className={classes.grid}>
                             <FormLabel className={classes.label} htmlFor="inicio">Inicio </FormLabel>
                             <Input  id="inicio" type="date" className={classes.inputDate} disableUnderline={true}/>
 
                           </Grid>
                         </Grid>
 
-                    <Grid item justify="flex-start" item xs={12} sm={12} md={7}>
+                <Grid container xs={12} sm={12} md={6} lg={6} justify="flex-start">
+                    <Grid item xs={12} sm={6} md={11} className={classes.grid} justify="space-between">
                         <FormLabel className={classes.label} htmlFor="projeto">Projeto </FormLabel>
                         <Input id="projeto"  className={classes.input} disableUnderline={true}/> 
-                        <Grid container justify="flex-end" direction="row">
-                            <Grid item justify="flex-end" xs={12} sm={6} md={5}>
+                    </Grid>
+                    
+
+                        <Grid container  md={12} justify="space-between" direction="row" className={classes.grid}> 
+                        
+                            <Grid item justify="space-between" xs={12} sm={6} md={5} className={classes.grid}>
                                 <FormLabel className={classes.label} htmlFor="fim">Fim </FormLabel>
-                                <Input id="fim" type="date" value={"null"} className={classes.inputDate} disableUnderline={true}/> 
+                                <Input id="fim" type="date" className={classes.inputDate} disableUnderline={true}/> 
                             </Grid>
 
-                            <Grid item xs={12} sm={6} md={6}>
+                            <Grid item xs={12} sm={6} md={5} className={classes.grid}>
                                 <FormLabel className={classes.label} htmlFor="tipo">Tipo </FormLabel>
                                 <Select className={classes.input} disableUnderline={true}>
                                 <MenuItem value="">
@@ -98,13 +109,12 @@ export default function Filtros() {
                                 {//<Input id="tipo" className={classes.input} disableUnderline={true}/>
                                 }
                             </Grid>
-                        </Grid> 
-                     
+                        </Grid>
                     </Grid>
 
-                    <Grid container justify="center" alignItems="center" xs={12} sm={12} md={2}>
+                    <Grid container justify="flex-end" alignItems="center" xs={12} sm={12} md={3} lg={2}>
                         <Button type="submit" onClick={console.log("voce enviou")} className={classes.button}>
-                            <img width={"50px"} src={imgLupa}/>
+                            <SearchIcon style={{fontSize: 50, color: "#26BAF4"}} />
                         </Button>
                     </Grid>
                     </Grid>

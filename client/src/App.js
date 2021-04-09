@@ -10,13 +10,9 @@ function App() {
           <Route path="/createata">
             <Pauta />
           </Route>
-          <Route path="/exibir">
-            <Filtros />
-          </Route>
         </Switch>
-        <Link to="/exibir">Exibir</Link>
-        <Link to="/home">Home</Link>
       </Router>
+      <Filtros/>
     </div>
   );
 }

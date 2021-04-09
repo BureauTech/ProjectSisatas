@@ -1,11 +1,15 @@
 import React from "react";
 
 import Filtros from "./components/ExibirAta/Filtros";
+import Menu from "./Menu";
 
 function ExibirAta() {
     return (
-        <Filtros/>
+        <div>
+            
+        </div>
+        
     )
 }
 
-export default Filtros;
+export default ExibirAta;
