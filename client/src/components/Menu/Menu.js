@@ -48,7 +48,13 @@ const useStyles = makeStyles((theme) => ({
     },
     menuButton: {
         marginRight: 36,
-        marginLeft: '-5px'
+        marginLeft: '-6px',
+        [theme.breakpoints.between('xs', 'sm')]: {
+            marginLeft: '2px',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            marginLeft: '-6px',
+        },
     },
     hide: {
         display: 'none',
@@ -72,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
         }),
         overflowX: 'hidden',
         width: theme.spacing(8) + 1,
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('xs')]: {
             width: theme.spacing(10) + 1,
         },
     },
