@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from '@material-ui/core';
+import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -24,7 +24,6 @@ import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 
-import '../Menu/Menu.css';
 
 const drawerWidth = 270;
 
@@ -91,11 +90,22 @@ const useStyles = makeStyles((theme) => ({
     },
     icons: {
         width: '50px',
-        height: '50px'
+        height: '50px',
+        textDecoration: 'none',
+        '&:active': {
+            color: theme.palette.secondary.main
+        }
     },
     text: {
         marginLeft: '7px',
         color: "#6D6D6D",
+    },
+    iconselected: {
+        color: theme.palette.secondary.main,
+        textDecoration: 'none'
+    },
+    link: {
+        textDecoration: 'none'
     }
 
 }));
@@ -103,7 +113,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Menu() {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [active, setActive] = useState(0);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -113,9 +124,9 @@ export default function Menu() {
         setOpen(false);
     };
 
-    const iconSelected = () => {
-        console.log('clicou')
-    };
+    const handleIconSelected = (index) => {
+        setActive(index)
+    }
 
     return (
         <div className={classes.root}>
@@ -164,57 +175,67 @@ export default function Menu() {
                 <Divider />
                 <List>
                     <Typography>
-                        <Link href='home' underline='none'>
-                            <ListItem button key='home' onClick={iconSelected}>
-                                <ListItemIcon ><NotificationsNoneOutlinedIcon className={classes.icons} /></ListItemIcon>
+                        <Link to='/' className={classes.link}>
+                            <ListItem button key='home'>
+                                <ListItemIcon
+                                    className={active === 0 ? classes.iconselected : console.log('false')}
+                                    onClick={(e) => handleIconSelected(0)}>
+                                    <NotificationsNoneOutlinedIcon className={classes.icons} />
+                                </ListItemIcon>
                                 <ListItemText primary='Home/Atualizações' className={classes.text} />
                             </ListItem>
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href='new-record' underline='none'>
+                        <Link to='new-record' className={classes.link}>
                             <ListItem button key='new-record'>
-                                <ListItemIcon><PostAddOutlinedIcon className={classes.icons} /></ListItemIcon>
+                                <ListItemIcon className={active === 1 ? classes.iconselected : console.log('false')}
+                                    onClick={(e) => handleIconSelected(1)}><PostAddOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Nova Ata' className={classes.text} />
                             </ListItem>
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="show-records" underline='none'>
+                        <Link to="show-records" className={classes.link}>
                             <ListItem button key='show-records'>
-                                <ListItemIcon><AssignmentOutlinedIcon className={classes.icons} /></ListItemIcon>
+                                <ListItemIcon className={active === 2 ? classes.iconselected : console.log('false')}
+                                    onClick={(e) => handleIconSelected(2)}><AssignmentOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Exibir Atas' className={classes.text} />
                             </ListItem>
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="reports" underline='none'>
+                        <Link to="reports" className={classes.link}>
                             <ListItem button key='reports'>
-                                <ListItemIcon><AssessmentOutlinedIcon className={classes.icons} /></ListItemIcon>
+                                <ListItemIcon className={active === 3 ? classes.iconselected : console.log('false')}
+                                    onClick={(e) => handleIconSelected(3)}><AssessmentOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Relatórios' className={classes.text} />
                             </ListItem>
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="profile" underline='none'>
+                        <Link to="profile" className={classes.link}>
                             <ListItem button key='profile'>
-                                <ListItemIcon><AccountCircleOutlinedIcon className={classes.icons} /></ListItemIcon>
+                                <ListItemIcon className={active === 4 ? classes.iconselected : console.log('false')}
+                                    onClick={(e) => handleIconSelected(4)}><AccountCircleOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Perfil de Usuário' className={classes.text} />
                             </ListItem>
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="users-list" underline='none'>
+                        <Link to="users-list" className={classes.link}>
                             <ListItem button key='users-list'>
-                                <ListItemIcon><PeopleAltOutlinedIcon className={classes.icons} /></ListItemIcon>
+                                <ListItemIcon className={active === 5 ? classes.iconselected : console.log('false')}
+                                    onClick={(e) => handleIconSelected(5)}><PeopleAltOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Usuários Cadastrados' className={classes.text} />
                             </ListItem>
                         </Link>
                     </Typography>
                     <Typography>
-                        <Link href="exit" underline='none'>
+                        <Link to="exit" className={classes.link}>
                             <ListItem button key='exit'>
-                                <ListItemIcon><ExitToAppOutlinedIcon className={classes.icons} /></ListItemIcon>
+                                <ListItemIcon className={active === 6 ? classes.iconselected : console.log('false')}
+                                    onClick={(e) => handleIconSelected(6)}><ExitToAppOutlinedIcon className={classes.icons} /></ListItemIcon>
                                 <ListItemText primary='Sair' className={classes.text} />
                             </ListItem>
                         </Link>
