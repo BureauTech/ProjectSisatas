@@ -7,6 +7,8 @@ import {
     Input,
 } from "@material-ui/core";
 import { Component } from "react";
+import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
 
 // Alterando css de componentes
 const styles = (theme) => ({
@@ -14,6 +16,7 @@ const styles = (theme) => ({
         backgroundColor: theme.palette.primary.main,
         borderRadius: "20px",
         padding: 5,
+        paddingBottom: 10
     },
     textField: {
         backgroundColor: "white",
@@ -35,7 +38,7 @@ const styles = (theme) => ({
     normalText: {
         color: "white",
         fontFamily: "Montserrat",
-        fontSize: "1.875rem",
+        fontSize: "1.2rem",
         fontStyle: "normal",
         fontWeight: "normal",
         lineHeight: "2rem",
@@ -45,6 +48,20 @@ const styles = (theme) => ({
     rowMargin: {
         margin: 20,
     },
+    btn: {
+        backgroundColor: theme.palette.secondary.contrastText,
+        color: theme.palette.secondary.main,
+        marginTop: 2,
+        borderRadius: 10,
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.contrastText,
+        }
+    },
+    icon: {
+        width: '30px',
+        height: '30px',
+    }
 });
 
 class UserFilter extends Component {
@@ -53,100 +70,39 @@ class UserFilter extends Component {
 
         return (
             <Container>
-                <Grid container>
-                    <Typography>Cabeçalho</Typography>
-                    <Grid
-                        container
-                        className={classes.grid}
-                        alignItems="center"
-                        justify="space-evenly"
-                    >
-                        {/* LATERAL ESQUERDA (NÚMERO DA ATA)*/}
-                        <Grid item sm={10} lg={4}>
-                            <Grid container justify="center">
-                                <Grid container justify="center">
-                                    <Typography className={classes.biggerText}>
-                                        ATA Nº:
-                    </Typography>
-                                </Grid>
-                                <Grid container justify="center">
-                                    <Typography className={classes.biggerText}>
-                                        {ata.id}
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        {/* CONTEINER DA DIREITA (INPUTS)*/}
-                        <Grid item xs={12} sm={10} md={8} lg={8}>
-                            <Grid item xs={11} lg={10}>
-                                {/* ROW DATA INÍCIO */}
-                                <Grid container className={classes.rowMargin}>
-                                    <Grid item lg={3}>
-                                        <FormLabel className={classes.normalText}>
-                                            Data Início
-                      </FormLabel>
-                                    </Grid>
-                                    <Grid item xs={12} lg={7}>
-                                        <Grid container justify="space-between">
-                                            <Grid item xs={7} lg={5}>
-                                                <Input
-                                                    className={classes.textField}
-                                                    disableUnderline
-                                                    type="date"
-                                                ></Input>
-                                            </Grid>
-                                            <Grid xs={4} lg={5}>
-                                                <Input
-                                                    className={classes.textField}
-                                                    disableUnderline
-                                                    type="time"
-                                                ></Input>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                {/* ROW DATA FINAL */}
-                                <Grid container className={classes.rowMargin}>
-                                    <Grid item lg={3}>
-                                        <FormLabel className={classes.normalText}>
-                                            Data Final
-                      </FormLabel>
-                                    </Grid>
-                                    <Grid item xs={12} lg={7}>
-                                        <Grid container justify="space-between">
-                                            <Grid item xs={7} lg={5}>
-                                                <Input
-                                                    className={classes.textField}
-                                                    disableUnderline
-                                                    type="date"
-                                                ></Input>
-                                            </Grid>
-                                            <Grid item xs={4} lg={5}>
-                                                <Input
-                                                    className={classes.textField}
-                                                    disableUnderline
-                                                    type="time"
-                                                ></Input>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                {/* ROW LOCAL */}
-                                <Grid container className={classes.rowMargin}>
-                                    <Grid item lg={2} xs={10}>
-                                        <FormLabel className={classes.normalText}>Local</FormLabel>
-                                    </Grid>
-                                    <Grid item xs={12} lg={8}>
-                                        <Input
-                                            className={classes.textField}
-                                            disableUnderline
-                                            type="text"
-                                        ></Input>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                <Grid container className={classes.grid} alignItems="center"
+                    justify='space-evenly'>
+                    <Grid>
+                        <FormLabel className={classes.normalText}>
+                            Usuário
+                    </FormLabel>
+                        <Input
+                            className={classes.textField}
+                            disableUnderline
+                            type="search"
+                        ></Input>
                     </Grid>
+                    <Grid>
+                        <FormLabel className={classes.normalText}>
+                            Área/Empresa
+                    </FormLabel>
+                        <Input
+                            className={classes.textField}
+                            disableUnderline
+                            type="search"
+                        ></Input>
+                    </Grid>
+                    <Grid>
+                        <FormLabel className={classes.normalText}>
+                            E-mail
+                    </FormLabel>
+                        <Input
+                            className={classes.textField}
+                            disableUnderline
+                            type="search"
+                        ></Input>
+                    </Grid>
+                    <Button className={classes.btn}><SearchIcon className={classes.icon} /></Button>
                 </Grid>
             </Container>
         );
