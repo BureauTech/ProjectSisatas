@@ -1,4 +1,4 @@
-package br.com.iacit.sisatas.DAO.models;
+package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "Revisoes")
 public class Revisoes implements Serializable {
@@ -23,7 +26,7 @@ public class Revisoes implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int rev_id;
+	private Long id;
 	@Column(nullable = false, length = 30)
 	private String rev_assunto;
 	@Column(nullable = false)
@@ -32,10 +35,10 @@ public class Revisoes implements Serializable {
 	private DateFormat rev_data;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fk_usu_id", referencedColumnName = "usu_id") // OK
+	@JoinColumn(name = "fk_usu_id", referencedColumnName = "id") // OK
 	private Usuarios resposavelRevisoes;
 
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "fk_ata_id", referencedColumnName = "ata_id") // OK
+	@JoinColumn(name = "fk_ata_id", referencedColumnName = "id") // OK
 	private Atas contemRevisoes;
 }

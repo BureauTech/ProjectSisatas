@@ -1,4 +1,4 @@
-package br.com.iacit.sisatas.DAO.models;
+package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Comentarios implements Serializable {
 
@@ -21,14 +24,14 @@ public class Comentarios implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public int com_id;
+	public Long id;
 	@Column(nullable = false, length = 300)
 	public String com_descricao;
 	@Column(nullable = false)
 	public DateFormat com_data;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fk_rev_id", referencedColumnName = "rev_id") // OK
+	@JoinColumn(name = "fk_rev_id", referencedColumnName = "id") // OK
 	public Revisoes contemRevisao;
 
 }

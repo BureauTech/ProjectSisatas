@@ -1,4 +1,4 @@
-package br.com.iacit.sisatas.DAO.models;
+package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -15,6 +15,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "Assuntos")
 public class Assuntos implements Serializable {
@@ -26,21 +29,21 @@ public class Assuntos implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int ass_id;
+	private Long id;
 	@Column(nullable = false, length = 30)
 	private String ass_assunto;
 	@Column(nullable = false)
 	private Date ass_prazo;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fk_ata_id", referencedColumnName = "ata_id") // OK
+	@JoinColumn(name = "fk_ata_id", referencedColumnName = "id") // OK
 	private Atas contemAssuntos;
 	
 	@ManyToMany
 	@JoinTable(name = "Resposavel",
-			joinColumns = @JoinColumn(name = "fk_pk_ass_id", referencedColumnName = "ass_id"), 
+			joinColumns = @JoinColumn(name = "fk_pk_ass_id", referencedColumnName = "id"), 
 																								
-			inverseJoinColumns = @JoinColumn(name = "fk_pk_usu_id", referencedColumnName = "usu_id") 
+			inverseJoinColumns = @JoinColumn(name = "fk_pk_usu_id", referencedColumnName = "id") 
 																										
 	)
 	private List<Usuarios> responsavelAssuntos; // OK

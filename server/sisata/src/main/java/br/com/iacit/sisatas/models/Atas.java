@@ -1,4 +1,4 @@
-package br.com.iacit.sisatas.DAO.models;
+package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -13,6 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "Atas")
 public class Atas implements Serializable{
@@ -23,7 +26,7 @@ public class Atas implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String ata_id;
+	private String id;
 	@Column(nullable = false)
 	private DateFormat ata_data_inicio;
 	@Column(nullable = false)
@@ -40,13 +43,13 @@ public class Atas implements Serializable{
 	private String ata_pauta;
 	
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "fk_usu_id", referencedColumnName = "usu_id") // OK
+	@JoinColumn(name = "fk_usu_id", referencedColumnName = "id") // OK
 	private Usuarios geraAtas;
 	
 	@ManyToMany
 	@JoinTable(name = "Participa",
-			joinColumns = @JoinColumn(name = "fk_pk_ata_id", referencedColumnName = "ata_id"),
-			inverseJoinColumns = @JoinColumn(name = "fk_pk_usu_id", referencedColumnName = "usu_id") 
+			joinColumns = @JoinColumn(name = "fk_pk_ata_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "fk_pk_usu_id", referencedColumnName = "id") 
 	)
 	private List<Usuarios> participaAtas;	// OK
 
