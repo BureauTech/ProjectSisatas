@@ -36,7 +36,7 @@ class AtaHeader extends Component {
             justify="space-evenly"
           >
             {/* LATERAL ESQUERDA (NÚMERO DA ATA)*/}
-            <Grid item sm={10} lg={4}>
+            <Grid item sm={10} md={3} lg={3}>
               <Grid container justify="center">
                 <Grid container justify="center">
                   <Typography className={classes.biggerText}>
@@ -51,25 +51,25 @@ class AtaHeader extends Component {
               </Grid>
             </Grid>
             {/* CONTEINER DA DIREITA (INPUTS)*/}
-            <Grid item xs={12} sm={10} md={8} lg={8}>
-              <Grid item xs={11} lg={10}>
+            <Grid item xs={12} sm={10} md={9} lg={9}>
+              <Grid item xs={11} md={10} lg={10}>
                 {/* ROW DATA INÍCIO */}
                 <Grid container className={classes.rowMargin}>
-                  <Grid item lg={3}>
+                  <Grid item md={4} lg={3}>
                     <FormLabel className={classes.normalText}>
                       Data Início
                     </FormLabel>
                   </Grid>
-                  <Grid item xs={12} lg={7}>
+                  <Grid item xs={12} md={8} lg={7}>
                     <Grid container justify="space-between">
-                      <Grid item xs={7} lg={5}>
+                      <Grid item xs={7} md={6} lg={5}>
                         <Input
                           className={classes.textField}
                           disableUnderline
                           type="date"
                         ></Input>
                       </Grid>
-                      <Grid xs={4} lg={5}>
+                      <Grid xs={4} md={5}>
                         <Input
                           className={classes.textField}
                           disableUnderline
@@ -81,21 +81,21 @@ class AtaHeader extends Component {
                 </Grid>
                 {/* ROW DATA FINAL */}
                 <Grid container className={classes.rowMargin}>
-                  <Grid item lg={3}>
+                  <Grid item md={4} lg={3}>
                     <FormLabel className={classes.normalText}>
                       Data Final
                     </FormLabel>
                   </Grid>
-                  <Grid item xs={12} lg={7}>
+                  <Grid item xs={12} md={8} lg={7}>
                     <Grid container justify="space-between">
-                      <Grid item xs={7} lg={5}>
+                      <Grid item xs={7} md={6} lg={5}>
                         <Input
                           className={classes.textField}
                           disableUnderline
                           type="date"
                         ></Input>
                       </Grid>
-                      <Grid item xs={4} lg={5}>
+                      <Grid item xs={4} md={5}>
                         <Input
                           className={classes.textField}
                           disableUnderline
@@ -107,10 +107,10 @@ class AtaHeader extends Component {
                 </Grid>
                 {/* ROW LOCAL */}
                 <Grid container className={classes.rowMargin}>
-                  <Grid item lg={2} xs={10}>
+                  <Grid item xs={10} md={2} lg={2}>
                     <FormLabel className={classes.normalText}>Local</FormLabel>
                   </Grid>
-                  <Grid item xs={12} lg={8}>
+                  <Grid item xs={12} md={10} lg={8}>
                     <Input
                       className={classes.textField}
                       disableUnderline

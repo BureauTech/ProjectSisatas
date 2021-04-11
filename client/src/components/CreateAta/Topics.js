@@ -2,10 +2,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Checkbox,
   Container,
   Divider,
-  FormControlLabel,
   FormLabel,
   Grid,
   IconButton,
@@ -21,28 +19,7 @@ import { styles } from "../../assets/styles/Styles";
 import "./Components.css";
 
 const Topics = (props) => {
-  const { classes } = props;
-
-  const [listaParticipantes, setListaParticipantes] = useState([
-    {
-      nome: "Denis Lima",
-      area: "Dev",
-      telefone: "12 123456789",
-      email: "denis@bureautech.com",
-    },
-    {
-      nome: "Charles Ferreira dasdsadsa",
-      area: "PO",
-      telefone: "12 123456439",
-      email: "charles@bureautech.com",
-    },
-    {
-      nome: "Bia Coutinho",
-      area: "Dev",
-      telefone: "12 1267796789",
-      email: "bia@bureautech.com",
-    },
-  ]);
+  const { classes, listaAdicionados } = props;
 
   const [atual, setAtual] = useState();
 
@@ -105,7 +82,7 @@ const Topics = (props) => {
     return formated;
   };
 
-  const options = listaParticipantes.map((option) => {
+  const options = listaAdicionados.map((option) => {
     const firstLetter = option.nome[0].toUpperCase();
     return {
       firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
