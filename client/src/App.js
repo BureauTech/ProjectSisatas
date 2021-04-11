@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Topics from "./components/CreateAta/Topics";
+import CreateAta from "./pages/CreateAta/CreateAta";
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/createata">
-            <Topics />
+            <CreateAta />
           </Route>
         </Switch>
       </Router>
