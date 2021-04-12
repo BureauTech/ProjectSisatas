@@ -10,13 +10,25 @@ import {
   RadioGroup,
   FormControlLabel,
   IconButton,
+  useTheme,
 } from "@material-ui/core";
-
+import { Link } from "react-router-dom";
 import {styles} from "../../assets/styles/Styles";
 import {ImageSearch} from "@material-ui/icons";
+import React from "react";
+import clsx from "clsx";
+import "./Register.css"
+
 
 const Register = (props) => {
-  let {classes} = props;
+  const {classes} = props;
+
+  const [value, setValue] = React.useState('USU');
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const theme = useTheme();
 
   return (
     <Container>
@@ -30,7 +42,7 @@ const Register = (props) => {
         {/* formulario */}
         <Grid container>
 
-          <form action="/" style={{width: "100%"}}>
+          <form action="/" method="post" style={{width: "100%"}}>
 
             {/* inputs */}
             <Grid item sm={8}>
@@ -46,7 +58,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input name="nome" id="nome" className={classes.textField} disableUnderline />
+                    <Input required name="nome" id="nome" className={classes.textField} disableUnderline />
                   </Grid>
                 </Grid>
 
@@ -60,7 +72,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input name="email" id="email" className={classes.textField} disableUnderline/>
+                    <Input type="email" required name="email" id="email" className={classes.textField} disableUnderline/>
                   </Grid>
                 </Grid>
 
@@ -74,7 +86,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input name="telefone" id="telefone" className={classes.textField} disableUnderline/>
+                    <Input type="tel" required name="telefone" id="telefone" className={classes.textField} disableUnderline/>
                   </Grid>
                 </Grid>
 
@@ -88,7 +100,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input name="cargo" id="cargo" className={classes.textField} disableUnderline/>
+                    <Input required name="cargo" id="cargo" className={classes.textField} disableUnderline/>
                   </Grid>
                 </Grid>
 
@@ -102,7 +114,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input name="area" id="area" className={classes.textField} disableUnderline/>
+                    <Input required name="area" id="area" className={classes.textField} disableUnderline/>
                   </Grid>
                 </Grid>
 
@@ -116,10 +128,49 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <RadioGroup row name="perfil" style={{color:"white"}}>
-                      <FormControlLabel style={{paddingLeft: 5}} labelPlacement="end" value="ADM" control={<Radio/>} label="ADM"/>
-                      <FormControlLabel style={{paddingLeft: 15}} labelPlacement="end" value="GER" control={<Radio/>} label="GER"/>
-                      <FormControlLabel style={{paddingLeft: 15}} labelPlacement="end" value="USU" control={<Radio/>} label="USU"/>
+                    <RadioGroup row name="perfil" style={{color:"white"}} value={value} onChange={handleChange}>
+                      <FormControlLabel
+                        style={{paddingLeft: 5}}
+                        labelPlacement="end"
+                        value="ADM"
+                        control={
+                          <Radio
+                            className={classes.radio}
+                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)}/>}
+                            icon={<span className={classes.icon}/>}
+                            {...props}
+                          />
+                        }
+                        label="ADM"
+                      />
+                      <FormControlLabel
+                        style={{paddingLeft: 15}}
+                        labelPlacement="end"
+                        value="GER"
+                        control={
+                          <Radio
+                            className={classes.radio}
+                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)}/>}
+                            icon={<span className={classes.icon}/>}
+                            {...props}
+                          />
+                        }
+                        label="GER"
+                      />
+                      <FormControlLabel
+                        style={{paddingLeft: 15}}
+                        labelPlacement="end"
+                        value="USU"
+                        control={
+                          <Radio
+                            className={classes.radio}
+                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)}/>}
+                            icon={<span className={classes.icon}/>}
+                            {...props}
+                          />
+                        }
+                        label="USU"
+                      />
                     </RadioGroup>
                   </Grid>
                 </Grid>
@@ -134,7 +185,7 @@ const Register = (props) => {
                   </FormLabel>
                 </Grid>
                 <Grid item xs>
-                  <input name="assinatura" accept="image/*" style={{display: "none"}} id="assinatura" type="file"/>
+                  <input required name="assinatura" accept="image/*" id="assinatura" type="file" style={{display: "none"}}/>
                   <label htmlFor="assinatura">
                     <IconButton color="primary" aria-label="upload picture" component="span" className="no-margin">
                       <ImageSearch style={{color: "white", width: 50, height: 50}}/>
@@ -152,11 +203,30 @@ const Register = (props) => {
                 Cadastrar
               </Button>
             </Grid>
-
           </form>
 
         </Grid>
       </Grid>
+
+      {/* button voltar */}
+      <Grid container>
+        <Link to="/" style={{textDecoration: 'none'}}>
+          <Button
+            variant="contained"
+            className="bold"
+            style={{
+              backgroundColor: "white",
+              color: theme.palette.secondary.main,
+              fontSize: "1rem",
+              borderRadius: 20,
+              padding: 0,
+              marginTop: 5
+            }}>
+            Voltar
+          </Button>
+        </Link>
+      </Grid>
+
     </Container>
   );
 };
