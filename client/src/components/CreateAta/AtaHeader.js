@@ -6,7 +6,7 @@ import {
   FormLabel,
   Input,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Components.css";
 import { styles } from "../../assets/styles/Styles";
 
@@ -31,8 +31,7 @@ const AtaHeader = (props) => {
   const [hrFinal, setHrFinal] = useState();
   const [local, setLocal] = useState();
 
-  const constHandleChange = (set, value) => {
-    set(value);
+  useEffect(() => {
     setInfoHeader({
       id: id,
       dtInicio: dtInicio,
@@ -41,7 +40,12 @@ const AtaHeader = (props) => {
       hrFinal: hrFinal,
       local: local,
     });
-  };
+  }, [dtFinal, dtInicio, hrFinal, hrInicio, id, local, setInfoHeader]);
+
+  useEffect(() => {
+    setId(somarIdAta(ata.id));
+    console.log("mudei id");
+  }, []);
 
   return (
     <Container>
@@ -59,9 +63,7 @@ const AtaHeader = (props) => {
                 <Typography className={classes.biggerText}>ATA Nº:</Typography>
               </Grid>
               <Grid container justify="center">
-                <Typography className={classes.biggerText}>
-                  {somarIdAta(id)}
-                </Typography>
+                <Typography className={classes.biggerText}>{id}</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -83,9 +85,7 @@ const AtaHeader = (props) => {
                         disableUnderline
                         type="date"
                         value={dtInicio}
-                        onChange={(e) =>
-                          constHandleChange(setDtInicio, e.target.value)
-                        }
+                        onChange={(e) => setDtInicio(e.target.value)}
                       />
                     </Grid>
                     <Grid xs={4} md={5}>
@@ -94,9 +94,7 @@ const AtaHeader = (props) => {
                         disableUnderline
                         type="time"
                         value={hrInicio}
-                        onChange={(e) =>
-                          constHandleChange(setHrInicio, e.target.value)
-                        }
+                        onChange={(e) => setHrInicio(e.target.value)}
                       />
                     </Grid>
                   </Grid>
@@ -117,9 +115,7 @@ const AtaHeader = (props) => {
                         disableUnderline
                         type="date"
                         value={dtFinal}
-                        onChange={(e) =>
-                          constHandleChange(setDtFinal, e.target.value)
-                        }
+                        onChange={(e) => setDtFinal(e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={4} md={5}>
@@ -128,9 +124,7 @@ const AtaHeader = (props) => {
                         disableUnderline
                         type="time"
                         value={hrFinal}
-                        onChange={(e) =>
-                          constHandleChange(setHrFinal, e.target.value)
-                        }
+                        onChange={(e) => setHrFinal(e.target.value)}
                       />
                     </Grid>
                   </Grid>
@@ -147,9 +141,7 @@ const AtaHeader = (props) => {
                     disableUnderline
                     type="text"
                     value={local}
-                    onChange={(e) =>
-                      constHandleChange(setLocal, e.target.value)
-                    }
+                    onChange={(e) => setLocal(e.target.value)}
                   />
                 </Grid>
               </Grid>
