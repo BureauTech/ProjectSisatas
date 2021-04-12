@@ -18,8 +18,8 @@ const Pauta = (props) => {
         <Grid item xs={12}>
           <Grid container>
             <TextareaAutosize
-              rowsMin={5}
-              rowsMax={5}
+              rowsMin={4}
+              rowsMax={4}
               value={pauta}
               onChange={(e) => setPauta(e.target.value)}
               style={{
