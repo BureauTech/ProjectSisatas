@@ -41,20 +41,30 @@ const styles = (theme) => ({
     margin: 20,
   },
 
+  uploadFile: {
+    color: "white",
+    "&:hover": {
+      color: "#26BAF4",
+    }
+  },
+
   radio: {
-    '&:hover': {
+    "&:hover": {
       backgroundColor: "transparent",
     },
   },
+
   icon: {
-    borderRadius: '100%',
+    borderRadius: "100%",
     width: 20,
     height: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
+
   checkedIcon: {
     backgroundColor: "#26BAF4",
   },
+
 });
 
 export { styles };

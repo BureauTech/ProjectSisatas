@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import {styles} from "../../assets/styles/Styles";
-import {ImageSearch} from "@material-ui/icons";
+import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import React from "react";
 import clsx from "clsx";
 import "./Register.css"
@@ -188,7 +188,7 @@ const Register = (props) => {
                   <input required name="assinatura" accept="image/*" id="assinatura" type="file" style={{display: "none"}}/>
                   <label htmlFor="assinatura">
                     <IconButton color="primary" aria-label="upload picture" component="span" className="no-margin">
-                      <ImageSearch style={{color: "white", width: 50, height: 50}}/>
+                      <ImageOutlinedIcon className={classes.uploadFile} style={{width: 50, height: 50}}/>
                     </IconButton>
                   </label>
                 </Grid>
@@ -231,4 +231,4 @@ const Register = (props) => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Register);
+export default withStyles(styles, {withTheme: true})(Register);
