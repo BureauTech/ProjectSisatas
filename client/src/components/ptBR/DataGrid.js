@@ -85,4 +85,8 @@ const ptBR = {
   checkboxSelectionHeaderName: "Seleção de checkbox",
 };
 
+// localeText={ptBR} adicionar esta props
+// importar import ptBR from "{pathTo}/components/ptBR/DataGrid";
+// trocar o {pathTo} pelo caminho local até o componente
+
 export default ptBR;
