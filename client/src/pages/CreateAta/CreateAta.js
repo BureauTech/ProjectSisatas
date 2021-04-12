@@ -5,12 +5,14 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
+
 import AtaHeader from "../../components/CreateAta/AtaHeader";
 import ProjectParticipants from "../../components/CreateAta/ProjectParticipants";
 import Pauta from "../../components/CreateAta/Pauta";
 import Topics from "../../components/CreateAta/Topics";
 import { useState } from "react";
 import "./Style.css";
+import ataServices from "../../services/ata";
 
 const CreateAta = (props) => {
   const theme = useTheme();
@@ -27,10 +29,19 @@ const CreateAta = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(infoHeader);
-    console.log(infoProject);
-    console.log(infoPauta);
-    console.log(infoTopics);
+
+    const body = {
+      ataHeader: JSON.stringify(infoHeader),
+      ataProject: JSON.stringify(infoProject),
+      ataPauta: infoPauta,
+      ataTopics: JSON.stringify(infoTopics),
+    };
+
+    try {
+      ataServices.criarAta(body);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
