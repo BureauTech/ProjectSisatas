@@ -30,7 +30,12 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const ProjectParticipants = (props) => {
-  const { classes, listaAdicionados, setListaAdicionados } = props;
+  const {
+    classes,
+    listaAdicionados,
+    setListaAdicionados,
+    setInfoProject,
+  } = props;
 
   const [listaParticipantes, setListaParticipantes] = useState([
     {
@@ -104,6 +109,7 @@ const ProjectParticipants = (props) => {
         area: "",
       });
       setListaAdicionados([...listaAdicionados, novo]);
+      setInfoProject([...listaAdicionados, novo]);
 
       // Limpa o campo "Participante"
       document.querySelector(".MuiAutocomplete-clearIndicator").click();
@@ -139,6 +145,7 @@ const ProjectParticipants = (props) => {
         newArray.splice(value, 1);
       });
       setListaAdicionados(newArray);
+      setInfoProject(newArray);
       document
         .querySelectorAll('input[type="checkbox"]')
         .forEach((checkbox) => {

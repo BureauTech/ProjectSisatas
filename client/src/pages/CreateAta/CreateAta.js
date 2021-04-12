@@ -20,61 +20,81 @@ const CreateAta = (props) => {
 
   const [listaAdicionados, setListaAdicionados] = useState([]);
 
+  const [infoHeader, setInfoHeader] = useState();
+  const [infoProject, setInfoProject] = useState();
+  const [infoPauta, setInfoPauta] = useState();
+  const [infoTopics, setInfoTopics] = useState();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(infoHeader);
+    console.log(infoProject);
+    console.log(infoPauta);
+    console.log(infoTopics);
+  };
+
   return (
     <Container>
-      <Grid container style={{ marginBottom: 10 }}>
-        <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
-          Cabeçalho
-        </Typography>
-        <AtaHeader ata={ata} />
-      </Grid>
-      <Grid container style={{ marginBottom: 10 }}>
-        <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
-          ATA de Reunião
-        </Typography>
-        <ProjectParticipants
-          listaAdicionados={listaAdicionados}
-          setListaAdicionados={setListaAdicionados}
-        />
-      </Grid>
-      <Grid container style={{ marginBottom: 10 }}>
-        <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
-          Pauta
-        </Typography>
-        <Pauta />
-      </Grid>
-      <Grid container style={{ marginBottom: 10 }}>
-        <Topics listaAdicionados={listaAdicionados} />
-      </Grid>
-      <Grid container justify="space-between" style={{ padding: 24 }}>
-        <Button
-          variant="contained"
-          className="bold"
-          style={{
-            backgroundColor: "white",
-            color: theme.palette.secondary.main,
-            fontWeight: 700,
-            fontSize: "1.5rem",
-            borderRadius: 20,
-            padding: "0 30px",
-          }}
-        >
-          Cancelar
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          className="bold"
-          style={{
-            color: "white",
-            fontSize: "1.5rem",
-            borderRadius: 20,
-            padding: "0 30px",
-          }}
-        >
-          Salvar
-        </Button>
-      </Grid>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <Grid container style={{ marginBottom: 10 }}>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
+            Cabeçalho
+          </Typography>
+          <AtaHeader ata={ata} setInfoHeader={setInfoHeader} />
+        </Grid>
+        <Grid container style={{ marginBottom: 10 }}>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
+            ATA de Reunião
+          </Typography>
+          <ProjectParticipants
+            listaAdicionados={listaAdicionados}
+            setListaAdicionados={setListaAdicionados}
+            setInfoProject={setInfoProject}
+          />
+        </Grid>
+        <Grid container style={{ marginBottom: 10 }}>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
+            Pauta
+          </Typography>
+          <Pauta setInfoPauta={setInfoPauta} />
+        </Grid>
+        <Grid container style={{ marginBottom: 10 }}>
+          <Topics
+            listaAdicionados={listaAdicionados}
+            setInfoTopics={setInfoTopics}
+          />
+        </Grid>
+        <Grid container justify="space-between" style={{ padding: 24 }}>
+          <Button
+            variant="contained"
+            className="bold"
+            style={{
+              backgroundColor: "white",
+              color: theme.palette.secondary.main,
+              fontWeight: 700,
+              fontSize: "1.5rem",
+              borderRadius: 20,
+              padding: "0 30px",
+            }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            className="bold"
+            type="submit"
+            style={{
+              color: "white",
+              fontSize: "1.5rem",
+              borderRadius: 20,
+              padding: "0 30px",
+            }}
+          >
+            Salvar
+          </Button>
+        </Grid>
+      </form>
     </Container>
   );
 };

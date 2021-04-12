@@ -19,7 +19,7 @@ import { styles } from "../../assets/styles/Styles";
 import "./Components.css";
 
 const Topics = (props) => {
-  const { classes, listaAdicionados } = props;
+  const { classes, listaAdicionados, setInfoTopics } = props;
 
   const [atual, setAtual] = useState();
 
@@ -40,6 +40,7 @@ const Topics = (props) => {
       };
       setListaAssuntos([...listaAssuntos, newTopic]);
       setIdAtual(idAtual + 1);
+      setInfoTopics([...listaAssuntos, newTopic]);
     }
   };
 
@@ -67,11 +68,13 @@ const Topics = (props) => {
         newId = newId + 1;
       }
       setListaAssuntos(newList);
+      setInfoTopics(newList);
       newId = newList[newList.length - 1].id + 1;
       setIdAtual(newId);
     } else {
       setIdAtual(1);
       setListaAssuntos([]);
+      setInfoTopics([]);
     }
   };
 
