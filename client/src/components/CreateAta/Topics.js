@@ -21,7 +21,7 @@ import "./Components.css";
 const Topics = (props) => {
   const { classes, listaAdicionados, setInfoTopics } = props;
 
-  const [atual, setAtual] = useState();
+  const [atual, setAtual] = useState("");
 
   const [assunto, setAssunto] = useState("");
   const [idAtual, setIdAtual] = useState(1);
@@ -52,7 +52,11 @@ const Topics = (props) => {
 
   // Rastreia o participante atualmente escolhido
   const getPerson = (person) => {
-    setAtual(person.nome);
+    if (person) {
+      setAtual(person.nome);
+    } else {
+      setAtual("");
+    }
   };
 
   const handleDelete = (id) => {
