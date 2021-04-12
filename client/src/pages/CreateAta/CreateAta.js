@@ -10,6 +10,7 @@ import ProjectParticipants from "../../components/CreateAta/ProjectParticipants"
 import Pauta from "../../components/CreateAta/Pauta";
 import Topics from "../../components/CreateAta/Topics";
 import { useState } from "react";
+import "./Style.css";
 
 const CreateAta = (props) => {
   const theme = useTheme();
@@ -48,6 +49,7 @@ const CreateAta = (props) => {
       <Grid container justify="space-between" style={{ padding: 24 }}>
         <Button
           variant="contained"
+          className="bold"
           style={{
             backgroundColor: "white",
             color: theme.palette.secondary.main,
@@ -62,9 +64,9 @@ const CreateAta = (props) => {
         <Button
           variant="contained"
           color="secondary"
+          className="bold"
           style={{
             color: "white",
-            fontWeight: 700,
             fontSize: "1.5rem",
             borderRadius: 20,
             padding: "0 30px",
