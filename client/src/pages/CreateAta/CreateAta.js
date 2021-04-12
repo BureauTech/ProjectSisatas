@@ -1,4 +1,10 @@
-import { Container, Grid, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  Grid,
+  Typography,
+  useTheme,
+} from "@material-ui/core";
 import AtaHeader from "../../components/CreateAta/AtaHeader";
 import ProjectParticipants from "../../components/CreateAta/ProjectParticipants";
 import Pauta from "../../components/CreateAta/Pauta";
@@ -6,6 +12,7 @@ import Topics from "../../components/CreateAta/Topics";
 import { useState } from "react";
 
 const CreateAta = (props) => {
+  const theme = useTheme();
   const ata = {
     id: "01/21",
   };
@@ -37,6 +44,34 @@ const CreateAta = (props) => {
       </Grid>
       <Grid container style={{ marginBottom: 10 }}>
         <Topics listaAdicionados={listaAdicionados} />
+      </Grid>
+      <Grid container justify="space-between" style={{ padding: 24 }}>
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: "white",
+            color: theme.palette.secondary.main,
+            fontWeight: 700,
+            fontSize: "1.5rem",
+            borderRadius: 20,
+            padding: "0 30px",
+          }}
+        >
+          Cancelar
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{
+            color: "white",
+            fontWeight: 700,
+            fontSize: "1.5rem",
+            borderRadius: 20,
+            padding: "0 30px",
+          }}
+        >
+          Salvar
+        </Button>
       </Grid>
     </Container>
   );
