@@ -2,7 +2,6 @@ import {
     Container,
     Grid,
     withStyles,
-    Typography,
     FormLabel,
     Input,
 } from "@material-ui/core";
@@ -16,7 +15,7 @@ const styles = (theme) => ({
         backgroundColor: theme.palette.primary.main,
         borderRadius: "20px",
         padding: 5,
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     textField: {
         backgroundColor: "white",
@@ -24,6 +23,9 @@ const styles = (theme) => ({
         color: "black",
         width: "100%",
         paddingLeft: "0.4rem",
+        [theme.breakpoints.down('md')]: {
+            marginBottom: '10px',
+        }
     },
     biggerText: {
         color: "white",
@@ -56,23 +58,26 @@ const styles = (theme) => ({
         '&:hover': {
             backgroundColor: theme.palette.secondary.main,
             color: theme.palette.secondary.contrastText,
+        },
+        [theme.breakpoints.down('md')]: {
+            marginTop: '10px',
         }
     },
     icon: {
         width: '30px',
         height: '30px',
-    }
+    },
 });
 
 class UserFilter extends Component {
     render() {
-        const { classes, ata } = this.props;
+        const { classes } = this.props;
 
         return (
             <Container>
                 <Grid container className={classes.grid} alignItems="center"
                     justify='space-evenly'>
-                    <Grid>
+                    <Grid item md={3} xs={8} >
                         <FormLabel className={classes.normalText}>
                             Usuário
                     </FormLabel>
@@ -82,7 +87,7 @@ class UserFilter extends Component {
                             type="search"
                         ></Input>
                     </Grid>
-                    <Grid>
+                    <Grid item md={3} xs={8} >
                         <FormLabel className={classes.normalText}>
                             Área/Empresa
                     </FormLabel>
@@ -92,7 +97,7 @@ class UserFilter extends Component {
                             type="search"
                         ></Input>
                     </Grid>
-                    <Grid>
+                    <Grid item md={3} xs={8} >
                         <FormLabel className={classes.normalText}>
                             E-mail
                     </FormLabel>
@@ -102,7 +107,11 @@ class UserFilter extends Component {
                             type="search"
                         ></Input>
                     </Grid>
-                    <Button className={classes.btn}><SearchIcon className={classes.icon} /></Button>
+                    <Grid item md={1} xs={8}>
+                        <Grid container justify='flex-end'>
+                            <Button className={classes.btn}><SearchIcon className={classes.icon} /></Button>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Container>
         );
