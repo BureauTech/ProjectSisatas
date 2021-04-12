@@ -38,7 +38,7 @@ public class UsuariosController {
 	@ResponseBody
 	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.GET)
 	public void atualizarUsuarios() {
-
+		// Desenvolver
 	}
 
 	@ResponseBody

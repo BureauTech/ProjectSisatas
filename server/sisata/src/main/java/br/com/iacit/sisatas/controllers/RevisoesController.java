@@ -38,7 +38,7 @@ public class RevisoesController {
 		@ResponseBody
 		@RequestMapping(value = "/atualizarRevisoes", method = RequestMethod.GET)
 		public void atualizarRevisoes() {
-
+			// Desenvolver
 		}
 
 		@ResponseBody
