@@ -13,7 +13,7 @@ function App() {
         <Grid
           container
           alignItems="center"
-          style={{ marginTop: 60, marginLeft: 100 }}
+          style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
         >
           <Switch>
             <Route path="/registeruser">
