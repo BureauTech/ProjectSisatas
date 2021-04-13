@@ -1,20 +1,16 @@
-import { Button } from "@material-ui/core";
-import "./App.css";
-import AtaTemplate from "./components/AtaModel/AtaTemplate";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CreateAta from "./pages/CreateAta/CreateAta";
 
 function App() {
   return (
     <div className="App">
-      <Button
-        color="primary"
-        variant="contained"
-        className="no-print"
-        style={{ marginTop: 100 }}
-        onClick={() => window.print()}
-      >
-        Gerar PDF da ATA
-      </Button>
-      <AtaTemplate />
+      <Router>
+        <Switch>
+          <Route path="/createata">
+            <CreateAta />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
