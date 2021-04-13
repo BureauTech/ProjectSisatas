@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Pauta from "./components/CreateAta/Pauta";
-import Filtros from "./components/ExibirAta/Filtros";
+import Data from "./components/ExibirAta/Data";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <Filtros/>
+      { /* <Data/> */ }
     </div>
   );
 }

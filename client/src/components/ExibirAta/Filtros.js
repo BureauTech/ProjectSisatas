@@ -65,7 +65,7 @@ export default function Filtros() {
     return(
         <div className={classes.root}>
           <form>
-            <Grid container spacing={5} alignItems="center" justify="flex-start" className={classes.grid}>
+            <Grid container spacing={5} alignItems="center" justify="flex-start" className={classes.root}>
                 <Grid item xs={12} sm={12} md={12} lg={12} justify="center">
 
                     <Grid md={12} xl={6} xs={12} lg={12} container className={classes.grid} justify="space-between" alignItems="center" direction="row">
