@@ -2,9 +2,10 @@ const styles = (theme) => ({
   grid: {
     backgroundColor: theme.palette.primary.main,
     borderRadius: "20px",
-    padding: 15,
+    padding: 5,
     paddingLeft: 25,
   },
+
   textField: {
     backgroundColor: "white",
     borderRadius: "10px",
@@ -13,6 +14,7 @@ const styles = (theme) => ({
     paddingLeft: "0.4rem",
     borderBottom: "none",
   },
+
   biggerText: {
     color: "white",
     fontFamily: "Montserrat",
@@ -23,6 +25,7 @@ const styles = (theme) => ({
     letterSpacing: "0em",
     textAlign: "left",
   },
+
   normalText: {
     color: "white",
     fontFamily: "Montserrat",
@@ -33,9 +36,35 @@ const styles = (theme) => ({
     letterSpacing: "0em",
     textAlign: "left",
   },
+
   rowMargin: {
-    margin: 20,
+    margin: 10,
   },
+
+  uploadFile: {
+    color: "white",
+    "&:hover": {
+      color: "#26BAF4",
+    }
+  },
+
+  radio: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+
+  icon: {
+    borderRadius: "100%",
+    width: 20,
+    height: 20,
+    backgroundColor: "white",
+  },
+
+  checkedIcon: {
+    backgroundColor: "#26BAF4",
+  },
+
 });
 
 export { styles };

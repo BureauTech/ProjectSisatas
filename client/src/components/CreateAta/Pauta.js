@@ -9,7 +9,7 @@ import { styles } from "../../assets/styles/Styles";
 import "./Components.css";
 
 const Pauta = (props) => {
-  const { classes } = props;
+  const { classes, setInfoPauta } = props;
   const [pauta, setPauta] = useState("");
 
   return (
@@ -18,10 +18,14 @@ const Pauta = (props) => {
         <Grid item xs={12}>
           <Grid container>
             <TextareaAutosize
-              rowsMin={5}
-              rowsMax={5}
+              rowsMin={4}
+              rowsMax={4}
+              id="pauta"
               value={pauta}
-              onChange={(e) => setPauta(e.target.value)}
+              onChange={(e) => {
+                setPauta(e.target.value);
+                setInfoPauta(e.target.value);
+              }}
               style={{
                 width: "100%",
                 fontSize: "1.8rem",
