@@ -4,6 +4,7 @@ import Register from "./components/RegisterUser/Register";
 import CreateAta from "./pages/CreateAta/CreateAta";
 import Menu from "./components/Menu/Menu";
 import { Grid } from "@material-ui/core";
+import EditUser from "./pages/User/EditUser";
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
             <Route path="/new-record">
               <CreateAta />
             </Route>
-            <Route path="/"></Route>
+            <Route exact path="/"></Route>
+            <Route path="/edit-user">
+              <EditUser />
+            </Route>
           </Switch>
         </Grid>
         {/* <Data/> */}
