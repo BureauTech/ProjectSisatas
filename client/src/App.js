@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import UserFilter from "./components/UserList/UserFilter";
+import UserList from "./components/UserList/UserList";
 import Menu from "./components/Menu/Menu"
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/userlist">
-            <UserFilter ata={ata} />
+            <UserList ata={ata} />
           </Route>
           <Route path="/">
             <Menu />
