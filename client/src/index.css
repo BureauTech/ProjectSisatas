@@ -1,4 +1,4 @@
-/* body {
+body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -8,8 +8,6 @@
 }
 
 * {
-  font-family: "Montserrat", sans-serif !important;
-  font-weight: 400 !important;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
 }
@@ -27,4 +25,3 @@ code {
   align-items: center;
   justify-content: center;
 }
-*/
