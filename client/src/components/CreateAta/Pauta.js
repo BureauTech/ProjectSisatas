@@ -20,6 +20,7 @@ const Pauta = (props) => {
             <TextareaAutosize
               rowsMin={4}
               rowsMax={4}
+              id="pauta"
               value={pauta}
               onChange={(e) => {
                 setPauta(e.target.value);

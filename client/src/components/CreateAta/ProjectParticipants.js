@@ -178,7 +178,11 @@ const ProjectParticipants = (props) => {
               Projeto
             </FormLabel>
             <Grid item xs={12} sm={5} md={4}>
-              <Input className={classes.textField} disableUnderline />
+              <Input
+                className={classes.textField}
+                id="temaProjeto"
+                disableUnderline
+              />
             </Grid>
           </Grid>
           <ParticipantsRow

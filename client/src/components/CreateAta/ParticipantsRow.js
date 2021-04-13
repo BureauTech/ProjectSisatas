@@ -58,6 +58,7 @@ const ParticipantsRow = (props) => {
           <Grid item md={11}>
             <Input
               className={classes.textField}
+              id="area"
               value={atual.area}
               disableUnderline
             />
@@ -69,6 +70,7 @@ const ParticipantsRow = (props) => {
           <Grid item md={11}>
             <Input
               className={classes.textField}
+              id="telefone"
               value={atual.telefone}
               disableUnderline
             />
@@ -80,6 +82,7 @@ const ParticipantsRow = (props) => {
           <Grid item md={11}>
             <Input
               className={classes.textField}
+              id="email"
               value={atual.email}
               disableUnderline
             />
