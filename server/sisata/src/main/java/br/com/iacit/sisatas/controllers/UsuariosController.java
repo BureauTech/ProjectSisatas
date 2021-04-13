@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +22,7 @@ public class UsuariosController {
 	private UsuariosRepository up;
 
 	@ResponseBody
-	@PostMapping(path = "/cadastrarUsuarios", consumes = "application/json")
+	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = "application/json")
 	public String cadastrarUsuario(@RequestBody Usuarios usuario) {
 		String result = null;
 		try {

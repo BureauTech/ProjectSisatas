@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +21,7 @@ public class LogsController {
 		private LogsRepository lp;
 
 		@ResponseBody
-		@PostMapping(path = "/cadastrarLogs", consumes = "application/json")
+		@RequestMapping(value = "/cadastrarLogs", method = RequestMethod.POST, consumes = "application/json")
 		public String cadastrarLogs(@RequestBody Logs log) {
 			String result = null;
 			try {

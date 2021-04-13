@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "perfis")
+@Table(name = "Perfis")
 public class Perfis implements Serializable {
 	/**
 	 * 
