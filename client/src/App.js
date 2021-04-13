@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Pauta from "./components/CreateAta/Pauta";
+import Data from "./components/ExibirAta/Data";
 import Register from "./components/RegisterUser/Register";
 import CreateAta from "./pages/CreateAta/CreateAta";
 import AtaHeader from "./components/CreateAta/AtaHeader";
@@ -19,6 +21,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      { /* <Data/> */ }
     </div>
   );
 }
