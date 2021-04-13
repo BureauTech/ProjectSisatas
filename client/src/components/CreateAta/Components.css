@@ -1,5 +1,6 @@
 input[type="time"],
-input[type="date"] {
+input[type="date"],
+input[type="datetime-local"] {
   text-align: center !important;
 }
 
@@ -52,8 +53,8 @@ textarea {
 }
 
 .largeIcon {
-  height: 3rem !important;
-  width: 3rem !important;
+  height: 2.6rem !important;
+  width: 2.6rem !important;
 }
 
 .no-margin {

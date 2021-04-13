@@ -2,7 +2,7 @@ const styles = (theme) => ({
   grid: {
     backgroundColor: theme.palette.primary.main,
     borderRadius: "20px",
-    padding: 15,
+    padding: 5,
     paddingLeft: 25,
   },
 
@@ -38,7 +38,7 @@ const styles = (theme) => ({
   },
 
   rowMargin: {
-    margin: 20,
+    margin: 10,
   },
 
   uploadFile: {
