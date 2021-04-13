@@ -1,5 +1,4 @@
-package br.com.iacit.sisata;
-
+package br.com.iacit.sisatas;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,9 +11,5 @@ public class SisatasApplication {
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		SpringApplication.run(SisatasApplication.class, args);
-		
-		
-
 	}
-
 }
