@@ -7,6 +7,8 @@ import "./UserList.css"
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ptBR from "../ptBR/DataGrid";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     grid: {
@@ -14,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "20px",
         padding: 15,
         paddingBottom: 50,
-        width: '80%',
-        height: 400,
+        width: '90%',
+        height: 550,
+        marginRight: 10
     },
     datagrid: {
         backgroundColor: '#FFFFFF',
@@ -47,20 +50,20 @@ const columns = [
     { field: 'Usuário', headerName: 'Usuário', width: 130 },
     { field: 'Email', headerName: 'Email', width: 130 },
     { field: 'Cargo', headerName: 'Cargo', width: 130 },
-    { field: 'ÁreaEmpresa', headerName: 'Área/Empresa', width: 160 },
-    { field: 'Perfil', headerName: 'Perfil', width: 100 },
+    { field: 'ÁreaEmpresa', headerName: 'Área/Empresa', width: 170 },
+    { field: 'Perfil', headerName: 'Perfil', width: 120 },
     {
-        field: "Exibir", headerName: "Exibir", width: 100,
+        field: "Exibir", headerName: "Exibir", width: 130,
         renderCell: (params) => (
             <Button onClick={() => console.log(params.getValue("id"))} ><VisibilityIcon className='icon' /></Button>)
     },
     {
-        field: "Editar", headerName: "Editar", width: 100,
+        field: "Editar", headerName: "Editar", width: 130,
         renderCell: (params) => (
             <Button onClick={() => console.log(params.getValue("id"))} ><EditIcon className='icon' /></Button>)
     },
     {
-        field: "Excluir", headerName: "Excluir", width: 100,
+        field: "Excluir", headerName: "Excluir", width: 130,
         renderCell: (params) => (
             <Button onClick={() => console.log(params.getValue("id"))} ><DeleteIcon className='icon' /></Button>)
     }
@@ -85,9 +88,13 @@ export default function UserList() {
                 className={classes.datagrid}
                 checkboxSelection={true}
                 hideFooter={true}
+                localeText={ptBR}
+                disableSelectionOnClick={true}
             />
             <Grid container className={classes.container}>
-                <Button className={classes.btn}>Novo Usuário</Button>
+                <Link to="/registeruser" style={{ textDecoration: 'none' }}>
+                    <Button className={classes.btn}>Novo Usuário</Button>
+                </Link>
             </Grid>
         </Grid>
     );
