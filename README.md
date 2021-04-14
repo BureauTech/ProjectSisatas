@@ -85,14 +85,13 @@ Ficará disponível em [localhost:3000](http://localhost/3000)
 
 # Progresso
 
+Board para acompanhamento das atividades disponível [aqui](https://www.notion.so/b2249587d2c24f6995f4c7ba8dea304e?v=322477ad68b04c12ac4bc0e36c55bd61)
+
+# Entregas
+
 - [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1)
 
 ## Sprint 2
-
-### Prototypes
-Interactive screen prototypes can be found here: https://bit.ly/SISATAS
-
-</br>
 
 ### Documentation
 - [Project Backlog](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
@@ -103,12 +102,6 @@ Interactive screen prototypes can be found here: https://bit.ly/SISATAS
 
 </br>
 
-### Server
-Created .xlsx minute template.
-Implementation of the excel export functionality, although with a enconging bug that is planned
-to be solved on the next Sprint.
-
-![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/assets/gifs/download_excel.gif)
 
 </br>
 
