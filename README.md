@@ -16,7 +16,6 @@ Desenvolvido pela bureau tech.
 
 ## Protótipo das telas da aplicação
 
-
 ![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/gifs/telas.gif)
 
 <br>
@@ -25,29 +24,30 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 <br>
 
-# Technologies
+# Tecnologias
 
 - Spring Framework
 - Maven
 - ReactJS
-- MaterialUI
+- Material-UI
 
 </br>
 
-# How to Run
+# Como executar
 
-## Server
+## Servidor
 
-On the [***server/sisata***](./server/sisata) folder: </br></br>
-It can be ran directly with maven by the command:
+Em [***server/sisata***](./server/sisata): </br></br>
+
+Pode ser executado diretamente utilizando o comando Maven abaixo:
 
 ```
 mvn spring-boot:run
 ```
 
-and it will be available on [localhost:8080](http://localhost/8080)
+e ficará disponível em [localhost:8080](http://localhost/8080)
 
-or
+ou
 
 1. Building the Docker Image:
 
