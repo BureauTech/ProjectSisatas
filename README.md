@@ -6,13 +6,8 @@ Feito pela BureauTech.
 
 
 <div style="text-align:center">
-    ![Logo-Bureau](/assets/png/BureauTechFundoTransparente-02.png)
+    ![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/png/BureauTechLogo.png)
 </div>
-
-![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/gifs/telas.gif)
-
-
-A web app for tracking and management of meeting records.
 
 </br>
 
