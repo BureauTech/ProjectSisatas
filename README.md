@@ -83,17 +83,9 @@ Board para acompanhamento das atividades disponível [aqui](https://www.notion.s
 
 ## Sprint 2
 
-### Documentation
-- [Project Backlog](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
-- [Entity Relationship (DER)(Conceptual)](https://github.com/BureauTech/ProjectSisatas/blob/master/docs/DER_Conceitual_SISATA_Final.png)
-- [Entity Relationship (DER)(Logical)](https://github.com/BureauTech/ProjectSisatas/blob/master/docs/DER_Logico_SISATA_Final.png)
-- [Use Case Diagram (DCU)](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
-- [Screen's Prototypes](https://github.com/BureauTech/ProjectSisatas/blob/prod/sprint-1/docs/Prototipo_telas_v1.pdf) 
+### Documentações
 
-</br>
-
-
-</br>
+- [Project Backlog](./docs/Product%20Backlog%20-%20SISATAS.pdf)
 
 ### Client
 Created .html template. 
