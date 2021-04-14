@@ -11,11 +11,11 @@ Desenvolvido pela bureau tech.
 </div>
 
 
-# Tabela de conteúdos
+# Sumário
 =================
 <!--ts-->
    * [Sobre](#SISATAS)
-   * [Tabela de Conteudo](#tabela-de-conteudo)
+   * [Sumário](#sumario)
    * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
    * [Instalação](#instalacao)
    * [Como usar](#como-usar)
