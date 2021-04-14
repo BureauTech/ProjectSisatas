@@ -20,6 +20,7 @@ Desenvolvido pela bureau tech.
    * [Documentações](#documentações)
    * [Tecnologias](#tecnologias)
    * [Como executar localmente](#como-executar-localmente)
+      * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
         * [Docker Image](#docker-image)
       * [Cliente](#cliente)
@@ -48,6 +49,8 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 ## Sprint 2
 
+------ cards aqui ---------
+
 # Documentações
 
 - [Product Backlog](./docs/Product%20Backlog%20-%20SISATAS.pdf)
@@ -67,14 +70,18 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 Para executar a aplicação completa localmente, siga as intruções a seguir:
 
-## Servidor
-
 ### Pré-requisitos:
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
 ```
 Java - Versão: 11
 PostgreSQL - Versão: 10.16
+Node - Versão: 14.x.x
+Docker (opicional)
 ```
+
+## Servidor
 
 Na pasta [***server/sisata***](./server/sisata): <br>
 
@@ -103,12 +110,6 @@ docker run -p 8080:8080 {image-id}
 ```
 
 ## Cliente
-
-### Pré-requisitos:
-
-```
-Node - Versão: 14.x.x
-```
 
 Na pasta [***client/***](./client): <br>
 
