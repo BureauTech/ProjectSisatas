@@ -33,7 +33,10 @@ Desenvolvido pela bureau tech.
 <br>
 
 Protótipo interativo das telas está disponível neste link: https://bit.ly/SISATAS
-  
+
+<br>
+
+ 
 # Acompanhamento das Atividades
 
 <h4 align="center"> 
@@ -42,6 +45,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.notion.so/b2249587d2c24f6995f4c7ba8dea304e?v=322477ad68b04c12ac4bc0e36c55bd61).
 
+<br>
 
 # Entregas
 
