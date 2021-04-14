@@ -5,7 +5,6 @@ import {
   Grid,
   IconButton,
   Input,
-  Paper,
   Typography,
   withStyles,
 } from "@material-ui/core";

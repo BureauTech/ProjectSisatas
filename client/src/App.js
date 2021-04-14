@@ -6,6 +6,7 @@ import Menu from "./components/Menu/Menu";
 import { Grid } from "@material-ui/core";
 import EditUser from "./pages/User/EditUser";
 import UserList from "./components/UserList/UserList";
+import UserProfile from "./pages/User/UserProfile";
 
 function App() {
   const ata = {
@@ -34,6 +35,9 @@ function App() {
             <Route exact path="/"></Route>
             <Route path="/edit-user">
               <EditUser />
+            </Route>
+            <Route path="/profile">
+              <UserProfile id={1} />
             </Route>
             <Route path="/users-list">
               <UserList ata={ata} />
