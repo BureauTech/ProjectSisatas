@@ -73,13 +73,13 @@ npm start
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
 
-# Progresso
+# Progresso do desenvolvimento do Projeto
 
 Board para acompanhamento das atividades disponível [aqui](https://www.notion.so/b2249587d2c24f6995f4c7ba8dea304e?v=322477ad68b04c12ac4bc0e36c55bd61)
 
 # Entregas
 
-- [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1)
+- [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entregue em 28/03/2021.
 
 ## Sprint 2
 
