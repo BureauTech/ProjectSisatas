@@ -73,7 +73,7 @@ Ficará disponível em [localhost:3000](http://localhost/3000)
 
 # Progresso do desenvolvimento do Projeto
 
-Para acompanhamento das atividades, [acesse o Board](https://www.notion.so/b2249587d2c24f6995f4c7ba8dea304e?v=322477ad68b04c12ac4bc0e36c55bd61)
+Para acompanhamento das atividades, [acesse o Board](https://www.notion.so/b2249587d2c24f6995f4c7ba8dea304e?v=322477ad68b04c12ac4bc0e36c55bd61).
 
 # Entregas
 
