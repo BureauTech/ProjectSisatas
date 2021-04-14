@@ -6,7 +6,7 @@
 
 ![logo](./assets/png/BureauTechLogo.png)
 
-Desenvolvido pela bureau tech.
+Desenvolvido pela Bureau Tech.
 
 </div>
 
