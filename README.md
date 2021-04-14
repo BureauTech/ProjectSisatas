@@ -37,7 +37,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 ## Servidor
 
-Em [***server/sisata***](./server/sisata): </br></br>
+Na pasta [***server/sisata***](./server/sisata): </br></br>
 
 Pode ser executado diretamente utilizando o comando Maven abaixo:
 
@@ -62,21 +62,24 @@ docker run -p 8080:8080 {image-id}
 ```
 
 
-## Client
-On the [***client/***](./client) folder: </br></br>
+## Cliente
 
-1. Download node modules
+Na pasta [***client/***](./client): </br></br>
+
+1. Faça a instalação dos módulos:
+   
 ```
 npm install
 ```
 
-2. Starting the application 
+2. Inicie a aplicação: 
+
 ```
 npm start
 ```
 </br>
 
-Now available on [localhost:3000](http://localhost/3000)
+Ficará disponível em [localhost:3000](http://localhost/3000)
 
 </br>
 
