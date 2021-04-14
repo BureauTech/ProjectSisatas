@@ -1,0 +1,20 @@
+.MuiDataGrid-root {
+    background-color: #EFEFEF;
+}
+.MuiDataGrid-colCell {
+    font-size: large;
+}
+.MuiDataGrid-row {
+    font-family: Montserrat;
+}
+.MuiButton-label-463 {
+}
+.MuiDataGrid-menuIcon {
+    visibility: visible !important;
+}
+.btmeio {
+    color: #26BAF4
+}
+.btmeio:hover {
+    color: black;
+}

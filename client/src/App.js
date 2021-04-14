@@ -28,6 +28,9 @@ function App() {
             <Route path="/new-record">
               <CreateAta />
             </Route>
+            <Route path="/show-records">
+              <Data />
+            </Route>
             <Route exact path="/"></Route>
             <Route path="/edit-user">
               <EditUser />
@@ -37,7 +40,6 @@ function App() {
             </Route>
           </Switch>
         </Grid>
-        {/* <Data/> */}
       </div>
     </Router>
   );
