@@ -75,11 +75,15 @@ Para executar a aplicação completa localmente, siga as intruções a seguir:
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
 ```
+Node - Versão: 14.x.x
 Java - Versão: 11
 PostgreSQL - Versão: 10.16
-Node - Versão: 14.x.x
+Spring Framework
+Maven
 Docker (opicional)
 ```
+
+Além disto é bom ter um editor para trabalhar com o código como VSCode.
 
 ## Servidor
 
