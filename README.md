@@ -27,7 +27,8 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 - Maven
 - ReactJS
 - Material-UI
-
+- Docker
+  
 # Como executar
 
 Para executar a aplicação completa localmente, siga
@@ -49,9 +50,9 @@ Pode ser executado diretamente utilizando o comando Maven abaixo:
 mvn spring-boot:run
 ```
 
-e ficará disponível em [localhost:8080](http://localhost/8080)
+Ficará disponível em [localhost:8080](http://localhost/8080)
 
-ou
+Também é possível executar utilizando Docker, conforme processos descritos abaixo:
 
 1. Criação da Imagem do Docker::
 
