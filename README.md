@@ -49,13 +49,13 @@ e ficará disponível em [localhost:8080](http://localhost/8080)
 
 ou
 
-1. Building the Docker Image:
+1. Criação da Imagem do Docker::
 
 ```
 docker build -t bureau/sisata
 ```
 
-2. Running the container:
+1. Para execução do container:
 
 ```
 docker run -p 8080:8080 {image-id}
