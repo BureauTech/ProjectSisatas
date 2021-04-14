@@ -18,6 +18,7 @@ function App() {
         <Grid
           container
           alignItems="center"
+          justify="center"
           style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
         >
           <Switch>
@@ -31,7 +32,7 @@ function App() {
             <Route path="/edit-user">
               <EditUser />
             </Route>
-            <Route path="/userlist">
+            <Route path="/users-list">
               <UserList ata={ata} />
             </Route>
           </Switch>
