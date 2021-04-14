@@ -40,7 +40,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 # Acompanhamento das Atividades
 
 <h4 align="center"> 
-	🚧  SISATAS em construção...  🚧
+	🚧  SISATAS em construção  🚧
 </h4>
 
 Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.notion.so/b2249587d2c24f6995f4c7ba8dea304e?v=322477ad68b04c12ac4bc0e36c55bd61).
@@ -49,7 +49,7 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 # Entregas
 
-- [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entrega realizada em ***28/03/2021***.
+- [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entrega realizada em 28/03/2021.
 
 - **Sprint 2**
 
