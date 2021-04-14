@@ -1,4 +1,4 @@
-# SISATAS
+<h1 align="center">SISATAS</h1>
 
 <p align="center">Uma solução web para acompanhamento e gerenciamento de atas de reuniões.</p>
 
