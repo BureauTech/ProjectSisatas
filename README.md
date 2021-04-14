@@ -105,7 +105,7 @@ Testing with button that calls the browser's printing function.
 
 # Authors
 
-### [![GitHub Badge](https://img.shields.io/github/followers/QuodJP?label=QuodJP&style=for-the-badge&color=black&link=https://github.com/QuodJP)](https://github.com/QuodJP) - Master <br/>
+### [![GitHub Badge](https://img.shields.io/github/followers/JoaoPSPereira?label=JoaoPSPereira&style=for-the-badge&color=black&link=https://github.com/JoaoPSPereira)](https://github.com/JoaoPSPereira) - Master <br/>
 
 ### [![GitHub Badge](https://img.shields.io/github/followers/charles-ramos?label=charles-ramos&style=for-the-badge&color=black&link=https://github.com/charles-ramos)](https://github.com/charles-ramos) - PO <br/>
 
