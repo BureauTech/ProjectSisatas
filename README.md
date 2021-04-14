@@ -20,9 +20,9 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 # Tecnologias
 
-- Node - Versão: 14.x.x
-- Java - Versão: 11
-- PostgreSQL - Versão: 10.16
+- Node
+- Java
+- PostgreSQL
 - Spring Framework
 - Maven
 - ReactJS
@@ -30,7 +30,16 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 # Como executar
 
+Para executar a aplicação completa localmente, siga
+
 ## Servidor
+
+### Pré-requisitos:
+
+```
+- Java - Versão: 11
+- PostgreSQL - Versão: 10.16
+```
 
 Na pasta [***server/sisata***](./server/sisata): <br>
 
@@ -58,7 +67,11 @@ docker run -p 8080:8080 {image-id}
 
 ## Cliente
 
-**Importante** Versão do Node exigida para execução do front localmente é 14. 
+### Pré-requisitos:
+
+```
+- Node - Versão: 14.x.x
+```
 
 Na pasta [***client/***](./client): <br>
 
