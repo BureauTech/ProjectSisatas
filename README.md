@@ -124,14 +124,14 @@ Ficará disponível em [localhost:3000](http://localhost/3000)
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-- [Node]()
-- [Java]()
-- [PostgreSQL]()
-- [Spring Framework]()
-- [Maven]()
-- [ReactJS]()
-- [Material-UI]()
-- [Docker]()
+- [Node](https://nodejs.org/)
+- [Java](https://www.java.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Spring Framework](https://spring.io/)
+- [Maven](https://maven.apache.org/)
+- [ReactJS](https://reactjs.org/)
+- [Material-UI](https://material-ui.com/)
+- [Docker](https://www.docker.com/)
 
 # Autores
 
