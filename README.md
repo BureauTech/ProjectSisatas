@@ -18,12 +18,13 @@ Desenvolvido pela bureau tech.
    * [Acompanhamento das Atividades](#acompanhamento-das-atividades)
    * [Entregas](#entregas)
    * [Documentações](#documentações)
-   * [Tecnologias](#tecnologias)
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
         * [Docker Image](#docker-image)
       * [Cliente](#cliente)
+   * [Tecnologias Utilizadas](#tecnologias-utilizadas)
+   * [Tecnologias](#tecnologias)
    * [Autores](#autores)
 
 ## Protótipo das telas da aplicação
@@ -54,17 +55,6 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 # Documentações
 
 - [Product Backlog](./docs/Product%20Backlog%20-%20SISATAS.pdf)
-
-# Tecnologias
-
-- Node
-- Java
-- PostgreSQL
-- Spring Framework
-- Maven
-- ReactJS
-- Material-UI
-- Docker
 
 # Como executar localmente
 
@@ -130,6 +120,31 @@ npm start
 ```
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
+
+# Tecnologias Utilizadas
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [Node]()
+- [Java]()
+- [PostgreSQL]()
+- [Spring Framework]()
+- [Maven]()
+- [ReactJS]()
+- [Material-UI]()
+- [Docker]()
+
+
+# Tecnologias
+
+- Node
+- Java
+- PostgreSQL
+- Spring Framework
+- Maven
+- ReactJS
+- Material-UI
+- Docker
 
 # Autores
 
