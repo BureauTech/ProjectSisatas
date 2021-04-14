@@ -2,12 +2,8 @@
 
 Uma solução web para acompanhamento e gerenciamento de atas de reuniões.
 
-Feito pela BureauTech.
-
-
-<div style="text-align:center">
+Desenvolvido pela BureauTech.
     ![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/png/BureauTechLogo.png)
-</div>
 
 </br>
 
