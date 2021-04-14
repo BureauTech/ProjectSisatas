@@ -12,8 +12,6 @@ Desenvolvido pela bureau tech.
 
 </div>
 
-<br>
-
 ## Protótipo das telas da aplicação
 
 ![telas](./assets/gifs/telas.gif)
@@ -21,8 +19,6 @@ Desenvolvido pela bureau tech.
 <br>
 
 Protótipo interativo das telas está disponível neste link: https://bit.ly/SISATAS
-
-<br>
 
 # Tecnologias
 
@@ -35,7 +31,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 ## Servidor
 
-Na pasta [***server/sisata***](./server/sisata): </br></br>
+Na pasta [***server/sisata***](./server/sisata): <br>
 
 Pode ser executado diretamente utilizando o comando Maven abaixo:
 
@@ -59,10 +55,9 @@ docker build -t bureau/sisata
 docker run -p 8080:8080 {image-id}
 ```
 
-
 ## Cliente
 
-Na pasta [***client/***](./client): </br></br>
+Na pasta [***client/***](./client): <br>
 
 1. Faça a instalação dos módulos:
    
@@ -75,11 +70,8 @@ npm install
 ```
 npm start
 ```
-</br>
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
-
-</br>
 
 # Progresso
 
