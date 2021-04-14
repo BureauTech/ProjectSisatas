@@ -2,6 +2,8 @@
 
 ### Uma solução web para acompanhamento e gerenciamento de atas de reuniões.
 
+</br>
+
 <div align="center">
     ![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/dev/readme/assets/png/BureauTechLogo.png)
     Desenvolvido pela bureau tech.
