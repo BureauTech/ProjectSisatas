@@ -20,10 +20,12 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 # Tecnologias
 
-- PostgreSQL
+- Node - Versão: ^14
+- ReactJS - ^17.0.1
+- Java - 11
+- PostgreSQL - 10.16
 - Spring Framework
 - Maven
-- ReactJS
 - Material-UI
 
 # Como executar
