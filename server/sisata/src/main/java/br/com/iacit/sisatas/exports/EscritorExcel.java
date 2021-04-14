@@ -1,4 +1,4 @@
-package br.com.iacit.sisata.exports;
+package br.com.iacit.sisatas.exports;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
