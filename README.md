@@ -16,7 +16,7 @@ Desenvolvido pela bureau tech.
 
 ## Protótipo das telas da aplicação
 
-![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/gifs/telas.gif)
+![telas](./assets/gifs/telas.gif)
 
 <br>
 
