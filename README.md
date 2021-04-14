@@ -80,7 +80,7 @@ Java - Versão: 11
 PostgreSQL - Versão: 10.16
 Spring Framework
 Maven
-Docker (opicional)
+Docker (opcional)
 ```
 
 Além disto é bom ter um editor para trabalhar com o código como VSCode.
