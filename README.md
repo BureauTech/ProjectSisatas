@@ -6,7 +6,7 @@
 
 <div align="center">
 
-![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/dev/readme/assets/png/BureauTechLogo.png)
+[logo](./assets/png/BureauTechLogo.png)
 
 Desenvolvido pela bureau tech.
 
