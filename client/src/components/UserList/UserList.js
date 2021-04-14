@@ -7,6 +7,7 @@ import "./UserList.css"
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ptBR from "../ptBR/DataGrid";
 
 const useStyles = makeStyles((theme) => ({
     grid: {
@@ -86,6 +87,7 @@ export default function UserList() {
                 className={classes.datagrid}
                 checkboxSelection={true}
                 hideFooter={true}
+                localeText={ptBR}
             />
             <Grid container className={classes.container}>
                 <Button className={classes.btn}>Novo Usuário</Button>
