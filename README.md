@@ -1,8 +1,6 @@
 # SISATAS
 
-### Uma solução web para acompanhamento e gerenciamento de atas de reuniões.
-
-<br>
+<p align="center">Uma solução web para acompanhamento e gerenciamento de atas de reuniões.</p>
 
 <div align="center">
 
