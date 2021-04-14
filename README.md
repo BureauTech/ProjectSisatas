@@ -23,7 +23,6 @@ Desenvolvido pela bureau tech.
       * [Servidor](#servidor)
         * [Docker Image](#docker-image)
       * [Cliente](#cliente)
-   * [Tecnologias Utilizadas](#tecnologias-utilizadas)
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
 
@@ -121,7 +120,7 @@ npm start
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
 
-# Tecnologias Utilizadas
+# Tecnologias
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
@@ -133,18 +132,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [ReactJS]()
 - [Material-UI]()
 - [Docker]()
-
-
-# Tecnologias
-
-- Node
-- Java
-- PostgreSQL
-- Spring Framework
-- Maven
-- ReactJS
-- Material-UI
-- Docker
 
 # Autores
 
