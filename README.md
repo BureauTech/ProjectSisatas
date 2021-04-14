@@ -79,7 +79,7 @@ Board para acompanhamento das atividades disponível [aqui](https://www.notion.s
 
 # Entregas
 
-- [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entregue em 28/03/2021.
+- [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entrega realizada em 28/03/2021.
 
 ## Sprint 2
 
