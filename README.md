@@ -100,7 +100,7 @@ Também é possível executar utilizando Docker, conforme processos descritos ab
 docker build -t bureau/sisata
 ```
 
-1. Para execução do container:
+2. Para execução do container:
 
 ```
 docker run -p 8080:8080 {image-id}
