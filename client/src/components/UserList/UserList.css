@@ -1,0 +1,12 @@
+.MuiDataGrid-menuIcon {
+  visibility: visible !important;
+}
+
+.MuiDataGrid-colCellSortable:hover {
+  background-color: #26BAF4;
+  color: #fff;
+}
+
+.icon:hover {
+  color: #26BAF4;
+}
