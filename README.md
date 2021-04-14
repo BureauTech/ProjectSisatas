@@ -1,4 +1,16 @@
-# SISATA
+# SISATAS
+
+Uma solução web para acompanhamento e gerenciamento de atas de reuniões.
+
+Feito pela BureauTech.
+
+
+<div style="text-align:center">
+    ![Logo-Bureau](/assets/png/BureauTechFundoTransparente-02.png)
+</div>
+
+![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/gifs/telas.gif)
+
 
 A web app for tracking and management of meeting records.
 
