@@ -14,8 +14,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "20px",
         padding: 15,
         paddingBottom: 50,
-        width: '80%',
-        height: 400,
+        width: '90%',
+        height: 550,
+        marginRight: 10
     },
     datagrid: {
         backgroundColor: '#FFFFFF',
