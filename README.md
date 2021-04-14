@@ -85,7 +85,7 @@ Board para acompanhamento das atividades disponível [aqui](https://www.notion.s
 
 ### Documentações
 
-- [Project Backlog](./docs/Product%20Backlog%20-%20SISATAS.pdf)
+- [Product Backlog](./docs/Product%20Backlog%20-%20SISATAS.pdf)
 
 ### Client
 Created .html template. 
