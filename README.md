@@ -31,15 +31,15 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
   
 # Como executar
 
-Para executar a aplicação completa localmente, siga
+Para executar a aplicação completa localmente, siga as intruções a seguir:
 
 ## Servidor
 
 ### Pré-requisitos:
 
 ```
-- Java - Versão: 11
-- PostgreSQL - Versão: 10.16
+Java - Versão: 11
+PostgreSQL - Versão: 10.16
 ```
 
 Na pasta [***server/sisata***](./server/sisata): <br>
@@ -71,7 +71,7 @@ docker run -p 8080:8080 {image-id}
 ### Pré-requisitos:
 
 ```
-- Node - Versão: 14.x.x
+Node - Versão: 14.x.x
 ```
 
 Na pasta [***client/***](./client): <br>
