@@ -20,6 +20,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 # Tecnologias
 
+- PostgreSQL
 - Spring Framework
 - Maven
 - ReactJS
@@ -54,6 +55,8 @@ docker run -p 8080:8080 {image-id}
 ```
 
 ## Cliente
+
+**Importante** Versão do Node exigida para execução do front localmente é 14. 
 
 Na pasta [***client/***](./client): <br>
 
