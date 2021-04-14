@@ -142,11 +142,37 @@ public class UsuariosController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/listarUsuariosLikeNome", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuariosLikeNome(@RequestParam("nome") String nome) {
+	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuNome", method = RequestMethod.GET)
+	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuNome(@RequestParam("usuNome") String usuNome) {
 		List<Usuarios> usuarios = null;
 		try {
-			usuarios = up.searchByusuNomeLike(nome);
+			usuarios = up.searchByusuNomeContainingIgnoreCase(usuNome);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+
+		return usuarios;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuAreaEmpresa", method = RequestMethod.GET)
+	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuAreaEmpresa(@RequestParam("usuAreaEmpresa") String usuAreaEmpresa) {
+		List<Usuarios> usuarios = null;
+		try {
+			usuarios = up.searchByusuAreaEmpresaContainingIgnoreCase(usuAreaEmpresa);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+
+		return usuarios;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuEmail", method = RequestMethod.GET)
+	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuEmail(@RequestParam("usuEmail") String usuEmail) {
+		List<Usuarios> usuarios = null;
+		try {
+			usuarios = up.searchByusuEmailContainingIgnoreCase(usuEmail);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
