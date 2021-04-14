@@ -87,12 +87,6 @@ Board para acompanhamento das atividades disponível [aqui](https://www.notion.s
 
 - [Product Backlog](./docs/Product%20Backlog%20-%20SISATAS.pdf)
 
-### Client
-Created .html template. 
-Testing with button that calls the browser's printing function.
-
-![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/assets/gifs/download_pdf.gif)
-
 # Autores
 
 ### [![GitHub Badge](https://img.shields.io/github/followers/bibiacoutinho?label=bibiacoutinho&style=for-the-badge&color=black&link=https://github.com/bibiacoutinho)](https://github.com/bibiacoutinho) - Master <br>
