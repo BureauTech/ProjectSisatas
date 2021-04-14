@@ -25,14 +25,6 @@ const theme = createMuiTheme(
   },
   ptBR
 );
-  typography: {
-    button: {
-      textTransform: "none",
-    },
-    fontFamily: "Montserrat",
-    fontWeightRegular: "400",
-  },
-});
 
 ReactDOM.render(
   <React.StrictMode>
