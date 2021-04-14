@@ -1,6 +1,7 @@
 # SISATAS
 
-Uma solução web para acompanhamento e gerenciamento de atas de reuniões.
+### Uma solução web para acompanhamento e gerenciamento de atas de reuniões.
+
     ![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/dev/readme/assets/png/BureauTechLogo.png)
 
 <div align="center">
@@ -9,9 +10,8 @@ Uma solução web para acompanhamento e gerenciamento de atas de reuniões.
 
 </br>
 
-# Spotlight
 
-## Front-end prototype
+# Front-end prototype
 
 
 ![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/gifs/telas.gif)
