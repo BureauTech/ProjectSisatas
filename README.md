@@ -31,8 +31,6 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 - ReactJS
 - Material-UI
 
-</br>
-
 # Como executar
 
 ## Servidor
