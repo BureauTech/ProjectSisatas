@@ -155,5 +155,5 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 
   <tr>
-    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars0.githubusercontent.com/u/14968551?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho - Master</b></sub></a><br /><a href="https://github.com/testing-library/react-testing-library/commits?author=aayushrajvanshi" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho - Master</b></sub></a><br /><a href="https://github.com/testing-library/react-testing-library/commits?author=aayushrajvanshi" title="Documentation">📖</a></td>
   </tr>
