@@ -3,26 +3,28 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { ptBR } from "@material-ui/core/locale";
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#3379FA",
-      contrastText: "#FFF",
+const theme = createMuiTheme(
+  {
+    palette: {
+      primary: {
+        main: "#3379FA",
+        contrastText: "#FFF",
+      },
+      secondary: {
+        main: "#26BAF4",
+        contrastText: "#FFF",
+      },
     },
-    secondary: {
-      main: "#26BAF4",
-      contrastText: "#FFF",
+    typography: {
+      button: {
+        textTransform: "none",
+      },
     },
   },
-  typography: {
-    button: {
-      textTransform: "none",
-    },
-    fontFamily: "Montserrat",
-    fontWeightRegular: "400",
-  },
-});
+  ptBR
+);
 
 ReactDOM.render(
   <React.StrictMode>

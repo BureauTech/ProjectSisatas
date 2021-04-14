@@ -1,25 +1,45 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Data from "./components/ExibirAta/Data";
+import Register from "./components/RegisterUser/Register";
+import CreateAta from "./pages/CreateAta/CreateAta";
+import Menu from "./components/Menu/Menu";
+import { Grid } from "@material-ui/core";
+import EditUser from "./pages/User/EditUser";
 import UserList from "./components/UserList/UserList";
-import Menu from "./components/Menu/Menu"
 
 function App() {
   const ata = {
     id: "01/21",
   };
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/userlist">
-            <UserList ata={ata} />
-          </Route>
-          <Route path="/">
-            <Menu />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <Router>
+      <div className="App">
+        <Menu />
+        <Grid
+          container
+          alignItems="center"
+          justify="center"
+          style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
+        >
+          <Switch>
+            <Route path="/registeruser">
+              <Register />
+            </Route>
+            <Route path="/new-record">
+              <CreateAta />
+            </Route>
+            <Route exact path="/"></Route>
+            <Route path="/edit-user">
+              <EditUser />
+            </Route>
+            <Route path="/users-list">
+              <UserList ata={ata} />
+            </Route>
+          </Switch>
+        </Grid>
+        {/* <Data/> */}
+      </div>
+    </Router>
   );
 }
-
 export default App;
