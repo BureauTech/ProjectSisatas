@@ -25,23 +25,23 @@ public class Usuarios implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long usuId;
 	@Column(nullable = false, length = 50)
-	private String usu_nome;
+	private String usuNome;
 	@Column(nullable = false, length = 50)
-	private String usu_email;
+	private String usuEmail;
 	@Column(nullable = false) // Definira tamanho.
-	private String usu_senha;
+	private String usuSenha;
 	@Column(nullable = false, length = 11)
-	private String usu_telefone;
-	@Column(nullable = false, length = 30)
-	private String usu_cargo;
-	@Column(nullable = false, length = 30)
-	private String usu_area_empresa;
+	private String usuTelefone;
+	@Column(nullable = false, length = 50)
+	private String usuCargo;
+	@Column(nullable = false, length = 50)
+	private String usuAreaEmpresa;
 	@Column(nullable = false)
-	private String usu_assinatura;// Definir qual como será salva a assinatura;
+	private String usuAssinatura;// Definir qual como será salva a assinatura;
 	
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "fk_per_id", referencedColumnName = "id") // OK
+	@JoinColumn(name = "fkPerId", referencedColumnName = "perId") // OK
 	private Perfis pertenceUsuarios;
 }

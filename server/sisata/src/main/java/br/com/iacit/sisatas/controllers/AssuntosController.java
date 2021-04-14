@@ -60,7 +60,7 @@ public class AssuntosController {
 	public String excluirAssuntos(@PathVariable long ass_id) {
 		String result = null;
 		try {
-			Assuntos assuntoSelecionado = ap.findById(ass_id);
+			Assuntos assuntoSelecionado = ap.findByassId(ass_id);
 			ap.delete(assuntoSelecionado);
 		} catch (DataAccessException e) {
 			result = e.getMessage();

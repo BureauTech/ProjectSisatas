@@ -19,8 +19,8 @@ public class Perfis implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private Long id;
+	private Long perId;
 	@Column(nullable = false, length = 15)
-	private String per_nome;
+	private String perNome;
 	
 }

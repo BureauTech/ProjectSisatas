@@ -57,7 +57,7 @@ public class EstadosController {
 			public String excluirEstados(@PathVariable long est_id) {
 				String result = null;
 				try {
-					Estados estadoSelecionado = ep.findById(est_id);
+					Estados estadoSelecionado = ep.findByestId(est_id);
 					ep.delete(estadoSelecionado);
 				} catch (DataAccessException e) {
 					result = e.getMessage();

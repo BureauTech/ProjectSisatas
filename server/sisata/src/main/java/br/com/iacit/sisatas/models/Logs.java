@@ -24,11 +24,11 @@ public class Logs implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long logId;
 	@Column(nullable = false, length = 50)
-	private String log_autor;
+	private String logAutor;
 	@Column(nullable = false, length = 100)
-	private String log_descricao;
+	private String logDescricao;
 	@Column(nullable = false)
-	private DateFormat log_data_hora;
+	private DateFormat logDataHora;
 }

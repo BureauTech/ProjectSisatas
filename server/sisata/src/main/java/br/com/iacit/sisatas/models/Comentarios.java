@@ -26,14 +26,14 @@ public class Comentarios implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long id;
+	public Long comId;
 	@Column(nullable = false, length = 300)
-	public String com_descricao;
+	public String comDescricao;
 	@Column(nullable = false)
-	public DateFormat com_data;
+	public DateFormat comData;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fk_rev_id", referencedColumnName = "id") // OK
+	@JoinColumn(name = "fkRevId", referencedColumnName = "revId") // OK
 	public Revisoes contemRevisao;
 
 }

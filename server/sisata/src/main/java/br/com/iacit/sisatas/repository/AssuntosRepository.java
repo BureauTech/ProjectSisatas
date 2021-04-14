@@ -6,6 +6,6 @@ import br.com.iacit.sisatas.models.Assuntos;
 
 public interface AssuntosRepository extends JpaRepository<Assuntos, String> {
 	
-	Assuntos findById(long id_usuario);
+	Assuntos findByassId(long assId);
 
 }

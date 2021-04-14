@@ -29,21 +29,21 @@ public class Assuntos implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long assId;
 	@Column(nullable = false, length = 30)
-	private String ass_assunto;
+	private String assAssunto;
 	@Column(nullable = false)
-	private Date ass_prazo;
+	private Date assPrazo;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fk_ata_id", referencedColumnName = "id") // OK
+	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId") // OK
 	private Atas contemAssuntos;
 	
 	@ManyToMany
 	@JoinTable(name = "Resposavel",
-			joinColumns = @JoinColumn(name = "fk_pk_ass_id", referencedColumnName = "id"), 
+			joinColumns = @JoinColumn(name = "fkPkAssId", referencedColumnName = "assId"), 
 																								
-			inverseJoinColumns = @JoinColumn(name = "fk_pk_usu_id", referencedColumnName = "id") 
+			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId") 
 																										
 	)
 	private List<Usuarios> responsavelAssuntos; // OK
