@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[logo](./assets/png/BureauTechLogo.png)
+![logo](./assets/png/BureauTechLogo.png)
 
 Desenvolvido pela bureau tech.
 
