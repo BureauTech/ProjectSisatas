@@ -36,7 +36,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 <br>
 
- 
+
 # Acompanhamento das Atividades
 
 <h4 align="center"> 
@@ -51,7 +51,7 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entrega realizada em **28/03/2021**.
 
-## Sprint 2
+- Sprint 2
 
 ------ cards aqui ---------
 
