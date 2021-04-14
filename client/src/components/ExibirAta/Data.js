@@ -1,21 +1,25 @@
 import React from "react";
-import { DataGrid, GridToolbar, ptBR	} from "@material-ui/data-grid";
-import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { Button, withTheme } from "@material-ui/core";
+import { DataGrid, GridToolbar	} from "@material-ui/data-grid";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Grid } from "@material-ui/core";
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import "./Data.css";
+import ptBR from "../ptBR/DataGrid";
 
 
-const theme = createMuiTheme(ptBR,)
+
+
+
 
 const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "projeto", headerName: "Projeto", width: 130 },
-    { field: "criado", headerName: "Criado em", width: 130 },
-    { field: "tipo", headerName: "Tipo", width: 130 },
-    { field: "estado", headerName: "Estado", width: 130 },
-    { field: "link", headerName: "Ver", width: 100, 
+    { field: "id", headerName: "ID", width: 100 },
+    { field: "projeto", headerName: "Projeto", width: 200 },
+    { field: "criado", headerName: "Criado em", width: 150 },
+    { field: "tipo", headerName: "Tipo", width: 150 },
+    { field: "estado", headerName: "Estado", width: 150 },
+    { field: "link", headerName: "Exibir", width: 120, 
     renderCell: (params) => (
-    <Button onClick={() => console.log(params.getValue("id"))} ><VisibilityIcon/></Button>)},
+    <Button onClick={() => console.log(params.getValue("id"))} ><VisibilityIcon className="btmeio"/></Button>)},
   ];
   const rows = [
    { id: 1, projeto: "Teste", criado: "22/01/2021", tipo: "Ata", estado: "Nova", link: "teste" },
@@ -43,23 +47,29 @@ const columns = [
         marginLeft: "11%",
         alignItems: "center",
         width: "75%",
-        height: 400,
-        fontFamily: "Montserrat",
-        fontSize: 40
+        borderRadius: 20,
       },
       data: {
-        backgroundColor: "#3379FA",
+        
 
+      },
+      grid: {
+        height: 600,
+        backgroundColor: "#3379FA",
+        borderRadius: 10,
+        padding: 15,
       }
   }));
 
   const datagrid = <DataGrid 
     components={{Toolbar: GridToolbar,}}
+    localeText={ptBR}
     rows={rows}
     columns={columns}
     pageSize={rows.length}
     hideFooter={true}
-    style={{color:"#fff"}}
+    disableSelectionOnClick={true}
+    checkboxSelection
     className={useStyles.data}
     />;
 
@@ -67,9 +77,9 @@ const columns = [
     const classes = useStyles();
     return (
         <div className={classes.root} >
-          <ThemeProvider theme={theme}>
+          <Grid container className={classes.grid}>
             {datagrid}
-          </ThemeProvider>
+          </Grid>
         </div>
     )
 };

@@ -22,6 +22,9 @@ function App() {
             <Route path="/new-record">
               <CreateAta />
             </Route>
+            <Route path="/show-records">
+              <Data />
+            </Route>
             <Route path="/"></Route>
           </Switch>
         </Grid>
