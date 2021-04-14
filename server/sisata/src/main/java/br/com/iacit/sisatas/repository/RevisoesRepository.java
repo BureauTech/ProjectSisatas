@@ -6,6 +6,6 @@ import br.com.iacit.sisatas.models.Revisoes;
 
 public interface RevisoesRepository extends JpaRepository<Revisoes, String> {
 	
-	Revisoes findById(long id_revisao);
+	Revisoes findByrevId(long revId);
 	
 }

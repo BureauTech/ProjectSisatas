@@ -6,7 +6,7 @@ import br.com.iacit.sisatas.models.Atas;
 
 public interface AtasRepository extends JpaRepository<Atas, String> {
 
-	Atas findById(long id_ata);
+	Atas findByataId(long ataId);
 	
 }
 

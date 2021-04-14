@@ -58,7 +58,7 @@ public class RevisoesController {
 		public String excluirRevisoes(@PathVariable long rev_id) {
 			String result = null;
 			try {
-				Revisoes revisaoSelecionada = rp.findById(rev_id);
+				Revisoes revisaoSelecionada = rp.findByrevId(rev_id);
 				rp.delete(revisaoSelecionada);
 			} catch (DataAccessException e) {
 				result = e.getMessage();

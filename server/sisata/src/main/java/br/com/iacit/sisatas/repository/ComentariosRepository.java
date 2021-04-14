@@ -6,6 +6,6 @@ import br.com.iacit.sisatas.models.Comentarios;
 
 public interface ComentariosRepository extends JpaRepository<Comentarios, String> {
 	
-	Comentarios findById(long id_comentario);
+	Comentarios findBycomId(long comId);
 	
 }

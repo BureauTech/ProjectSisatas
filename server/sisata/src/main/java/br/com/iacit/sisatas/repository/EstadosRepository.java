@@ -6,6 +6,6 @@ import br.com.iacit.sisatas.models.Estados;
 
 public interface EstadosRepository extends JpaRepository<Estados, String> {
 	
-	Estados findById(long id_estado);
+	Estados findByestId(long estId);
 	
 }

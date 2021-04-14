@@ -6,6 +6,6 @@ import br.com.iacit.sisatas.models.Perfis;
 
 public interface PerfisRepository extends JpaRepository<Perfis, String> {
 	
-	Perfis findById(long id_per);
+	Perfis findByperId(long perId);
 	
 }

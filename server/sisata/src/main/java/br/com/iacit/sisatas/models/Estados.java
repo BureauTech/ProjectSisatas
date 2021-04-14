@@ -26,16 +26,16 @@ public class Estados implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long estId;
 	@Column(nullable = false, length = 20)
-	private String est_nome;
+	private String estNome;
 	@Column(nullable = false, length = 50)
-	private String est_descricao;
+	private String estDescricao;
 	
 	@ManyToMany
 	@JoinTable(name = "Possui",
-			joinColumns = @JoinColumn(name = "fk_pk_est_id", referencedColumnName = "id"),
-			inverseJoinColumns = @JoinColumn(name = "fk_pk_ata_id", referencedColumnName = "id")
+			joinColumns = @JoinColumn(name = "fkPkEstId", referencedColumnName = "estId"),
+			inverseJoinColumns = @JoinColumn(name = "fkPkAtaId", referencedColumnName = "ataId")
 	)
 	private List<Atas> possuiEstados;	// OK
 

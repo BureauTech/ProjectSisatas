@@ -57,7 +57,7 @@ public class ComentariosController {
 		public String excluirComentarios(@PathVariable long com_id) {
 			String result = null;
 			try {
-				Comentarios comentarioSelecionado = cp.findById(com_id);
+				Comentarios comentarioSelecionado = cp.findBycomId(com_id);
 				cp.delete(comentarioSelecionado);
 			} catch (DataAccessException e) {
 				result = e.getMessage();

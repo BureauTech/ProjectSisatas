@@ -26,19 +26,19 @@ public class Revisoes implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long revId;
 	@Column(nullable = false, length = 30)
-	private String rev_assunto;
+	private String revAssunto;
 	@Column(nullable = false)
-	private DateFormat rev_prazo;
+	private DateFormat revPrazo;
 	@Column(nullable = false)
-	private DateFormat rev_data;
+	private DateFormat revData;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fk_usu_id", referencedColumnName = "id") // OK
+	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId") // OK
 	private Usuarios resposavelRevisoes;
 
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "fk_ata_id", referencedColumnName = "id") // OK
+	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId") // OK
 	private Atas contemRevisoes;
 }

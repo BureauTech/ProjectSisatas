@@ -57,7 +57,7 @@ public class AtasController {
 		public String excluirAtas(@PathVariable long ata_id) {
 			String result = null;
 			try {
-				Atas ataSelecionada = ap.findById(ata_id);
+				Atas ataSelecionada = ap.findByataId(ata_id);
 				ap.delete(ataSelecionada);
 			} catch (DataAccessException e) {
 				result = e.getMessage();
