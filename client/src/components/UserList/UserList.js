@@ -48,20 +48,20 @@ const columns = [
     { field: 'Usuário', headerName: 'Usuário', width: 130 },
     { field: 'Email', headerName: 'Email', width: 130 },
     { field: 'Cargo', headerName: 'Cargo', width: 130 },
-    { field: 'ÁreaEmpresa', headerName: 'Área/Empresa', width: 160 },
-    { field: 'Perfil', headerName: 'Perfil', width: 100 },
+    { field: 'ÁreaEmpresa', headerName: 'Área/Empresa', width: 170 },
+    { field: 'Perfil', headerName: 'Perfil', width: 120 },
     {
-        field: "Exibir", headerName: "Exibir", width: 100,
+        field: "Exibir", headerName: "Exibir", width: 130,
         renderCell: (params) => (
             <Button onClick={() => console.log(params.getValue("id"))} ><VisibilityIcon className='icon' /></Button>)
     },
     {
-        field: "Editar", headerName: "Editar", width: 100,
+        field: "Editar", headerName: "Editar", width: 130,
         renderCell: (params) => (
             <Button onClick={() => console.log(params.getValue("id"))} ><EditIcon className='icon' /></Button>)
     },
     {
-        field: "Excluir", headerName: "Excluir", width: 100,
+        field: "Excluir", headerName: "Excluir", width: 130,
         renderCell: (params) => (
             <Button onClick={() => console.log(params.getValue("id"))} ><DeleteIcon className='icon' /></Button>)
     }
