@@ -131,8 +131,8 @@ Ficará disponível em [localhost:3000](http://localhost/3000)
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-- [Node](https://nodejs.org/){:target="_blank"}
-- [Java](https://www.java.com/){:target="_blank"}
+- [Node](https://nodejs.org/)
+- [Java](https://www.java.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Spring Framework](https://spring.io/)
 - [Maven](https://maven.apache.org/)
@@ -144,7 +144,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 <table align="center">
   <tr>
-    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho<br>Master</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=bibiacoutinho" title="Master">:nail_care::computer_mouse::headphones:</a></td>{:target="_blank"}
+    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho<br>Master</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=bibiacoutinho" title="Master">:nail_care::computer_mouse::headphones:</a></td>
     <td align="center"><a href="https://github.com/charles-ramos"><img src="https://avatars.githubusercontent.com/u/25464287?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Charles Ramos<br>PO</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=charles-ramos" title="PO">:fist_raised::open_book::hamburger:</a></td>
     <td align="center"><a href="https://github.com/anaclaragraciano"><img src="https://avatars.githubusercontent.com/u/64653864?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ana Clara<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=anaclaragraciano" title="Dev Team">:sparkles::iphone::open_book:</a></td>
     <td align="center"><a href="https://github.com/caiquesjc"><img src="https://avatars.githubusercontent.com/u/54915913?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Caique Nascimento<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=caiquesjc" title="Dev Team">:computer:</a></td>
