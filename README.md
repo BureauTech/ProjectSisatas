@@ -55,6 +55,9 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 ------ cards aqui ---------
 
+**Documentação entregue:** [Diagrama e descrições de Casos de Uso, Diagrama de Atividades, Diagrama de Contexto, Diagrama de Implantação e Lista de Requisitos]()
+
+
 # Documentações
 
 - [Product Backlog](./docs/Product%20Backlog%20-%20SISATAS.pdf)
