@@ -151,7 +151,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 </table>
 <table align="center">
     <td align="center"><a href="https://github.com/danielsantosoliveira"><img src="https://avatars.githubusercontent.com/u/55162125?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Oliveira<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=danielsantosoliveira" title="Dev Team">:computer:</a></td>
-    <td align="center"><a href="https://github.com/Denis-Lima"><img src="https://avatars.githubusercontent.com/u/55518511?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Denis Lima<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=Denis-Lima" title="Dev Team">:code::v::pizza:</a></td>
+    <td align="center"><a href="https://github.com/Denis-Lima"><img src="https://avatars.githubusercontent.com/u/55518511?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Denis Lima<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=Denis-Lima" title="Dev Team">:computer::v::pizza:</a></td>
     <td align="center"><a href="https://github.com/JoaoPSPereira"><img src="https://avatars.githubusercontent.com/u/55442593?v=4?s=100" width="100px;" alt=""/><br /><sub><b>João Pedro<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=JoaoPSPereira" title="Dev Team">:computer:</a></td>
     <td align="center"><a href="https://github.com/WeDias"><img src="https://avatars.githubusercontent.com/u/56437612?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wesley Dias<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=WeDias" title="Dev Team">:computer:</a></td>
   </tr>
