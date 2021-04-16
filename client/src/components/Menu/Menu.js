@@ -23,6 +23,7 @@ import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import './Menu.css';
 
 
 const drawerWidth = 270;
@@ -109,11 +110,15 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '65px',
   },
   iconselected: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.contrastText,
     minWidth: '65px',
   },
   link: {
     textDecoration: 'none'
+  },
+  textselected: {
+    color: theme.palette.secondary.contrastText,
+    marginLeft: '7px',
   }
 
 }));
@@ -122,7 +127,7 @@ export default function Menu() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(20);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -189,7 +194,7 @@ export default function Menu() {
                   className={active === 0 ? classes.iconselected : classes.iconitem}>
                   <NotificationsNoneOutlinedIcon className={classes.icons} />
                 </ListItemIcon>
-                <ListItemText primary='Home/Atualizações' className={classes.text} />
+                <ListItemText primary='Home/Atualizações' className={active === 0 ? classes.textselected : classes.text} />
               </ListItem>
             </Link>
           </Typography>
@@ -199,7 +204,7 @@ export default function Menu() {
                 <ListItemIcon className={active === 1 ? classes.iconselected : classes.iconitem}>
                   <PostAddOutlinedIcon className={classes.icons} />
                 </ListItemIcon>
-                <ListItemText primary='Nova Ata' className={classes.text} />
+                <ListItemText primary='Nova Ata' className={active === 1 ? classes.textselected : classes.text} />
               </ListItem>
             </Link>
           </Typography>
@@ -209,7 +214,7 @@ export default function Menu() {
                 <ListItemIcon className={active === 2 ? classes.iconselected : classes.iconitem}>
                   <AssignmentOutlinedIcon className={classes.icons} />
                 </ListItemIcon>
-                <ListItemText primary='Exibir Atas' className={classes.text} />
+                <ListItemText primary='Exibir Atas' className={active === 2 ? classes.textselected : classes.text} />
               </ListItem>
             </Link>
           </Typography>
@@ -219,7 +224,7 @@ export default function Menu() {
                 <ListItemIcon className={active === 3 ? classes.iconselected : classes.iconitem}>
                   <AssessmentOutlinedIcon className={classes.icons} />
                 </ListItemIcon>
-                <ListItemText primary='Relatórios' className={classes.text} />
+                <ListItemText primary='Relatórios' className={active === 3 ? classes.textselected : classes.text} />
               </ListItem>
             </Link>
           </Typography>
@@ -229,7 +234,7 @@ export default function Menu() {
                 <ListItemIcon className={active === 4 ? classes.iconselected : classes.iconitem}>
                   <AccountCircleOutlinedIcon className={classes.icons} />
                 </ListItemIcon>
-                <ListItemText primary='Perfil de Usuário' className={classes.text} />
+                <ListItemText primary='Perfil de Usuário' className={active === 4 ? classes.textselected : classes.text} />
               </ListItem>
             </Link>
           </Typography>
@@ -239,7 +244,7 @@ export default function Menu() {
                 <ListItemIcon className={active === 5 ? classes.iconselected : classes.iconitem}>
                   <PeopleAltOutlinedIcon className={classes.icons} />
                 </ListItemIcon>
-                <ListItemText primary='Usuários Cadastrados' className={classes.text} />
+                <ListItemText primary='Usuários Cadastrados' className={active === 5 ? classes.textselected : classes.text} />
               </ListItem>
             </Link>
           </Typography>
@@ -247,9 +252,9 @@ export default function Menu() {
             <Link to="exit" className={classes.link} onClick={(e) => handleIconSelected(6)}>
               <ListItem button key='exit'>
                 <ListItemIcon className={active === 6 ? classes.iconselected : classes.iconitem}>
-                  <ExitToAppOutlinedIcon className={classes.icons}/>
+                  <ExitToAppOutlinedIcon className={classes.icons} />
                 </ListItemIcon>
-                <ListItemText primary='Sair' className={classes.text} />
+                <ListItemText primary='Sair' className={active === 6 ? classes.textselected : classes.text} />
               </ListItem>
             </Link>
           </Typography>
