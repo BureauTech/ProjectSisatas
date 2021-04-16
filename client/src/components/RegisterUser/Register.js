@@ -42,7 +42,6 @@ const Register = (props) => {
   const registrar = (event) => {
   api.post('/usuarios/cadastrarUsuarios',
     {
-      data: {
       "usuNome": nome,
       "usuEmail": email,
       "usuSenha": "123",
@@ -52,7 +51,6 @@ const Register = (props) => {
       "pertenceUsuarios":{
         perId: 1
       }
-    }
   }, options
   )
   }

@@ -12,7 +12,7 @@ public interface UsuariosRepository extends JpaRepository<Usuarios, String> {
 
 	List<Usuarios> searchByusuNomeContainingIgnoreCase(String usuNome);
 
-	//List<Usuarios> searchByusuAreaEmpresaContainingIgnoreCase( String usuAreaEmpresa);
+	List<Usuarios> searchByusuAreaEmpresaContainingIgnoreCase( String usuAreaEmpresa);
 
 	List<Usuarios> searchByusuEmailContainingIgnoreCase( String usuEmail);
 	
