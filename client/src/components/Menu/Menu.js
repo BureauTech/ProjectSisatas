@@ -30,7 +30,10 @@ const drawerWidth = 270;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+  },
+  font: {
+    fontFamily: 'Montserrat'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -162,7 +165,7 @@ export default function Menu() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap className={classes.font}>
             Sisatas
           </Typography>
         </Toolbar>
@@ -187,7 +190,7 @@ export default function Menu() {
         </div>
         <Divider />
         <List>
-          <Typography>
+          <Typography className={classes.font}>
             <Link to='/' className={classes.link} onClick={(e) => handleIconSelected(0)}>
               <ListItem button key='home'>
                 <ListItemIcon
@@ -198,7 +201,7 @@ export default function Menu() {
               </ListItem>
             </Link>
           </Typography>
-          <Typography>
+          <Typography className={classes.font}>
             <Link to='new-record' className={classes.link} onClick={(e) => handleIconSelected(1)}>
               <ListItem button key='new-record'>
                 <ListItemIcon className={active === 1 ? classes.iconselected : classes.iconitem}>
@@ -208,7 +211,7 @@ export default function Menu() {
               </ListItem>
             </Link>
           </Typography>
-          <Typography>
+          <Typography className={classes.font}>
             <Link to="show-records" className={classes.link} onClick={(e) => handleIconSelected(2)}>
               <ListItem button key='show-records'>
                 <ListItemIcon className={active === 2 ? classes.iconselected : classes.iconitem}>
@@ -218,7 +221,7 @@ export default function Menu() {
               </ListItem>
             </Link>
           </Typography>
-          <Typography>
+          <Typography className={classes.font}>
             <Link to="reports" className={classes.link} onClick={(e) => handleIconSelected(3)}>
               <ListItem button key='reports'>
                 <ListItemIcon className={active === 3 ? classes.iconselected : classes.iconitem}>
@@ -228,7 +231,7 @@ export default function Menu() {
               </ListItem>
             </Link>
           </Typography>
-          <Typography>
+          <Typography className={classes.font}>
             <Link to="profile" className={classes.link} onClick={(e) => handleIconSelected(4)}>
               <ListItem button key='profile'>
                 <ListItemIcon className={active === 4 ? classes.iconselected : classes.iconitem}>
@@ -238,7 +241,7 @@ export default function Menu() {
               </ListItem>
             </Link>
           </Typography>
-          <Typography>
+          <Typography className={classes.font}>
             <Link to="users-list" className={classes.link} onClick={(e) => handleIconSelected(5)}>
               <ListItem button key='users-list'>
                 <ListItemIcon className={active === 5 ? classes.iconselected : classes.iconitem}>
@@ -248,7 +251,7 @@ export default function Menu() {
               </ListItem>
             </Link>
           </Typography>
-          <Typography>
+          <Typography className={classes.font}>
             <Link to="exit" className={classes.link} onClick={(e) => handleIconSelected(6)}>
               <ListItem button key='exit'>
                 <ListItemIcon className={active === 6 ? classes.iconselected : classes.iconitem}>
