@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import br.com.iacit.sisatas.models.Usuarios;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/usuarios")
 public class UsuariosController {
@@ -153,7 +156,7 @@ public class UsuariosController {
 
 		return usuarios;
 	}
-	
+	/*
 	@ResponseBody
 	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuAreaEmpresa", method = RequestMethod.GET)
 	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuAreaEmpresa(@RequestParam("usuAreaEmpresa") String usuAreaEmpresa) {
@@ -165,7 +168,7 @@ public class UsuariosController {
 		}
 
 		return usuarios;
-	}
+	}*/
 	
 	@ResponseBody
 	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuEmail", method = RequestMethod.GET)

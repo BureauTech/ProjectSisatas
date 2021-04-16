@@ -38,9 +38,9 @@ public class Usuarios implements Serializable{
 	private String usuCargo;
 	@Column(nullable = false, length = 50)
 	private String usuAreaEmpresa;
-	@Column(nullable = false)
+	/*@Column(nullable = false)
 	private String usuAssinatura;// Definir qual como será salva a assinatura;
-	
+	*/
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "fkPerId", referencedColumnName = "perId") // OK
 	private Perfis pertenceUsuarios;

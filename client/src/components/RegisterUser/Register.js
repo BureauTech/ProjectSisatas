@@ -15,19 +15,45 @@ import {
 import { Link } from "react-router-dom";
 import { styles } from "../../assets/styles/Styles";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
-import React from "react";
+import React, {useState} from "react";
 import clsx from "clsx";
-import "./Register.css"
+import "./Register.css";
+import api from "../../services/api";
 
 
 const Register = (props) => {
   const { classes } = props;
 
   const [value, setValue] = React.useState('USU');
+  const [nome, setNome] = useState();
+  const [email, setEmail] = useState();
+  const [telefone, setTelefone] = useState();
+  const [cargo, setCargo] = useState();
+  const [area, setArea] = useState();
+  
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
+  const options = {
+    headers: {'Content-Type': 'application/json', "Access-Control-Allow-Origin": `*`}
+  };
+  
+  const registrar = (event) => {
+  api.post('/usuarios/cadastrarUsuarios',
+    {
+      "usuNome": nome,
+      "usuEmail": email,
+      "usuSenha": "123",
+      "usuTelefone": telefone,
+      "usuCargo": cargo,
+      "usuAreaEmpresa": area,
+      "pertenceUsuarios":{
+        perId: 1
+      }
+  }, options
+  )
+  }
   const theme = useTheme();
 
   return (
@@ -58,7 +84,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input required name="nome" id="nome" className={classes.textField} disableUnderline />
+                    <Input required name="nome" id="nome" className={classes.textField} onChange={e => setNome(e.target.value)} disableUnderline />
                   </Grid>
                 </Grid>
 
@@ -72,7 +98,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input type="email" required name="email" id="email" className={classes.textField} disableUnderline />
+                    <Input type="email" required name="email" id="email" className={classes.textField} onChange={e => setEmail(e.target.value)} disableUnderline />
                   </Grid>
                 </Grid>
 
@@ -86,7 +112,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input type="tel" required name="telefone" id="telefone" className={classes.textField} disableUnderline />
+                    <Input type="tel" required name="telefone" id="telefone" className={classes.textField} onChange={e => setTelefone(e.target.value)} disableUnderline />
                   </Grid>
                 </Grid>
 
@@ -100,7 +126,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input required name="cargo" id="cargo" className={classes.textField} disableUnderline />
+                    <Input required name="cargo" id="cargo" className={classes.textField} onChange={e => setCargo(e.target.value)} disableUnderline />
                   </Grid>
                 </Grid>
 
@@ -114,7 +140,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <Input required name="area" id="area" className={classes.textField} disableUnderline />
+                    <Input required name="area" id="area" className={classes.textField} onChange={e => setArea(e.target.value)} disableUnderline />
                   </Grid>
                 </Grid>
 
@@ -128,7 +154,7 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <RadioGroup row name="perfil" style={{ color: "white" }} value={value} onChange={handleChange}>
+                    <RadioGroup row name="perfil" style={{ color: "white" }} value={value} /*onChange={handleChange}*/>
                       <FormControlLabel
                         style={{ paddingLeft: 5 }}
                         labelPlacement="end"
@@ -176,7 +202,7 @@ const Register = (props) => {
                 </Grid>
 
                 {/* upload assinatura */}
-                <Grid container alignItems="center">
+                {/* <Grid container alignItems="center">
                   <Grid item>
                     <FormLabel htmlFor="assinatura">
                       <Typography style={{ fontSize: '1.5rem', paddingRight: 20, color: 'white' }}>
@@ -185,21 +211,21 @@ const Register = (props) => {
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <input required name="assinatura" accept="image/*" id="assinatura" type="file" style={{ display: "none" }} />
+                    <input name="assinatura" accept="image/*" id="assinatura" type="file" style={{ display: "none" }} />
                     <label htmlFor="assinatura">
                       <IconButton color="primary" aria-label="upload picture" component="span" className="no-margin">
                         <ImageOutlinedIcon className={classes.uploadFile} style={{ width: 50, height: 50 }} />
                       </IconButton>
                     </label>
                   </Grid>
-                </Grid>
+                </Grid> */}
 
               </Grid>
             </Grid>
 
             {/* button cadastrar */}
             <Grid container justify="flex-end" style={{ paddingRight: 20 }}>
-              <Button type="submit" variant="contained" color="secondary" style={{ borderRadius: 18 }}>
+              <Button variant="contained" color="secondary" onClick={registrar} style={{ borderRadius: 18 }}>
                 Cadastrar
               </Button>
             </Grid>

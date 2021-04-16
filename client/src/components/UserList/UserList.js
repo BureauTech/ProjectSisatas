@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DataGrid, GridToolbar } from '@material-ui/data-grid';
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button } from "@material-ui/core";
@@ -9,6 +9,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ptBR from "../ptBR/DataGrid";
 import { Link } from "react-router-dom";
+import api from "../../services/api";
+
+
 
 const useStyles = makeStyles((theme) => ({
     grid: {
@@ -47,12 +50,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const columns = [
-    { field: 'Usuário', headerName: 'Usuário', width: 130 },
-    { field: 'Email', headerName: 'Email', width: 130 },
-    { field: 'Cargo', headerName: 'Cargo', width: 130 },
-    { field: 'ÁreaEmpresa', headerName: 'Área/Empresa', width: 170 },
-    { field: 'Perfil', headerName: 'Perfil', width: 120 },
-    {
+    { field: "usuNome", headerName: 'Usuário', width: 130 },
+    { field: "usuEmail", headerName: 'Email', width: 130 },
+    { field: 'usuCargo', headerName: 'Cargo', width: 130 },
+    { field: 'usuAreaEmpresa', headerName: 'Área/Empresa', width: 170 },
+    { field: 'perterceUsuarios', headerName: 'Perfil', width: 120 },
+     {
         field: "Exibir", headerName: "Exibir", width: 130,
         renderCell: (params) => (
             <Button onClick={() => console.log(params.getValue("id"))} ><VisibilityIcon className='icon' /></Button>)
@@ -69,20 +72,35 @@ const columns = [
     }
 ];
 
-const rows = [
-    { id: 1, Usuário: 'Snow', Email: 'Jon', Cargo: 'Dev', ÁreaEmpresa: 'IACIT', Perfil: 'ADM' },
-    { id: 2, Usuário: 'Lannister', Email: 'Cersei', Cargo: 'Dev', ÁreaEmpresa: 'IACIT', Perfil: 'ADM' },
-    { id: 3, Usuário: 'Lannister', Email: 'Jaime', Cargo: 'Dev', ÁreaEmpresa: 'IACIT', Perfil: 'ADM' },
-    { id: 4, Usuário: 'Stark', Email: 'Arya', Cargo: 'Dev', ÁreaEmpresa: 'IACIT', Perfil: 'ADM' },
-    { id: 5, Usuário: 'Targaryen', Email: 'Daenerys', Cargo: 'Dev', ÁreaEmpresa: 'IACIT', Perfil: 'ADM' },
-];
+
+
+    
+const listarUsuarios = (setResults) => {
+    api.get('/usuarios/listarUsuarios')
+    .then(response => {
+        let lista = response.data
+        let lista2 = []
+        lista.forEach(user => {
+          lista2.push({id: user["usuId"], ...user})
+        })
+        setResults(lista2)
+      })
+
+    }
+// const usuarios = (response) => {
+//     console.log("olha as respostas" + response.data)
+// }
+
+
 
 export default function UserList() {
+    const [results, setResults] = useState([]);
+    listarUsuarios(setResults)
     const classes = useStyles();
-    return (
+        return (
         <Grid className={classes.grid} direction='column' alignItems="center">
             <DataGrid
-                rows={rows}
+                rows={results}
                 columns={columns}
                 components={{ Toolbar: GridToolbar }}
                 className={classes.datagrid}
