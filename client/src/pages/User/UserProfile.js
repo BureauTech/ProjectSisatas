@@ -11,15 +11,29 @@ import "../CreateAta/Style.css";
 import userServices from "../../services/user";
 import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
+import { useHistory, useParams } from "react-router-dom";
 
 const EditUser = (props) => {
   const { classes } = props;
   const [usuario, setUsuario] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
+  const voltar = () => {
+    history.goBack();
+  };
+  const { id } = useParams();
 
   useEffect(() => {
+    // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
+    let idBuscar = "";
+    if (id) {
+      idBuscar = id;
+    } else {
+      idBuscar = props.id;
+    }
+
     userServices
-      .pegarUsuario(props.id)
+      .pegarUsuario(idBuscar)
       .then((user) => {
         setUsuario(user.data);
         setIsLoading(false);
@@ -36,6 +50,7 @@ const EditUser = (props) => {
         });
         setIsLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -79,7 +94,7 @@ const EditUser = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.nome}
+                    {usuario.usuNome}
                   </Typography>
                 </Grid>
               </Grid>
@@ -105,7 +120,7 @@ const EditUser = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.email}
+                    {usuario.usuEmail}
                   </Typography>
                 </Grid>
               </Grid>
@@ -131,7 +146,7 @@ const EditUser = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.telefone}
+                    {usuario.usuTelefone}
                   </Typography>
                 </Grid>
               </Grid>
@@ -157,7 +172,7 @@ const EditUser = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.cargo}
+                    {usuario.usuCargo}
                   </Typography>
                 </Grid>
               </Grid>
@@ -183,7 +198,7 @@ const EditUser = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.area}
+                    {usuario.usuAreaEmpresa}
                   </Typography>
                 </Grid>
               </Grid>
@@ -209,7 +224,7 @@ const EditUser = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.perfil}
+                    {usuario.pertenceUsuarios.perNome}
                   </Typography>
                 </Grid>
               </Grid>
@@ -233,6 +248,7 @@ const EditUser = (props) => {
                     variant="contained"
                     color="secondary"
                     className="bold"
+                    onClick={() => voltar()}
                     style={{
                       color: "white",
                       fontSize: "1.5rem",

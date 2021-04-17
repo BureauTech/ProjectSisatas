@@ -12,7 +12,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ptBR from "../ptBR/DataGrid";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import api from "../../services/api";
 import userServices from "../../services/user.js";
 
@@ -52,47 +52,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const columns = [
-  { field: "usuNome", headerName: "Usuário", width: 130 },
-  { field: "usuEmail", headerName: "Email", width: 130 },
-  { field: "usuCargo", headerName: "Cargo", width: 130 },
-  { field: "usuAreaEmpresa", headerName: "Área/Empresa", width: 170 },
-  { field: "perterceUsuarios", headerName: "Perfil", width: 120 },
-  {
-    field: "Exibir",
-    headerName: "Exibir",
-    width: 130,
-    renderCell: (params) => (
-      <Button onClick={() => console.log(params.getValue("id"))}>
-        <VisibilityIcon className="icon" />
-      </Button>
-    ),
-  },
-  {
-    field: "Editar",
-    headerName: "Editar",
-    width: 130,
-    renderCell: (params) => (
-      <Button onClick={() => console.log(params.getValue("id"))}>
-        <EditIcon className="icon" />
-      </Button>
-    ),
-  },
-  {
-    field: "Excluir",
-    headerName: "Excluir",
-    width: 130,
-    renderCell: (params) => (
-      <Button onClick={() => console.log(params.getValue("id"))}>
-        <DeleteIcon className="icon" />
-      </Button>
-    ),
-  },
-];
-
 export default function UserList() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
+  const history = useHistory();
 
   // Carrega a lista de usuários antes de montar o componente
   useEffect(() => {
@@ -108,6 +71,46 @@ export default function UserList() {
       })
       .catch((err) => console.log(err.message));
   }, []);
+
+  const columns = [
+    { field: "usuNome", headerName: "Usuário", width: 130 },
+    { field: "usuEmail", headerName: "Email", width: 130 },
+    { field: "usuCargo", headerName: "Cargo", width: 130 },
+    { field: "usuAreaEmpresa", headerName: "Área/Empresa", width: 170 },
+    { field: "perterceUsuarios", headerName: "Perfil", width: 120 },
+    {
+      field: "Exibir",
+      headerName: "Exibir",
+      width: 130,
+      renderCell: (params) => (
+        <Button
+          onClick={() => history.push(`profile/${params.getValue("id")}`)}
+        >
+          <VisibilityIcon className="icon" />
+        </Button>
+      ),
+    },
+    {
+      field: "Editar",
+      headerName: "Editar",
+      width: 130,
+      renderCell: (params) => (
+        <Button onClick={() => console.log(params.getValue("id"))}>
+          <EditIcon className="icon" />
+        </Button>
+      ),
+    },
+    {
+      field: "Excluir",
+      headerName: "Excluir",
+      width: 130,
+      renderCell: (params) => (
+        <Button onClick={() => console.log(params.getValue("id"))}>
+          <DeleteIcon className="icon" />
+        </Button>
+      ),
+    },
+  ];
 
   return (
     <Grid className={classes.grid} direction="column" alignItems="center">

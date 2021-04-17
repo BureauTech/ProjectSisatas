@@ -1,7 +1,7 @@
 import api from "./api";
 
 const pegarUsuario = (id) => {
-  return api.get(`/user/${id}`);
+  return api.get(`usuarios/pegarUsuario/${id}`);
 };
 
 const listarUsuarios = () => {
