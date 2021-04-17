@@ -23,25 +23,18 @@ function App() {
           style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
         >
           <Switch>
-            <Route path="/registeruser">
-              <Register />
-            </Route>
-            <Route path="/new-record">
-              <CreateAta />
-            </Route>
-            <Route path="/show-records">
-              <Data />
-            </Route>
+            <Route path="/registeruser" component={() => <Register />} />
+
+            <Route path="/new-record" component={() => <CreateAta />} />
+            <Route path="/show-records" component={() => <Data />} />
+
             <Route exact path="/"></Route>
-            <Route path="/edit-user">
-              <EditUser />
-            </Route>
-            <Route path="/profile">
-              <UserProfile id={1} />
-            </Route>
-            <Route path="/users-list">
-              <UserList ata={ata} />
-            </Route>
+            <Route path="/edit-user" component={() => <EditUser />} />
+
+            <Route path="/profile/:id" component={() => <UserProfile />} />
+
+            <Route path="/profile" component={() => <UserProfile id={0} />} />
+            <Route path="/users-list" component={() => <UserList ata={ata} />} />
           </Switch>
         </Grid>
       </div>
