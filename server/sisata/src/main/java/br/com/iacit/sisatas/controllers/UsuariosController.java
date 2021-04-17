@@ -186,6 +186,34 @@ public class UsuariosController {
 	/**
 	 * @author daniel.oliveira
 	 * 
+	 * METHOD: GET; Para pegar apenas 1 usuário.
+	 * URL: http://localhost:8080/usuarios/pegarUsuario/{usu_id}
+	 * 
+	 * PathVariable: {usu_id}
+	 * 
+	 * RETURN: Retorna uma String <result>;
+	 * result = 1, Exclusão realizada com sucesso;
+	 * result != 1, Exclusão não realizada; null ou a mensagem de erro apresentada ao tentar realizar a persistência.
+	 *
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "/pegarUsuario/{usu_id}", method = RequestMethod.GET)
+	public Usuarios pegarUsuario(@PathVariable long usu_id) {
+		Usuarios result = null;
+		System.out.println("Pegando id " + usu_id);
+		try {
+			Usuarios usuarioSelecionado = up.findByusuId(usu_id);
+			result = usuarioSelecionado;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * @author daniel.oliveira
+	 * 
 	 * METHOD: GET; Para excluir Perfis.
 	 * URL: http://localhost:8080/usuarios/excluirUsuarios/{usu_id}
 	 * 
