@@ -122,6 +122,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.contrastText,
     marginLeft: "7px",
   },
+  blueColor: {
+    backgroundColor: "#26BAF4",
+  },
 }));
 
 export default function Menu() {
@@ -198,7 +201,11 @@ export default function Menu() {
               className={classes.link}
               onClick={(e) => handleIconSelected(0)}
             >
-              <ListItem button key="home">
+              <ListItem
+                button
+                key="home"
+                className={active === 0 ? classes.blueColor : {}}
+              >
                 <ListItemIcon
                   className={
                     active === 0 ? classes.iconselected : classes.iconitem
@@ -219,7 +226,11 @@ export default function Menu() {
               className={classes.link}
               onClick={(e) => handleIconSelected(1)}
             >
-              <ListItem button key="new-record">
+              <ListItem
+                button
+                key="new-record"
+                className={active === 1 ? classes.blueColor : {}}
+              >
                 <ListItemIcon
                   className={
                     active === 1 ? classes.iconselected : classes.iconitem
@@ -240,7 +251,11 @@ export default function Menu() {
               className={classes.link}
               onClick={(e) => handleIconSelected(2)}
             >
-              <ListItem button key="show-records">
+              <ListItem
+                button
+                key="show-records"
+                className={active === 2 ? classes.blueColor : {}}
+              >
                 <ListItemIcon
                   className={
                     active === 2 ? classes.iconselected : classes.iconitem
@@ -261,7 +276,11 @@ export default function Menu() {
               className={classes.link}
               onClick={(e) => handleIconSelected(3)}
             >
-              <ListItem button key="reports">
+              <ListItem
+                button
+                key="reports"
+                className={active === 3 ? classes.blueColor : {}}
+              >
                 <ListItemIcon
                   className={
                     active === 3 ? classes.iconselected : classes.iconitem
@@ -278,11 +297,18 @@ export default function Menu() {
           </Typography>
           <Typography className={classes.font}>
             <Link
-              to="/profile"
+              to={{
+                pathname: "/profile",
+                state: { id: 0 },
+              }}
               className={classes.link}
               onClick={(e) => handleIconSelected(4)}
             >
-              <ListItem button key="profile">
+              <ListItem
+                button
+                key="profile"
+                className={active === 4 ? classes.blueColor : {}}
+              >
                 <ListItemIcon
                   className={
                     active === 4 ? classes.iconselected : classes.iconitem
@@ -303,7 +329,11 @@ export default function Menu() {
               className={classes.link}
               onClick={(e) => handleIconSelected(5)}
             >
-              <ListItem button key="users-list">
+              <ListItem
+                button
+                key="users-list"
+                className={active === 5 ? classes.blueColor : {}}
+              >
                 <ListItemIcon
                   className={
                     active === 5 ? classes.iconselected : classes.iconitem
@@ -324,7 +354,11 @@ export default function Menu() {
               className={classes.link}
               onClick={(e) => handleIconSelected(6)}
             >
-              <ListItem button key="exit">
+              <ListItem
+                button
+                key="exit"
+                className={active === 6 ? classes.blueColor : {}}
+              >
                 <ListItemIcon
                   className={
                     active === 6 ? classes.iconselected : classes.iconitem
