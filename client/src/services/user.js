@@ -1,16 +1,21 @@
 import api from "./api";
 
-const pegarParticipantes = () => {
-  return api.get("/user");
-};
-
 const pegarUsuario = (id) => {
   return api.get(`/user/${id}`);
 };
 
+const listarUsuarios = () => {
+  return api.get("/usuarios/listarUsuarios");
+};
+
+const cadastrarUsuario = (body) => {
+  return api.post("/usuarios/cadastrarUsuarios", body);
+};
+
 const userServices = {
-  pegarParticipantes,
   pegarUsuario,
+  listarUsuarios,
+  cadastrarUsuario,
 };
 
 export default userServices;
