@@ -53,15 +53,13 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - **Sprint 2**
 
-Entregas para a sprint:
+Entregas realizadas:
 
 ![cards](./assets/png/Cards%20Sprint%202.png)
 
 Representação da entrega:
 
 ![representacao](./assets/gifs/Representacao%20-%20Sprint%202.gif)
-
------- cards aqui ---------
 
 **Documentação entregue:**
 - Diagrama e descrições de Casos de Uso;
