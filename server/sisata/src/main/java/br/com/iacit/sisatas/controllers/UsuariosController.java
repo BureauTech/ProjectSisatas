@@ -211,7 +211,7 @@ public class UsuariosController {
 	/**
 	 * @author daniel.oliveira
 	 * 
-	 * METHOD: GET; Para excluir Perfis.
+	 * METHOD: DELETE; Para excluir Perfis.
 	 * URL: http://localhost:8080/usuarios/excluirUsuarios/{usu_id}
 	 * 
 	 * PathVariable: {usu_id}
