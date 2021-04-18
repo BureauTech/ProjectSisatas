@@ -93,6 +93,12 @@ const EditUser = (props) => {
         setOpenSnack(true);
         setMsgSucesso("Sucesso ao salvar alterações!");
         setMsgErro(false);
+        history.push({
+          pathname: "/profile",
+          state: {
+            id: usuario.usuId,
+          },
+        });
       })
       .catch((err) => {
         console.log(err.message);
