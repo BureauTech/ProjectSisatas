@@ -53,6 +53,11 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - **Sprint 2** 🚧
 
+Entregas para a sprint:
+
+[cards](./docs/Cards%20Sprint%202.pdf)
+
+
 ------ cards aqui ---------
 
 **Documentação entregue:** [Diagrama e descrições de Casos de Uso, Diagrama de Atividades, Diagrama de Contexto, Diagrama de Implantação e Lista de Requisitos]()
