@@ -1,127 +1,158 @@
-# SISATA
+<h1 align="center">SISATAS</h1>
 
-A web app for tracking and management of meeting records.
+<p align="center">Uma solução web para acompanhamento e gerenciamento de atas de reuniões.</p>
 
-</br>
+<div align="center">
 
-# Spotlight
+![logo](./assets/png/BureauTechLogo.png)
 
-## Front-end prototype
+Desenvolvido pela Bureau Tech.
+
+</div>
+
+# Sumário
+
+   * [Sobre](#SISATAS)
+   * [Sumário](#sumário)
+   * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
+   * [Acompanhamento das Atividades](#acompanhamento-das-atividades)
+   * [Entregas](#entregas)
+   * [Documentações](#documentações)
+   * [Como executar localmente](#como-executar-localmente)
+      * [Pré-Requisitos](#pré-requisitos)
+      * [Servidor](#servidor)
+        * [Docker Image](#docker-image)
+      * [Cliente](#cliente)
+   * [Tecnologias](#tecnologias)
+   * [Autores](#autores)
+
+## Protótipo das telas da aplicação
+
+![telas](./assets/gifs/telas.gif)
+
+<br>
+
+Protótipo interativo das telas está disponível neste link: https://bit.ly/SISATAS
+
+<br>
 
 
-![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/master/assets/gifs/telas.gif)
+# Acompanhamento das Atividades
 
-<br/>
+<h4 align="center"> 
+	🚧  SISATAS em construção  🚧
+</h4>
 
-Interactive screen prototypes can be found here: https://bit.ly/SISATAS
+Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.notion.so/b2249587d2c24f6995f4c7ba8dea304e?v=322477ad68b04c12ac4bc0e36c55bd61).
 
-<br/>
+<br>
 
-# Technologies
+# Entregas
 
-- Spring Framework
-- Maven
-- ReactJS
-- MaterialUI
+- [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entrega realizada em 28/03/2021.
 
-</br>
+- **Sprint 2** 🚧
 
-# How to Run
+------ cards aqui ---------
 
-## Server
+**Documentação entregue:** [Diagrama e descrições de Casos de Uso, Diagrama de Atividades, Diagrama de Contexto, Diagrama de Implantação e Lista de Requisitos]()
 
-On the [***server/sisata***](./server/sisata) folder: </br></br>
-It can be ran directly with maven by the command:
+
+# Documentações
+
+- [Product Backlog](./docs/Product%20Backlog%20-%20SISATAS.pdf)
+
+# Como executar localmente
+
+Para executar a aplicação completa localmente, siga as intruções a seguir:
+
+### Pré-requisitos:
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+
+```
+Node - Versão: 14.x.x
+Java - Versão: 11
+PostgreSQL - Versão: 10.16
+Spring Framework
+Maven
+Docker (opcional)
+```
+
+Além disto é bom ter um editor para trabalhar com o código como VSCode.
+
+## Servidor
+
+Na pasta [***server/sisata***](./server/sisata): <br>
+
+Pode ser executado diretamente utilizando o comando Maven abaixo:
 
 ```
 mvn spring-boot:run
 ```
 
-and it will be available on [localhost:8080](http://localhost/8080)
+Ficará disponível em [localhost:8080](http://localhost/8080)
 
-or
+### Docker Image
 
-1. Building the Docker Image:
+Também é possível executar utilizando Docker, conforme processos descritos abaixo:
+
+1. Criação da Imagem do Docker::
 
 ```
 docker build -t bureau/sisata
 ```
 
-2. Running the container:
+2. Para execução do container:
 
 ```
 docker run -p 8080:8080 {image-id}
 ```
 
+## Cliente
 
-## Client
-On the [***client/***](./client) folder: </br></br>
+Na pasta [***client/***](./client): <br>
 
-1. Download node modules
+1. Faça a instalação dos módulos:
+   
 ```
 npm install
 ```
 
-2. Starting the application 
+2. Inicie a aplicação: 
+
 ```
 npm start
 ```
-</br>
 
-Now available on [localhost:3000](http://localhost/3000)
+Ficará disponível em [localhost:3000](http://localhost/3000)
 
-</br>
+# Tecnologias
 
-# Progress
-## Sprint 1
-### Prototypes
-Interactive screen prototypes can be found here: https://bit.ly/SISATAS
+As seguintes ferramentas foram usadas na construção do projeto:
 
-</br>
+- [Node](https://nodejs.org/)
+- [Java](https://www.java.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Spring Framework](https://spring.io/)
+- [Maven](https://maven.apache.org/)
+- [ReactJS](https://reactjs.org/)
+- [Material-UI](https://material-ui.com/)
+- [Docker](https://www.docker.com/)
 
-### Documentation
-- [Project Backlog](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
-- [Entity Relationship (DER)(Conceptual)](https://github.com/BureauTech/ProjectSisatas/blob/master/docs/DER_Conceitual_SISATA_Final.png)
-- [Entity Relationship (DER)(Logical)](https://github.com/BureauTech/ProjectSisatas/blob/master/docs/DER_Logico_SISATA_Final.png)
-- [Use Case Diagram (DCU)](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/docs/Product%20Backlog%20-%20SISATAS.pdf)
-- [Screen's Prototypes](https://github.com/BureauTech/ProjectSisatas/blob/prod/sprint-1/docs/Prototipo_telas_v1.pdf) 
+# Autores
 
-</br>
-
-### Server
-Created .xlsx minute template.
-Implementation of the excel export functionality, although with a enconging bug that is planned
-to be solved on the next Sprint.
-
-![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/assets/gifs/download_excel.gif)
-
-</br>
-
-### Client
-Created .html template. 
-Testing with button that calls the browser's printing function.
-
-![alt-text](https://github.com/BureauTech/ProjectSisatas/blob/feature/readme/assets/gifs/download_pdf.gif)
-
-# Authors
-
-### [![GitHub Badge](https://img.shields.io/github/followers/JoaoPSPereira?label=JoaoPSPereira&style=for-the-badge&color=black&link=https://github.com/JoaoPSPereira)](https://github.com/JoaoPSPereira) - Master <br/>
-
-### [![GitHub Badge](https://img.shields.io/github/followers/charles-ramos?label=charles-ramos&style=for-the-badge&color=black&link=https://github.com/charles-ramos)](https://github.com/charles-ramos) - PO <br/>
-
-### [![GitHub Badge](https://img.shields.io/github/followers/anaclaragraciano?label=anaclaragraciano&style=for-the-badge&color=black&link=https://github.com/anaclaragraciano)](https://github.com/anaclaragraciano) - DEV Team<br/>
-
-### [![GitHub Badge](https://img.shields.io/github/followers/bibiacoutinho?label=bibiacoutinho&style=for-the-badge&color=black&link=https://github.com/bibiacoutinho)](https://github.com/bibiacoutinho) - DEV Team</br> 
-
-### [![GitHub Badge](https://img.shields.io/github/followers/caiquesjc?label=caiquesjc&style=for-the-badge&color=black&link=https://github.com/caiquesjc)](https://github.com/caiquesjc) - DEV Team<br/> 
-
-### [![GitHub Badge](https://img.shields.io/github/followers/danielsantosoliveira?label=danielsantosoliveira&style=for-the-badge&color=black&link=https://github.com/danielsantosoliveira)](https://github.com/danielsantosoliveira) - DEV Team<br/>
-
-### [![GitHub Badge](https://img.shields.io/github/followers/Denis-Lima?label=Denis-Lima&style=for-the-badge&color=black&link=https://github.com/Denis-Lima)](https://github.com/Denis-Lima) - DEV Team<br/> 
-
-### [![GitHub Badge](https://img.shields.io/github/followers/WeDias?label=WeDias&style=for-the-badge&color=black&link=https://github.com/WeDias)](https://github.com/WeDias) - DEV Team<br/>
-
-
-
-
-
+<table align="center">
+  <tr>
+    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho<br>Master</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=bibiacoutinho" title="Master">:headphones::nail_care::computer_mouse:</a></td>
+    <td align="center"><a href="https://github.com/charles-ramos"><img src="https://avatars.githubusercontent.com/u/25464287?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Charles Ramos<br>PO</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=charles-ramos" title="PO">:fist_raised::open_book::hamburger:</a></td>
+    <td align="center"><a href="https://github.com/anaclaragraciano"><img src="https://avatars.githubusercontent.com/u/64653864?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ana Clara<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=anaclaragraciano" title="Dev Team">:sparkles::iphone::open_book:</a></td>
+    <td align="center"><a href="https://github.com/caiquesjc"><img src="https://avatars.githubusercontent.com/u/54915913?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Caique Nascimento<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=caiquesjc" title="Dev Team">:keyboard::desktop_computer::computer_mouse:</a></td>
+</table>
+<table align="center">
+    <td align="center"><a href="https://github.com/danielsantosoliveira"><img src="https://avatars.githubusercontent.com/u/55162125?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Oliveira<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=danielsantosoliveira" title="Dev Team">:computer::guitar::soccer:</a></td>
+    <td align="center"><a href="https://github.com/Denis-Lima"><img src="https://avatars.githubusercontent.com/u/55518511?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Denis Lima<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=Denis-Lima" title="Dev Team">:computer::v::pizza:</a></td>
+    <td align="center"><a href="https://github.com/JoaoPSPereira"><img src="https://avatars.githubusercontent.com/u/55442593?v=4?s=100" width="100px;" alt=""/><br /><sub><b>João Pedro<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=JoaoPSPereira" title="Dev Team">:microphone::sushi::video_game:</a></td>
+    <td align="center"><a href="https://github.com/WeDias"><img src="https://avatars.githubusercontent.com/u/56437612?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wesley Dias<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/ProjectSisatas/commits?author=WeDias" title="Dev Team">:rocket::milky_way::new_moon:</a></td>
+  </tr>
+</table>
