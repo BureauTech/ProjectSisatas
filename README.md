@@ -59,7 +59,7 @@ Entregas para a sprint:
 
 Representação da entrega:
 
-[representacao](./assets/mp4/Representacao%20-%20Sprint%202.mp4)
+![representacao](./assets/gifs/Representacao%20-%20Sprint%202.gif)
 
 ------ cards aqui ---------
 
