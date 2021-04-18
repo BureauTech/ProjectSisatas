@@ -199,7 +199,6 @@ public class UsuariosController {
 	@RequestMapping(value = "/pegarUsuario/{usu_id}", method = RequestMethod.GET)
 	public Usuarios pegarUsuario(@PathVariable long usu_id) {
 		Usuarios result = null;
-		System.out.println("Pegando id " + usu_id);
 		try {
 			Usuarios usuarioSelecionado = up.findByusuId(usu_id);
 			result = usuarioSelecionado;
@@ -224,9 +223,10 @@ public class UsuariosController {
 	 */
 	
 	@ResponseBody
-	@RequestMapping(value = "/excluirUsuarios/{usu_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/excluirUsuarios/{usu_id}", method = RequestMethod.DELETE)
 	public String excluirUsuarios(@PathVariable long usu_id) {
 		String result = null;
+		System.out.println(usu_id);
 		try {
 			Usuarios usuarioSelecionado = up.findByusuId(usu_id);
 			up.delete(usuarioSelecionado);
