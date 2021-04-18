@@ -90,7 +90,7 @@ const UserProfile = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.usuNome}
+                    <strong>{usuario.usuNome}</strong>
                   </Typography>
                 </Grid>
               </Grid>
@@ -116,7 +116,7 @@ const UserProfile = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.usuEmail}
+                    <strong>{usuario.usuEmail}</strong>
                   </Typography>
                 </Grid>
               </Grid>
@@ -142,7 +142,7 @@ const UserProfile = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.usuTelefone}
+                    <strong>{usuario.usuTelefone}</strong>
                   </Typography>
                 </Grid>
               </Grid>
@@ -168,7 +168,7 @@ const UserProfile = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.usuCargo}
+                    <strong>{usuario.usuCargo}</strong>
                   </Typography>
                 </Grid>
               </Grid>
@@ -194,7 +194,7 @@ const UserProfile = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.usuAreaEmpresa}
+                    <strong>{usuario.usuAreaEmpresa}</strong>
                   </Typography>
                 </Grid>
               </Grid>
@@ -220,7 +220,7 @@ const UserProfile = (props) => {
                       color: "white",
                     }}
                   >
-                    {usuario.pertenceUsuarios.perNome}
+                    <strong>{usuario.pertenceUsuarios.perNome}</strong>
                   </Typography>
                 </Grid>
               </Grid>
