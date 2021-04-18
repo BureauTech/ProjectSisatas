@@ -55,8 +55,11 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 Entregas para a sprint:
 
-[cards](./docs/Cards%20Sprint%202.pdf)
+![cards](./assets/png/Cards%20Sprint%202.png)
 
+Representação da entrega:
+
+[representacao](./assets/mp4/Representacao%20-%20Sprint%202.mp4)
 
 ------ cards aqui ---------
 
