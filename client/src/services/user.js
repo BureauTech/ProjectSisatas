@@ -1,19 +1,24 @@
 import api from "./api";
+const endpoint = "/usuarios";
 
 const pegarUsuario = (id) => {
-  return api.get(`usuarios/pegarUsuario/${id}`);
+  return api.get(`${endpoint}/pegarUsuario/${id}`);
 };
 
 const listarUsuarios = () => {
-  return api.get("/usuarios/listarUsuarios");
+  return api.get(`${endpoint}/listarUsuarios`);
 };
 
 const cadastrarUsuario = (body) => {
-  return api.post("/usuarios/cadastrarUsuarios", body);
+  return api.post(`${endpoint}/cadastrarUsuarios`, body);
 };
 
 const atualizarUsuario = (body) => {
-  return api.post("usuarios/atualizarUsuarios", body);
+  return api.post(`${endpoint}/atualizarUsuarios`, body);
+};
+
+const deletarUsuario = (id) => {
+  return api.delete(`${endpoint}/excluirUsuarios/${id}`);
 };
 
 const userServices = {
@@ -21,6 +26,7 @@ const userServices = {
   listarUsuarios,
   cadastrarUsuario,
   atualizarUsuario,
+  deletarUsuario,
 };
 
 export default userServices;
