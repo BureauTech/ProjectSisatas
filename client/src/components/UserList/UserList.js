@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 15,
     paddingBottom: 50,
     width: "60%",
-    height: 900,
+    height: 800,
     marginRight: 10,
   },
   datagrid: {

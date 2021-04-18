@@ -45,6 +45,10 @@ const UserProfile = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
+  const editar = () => {
+    history.push("/edit-user", { id: usuario.usuId });
+  };
+
   return (
     <Container>
       {isLoading && <Loading />}
@@ -235,7 +239,11 @@ const UserProfile = (props) => {
                     Assinatura Atual
                   </Typography>
                 </Grid>
-                <Grid container justify="center" style={{ paddingTop: 50 }}>
+                <Grid
+                  container
+                  justify="space-around"
+                  style={{ paddingTop: 50 }}
+                >
                   <Button
                     variant="contained"
                     color="secondary"
@@ -245,10 +253,24 @@ const UserProfile = (props) => {
                       color: "white",
                       fontSize: "1.5rem",
                       borderRadius: 40,
-                      padding: "10px 30px",
+                      padding: "10px 50px",
                     }}
                   >
                     Voltar
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className="bold"
+                    onClick={() => editar()}
+                    style={{
+                      color: "white",
+                      fontSize: "1.5rem",
+                      borderRadius: 40,
+                      padding: "10px 50px",
+                    }}
+                  >
+                    Editar
                   </Button>
                 </Grid>
               </Grid>
