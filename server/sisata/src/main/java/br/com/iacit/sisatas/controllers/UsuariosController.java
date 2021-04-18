@@ -184,16 +184,14 @@ public class UsuariosController {
 	}
 
 	/**
-	 * @author daniel.oliveira
+	 * @author Denis Lima
 	 * 
 	 * METHOD: GET; Para pegar apenas 1 usuário.
 	 * URL: http://localhost:8080/usuarios/pegarUsuario/{usu_id}
 	 * 
 	 * PathVariable: {usu_id}
 	 * 
-	 * RETURN: Retorna uma String <result>;
-	 * result = 1, Exclusão realizada com sucesso;
-	 * result != 1, Exclusão não realizada; null ou a mensagem de erro apresentada ao tentar realizar a persistência.
+	 * RETURN: Retorna um usuário <Usuarios>;
 	 *
 	 */
 	
