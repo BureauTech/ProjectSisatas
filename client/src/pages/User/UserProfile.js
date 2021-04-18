@@ -11,9 +11,9 @@ import "../CreateAta/Style.css";
 import userServices from "../../services/user";
 import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
-const EditUser = (props) => {
+const UserProfile = (props) => {
   const { classes } = props;
   const [usuario, setUsuario] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,14 +21,14 @@ const EditUser = (props) => {
   const voltar = () => {
     history.goBack();
   };
-  const { id } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
     let idBuscar = "";
-    if (id) {
-      idBuscar = id;
-    } else {
+    try {
+      idBuscar = location.state.id;
+    } catch (error) {
       idBuscar = props.id;
     }
 
@@ -40,18 +40,10 @@ const EditUser = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        setUsuario({
-          nome: "Denis",
-          email: "denis@bureautech.com",
-          telefone: "12 991234567",
-          cargo: "Desenvolvedor",
-          area: "Bureau Tech Frontend",
-          perfil: "ADM",
-        });
         setIsLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
 
   return (
     <Container>
@@ -267,4 +259,4 @@ const EditUser = (props) => {
     </Container>
   );
 };
-export default withStyles(styles, { withTheme: true })(EditUser);
+export default withStyles(styles, { withTheme: true })(UserProfile);
