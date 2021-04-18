@@ -31,6 +31,15 @@ const Register = (props) => {
   const [cargo, setCargo] = useState();
   const [area, setArea] = useState();
 
+  const clear = () => {
+    setPerfil("USU");
+    setNome("");
+    setEmail("");
+    setTelefone("");
+    setCargo("");
+    setArea("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let perfilId = "";
@@ -55,7 +64,7 @@ const Register = (props) => {
 
     userServices
       .cadastrarUsuario(body)
-      .then((res) => console.log("Sucesso!", res.data))
+      .then((res) => clear())
       .catch((err) => console.log(err.message));
   };
 
@@ -74,7 +83,11 @@ const Register = (props) => {
 
         {/* formulario */}
         <Grid container>
-          <form onSubmit={(e) => handleSubmit(e)} style={{ width: "100%" }}>
+          <form
+            id="form"
+            onSubmit={(e) => handleSubmit(e)}
+            style={{ width: "100%" }}
+          >
             {/* inputs */}
             <Grid item sm={8}>
               <Grid container alignItems="center" justify="center">
