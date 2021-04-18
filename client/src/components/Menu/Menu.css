@@ -1,0 +1,7 @@
+.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button:focus{
+  background-color: #26BAF4;
+}
+
+.MuiTouchRipple-root {
+  color: #26BAF4;
+}
