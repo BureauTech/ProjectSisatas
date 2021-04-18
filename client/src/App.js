@@ -30,9 +30,6 @@ function App() {
 
             <Route exact path="/"></Route>
             <Route path="/edit-user" component={() => <EditUser />} />
-
-            <Route path="/profile/:id" component={() => <UserProfile />} />
-
             <Route path="/profile" component={() => <UserProfile id={0} />} />
             <Route path="/users-list" component={() => <UserList ata={ata} />} />
           </Switch>

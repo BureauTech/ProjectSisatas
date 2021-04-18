@@ -12,10 +12,15 @@ const cadastrarUsuario = (body) => {
   return api.post("/usuarios/cadastrarUsuarios", body);
 };
 
+const atualizarUsuario = (body) => {
+  return api.post("usuarios/atualizarUsuarios", body);
+};
+
 const userServices = {
   pegarUsuario,
   listarUsuarios,
   cadastrarUsuario,
+  atualizarUsuario,
 };
 
 export default userServices;

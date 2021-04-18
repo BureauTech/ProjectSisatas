@@ -84,7 +84,7 @@ export default function UserList() {
       width: 130,
       renderCell: (params) => (
         <Button
-          onClick={() => history.push(`profile/${params.getValue("id")}`)}
+          onClick={() => history.push("profile", { id: params.getValue("id") })}
         >
           <VisibilityIcon className="icon" />
         </Button>
@@ -95,7 +95,11 @@ export default function UserList() {
       headerName: "Editar",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => console.log(params.getValue("id"))}>
+        <Button
+          onClick={() =>
+            history.push("edit-user", { id: params.getValue("id") })
+          }
+        >
           <EditIcon className="icon" />
         </Button>
       ),
