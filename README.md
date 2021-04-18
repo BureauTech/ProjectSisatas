@@ -17,7 +17,7 @@ Desenvolvido pela Bureau Tech.
    * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
    * [Acompanhamento das Atividades](#acompanhamento-das-atividades)
    * [Entregas](#entregas)
-   * [Documentações](#documentações)
+   * [Backlog](#backlog)
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
@@ -59,7 +59,7 @@ Entregas realizadas:
 
 Representação da entrega:
 
-![representacao](./assets/gifs/Representacao%20-%20Sprint%202.gif)
+![representacao](./assets/gif/../gifs/Representacao%20-%20Sprint2.gif)
 
 **Documentação entregue:**
 - Diagrama e descrições de Casos de Uso;
