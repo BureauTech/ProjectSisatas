@@ -87,6 +87,9 @@ export default function UserList() {
       .catch((err) => {
         console.log(err.message);
         setIsLoading(false);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao carregar a lista de usuários");
+        setOpenSnack(true);
       });
   }, [setRows]);
 

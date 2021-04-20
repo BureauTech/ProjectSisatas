@@ -90,15 +90,9 @@ const EditUser = (props) => {
       .atualizarUsuario(usuario)
       .then((res) => {
         setIsLoadingBtn(false);
-        setOpenSnack(true);
         setMsgSucesso("Sucesso ao salvar alterações!");
         setMsgErro(false);
-        history.push({
-          pathname: "/profile",
-          state: {
-            id: usuario.usuId,
-          },
-        });
+        setOpenSnack(true);
       })
       .catch((err) => {
         console.log(err.message);

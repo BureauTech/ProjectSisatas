@@ -12,16 +12,39 @@ import userServices from "../../services/user";
 import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
 import { useHistory, useLocation } from "react-router-dom";
+import Alerta from "../../components/Snackbar/Alerta";
 
 const UserProfile = (props) => {
   const { classes } = props;
-  const [usuario, setUsuario] = useState(null);
+  const [usuario, setUsuario] = useState({
+    usuNome: "",
+    usuId: "",
+    usuEmail: "",
+    usuCargo: "",
+    usuAreaEmpresa: "",
+    usuTelefone: "",
+    pertenceUsuarios: {
+      perId: "",
+      perNome: "",
+    },
+  });
   const [isLoading, setIsLoading] = useState(true);
+  const [openSnack, setOpenSnack] = useState(false);
+  const [msgSucesso, setMsgSucesso] = useState("");
+  const [msgErro, setMsgErro] = useState("");
   const history = useHistory();
   const voltar = () => {
     history.goBack();
   };
   const location = useLocation();
+
+  const isEmpty = (user) => {
+    const keys = Object.keys(user);
+    if (keys.length === 0) {
+      return 1;
+    }
+    return 0;
+  };
 
   useEffect(() => {
     // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
@@ -35,12 +58,17 @@ const UserProfile = (props) => {
     userServices
       .pegarUsuario(idBuscar)
       .then((user) => {
-        setUsuario(user.data);
-        setIsLoading(false);
+        if (!isEmpty(user.data)) {
+          setUsuario(user.data);
+          setIsLoading(false);
+        }
       })
       .catch((err) => {
         console.log(err);
         setIsLoading(false);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
+        setOpenSnack(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
@@ -269,6 +297,7 @@ const UserProfile = (props) => {
                       borderRadius: 40,
                       padding: "10px 50px",
                     }}
+                    disabled={String(usuario.usuId).length ? false : true}
                   >
                     Editar
                   </Button>
@@ -278,6 +307,12 @@ const UserProfile = (props) => {
           </Grid>
         </Grid>
       )}
+      <Alerta
+        isOpen={openSnack}
+        setIsOpen={setOpenSnack}
+        sucesso={msgSucesso}
+        erro={msgErro}
+      />
     </Container>
   );
 };
