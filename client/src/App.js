@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Data from "./components/ExibirAta/Data";
 import Register from "./components/RegisterUser/Register";
-import CreateAta from "./pages/CreateAta/CreateAta";
+import CreateAta from "./pages/Ata/CreateAta/CreateAta";
 import Menu from "./components/Menu/Menu";
 import { Grid } from "@material-ui/core";
 import EditUser from "./pages/User/EditUser";
@@ -31,7 +31,10 @@ function App() {
             <Route exact path="/"></Route>
             <Route path="/edit-user" component={() => <EditUser />} />
             <Route path="/profile" component={() => <UserProfile id={0} />} />
-            <Route path="/users-list" component={() => <UserList ata={ata} />} />
+            <Route
+              path="/users-list"
+              component={() => <UserList ata={ata} />}
+            />
           </Switch>
         </Grid>
       </div>
