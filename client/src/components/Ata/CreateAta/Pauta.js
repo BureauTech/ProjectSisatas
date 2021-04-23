@@ -5,7 +5,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { useState } from "react";
-import { styles } from "../../assets/styles/Styles";
+import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
 
 const Pauta = (props) => {

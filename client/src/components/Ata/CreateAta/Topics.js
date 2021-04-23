@@ -15,7 +15,7 @@ import {
 import { AddCircle, Delete, ExpandMore } from "@material-ui/icons";
 import { Autocomplete } from "@material-ui/lab";
 import { useState } from "react";
-import { styles } from "../../assets/styles/Styles";
+import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
 
 const Topics = (props) => {

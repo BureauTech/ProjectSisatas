@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import "./Components.css";
-import { styles } from "../../assets/styles/Styles";
+import { styles } from "../../../assets/styles/Styles";
 
 // Alterando css de componentes
 

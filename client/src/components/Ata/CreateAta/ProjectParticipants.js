@@ -21,7 +21,7 @@ import {
 } from "@material-ui/core";
 import { AddCircle, Cancel, Delete, ExpandMore } from "@material-ui/icons";
 import "./Components.css";
-import { styles } from "../../assets/styles/Styles";
+import { styles } from "../../../assets/styles/Styles";
 import ParticipantsRow from "./ParticipantsRow";
 import { forwardRef, useState } from "react";
 

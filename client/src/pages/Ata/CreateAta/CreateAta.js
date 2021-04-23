@@ -6,13 +6,13 @@ import {
   useTheme,
 } from "@material-ui/core";
 
-import AtaHeader from "../../components/CreateAta/AtaHeader";
-import ProjectParticipants from "../../components/CreateAta/ProjectParticipants";
-import Pauta from "../../components/CreateAta/Pauta";
-import Topics from "../../components/CreateAta/Topics";
+import AtaHeader from "../../../components/Ata/CreateAta/AtaHeader";
+import ProjectParticipants from "../../../components/Ata/CreateAta/ProjectParticipants";
+import Pauta from "../../../components/Ata/CreateAta/Pauta";
+import Topics from "../../../components/Ata/CreateAta/Topics";
 import { useState } from "react";
 import "./Style.css";
-import ataServices from "../../services/ata";
+import ataServices from "../../../services/ata";
 
 const CreateAta = (props) => {
   const theme = useTheme();
