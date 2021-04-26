@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -30,7 +28,7 @@ public class Usuarios implements Serializable{
 	private String usuNome;
 	@Column(nullable = false, length = 50)
 	private String usuEmail;
-	@Column(nullable = false) // Definira tamanho.
+	@Column(nullable = true)
 	private String usuSenha;
 	@Column(nullable = false, length = 11)
 	private String usuTelefone;
@@ -38,10 +36,10 @@ public class Usuarios implements Serializable{
 	private String usuCargo;
 	@Column(nullable = false, length = 50)
 	private String usuAreaEmpresa;
-	/*@Column(nullable = false)
-	private String usuAssinatura;// Definir qual como será salva a assinatura;
-	*/
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "fkPerId", referencedColumnName = "perId") // OK
-	private Perfis pertenceUsuarios;
+	@Column(nullable = false)
+	private byte[] usuAssinatura;
+	private String UsuAssinaturaString;
+	@Column(nullable = false)
+	private Long usuPerfil;
+	
 }

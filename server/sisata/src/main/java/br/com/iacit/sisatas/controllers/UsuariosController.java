@@ -1,21 +1,25 @@
 package br.com.iacit.sisatas.controllers;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.multipart.MultipartFile;
 
-
+import br.com.iacit.sisatas.mapper.UsuarioMapper;
 import br.com.iacit.sisatas.models.Usuarios;
+import br.com.iacit.sisatas.models.UsuariosControllerModel;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
 
 @CrossOrigin
@@ -39,23 +43,17 @@ public class UsuariosController {
 	 * 
 	 * METHOD: POST; Para cadastrar Usuários.
 	 * URL: http://localhost:8080/usuarios/cadastrarUsuarios
-	 * BODY: 
-	 * {
-    		"usu_nome": "<String>",
-    		"usu_email": "<String>",
-    		"usu_senha" : "<String>",
-    		"usu_telefone": "<String>",
-    		"usu_cargo": "<String>",
-    		"usu_area_empresa": "<String>",
-    		"usu_assinatura": "<String>",
-    		"pertenceUsuarios": {
-        							"id":<int>,
-        							"per_nome": "<String>"
-    							}
-		}
-		Conforme <models.Usuarios>;
-		Obs: <pertenceUsuarios>, deverá ser atribuído um objeto, este objeto deverá existir no banco de dados;
-		Pode passar os dois argumentos ou somente o <id> para o objeto <pertenceUsuarios>.
+	 *
+	 		imagem: multipart/form-data
+    		"usuNome": "<String>",
+    		"usuEmail": "<String>",
+    		"usuTelefone": "<String>",
+    		"usuCargo": "<String>",
+    		"usuAreaEmpresa": "<String>",
+    		"usuPerfil" : <Long>
+    		
+		Conforme <models.UsuariosControllerModel>;
+	
 	 * 
 	 * RETURN: Retorna uma String <result>;
 	 * result = 1, persistência realizada com sucesso;
@@ -65,10 +63,10 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = "application/json")
-	public String cadastrarUsuario(@RequestBody Usuarios usuario) {
-		String result = null;
+	public String cadastrarUsuario(@RequestParam(value = "imagem") MultipartFile imagem, UsuariosControllerModel usuario) throws IOException {
+		String result = "1";
 		try {
-			up.save(usuario);
+			up.save(UsuarioMapper.converter(usuario, imagem));
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			result = e.getMessage();
@@ -82,24 +80,19 @@ public class UsuariosController {
 	 * METHOD: POST; Para atualizar Usuários.
 	 * URL: http://localhost:8080/usuarios/atualizarUsuarios
 	 * BODY: 
-	 * {	
-	 		"id": <long>,
-    		"usu_nome": "<String>",
-    		"usu_email": "<String>",
-    		"usu_senha" : "<String>",
-    		"usu_telefone": "<String>",
-    		"usu_cargo": "<String>",
-    		"usu_area_empresa": "<String>",
-    		"usu_assinatura": "<String>",
-    		"pertenceUsuarios": {
-        							"id":<long>,
-        							"per_nome": "<String>"
-    							}
-		}
-		Conforme <models.Perfis>
-		Obs: <pertenceUsuarios>, deverá ser atribuído um objeto, este objeto deverá existir no banco de dados;
-		Pode passar os dois argumentos ou somente o <id> para o objeto <pertenceUsuarios>.
-			 <id> deverá ser informado, pois será utilizado como referência para realizar a atualização;
+	 *  	imagem: multipart/form-data
+	 *  	"usuId": Long,
+    		"usuNome": "<String>",
+    		"usuEmail": "<String>",
+    		"usuTelefone": "<String>",
+    		"usuCargo": "<String>",
+    		"usuAreaEmpresa": "<String>",
+    		"usuAssinatura": "<String>",
+    		"usuPerfil" : <Long>
+		Conforme <models.UsuariosControllerModel>;
+		
+
+		<usuId> deverá ser informado, pois será utilizado como referência para realizar a atualização;
 	 * 
 	 * RETURN: Retorna uma String <result>;
 	 * result = 1, Atualização realizada com sucesso;
@@ -108,10 +101,9 @@ public class UsuariosController {
 	 */
 	
 	@ResponseBody
-	@Query(value = "")
 	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.POST, consumes = "application/json")
 	public String atualizarUsuarios(@RequestBody Usuarios usuario) {
-		String result = null;
+		String result = "1";
 		try {
 			up.save(usuario);
 		} catch (DataAccessException e) {
@@ -133,12 +125,15 @@ public class UsuariosController {
 
 	@ResponseBody
 	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuarios() {
-		List<Usuarios> usuarios = null;
-		try {
-			usuarios = up.findAll();
-		} catch (DataAccessException e) {
-			e.printStackTrace();
+	public List<Usuarios> listarUsuarios() throws UnsupportedEncodingException {
+		
+		 List<Usuarios> usuarios = up.findAll();
+		
+		for (Usuarios usuario : usuarios) {
+
+			String imagem = Base64.getEncoder().encodeToString(usuario.getUsuAssinatura());
+			usuario.setUsuAssinaturaString(imagem);
+			usuarios.add(usuario);
 		}
 
 		return usuarios;
