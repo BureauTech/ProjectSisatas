@@ -5,8 +5,10 @@ import {
   Typography,
   FormLabel,
   Input,
-  Button
+  Button, IconButton
 } from "@material-ui/core";
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+
 import { styles } from "../../assets/styles/Styles";
 import "./RegisterPassword.css";
 
@@ -102,14 +104,14 @@ const RegisterPassword = (props) => {
                 </Grid>
 
                 {/* button cadastrar */}
-                <Grid container justify="flex-end" style={{ paddingTop: 10}}>
+                <Grid container justify="flex-end">
                   <Button
                     variant="contained"
                     color="secondary"
                     type="submit"
-                    style={{ borderRadius: 18 }}
+                    style={{ borderRadius: 18, padding: 0}}
                   >
-                    Cadastrar
+                    <ArrowRightAltIcon style={{width: 90, height: 30}} />
                   </Button>
                 </Grid>
 
