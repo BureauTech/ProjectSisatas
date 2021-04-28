@@ -9,12 +9,12 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
-  IconButton,
+  /*IconButton,*/
   useTheme,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { styles } from "../../assets/styles/Styles";
-import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
+//import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import { useState } from "react";
 import clsx from "clsx";
 import "./Register.css";
