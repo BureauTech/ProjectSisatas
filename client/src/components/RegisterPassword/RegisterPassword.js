@@ -5,7 +5,7 @@ import {
   Typography,
   FormLabel,
   Input,
-  Button, IconButton
+  Button
 } from "@material-ui/core";
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
@@ -41,17 +41,17 @@ const RegisterPassword = (props) => {
 
                 {/* input senha */}
                 <Grid item>
-                    <FormLabel htmlFor="nome">
-                      <Typography
-                        style={{
-                          fontSize: "1.5rem",
-                          paddingRight: 20,
-                          color: "white",
-                        }}
-                      >
-                        Digite sua senha
-                      </Typography>
-                    </FormLabel>
+                  <FormLabel htmlFor="senha">
+                    <Typography
+                      style={{
+                        fontSize: "1.5rem",
+                        paddingRight: 20,
+                        color: "white",
+                      }}
+                    >
+                      Digite sua senha
+                    </Typography>
+                  </FormLabel>
                   </Grid>
 
                 <Grid
@@ -73,17 +73,17 @@ const RegisterPassword = (props) => {
 
                 {/* input senha novamente */}
                 <Grid item>
-                    <FormLabel htmlFor="nome">
-                      <Typography
-                        style={{
-                          fontSize: "1.5rem",
-                          paddingRight: 20,
-                          color: "white",
-                        }}
-                      >
-                        Digite novamente
-                      </Typography>
-                    </FormLabel>
+                  <FormLabel htmlFor="senhaNovamente">
+                    <Typography
+                      style={{
+                        fontSize: "1.5rem",
+                        paddingRight: 20,
+                        color: "white",
+                      }}
+                    >
+                      Digite novamente
+                    </Typography>
+                  </FormLabel>
                   </Grid>
 
                 <Grid
