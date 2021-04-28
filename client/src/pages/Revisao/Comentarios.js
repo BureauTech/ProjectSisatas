@@ -6,7 +6,7 @@ import {
   useTheme,
 } from "@material-ui/core";
 
-import Pauta from "../../components/CreateAta/RevisaoCom";
+import Pauta from "../../components/Comentarios/Comentarios";
 import { useState } from "react";
 import "./Style.css";
 import ataServices from "../../services/ata";
