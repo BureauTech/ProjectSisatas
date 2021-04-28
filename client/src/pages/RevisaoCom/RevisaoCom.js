@@ -66,7 +66,7 @@ const CreateAta = (props) => {
               padding: "0 30px",
             }}
           >
-            Salvar
+            Comentar
           </Button>
         </Grid>
       </form>
