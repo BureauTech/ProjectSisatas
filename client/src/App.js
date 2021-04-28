@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Data from "./components/ExibirAta/Data";
 import Register from "./components/RegisterUser/Register";
 import CreateAta from "./pages/CreateAta/CreateAta";
+import RevisaoCom from "./pages/RevisaoCom/RevisaoCom";
 import Menu from "./components/Menu/Menu";
 import { Grid } from "@material-ui/core";
 import EditUser from "./pages/User/EditUser";
@@ -27,6 +28,7 @@ function App() {
 
             <Route path="/new-record" component={() => <CreateAta />} />
             <Route path="/show-records" component={() => <Data />} />
+            <Route path="/revisao-comentarios" component={() => <RevisaoCom />} />
 
             <Route exact path="/"></Route>
             <Route path="/edit-user" component={() => <EditUser />} />
