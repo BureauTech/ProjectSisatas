@@ -12,12 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Revisoes")
-public class Revisoes implements Serializable {
+public class RevisoesModel implements Serializable {
 
 	/**
 	 * 
@@ -36,9 +40,9 @@ public class Revisoes implements Serializable {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId") // OK
-	private Usuarios resposavelRevisoes;
+	private UsuariosModel resposavelRevisoes;
 
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId") // OK
-	private Atas contemRevisoes;
+	private AtasModel contemRevisoes;
 }

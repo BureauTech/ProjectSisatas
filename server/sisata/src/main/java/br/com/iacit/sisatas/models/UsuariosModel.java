@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Usuarios")
-public class Usuarios implements Serializable{
+public class UsuariosModel implements Serializable{
 	
 	/**
 	 * 
@@ -36,7 +37,8 @@ public class Usuarios implements Serializable{
 	private String usuCargo;
 	@Column(nullable = false, length = 50)
 	private String usuAreaEmpresa;
-	@Column(nullable = false)
+	@Lob
+	@Column(nullable = true)
 	private byte[] usuAssinatura;
 	private String UsuAssinaturaString;
 	@Column(nullable = false)

@@ -2,11 +2,13 @@ package br.com.iacit.sisatas.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.iacit.sisatas.models.Atas;
+import br.com.iacit.sisatas.models.AtasModel;
 
-public interface AtasRepository extends JpaRepository<Atas, String> {
+public interface AtasRepository extends JpaRepository<AtasModel, String> {
 
-	Atas findByataId(long ataId);
+	AtasModel findByataId(long ataId);
+	
+	Boolean existsByataId(long ataId);
 	
 }
 

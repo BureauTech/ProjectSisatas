@@ -1,19 +1,13 @@
 package br.com.iacit.sisatas.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.iacit.sisatas.models.Usuarios;
+import br.com.iacit.sisatas.models.UsuariosModel;
 
-public interface UsuariosRepository extends JpaRepository<Usuarios, String> {
+public interface UsuariosRepository extends JpaRepository<UsuariosModel, String> {
 
-	Usuarios findByusuId(long usuId);
-
-	List<Usuarios> searchByusuNomeContainingIgnoreCase(String usuNome);
-
-	List<Usuarios> searchByusuAreaEmpresaContainingIgnoreCase( String usuAreaEmpresa);
-
-	List<Usuarios> searchByusuEmailContainingIgnoreCase( String usuEmail);
+	UsuariosModel findByusuId(long usuId);
+	
+	Boolean existsByusuId(long usuId);
 	
 }

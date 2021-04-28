@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.iacit.sisatas.mapper.UsuarioMapper;
-import br.com.iacit.sisatas.models.Usuarios;
 import br.com.iacit.sisatas.models.UsuariosControllerModel;
+import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
 
 @CrossOrigin
@@ -62,16 +63,16 @@ public class UsuariosController {
 	 */
 	
 	@ResponseBody
-	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = "application/json")
-	public String cadastrarUsuario(@RequestParam(value = "imagem") MultipartFile imagem, UsuariosControllerModel usuario) throws IOException {
+	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = { "multipart/form-data" })
+	public ResponseEntity<String> cadastrarUsuario(@RequestParam(value = "imagem") MultipartFile imagem, UsuariosControllerModel usuario) throws IOException {
 		String result = "1";
 		try {
 			up.save(UsuarioMapper.converter(usuario, imagem));
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			result = e.getMessage();
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		return result;
+		return ResponseEntity.ok(result);
 	}
 	
 	/**
@@ -101,16 +102,16 @@ public class UsuariosController {
 	 */
 	
 	@ResponseBody
-	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.POST, consumes = "application/json")
-	public String atualizarUsuarios(@RequestBody Usuarios usuario) {
+	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<String> atualizarUsuarios(@RequestBody UsuariosModel usuario) {
 		String result = "1";
 		try {
 			up.save(usuario);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			result = e.getMessage();
+			return ResponseEntity.notFound().build();
 		}
-		return result;
+		return ResponseEntity.ok(result);
 	}
 	
 	/**
@@ -125,57 +126,23 @@ public class UsuariosController {
 
 	@ResponseBody
 	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuarios() throws UnsupportedEncodingException {
-		
-		 List<Usuarios> usuarios = up.findAll();
-		
-		for (Usuarios usuario : usuarios) {
+	public ResponseEntity<List<UsuariosModel>> listarUsuarios() throws UnsupportedEncodingException {
 
-			String imagem = Base64.getEncoder().encodeToString(usuario.getUsuAssinatura());
-			usuario.setUsuAssinaturaString(imagem);
-			usuarios.add(usuario);
-		}
+		List<UsuariosModel> usuarios = up.findAll();
 
-		return usuarios;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuNome", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuNome(@RequestParam("usuNome") String usuNome) {
-		List<Usuarios> usuarios = null;
 		try {
-			usuarios = up.searchByusuNomeContainingIgnoreCase(usuNome);
+			for (UsuariosModel usuario : usuarios) {
+
+				String imagem = Base64.getEncoder().encodeToString(usuario.getUsuAssinatura());
+				usuario.setUsuAssinaturaString(imagem);
+				usuarios.add(usuario);
+			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			return ResponseEntity.notFound().build();
 		}
 
-		return usuarios;
-	}
-	/*
-	@ResponseBody
-	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuAreaEmpresa", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuAreaEmpresa(@RequestParam("usuAreaEmpresa") String usuAreaEmpresa) {
-		List<Usuarios> usuarios = null;
-		try {
-			usuarios = up.searchByusuAreaEmpresaContainingIgnoreCase(usuAreaEmpresa);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-
-		return usuarios;
-	}*/
-	
-	@ResponseBody
-	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuEmail", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuEmail(@RequestParam("usuEmail") String usuEmail) {
-		List<Usuarios> usuarios = null;
-		try {
-			usuarios = up.searchByusuEmailContainingIgnoreCase(usuEmail);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-
-		return usuarios;
+		return ResponseEntity.ok(usuarios);
 	}
 
 	/**
@@ -189,19 +156,21 @@ public class UsuariosController {
 	 * RETURN: Retorna um usuário <Usuarios>;
 	 *
 	 */
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/pegarUsuario/{usu_id}", method = RequestMethod.GET)
-	public Usuarios pegarUsuario(@PathVariable long usu_id) {
-		Usuarios result = null;
+	public ResponseEntity<UsuariosModel> pegarUsuario(@PathVariable long usu_id) {
 		try {
-			Usuarios usuarioSelecionado = up.findByusuId(usu_id);
-			result = usuarioSelecionado;
+			if (up.existsByusuId(usu_id)) {
+				UsuariosModel usuarioSelecionado = up.findByusuId(usu_id);
+				return ResponseEntity.ok(usuarioSelecionado);
+			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return ResponseEntity.notFound().build();
 	}
+	
 
 	/**
 	 * @author daniel.oliveira
@@ -219,15 +188,15 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/excluirUsuarios/{usu_id}", method = RequestMethod.DELETE)
-	public String excluirUsuarios(@PathVariable long usu_id) {
+	public ResponseEntity<String> excluirUsuarios(@PathVariable long usu_id) {
 		String result = null;
-		System.out.println(usu_id);
 		try {
-			Usuarios usuarioSelecionado = up.findByusuId(usu_id);
+			UsuariosModel usuarioSelecionado = up.findByusuId(usu_id);
 			up.delete(usuarioSelecionado);
 		} catch (DataAccessException e) {
 			result = e.getMessage();
+			return ResponseEntity.notFound().build();
 		}
-		return result;
+		return ResponseEntity.ok(result);
 	}
 }

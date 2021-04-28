@@ -13,12 +13,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Estados")
-public class Estados implements Serializable{
+public class EstadosModel implements Serializable{
 
 	/**
 	 * 
@@ -37,6 +41,6 @@ public class Estados implements Serializable{
 			joinColumns = @JoinColumn(name = "fkPkEstId", referencedColumnName = "estId"),
 			inverseJoinColumns = @JoinColumn(name = "fkPkAtaId", referencedColumnName = "ataId")
 	)
-	private List<Atas> possuiEstados;	// OK
+	private List<AtasModel> possuiEstados;	// OK
 
 }

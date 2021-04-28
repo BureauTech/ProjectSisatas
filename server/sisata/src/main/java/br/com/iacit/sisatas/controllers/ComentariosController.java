@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.iacit.sisatas.models.Comentarios;
+import br.com.iacit.sisatas.models.ComentariosModel;
 import br.com.iacit.sisatas.repository.ComentariosRepository;
 
 @Controller
@@ -23,7 +23,7 @@ public class ComentariosController {
 
 		@ResponseBody
 		@RequestMapping(value = "/cadastrarComentarios", method = RequestMethod.POST, consumes = "application/json")
-		public String cadastrarComentarios(@RequestBody Comentarios comentario) {
+		public String cadastrarComentarios(@RequestBody ComentariosModel comentario) {
 			String result = null;
 			try {
 				cp.save(comentario);
@@ -42,8 +42,8 @@ public class ComentariosController {
 
 		@ResponseBody
 		@RequestMapping(value = "/listarComentarios", method = RequestMethod.GET)
-		public List<Comentarios> listarComentarios() {
-			List<Comentarios> comentarios = null;
+		public List<ComentariosModel> listarComentarios() {
+			List<ComentariosModel> comentarios = null;
 			try {
 				comentarios = cp.findAll();
 			} catch (DataAccessException e) {
@@ -57,7 +57,7 @@ public class ComentariosController {
 		public String excluirComentarios(@PathVariable long com_id) {
 			String result = null;
 			try {
-				Comentarios comentarioSelecionado = cp.findBycomId(com_id);
+				ComentariosModel comentarioSelecionado = cp.findBycomId(com_id);
 				cp.delete(comentarioSelecionado);
 			} catch (DataAccessException e) {
 				result = e.getMessage();

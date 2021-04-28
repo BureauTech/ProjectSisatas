@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,12 +17,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Assuntos")
-public class Assuntos implements Serializable {
+public class AssuntosModel implements Serializable {
 
 	/**
 	 * 
@@ -35,9 +41,11 @@ public class Assuntos implements Serializable {
 	@Column(nullable = false)
 	private Date assPrazo;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId") // OK
-	private Atas contemAssuntos;
+	private AtasModel contemAssuntos;
+	
+	
 	
 	@ManyToMany
 	@JoinTable(name = "Resposavel",
@@ -46,6 +54,6 @@ public class Assuntos implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId") 
 																										
 	)
-	private List<Usuarios> responsavelAssuntos; // OK
-
+	private List<UsuariosModel> responsavelAssuntos; // OK
+	
 }

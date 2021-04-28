@@ -2,10 +2,10 @@ package br.com.iacit.sisatas.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.iacit.sisatas.models.Logs;
+import br.com.iacit.sisatas.models.LogsModel;
 
-public interface LogsRepository extends JpaRepository<Logs, String> {
+public interface LogsRepository extends JpaRepository<LogsModel, String> {
 	
-	Logs findBylogId(long logId);
+	LogsModel findBylogId(long logId);
 
 }
