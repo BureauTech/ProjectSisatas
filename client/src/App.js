@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Data from "./components/ExibirAta/Data";
-import Register from "./components/RegisterUser/Register";
+import RegisterUser from "./components/RegisterUser/RegisterUser";
+import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
 import CreateAta from "./pages/CreateAta/CreateAta";
 import Menu from "./components/Menu/Menu";
 import { Grid } from "@material-ui/core";
@@ -23,7 +24,8 @@ function App() {
           style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
         >
           <Switch>
-            <Route path="/registeruser" component={() => <Register />} />
+            <Route path="/register-user" component={() => <RegisterUser />} />
+            <Route path="/register-password" component={() => <RegisterPassword />} />
 
             <Route path="/new-record" component={() => <CreateAta />} />
             <Route path="/show-records" component={() => <Data />} />

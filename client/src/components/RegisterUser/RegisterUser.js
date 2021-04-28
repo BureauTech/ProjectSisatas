@@ -17,10 +17,10 @@ import { styles } from "../../assets/styles/Styles";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import { useState } from "react";
 import clsx from "clsx";
-import "./Register.css";
+import "./RegisterUser.css";
 import userServices from "../../services/user";
 
-const Register = (props) => {
+const RegisterUser = (props) => {
   const { classes } = props;
   const theme = useTheme();
 
@@ -402,4 +402,4 @@ const Register = (props) => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Register);
+export default withStyles(styles, { withTheme: true })(RegisterUser);
