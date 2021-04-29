@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -37,10 +36,8 @@ public class UsuariosModel implements Serializable{
 	private String usuCargo;
 	@Column(nullable = false, length = 50)
 	private String usuAreaEmpresa;
-	@Lob
 	@Column(nullable = true)
 	private byte[] usuAssinatura;
-	private String UsuAssinaturaString;
 	@Column(nullable = false)
 	private Long usuPerfil;
 	

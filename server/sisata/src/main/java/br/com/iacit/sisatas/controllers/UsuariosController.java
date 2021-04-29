@@ -1,8 +1,6 @@
 package br.com.iacit.sisatas.controllers;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.iacit.sisatas.mapper.UsuarioMapper;
-import br.com.iacit.sisatas.models.UsuariosControllerModel;
+import br.com.iacit.sisatas.models.UsuariosCadastrarControllerModel;
 import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
 
@@ -38,7 +37,7 @@ public class UsuariosController {
 	
 	@Autowired
 	private UsuariosRepository up;
-
+	
 	/**
 	 * @author daniel.oliveira
 	 * 
@@ -64,11 +63,16 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = { "multipart/form-data" })
-	public ResponseEntity<String> cadastrarUsuario(@RequestParam(value = "imagem") MultipartFile imagem, UsuariosControllerModel usuario) throws IOException {
+	public ResponseEntity<String> cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
 		String result = "1";
+		
+		ObjectMapper mapper = new ObjectMapper();
+		UsuariosCadastrarControllerModel pessoa = null;
+		
 		try {
-			up.save(UsuarioMapper.converter(usuario, imagem));
-		} catch (DataAccessException e) {
+			pessoa = mapper.readValue(usuario, UsuariosCadastrarControllerModel.class);
+			up.save(UsuarioMapper.converter(pessoa, imagem));
+		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
@@ -126,17 +130,12 @@ public class UsuariosController {
 
 	@ResponseBody
 	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
-	public ResponseEntity<List<UsuariosModel>> listarUsuarios() throws UnsupportedEncodingException {
+	public ResponseEntity<List<UsuariosModel>> listarUsuarios() {
 
-		List<UsuariosModel> usuarios = up.findAll();
+		List<UsuariosModel> usuarios = null;
 
 		try {
-			for (UsuariosModel usuario : usuarios) {
-
-				String imagem = Base64.getEncoder().encodeToString(usuario.getUsuAssinatura());
-				usuario.setUsuAssinaturaString(imagem);
-				usuarios.add(usuario);
-			}
+			usuarios = up.findAll();
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			return ResponseEntity.notFound().build();
@@ -160,15 +159,14 @@ public class UsuariosController {
 	@ResponseBody
 	@RequestMapping(value = "/pegarUsuario/{usu_id}", method = RequestMethod.GET)
 	public ResponseEntity<UsuariosModel> pegarUsuario(@PathVariable long usu_id) {
+		UsuariosModel usuarioSelecionado = null;
 		try {
-			if (up.existsByusuId(usu_id)) {
-				UsuariosModel usuarioSelecionado = up.findByusuId(usu_id);
-				return ResponseEntity.ok(usuarioSelecionado);
-			}
-		} catch (DataAccessException e) {
+			usuarioSelecionado = up.findByusuId(usu_id);
+		} catch (Exception e) {
 			e.printStackTrace();
+			return ResponseEntity.noContent().build();
 		}
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(usuarioSelecionado);	
 	}
 	
 

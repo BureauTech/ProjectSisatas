@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.iacit.sisatas.models.UsuariosModel;
-import br.com.iacit.sisatas.models.UsuariosControllerModel;
+import br.com.iacit.sisatas.models.UsuariosCadastrarControllerModel;
 
 public class UsuarioMapper {
 	
-	public static UsuariosModel converter(UsuariosControllerModel usuario, MultipartFile imagem) throws IOException {
+	public static UsuariosModel converter(UsuariosCadastrarControllerModel usuario, MultipartFile imagem) throws IOException {
 		
 		var usuarioBanco = new UsuariosModel();
 		usuarioBanco.setUsuAreaEmpresa(usuario.getUsuAreaEmpresa());
