@@ -30,7 +30,7 @@ public class DownloadController {
 	        header.add("Pragma", "no-cache");
 	        header.add("Expires", "0");
 			
-	        byte[] ata = new EscritorExcel().getAta();
+	        byte[] ata = new EscritorExcel(1).getByteArray();
 	        ByteArrayResource resource = new ByteArrayResource(ata);
 	        //byte[] resource = new EscritorExcel().getAta();
 	        
