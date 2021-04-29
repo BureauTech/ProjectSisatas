@@ -11,11 +11,13 @@ const Assinaturas = (props) => {
               <Typography>Representante: {participante.area}</Typography>
             </Grid>
             <Grid container justify="flex-start" style={{ paddingTop: 20 }}>
-              <img
-                src={participante.assinatura}
-                alt="Assinatura"
-                style={{ maxHeight: "1.5cm", borderBottom: "1px solid black" }}
-              />
+              {participante.assinatura && (
+                <img
+                  src={participante.assinatura}
+                  alt="Assinatura"
+                  style={{ maxHeight: "1.5cm", borderBottom: "1px solid black" }}
+                />
+              )}
             </Grid>
             <Grid container justify="flex-start" style={{ marginBottom: 30 }}>
               <Typography>

@@ -304,9 +304,9 @@ const Topics = (props) => {
                                     </Grid>
                                     <Grid item xs>
                                       <Typography style={{ color: "black" }}>
-                                        <bold>
+                                        <strong>
                                           {topic.id} - {topic.topic}
-                                        </bold>
+                                        </strong>
                                       </Typography>
                                     </Grid>
                                   </Grid>

@@ -30,12 +30,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const ProjectParticipants = (props) => {
-  const {
-    classes,
-    listaAdicionados,
-    setListaAdicionados,
-    setInfoProject,
-  } = props;
+  const { classes, listaAdicionados, setListaAdicionados, setInfoProject } = props;
 
   const [listaParticipantes, setListaParticipantes] = useState([
     {
@@ -146,43 +141,25 @@ const ProjectParticipants = (props) => {
       });
       setListaAdicionados(newArray);
       setInfoProject(newArray);
-      document
-        .querySelectorAll('input[type="checkbox"]')
-        .forEach((checkbox) => {
-          if (checkbox.checked) {
-            checkbox.click();
-          }
-        });
+      document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+        if (checkbox.checked) {
+          checkbox.click();
+        }
+      });
       setCheckeds([]);
     }
   };
 
   return (
     <Container>
-      <Grid
-        container
-        className={classes.grid}
-        style={{ paddingBottom: 0, paddingRight: 0 }}
-      >
+      <Grid container className={classes.grid} style={{ paddingBottom: 0, paddingRight: 0 }}>
         <Grid item xs={12}>
-          <Grid
-            container
-            justify="flex-start"
-            alignItems="center"
-            style={{ marginBottom: 30, paddingTop: 20 }}
-          >
-            <FormLabel
-              className={classes.normalText}
-              style={{ marginRight: 15 }}
-            >
+          <Grid container justify="flex-start" alignItems="center" style={{ marginBottom: 30, paddingTop: 20 }}>
+            <FormLabel className={classes.normalText} style={{ marginRight: 15 }}>
               Projeto
             </FormLabel>
             <Grid item xs={12} sm={5} md={4}>
-              <Input
-                className={classes.textField}
-                id="temaProjeto"
-                disableUnderline
-              />
+              <Input className={classes.textField} id="temaProjeto" disableUnderline />
             </Grid>
           </Grid>
           <ParticipantsRow
@@ -193,27 +170,13 @@ const ProjectParticipants = (props) => {
             atual={atual}
           />
         </Grid>
-        <Grid
-          container
-          justify="flex-end"
-          alignItems="center"
-          style={{ paddingTop: 10 }}
-        >
+        <Grid container justify="flex-end" alignItems="center" style={{ paddingTop: 10 }}>
           <Grid item xs={7}>
             <Grid container justify="flex-end">
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleClick}
-              >
+              <Button variant="contained" color="secondary" onClick={handleClick}>
                 Lista de participantes
               </Button>
-              <Dialog
-                open={isOpen}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={handleClick}
-              >
+              <Dialog open={isOpen} TransitionComponent={Transition} keepMounted onClose={handleClick}>
                 <DialogTitle>Lista de participantes</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
@@ -223,39 +186,22 @@ const ProjectParticipants = (props) => {
                           <Accordion key={index}>
                             <AccordionSummary expandIcon={<ExpandMore />}>
                               <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    onChange={(e) =>
-                                      pegarCheckbox(e.target.value)
-                                    }
-                                    value={index}
-                                  />
-                                }
+                                control={<Checkbox onChange={(e) => pegarCheckbox(e.target.value)} value={index} />}
                                 label={dados.nome}
                                 onClick={(event) => event.stopPropagation()}
                                 onFocus={(event) => event.stopPropagation()}
                               />
                             </AccordionSummary>
                             <AccordionDetails>
-                              <Grid
-                                container
-                                justify="space-between"
-                                className="light"
-                              >
+                              <Grid container justify="space-between" className="light">
                                 <Grid item>
-                                  <Typography style={{ padding: 10 }}>
-                                    {dados.area}
-                                  </Typography>
+                                  <Typography style={{ padding: 10 }}>{dados.area}</Typography>
                                 </Grid>
                                 <Grid item>
-                                  <Typography style={{ padding: 10 }}>
-                                    {dados.telefone}
-                                  </Typography>
+                                  <Typography style={{ padding: 10 }}>{dados.telefone}</Typography>
                                 </Grid>
                                 <Grid item>
-                                  <Typography style={{ padding: 10 }}>
-                                    {dados.email}
-                                  </Typography>
+                                  <Typography style={{ padding: 10 }}>{dados.email}</Typography>
                                 </Grid>
                               </Grid>
                             </AccordionDetails>
@@ -267,11 +213,7 @@ const ProjectParticipants = (props) => {
                 <Grid container justify="flex-end">
                   <Grid item>
                     <DialogActions>
-                      <Button
-                        onClick={handleDelete}
-                        color="secondary"
-                        variant="contained"
-                      >
+                      <Button onClick={handleDelete} color="secondary" variant="contained">
                         <Delete />
                         Remover
                       </Button>
@@ -279,11 +221,7 @@ const ProjectParticipants = (props) => {
                   </Grid>
                   <Grid item>
                     <DialogActions>
-                      <Button
-                        onClick={handleClick}
-                        color="secondary"
-                        variant="contained"
-                      >
+                      <Button onClick={handleClick} color="secondary" variant="contained">
                         <Cancel />
                         Fechar
                       </Button>
@@ -294,20 +232,9 @@ const ProjectParticipants = (props) => {
             </Grid>
           </Grid>
           <Grid item xs>
-            <Grid
-              container
-              justify="flex-end"
-              alignItems="flex-end"
-              style={{ height: "100%" }}
-            >
-              <IconButton
-                className="no-margin"
-                onClick={() => adicionarParticipante(atual)}
-              >
-                <AddCircle
-                  className="largeIcon"
-                  style={{ color: "white" }}
-                ></AddCircle>
+            <Grid container justify="flex-end" alignItems="flex-end" style={{ height: "100%" }}>
+              <IconButton className="no-margin" onClick={() => adicionarParticipante(atual)}>
+                <AddCircle className="largeIcon" style={{ color: "white" }}></AddCircle>
               </IconButton>
             </Grid>
           </Grid>

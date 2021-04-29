@@ -1,12 +1,4 @@
-import {
-  Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 
 const Assunto = (props) => {
   const { assuntos } = props.dados;
@@ -61,48 +53,49 @@ const Assunto = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {assuntos.map((dados) => (
-              <TableRow>
-                <TableCell
-                  style={{
-                    width: "5%",
-                    padding: 5,
-                    border: "1px solid black",
-                  }}
-                >
-                  {dados.id}.
-                </TableCell>
-                <TableCell
-                  style={{
-                    width: "55%",
-                    padding: 5,
-                    border: "1px solid black",
-                  }}
-                >
-                  {dados.assunto}
-                </TableCell>
-                <TableCell
-                  align="center"
-                  style={{
-                    width: "25%",
-                    padding: 5,
-                    border: "1px solid black",
-                  }}
-                >
-                  {dados.responsavel}
-                </TableCell>
-                <TableCell
-                  align="center"
-                  style={{
-                    width: "25%",
-                    padding: 5,
-                    border: "1px solid black",
-                  }}
-                >
-                  {dados.prazo}
-                </TableCell>
-              </TableRow>
-            ))}
+            {assuntos &&
+              assuntos.map((dados) => (
+                <TableRow>
+                  <TableCell
+                    style={{
+                      width: "5%",
+                      padding: 5,
+                      border: "1px solid black",
+                    }}
+                  >
+                    {dados.id}.
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      width: "55%",
+                      padding: 5,
+                      border: "1px solid black",
+                    }}
+                  >
+                    {dados.topic}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    style={{
+                      width: "25%",
+                      padding: 5,
+                      border: "1px solid black",
+                    }}
+                  >
+                    {dados.inCharge}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    style={{
+                      width: "25%",
+                      padding: 5,
+                      border: "1px solid black",
+                    }}
+                  >
+                    {dados.datetime}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
