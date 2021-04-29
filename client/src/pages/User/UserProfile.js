@@ -220,7 +220,8 @@ const UserProfile = (props) => {
                       color: "white",
                     }}
                   >
-                    <strong>{usuario.pertenceUsuarios.perNome}</strong>
+                    {/* Alteração Daniel */}
+                    <strong>{usuario.usuPerfil}</strong>
                   </Typography>
                 </Grid>
               </Grid>
@@ -229,7 +230,8 @@ const UserProfile = (props) => {
               <Grid container justify="center">
                 <Grid container justify="center">
                   <img
-                    src={logo}
+                    // Alteração Daniel
+                    src={"data:image/png;base64," + usuario.usuAssinatura}
                     alt="Imagem da assinatura"
                     style={{ maxWidth: 400, maxHeight: 400 }}
                   />

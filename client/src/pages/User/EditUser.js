@@ -302,7 +302,8 @@ const EditUser = (props) => {
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
-                    value={usuario.pertenceUsuarios.perId}
+                    // Ateração Daniel
+                    value={usuario.usuPerfil}
                     onChange={handleChange}
                     className={classes.textField}
                     style={{ width: "7rem" }}
@@ -357,7 +358,8 @@ const EditUser = (props) => {
               <Grid container justify="center">
                 <Grid container justify="center">
                   <img
-                    src={logo}
+                  // Alteração Daniel
+                    src={"data:image/png;base64," + usuario.usuAssinatura}
                     alt="Imagem da assinatura"
                     style={{ maxWidth: 400, maxHeight: 400 }}
                   />
