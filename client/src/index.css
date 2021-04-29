@@ -18,8 +18,8 @@ code {
     monospace;
 }
 .App {
-  background: linear-gradient(90deg, #d5e3fd 0.83%, rgba(255, 255, 255, 0) 100%),
-    linear-gradient(0deg, #84adfb, #84adfb);
+  background: linear-gradient(90deg, #b0c4de 0.83%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(0deg, #4682b4, #b0c4de);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
