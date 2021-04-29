@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AtasProjectControllerModel {
 	
+	private String ataProjeto;
 	private List<UsuariosModel> participaAtas;
 
 }

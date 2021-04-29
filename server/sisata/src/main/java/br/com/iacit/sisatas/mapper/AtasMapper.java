@@ -26,6 +26,7 @@ public class AtasMapper {
 		ataBanco.setGeraAtas(ataHeader.getGeraAtas());
 		
 		ataBanco.setParticipaAtas(ataProject.getParticipaAtas());
+		ataBanco.setAtaProjeto(ataProject.getAtaProjeto());
 		
 		ataBanco.setAtaPauta(ataPauta.getAtaPauta());
 		
