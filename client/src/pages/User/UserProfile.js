@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
 import logo from "../../assets/images/BureauTechFundoBranco-01.png";
-import "../CreateAta/Style.css";
+import "../Ata/CreateAta/Style.css";
 import userServices from "../../services/user";
 import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";

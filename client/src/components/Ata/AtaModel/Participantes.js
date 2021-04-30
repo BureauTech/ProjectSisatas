@@ -16,10 +16,7 @@ const Participantes = (props) => {
     <Container style={{ border: "1px solid black", padding: 0 }}>
       <Grid container>
         <Grid container>
-          <Typography
-            display="inline"
-            style={{ paddingTop: 5, paddingLeft: 10 }}
-          >
+          <Typography display="inline" style={{ paddingTop: 5, paddingLeft: 10 }}>
             <strong>Projeto: </strong>
             {tema}
           </Typography>

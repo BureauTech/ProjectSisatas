@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
 import logo from "../../assets/images/BureauTechFundoBranco-01.png";
-import "../CreateAta/Style.css";
+import "../Ata/CreateAta/Style.css";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import Loading from "../Loading/Loading";
 import userServices from "../../services/user";

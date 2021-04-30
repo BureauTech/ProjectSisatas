@@ -1,18 +1,12 @@
-import {
-  Button,
-  Container,
-  Grid,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core";
 
-import AtaHeader from "../../components/CreateAta/AtaHeader";
-import ProjectParticipants from "../../components/CreateAta/ProjectParticipants";
-import Pauta from "../../components/CreateAta/Pauta";
-import Topics from "../../components/CreateAta/Topics";
+import AtaHeader from "../../../components/Ata/CreateAta/AtaHeader";
+import ProjectParticipants from "../../../components/Ata/CreateAta/ProjectParticipants";
+import Pauta from "../../../components/Ata/CreateAta/Pauta";
+import Topics from "../../../components/Ata/CreateAta/Topics";
 import { useState } from "react";
 import "./Style.css";
-import ataServices from "../../services/ata";
+import ataServices from "../../../services/ata";
 
 const CreateAta = (props) => {
   const theme = useTheme();
@@ -49,15 +43,11 @@ const CreateAta = (props) => {
     <Container>
       <form onSubmit={(e) => handleSubmit(e)}>
         <Grid container style={{ marginBottom: 10 }}>
-          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
-            Cabeçalho
-          </Typography>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Cabeçalho</Typography>
           <AtaHeader ata={ata} setInfoHeader={setInfoHeader} />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
-          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
-            ATA de Reunião
-          </Typography>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>ATA de Reunião</Typography>
           <ProjectParticipants
             listaAdicionados={listaAdicionados}
             setListaAdicionados={setListaAdicionados}
@@ -65,16 +55,11 @@ const CreateAta = (props) => {
           />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
-          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
-            Pauta
-          </Typography>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Pauta</Typography>
           <Pauta setInfoPauta={setInfoPauta} />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
-          <Topics
-            listaAdicionados={listaAdicionados}
-            setInfoTopics={setInfoTopics}
-          />
+          <Topics listaAdicionados={listaAdicionados} setInfoTopics={setInfoTopics} />
         </Grid>
         <Grid container justify="space-between" style={{ padding: 24 }}>
           <Button

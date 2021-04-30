@@ -6,7 +6,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { styles } from "../../assets/styles/Styles";
+import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
 
 const ParticipantsRow = (props) => {
