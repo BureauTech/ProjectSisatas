@@ -21,6 +21,9 @@
   .blue {
     box-shadow: inset 1px 1px 10px 100px #c6d9f1 !important;
   }
+  .black {
+    box-shadow: inset 1px 1px 10px 100px black !important;
+  }
   .page {
     page-break-after: always;
   }
@@ -30,5 +33,10 @@
   }
   .second {
     margin-top: 1.25cm;
+  }
+
+  .space {
+    margin-top: 1.5cm;
+    width: 8cm;
   }
 } ;
