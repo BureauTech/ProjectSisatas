@@ -15,5 +15,7 @@ public interface UsuariosRepository extends JpaRepository<UsuariosModel, String>
 	Boolean existsByusuEmail(String usuEmail);
 
 	<T> List<T> findBy(Class<T> projection);
+	
+	UsuariosModel findTopBy();
 
 }

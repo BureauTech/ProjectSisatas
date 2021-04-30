@@ -44,6 +44,7 @@ public class UsuariosController {
 	 * Valida se e-mail já está cadastrado no DB.
 	 *
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/validadorUsuEmail", method = RequestMethod.GET)
 	public Boolean validadorUsuEmail(@RequestParam String usuEmail) {
 		return up.existsByusuEmail(usuEmail);

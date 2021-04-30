@@ -54,7 +54,7 @@ public class AtasModel implements Serializable{
 	private String ataPauta;
 	
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkUsuId")) // OK
+	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkUsuId"))
 	private UsuariosModel geraAtas;
 	
 	@ManyToMany
@@ -62,7 +62,7 @@ public class AtasModel implements Serializable{
 			joinColumns = @JoinColumn(name = "fkPkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkPkAtaId")),
 			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkPkUsuId")) 
 	)
-	private List<UsuariosModel> participaAtas = new ArrayList<>();	// OK
+	private List<UsuariosModel> participaAtas = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contemAssuntos", fetch = FetchType.EAGER)
 	@JsonManagedReference

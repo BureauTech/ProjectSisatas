@@ -19,6 +19,7 @@ import br.com.iacit.sisatas.models.AtasModel;
 import br.com.iacit.sisatas.models.AtasPautaControllerModel;
 import br.com.iacit.sisatas.models.AtasProjectControllerModel;
 import br.com.iacit.sisatas.models.AtasTopicsControllerModel;
+import br.com.iacit.sisatas.projections.AtasProjectionId;
 import br.com.iacit.sisatas.repository.AtasRepository;
 
 @Controller
@@ -27,7 +28,26 @@ public class AtasController {
 
 		@Autowired
 		private AtasRepository ap;
-
+		
+		/**
+		 * @Author Daniel Oliveira
+		 *
+		 * Retorna o ataId da última Ata.
+		 *
+		 */		
+		@ResponseBody
+		@RequestMapping(value = "/ultimoRegistro", method = RequestMethod.GET)
+		public AtasProjectionId ultimoRegistro() {
+			return ap.findTopBy();
+		}
+		
+		
+		/**
+		 * @Author Daniel Oliveira
+		 *
+		 * Cadastr
+		 *
+		 */	
 		@ResponseBody
 		@RequestMapping(value = "/cadastrarAtas", method = RequestMethod.POST, consumes = "application/json")
 		public ResponseEntity<String> cadastrarAtas(@RequestBody AtasHeaderControllerModel ataHeader, 
