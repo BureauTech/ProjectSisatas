@@ -5,6 +5,7 @@ import java.text.DateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,12 +13,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Revisoes")
-public class Revisoes implements Serializable {
+public class RevisoesModel implements Serializable {
 
 	/**
 	 * 
@@ -35,10 +40,10 @@ public class Revisoes implements Serializable {
 	private DateFormat revData;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId") // OK
-	private Usuarios resposavelRevisoes;
+	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkUsuId"))
+	private UsuariosModel resposavelRevisoes;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId") // OK
-	private Atas contemRevisoes;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkAtaId"))
+	private AtasModel contemRevisoes;
 }

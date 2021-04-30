@@ -107,7 +107,7 @@ export default function UserList() {
     { field: "usuEmail", headerName: "Email", width: 130 },
     { field: "usuCargo", headerName: "Cargo", width: 130 },
     { field: "usuAreaEmpresa", headerName: "Área/Empresa", width: 170 },
-    { field: "perterceUsuarios", headerName: "Perfil", width: 120 },
+    { field: "usuPerfil", headerName: "Perfil", width: 120 },
     {
       field: "Exibir",
       headerName: "Exibir",

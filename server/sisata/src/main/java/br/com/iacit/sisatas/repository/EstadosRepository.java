@@ -2,10 +2,10 @@ package br.com.iacit.sisatas.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.iacit.sisatas.models.Estados;
+import br.com.iacit.sisatas.models.EstadosModel;
 
-public interface EstadosRepository extends JpaRepository<Estados, String> {
+public interface EstadosRepository extends JpaRepository<EstadosModel, String> {
 	
-	Estados findByestId(long estId);
+	EstadosModel findByestId(long estId);
 	
 }
