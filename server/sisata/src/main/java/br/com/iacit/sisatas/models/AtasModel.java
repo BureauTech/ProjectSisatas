@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -53,13 +54,13 @@ public class AtasModel implements Serializable{
 	private String ataPauta;
 	
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId") // OK
+	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkUsuId")) // OK
 	private UsuariosModel geraAtas;
 	
 	@ManyToMany
 	@JoinTable(name = "Participa",
-			joinColumns = @JoinColumn(name = "fkPkAtaId", referencedColumnName = "ataId"),
-			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId") 
+			joinColumns = @JoinColumn(name = "fkPkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkPkAtaId")),
+			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkPkUsuId")) 
 	)
 	private List<UsuariosModel> participaAtas = new ArrayList<>();	// OK
 

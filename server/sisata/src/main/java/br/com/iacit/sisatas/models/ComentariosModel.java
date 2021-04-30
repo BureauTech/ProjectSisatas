@@ -5,6 +5,7 @@ import java.text.DateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class ComentariosModel implements Serializable {
 	public DateFormat comData;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fkRevId", referencedColumnName = "revId") // OK
+	@JoinColumn(name = "fkRevId", referencedColumnName = "revId", foreignKey = @ForeignKey(name = "fkRevId"))
 	public RevisoesModel contemRevisao;
 
 }

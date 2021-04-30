@@ -5,6 +5,7 @@ import java.text.DateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,10 +40,10 @@ public class RevisoesModel implements Serializable {
 	private DateFormat revData;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId") // OK
+	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkUsuId"))
 	private UsuariosModel resposavelRevisoes;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId") // OK
+	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkAtaId"))
 	private AtasModel contemRevisoes;
 }

@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,16 +43,16 @@ public class AssuntosModel implements Serializable {
 	private Date assPrazo;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId") // OK
+	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkAtaId")) // OK
 	private AtasModel contemAssuntos;
 	
 	
 	
 	@ManyToMany
 	@JoinTable(name = "Resposavel",
-			joinColumns = @JoinColumn(name = "fkPkAssId", referencedColumnName = "assId"), 
+			joinColumns = @JoinColumn(name = "fkPkAssId", referencedColumnName = "assId", foreignKey = @ForeignKey(name = "fkPkAssId")), 
 																								
-			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId") 
+			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkPkUsuId")) 
 																										
 	)
 	private List<UsuariosModel> responsavelAssuntos; // OK
