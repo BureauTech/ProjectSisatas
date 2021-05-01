@@ -8,10 +8,8 @@ import { useState } from "react";
 import { styles } from "../../assets/styles/Styles";
 import "./Components.css";
 
-const Pauta = (props) => {
-  const { classes, setInfoPauta } = props;
-  const [pauta, setPauta] = useState("");
-
+const Comentario = (props) => {
+  const { classes } = props;
   return (
     <Container>
       <Grid container className={classes.grid} style={{ padding: 20 }}>
@@ -20,11 +18,10 @@ const Pauta = (props) => {
             <TextareaAutosize
               rowsMin={15}
               rowsMax={15}
-              id="pauta"
-              value={pauta}
+              id="SalvarComentarios"
+              value={props.commmm}
               onChange={(e) => {
-                setPauta(e.target.value);
-                setInfoPauta(e.target.value);
+                props.setNewComentario(e.target.value);
               }}
               style={{
                 width: "100%",
@@ -40,4 +37,4 @@ const Pauta = (props) => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Pauta);
+export default withStyles(styles, { withTheme: true })(Comentario);
