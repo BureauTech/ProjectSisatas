@@ -41,7 +41,7 @@ public class RevisoesModel implements Serializable {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkUsuId"))
-	private UsuariosModel resposavelRevisoes;
+	private UsuariosModel responsavelRevisoes;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkAtaId"))
