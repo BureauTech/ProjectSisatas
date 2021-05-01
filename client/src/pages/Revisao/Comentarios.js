@@ -30,8 +30,6 @@ const CreateComentario = (props) => {
     }
   };
 
-  const data = new Date();
-
   return (
     <Container>
       <form onSubmit={(e) => handleSubmit(e)}>
