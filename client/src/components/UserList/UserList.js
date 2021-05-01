@@ -74,7 +74,7 @@ export default function UserList() {
   // Carrega a lista de usuários antes de montar o componente
   useEffect(() => {
     userServices
-      .listarUsuarios()
+      .listarUsuarios("DataGrid")
       .then((res) => {
         let lista = res.data;
         let lista2 = [];

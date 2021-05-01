@@ -69,7 +69,7 @@ const EditUser = (props) => {
     }
     setUsuario({
       ...usuario,
-      pertenceUsuarios: { perId: event.target.value, perNome: nomePerfil },
+      usuPerfil: event.target.value,
     });
     console.log(usuario);
   };
@@ -86,13 +86,19 @@ const EditUser = (props) => {
     event.preventDefault();
     setIsLoadingBtn(true);
 
+    var imagem = document.querySelector('#assinatura').files[0];
+    var formData = new FormData();
+    formData.append("usuario", JSON.stringify(usuario));
+    formData.append("imagem", imagem);
+
     userServices
-      .atualizarUsuario(usuario)
+      .atualizarUsuario(formData)
       .then((res) => {
         setIsLoadingBtn(false);
         setMsgSucesso("Sucesso ao salvar alterações!");
         setMsgErro(false);
         setOpenSnack(true);
+        history.push("profile", { id: usuario.usuId })
       })
       .catch((err) => {
         console.log(err.message);
