@@ -49,7 +49,7 @@ public class AssuntosModel implements Serializable {
 	
 	
 	@ManyToMany
-	@JoinTable(name = "Resposavel",
+	@JoinTable(name = "Responsavel",
 			joinColumns = @JoinColumn(name = "fkPkAssId", referencedColumnName = "assId", foreignKey = @ForeignKey(name = "fkPkAssId")), 
 																								
 			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkPkUsuId")) 

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.iacit.sisatas.models.ComentariosModel;
 import br.com.iacit.sisatas.repository.ComentariosRepository;
 
@@ -23,11 +26,16 @@ public class ComentariosController {
 
 		@ResponseBody
 		@RequestMapping(value = "/cadastrarComentarios", method = RequestMethod.POST, consumes = "application/json")
-		public String cadastrarComentarios(@RequestBody ComentariosModel comentario) {
+		public String cadastrarComentarios(@RequestBody String comentario) {
 			String result = null;
+			
+			ObjectMapper mapper = new ObjectMapper();
+			ComentariosModel comentarioDB = null;
+			
 			try {
-				cp.save(comentario);
-			} catch (DataAccessException e) {
+				comentarioDB = mapper.readValue(comentario, ComentariosModel.class);
+				cp.save(comentarioDB);
+			} catch (DataAccessException | JsonProcessingException e) {
 				e.printStackTrace();
 				result = e.getMessage();
 			}
