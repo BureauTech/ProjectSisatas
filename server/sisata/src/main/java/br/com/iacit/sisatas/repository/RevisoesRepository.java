@@ -2,10 +2,10 @@ package br.com.iacit.sisatas.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.iacit.sisatas.models.Revisoes;
+import br.com.iacit.sisatas.models.RevisoesModel;
 
-public interface RevisoesRepository extends JpaRepository<Revisoes, String> {
+public interface RevisoesRepository extends JpaRepository<RevisoesModel, String> {
 	
-	Revisoes findByrevId(long revId);
+	RevisoesModel findByrevId(long revId);
 	
 }

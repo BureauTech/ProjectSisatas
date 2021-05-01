@@ -1,0 +1,42 @@
+@page {
+  size: A4;
+  margin: 0;
+  padding: 0;
+}
+
+@media print {
+  * {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.43;
+  }
+  html,
+  body {
+    padding: 0;
+    height: 10px;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+  .blue {
+    box-shadow: inset 1px 1px 10px 100px #c6d9f1 !important;
+  }
+  .black {
+    box-shadow: inset 1px 1px 10px 100px black !important;
+  }
+  .page {
+    page-break-after: always;
+  }
+  .print {
+    margin-top: 0.5cm;
+    display: block !important;
+  }
+  .second {
+    margin-top: 1.25cm;
+  }
+
+  .space {
+    margin-top: 1.5cm;
+    width: 8cm;
+  }
+} ;
