@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   DataGrid,
   GridToolbar,
-  setGridRowCountStateUpdate,
+  //setGridRowCountStateUpdate,
 } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -19,7 +19,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ptBR from "../ptBR/DataGrid";
 import { Link, useHistory } from "react-router-dom";
-import api from "../../services/api";
+//import api from "../../services/api";
 import userServices from "../../services/user.js";
 import Alerta from "../Snackbar/Alerta.js";
 import Loading from "../../pages/Loading/Loading.js";

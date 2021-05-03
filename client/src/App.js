@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Data from "./components/ExibirAta/Data";
 import Register from "./components/RegisterUser/Register";
-import CreateAta from "./pages/Ata/CreateAta/CreateAta";
+import CreateAta from "./pages/CreateAta/CreateAta";
+import Comentarios from "./pages/Revisao/Comentarios";
 import ViewAta from "./pages/Ata/ViewAta/ViewAta";
 import ViewRevisions from "./pages/ViewRevisions/ViewRevisions";
 import Menu from "./components/Menu/Menu";
@@ -33,10 +34,10 @@ function App() {
               <Route path="/registeruser" component={() => <Register />} />
               <Route path="/new-record" component={() => <CreateAta />} />
               <Route path="/show-records" component={() => <Data />} />
-              <Route path="/new-revision" component={() => <CreateRevision />} />
+              <Route path="/comentarios" component={() => <Comentarios />} />
               <Route path="/view-ata" component={() => <ViewAta />} />
+              <Route path="/new-revision" component={() => <CreateRevision />} />
               <Route path="/show-revisions" component={() => <ViewRevisions />} />
-
               <Route exact path="/" />
               <Route path="/edit-user" component={() => <EditUser />} />
               <Route path="/profile" component={() => <UserProfile id={0} />} />
