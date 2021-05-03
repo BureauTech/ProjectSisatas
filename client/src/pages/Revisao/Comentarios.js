@@ -2,25 +2,42 @@ import {
   Button,
   Container,
   Grid,
+  Typography,
   useTheme,
 } from "@material-ui/core";
 
-import RevisionHeader from "../../components/CreateRevision/RevisionHeader";
-import RevisionSubject from "../../components/CreateRevision/RevisionSubject";
+import Campo from "../../components/Comentarios/Comentarios";
 import { useState } from "react";
 import "./Style.css";
+import ataServices from "../../services/comentarios";
 
-const CreateRevision = (props) => {
+const CreateComentario = (props) => {
   const theme = useTheme();
+
+  const [newNewComentario, setNewNewComentario] = useState();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const body = {
+      comDescricao: newNewComentario,
+      contemRevisao: 1, //precisa ser mexido ainda
+    };
+    console.log()
+    try {
+      ataServices.salvarComentario(body);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container>
-      <form>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <Grid container style={{ marginBottom: 10 }}>
-          <RevisionHeader />
-        </Grid>
-        <Grid container style={{ marginBottom: 10 }}>
-          <RevisionSubject />
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
+            Comentários
+          </Typography>
+          <Campo setNewComentario={setNewNewComentario} commmm={newNewComentario} />
         </Grid>
         <Grid container justify="space-between" style={{ padding: 24 }}>
           <Button
@@ -49,7 +66,7 @@ const CreateRevision = (props) => {
               padding: "0 30px",
             }}
           >
-            Salvar
+            Comentar
           </Button>
         </Grid>
       </form>
@@ -57,4 +74,4 @@ const CreateRevision = (props) => {
   );
 };
 
-export default CreateRevision;
+export default CreateComentario;
