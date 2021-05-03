@@ -5,8 +5,8 @@ const pegarUsuario = (id) => {
   return api.get(`${endpoint}/pegarUsuario/${id}`);
 };
 
-const listarUsuarios = () => {
-  return api.get(`${endpoint}/listarUsuarios`);
+const listarUsuarios = (param) => {
+  return api.get(`${endpoint}/listarUsuarios?lista=${param}`);
 };
 
 const cadastrarUsuario = (body) => {
@@ -14,12 +14,15 @@ const cadastrarUsuario = (body) => {
 };
 
 const atualizarUsuario = (body) => {
-  return api.post(`${endpoint}/atualizarUsuarios`, body);
+  return api.put(`${endpoint}/atualizarUsuarios`, body);
 };
 
 const deletarUsuario = (id) => {
   return api.delete(`${endpoint}/excluirUsuarios/${id}`);
 };
+
+
+
 
 const userServices = {
   pegarUsuario,

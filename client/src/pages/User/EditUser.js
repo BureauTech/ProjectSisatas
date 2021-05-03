@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
 import logo from "../../assets/images/BureauTechFundoBranco-01.png";
-import "../CreateAta/Style.css";
+import "../Ata/CreateAta/Style.css";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import Loading from "../Loading/Loading";
 import userServices from "../../services/user";
@@ -69,7 +69,7 @@ const EditUser = (props) => {
     }
     setUsuario({
       ...usuario,
-      pertenceUsuarios: { perId: event.target.value, perNome: nomePerfil },
+      usuPerfil: event.target.value,
     });
     console.log(usuario);
   };
@@ -86,13 +86,19 @@ const EditUser = (props) => {
     event.preventDefault();
     setIsLoadingBtn(true);
 
+    var imagem = document.querySelector('#assinatura').files[0];
+    var formData = new FormData();
+    formData.append("usuario", JSON.stringify(usuario));
+    formData.append("imagem", imagem);
+
     userServices
-      .atualizarUsuario(usuario)
+      .atualizarUsuario(formData)
       .then((res) => {
         setIsLoadingBtn(false);
         setMsgSucesso("Sucesso ao salvar alterações!");
         setMsgErro(false);
         setOpenSnack(true);
+        history.push("profile", { id: usuario.usuId })
       })
       .catch((err) => {
         console.log(err.message);
@@ -296,7 +302,8 @@ const EditUser = (props) => {
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
-                    value={usuario.pertenceUsuarios.perId}
+                    // Ateração Daniel
+                    value={usuario.usuPerfil}
                     onChange={handleChange}
                     className={classes.textField}
                     style={{ width: "7rem" }}
@@ -351,7 +358,8 @@ const EditUser = (props) => {
               <Grid container justify="center">
                 <Grid container justify="center">
                   <img
-                    src={logo}
+                  // Alteração Daniel
+                    src={"data:image/png;base64," + usuario.usuAssinatura}
                     alt="Imagem da assinatura"
                     style={{ maxWidth: 400, maxHeight: 400 }}
                   />

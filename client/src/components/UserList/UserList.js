@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   DataGrid,
   GridToolbar,
-  //setGridRowCountStateUpdate,
+  setGridRowCountStateUpdate,
 } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -19,7 +19,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ptBR from "../ptBR/DataGrid";
 import { Link, useHistory } from "react-router-dom";
-//import api from "../../services/api";
+import api from "../../services/api";
 import userServices from "../../services/user.js";
 import Alerta from "../Snackbar/Alerta.js";
 import Loading from "../../pages/Loading/Loading.js";
@@ -74,7 +74,7 @@ export default function UserList() {
   // Carrega a lista de usuários antes de montar o componente
   useEffect(() => {
     userServices
-      .listarUsuarios()
+      .listarUsuarios("DataGrid")
       .then((res) => {
         let lista = res.data;
         let lista2 = [];
@@ -107,7 +107,7 @@ export default function UserList() {
     { field: "usuEmail", headerName: "Email", width: 130 },
     { field: "usuCargo", headerName: "Cargo", width: 130 },
     { field: "usuAreaEmpresa", headerName: "Área/Empresa", width: 170 },
-    { field: "perterceUsuarios", headerName: "Perfil", width: 120 },
+    { field: "usuPerfil", headerName: "Perfil", width: 120 },
     {
       field: "Exibir",
       headerName: "Exibir",

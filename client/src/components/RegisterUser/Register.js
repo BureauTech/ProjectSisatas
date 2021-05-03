@@ -9,12 +9,12 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
-  /*IconButton,*/
+  IconButton,
   useTheme,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { styles } from "../../assets/styles/Styles";
-//import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
+import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import { useState } from "react";
 import clsx from "clsx";
 import "./Register.css";
@@ -50,6 +50,7 @@ const Register = (props) => {
     } else {
       perfilId = 3;
     }
+
     const body = {
       usuNome: nome,
       usuEmail: email,
@@ -57,13 +58,19 @@ const Register = (props) => {
       usuTelefone: telefone,
       usuCargo: cargo,
       usuAreaEmpresa: area,
-      pertenceUsuarios: {
-        perId: perfilId,
-      },
+       /* Alterações Daniel */
+      usuPerfil: perfilId
     };
 
+    var imagem = document.querySelector('#assinatura').files[0];
+
+    var formData = new FormData();
+    formData.append("usuario", JSON.stringify(body));
+    formData.append("imagem", imagem);
+
     userServices
-      .cadastrarUsuario(body)
+      .cadastrarUsuario(formData)
+      /* / Alterações Daniel */
       .then((res) => clear())
       .catch((err) => console.log(err.message));
   };
@@ -344,7 +351,7 @@ const Register = (props) => {
                 </Grid>
 
                 {/* upload assinatura */}
-                {/* <Grid container alignItems="center">
+                <Grid container alignItems="center">
                   <Grid item>
                     <FormLabel htmlFor="assinatura">
                       <Typography style={{ fontSize: '1.5rem', paddingRight: 20, color: 'white' }}>
@@ -360,7 +367,7 @@ const Register = (props) => {
                       </IconButton>
                     </label>
                   </Grid>
-                </Grid> */}
+                </Grid>
               </Grid>
             </Grid>
 
