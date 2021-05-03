@@ -8,6 +8,7 @@ import { Grid } from "@material-ui/core";
 import EditUser from "./pages/User/EditUser";
 import UserList from "./components/UserList/UserList";
 import UserProfile from "./pages/User/UserProfile";
+import CreateRevision from "./pages/CreateRevision/CreateRevision";
 import AtaTemplate from "./components/Ata/AtaModel/AtaTemplate";
 import InfoAtaProvider, { useInfoAta } from "./context/InfoAta";
 
@@ -29,9 +30,9 @@ function App() {
           >
             <Switch>
               <Route path="/registeruser" component={() => <Register />} />
-
               <Route path="/new-record" component={() => <CreateAta />} />
               <Route path="/show-records" component={() => <Data />} />
+              <Route path="/new-revision" component={() => <CreateRevision />} />
               <Route path="/view-ata" component={() => <ViewAta />} />
 
               <Route exact path="/" />
