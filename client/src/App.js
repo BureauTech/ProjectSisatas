@@ -12,6 +12,7 @@ import UserProfile from "./pages/User/UserProfile";
 import CreateRevision from "./pages/CreateRevision/CreateRevision";
 import AtaTemplate from "./components/Ata/AtaModel/AtaTemplate";
 import InfoAtaProvider, { useInfoAta } from "./context/InfoAta";
+import ViewComments from "./pages/Comment/ViewComments";
 
 function App() {
   const ata = {
@@ -41,6 +42,7 @@ function App() {
               <Route path="/edit-user" component={() => <EditUser />} />
               <Route path="/profile" component={() => <UserProfile id={0} />} />
               <Route path="/users-list" component={() => <UserList ata={ata} />} />
+              <Route path="/view-comments" component={() => <ViewComments />} />
             </Switch>
           </Grid>
         </div>
