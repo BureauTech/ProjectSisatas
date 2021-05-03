@@ -41,7 +41,7 @@ const RevisionHeader = (props) => {
             </Grid>
           </Grid>
           {/* CONTEINER DA DIREITA (INFOS)*/}
-          <Grid item xs={12} sm={10} md={9} lg={4}>
+          <Grid item xs={12} sm={10} md={5} lg={4}>
             <Grid item xs={11} md={10} lg={12}>
               {/* ROW ATA REF */}
               <Grid container className={classes.rowMargin}>
@@ -50,7 +50,7 @@ const RevisionHeader = (props) => {
                     Ata Ref.
                   </FormLabel>
                 </Grid>
-                <Grid item xs={12} md={8} lg={6}>
+                <Grid item xs={12} md={8} lg={6} >
                   <Grid container justify="space-between">
                     <Grid item xs={7} md={6} lg={5}>
                       <FormLabel className={classes.normalText}>
@@ -69,7 +69,7 @@ const RevisionHeader = (props) => {
                 </Grid>
                 <Grid item xs={12} md={8} lg={8}>
                   <Grid container justify="space-between">
-                    <Grid item xs={7} md={6} lg={8}>
+                    <Grid item xs={7} md={8} lg={8}>
                       <Input
                         className={classes.textField}
                         disableUnderline
@@ -81,7 +81,7 @@ const RevisionHeader = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={10} md={9} lg={4}>
+          <Grid item xs={12} sm={10} md={4} lg={4}>
             <Grid item xs={11} md={10} lg={12}>
               {/* ROW RESPONSAVEL*/}
               <Grid container className={classes.rowMargin}>
@@ -92,7 +92,7 @@ const RevisionHeader = (props) => {
                 </Grid>
               </Grid>
               <Grid container className={classes.rowMargin}>
-                <Grid item xs={10} md={2} lg={12}>
+                <Grid item xs={10} md={12} lg={12}>
                   <FormLabel className={classes.normalText}><strong>Fulano da Silva</strong></FormLabel>
                 </Grid>
               </Grid>
