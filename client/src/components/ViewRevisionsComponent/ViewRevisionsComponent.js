@@ -177,18 +177,18 @@ const ViewRevisionsComponent = (props) => {
             </Grid>
           </Grid>
           <Grid container className={classes.grid} justify="center" style={{ paddingBottom: 0, paddingRight: 0 }}>
-            <Grid item xs={3} style={{ margin: "15px 0px" }}>
+            <Grid item xs={4} sm={4} md={3} style={{ margin: "15px 0px" }}>
               <Typography className={classes.normalText}>Aprovado</Typography>
             </Grid>
-            <Grid item xs={8} style={{ margin: "15px 0px" }}>
+            <Grid item xs={6} sm={7} md={8} style={{ margin: "15px 0px" }}>
               <Grid container>
                 <Chips participantes={listaParticipantes} filtro={"Aprovado"} />
               </Grid>
             </Grid>
-            <Grid item xs={3} style={{ margin: "15px 0px" }}>
+            <Grid item xs={4} sm={4} md={3} style={{ margin: "15px 0px" }}>
               <Typography className={classes.normalText}>Pendente</Typography>
             </Grid>
-            <Grid item xs={8} style={{ margin: "15px 0px" }}>
+            <Grid item xs={6} sm={7} md={8} style={{ margin: "15px 0px" }}>
               <Grid container>
                 <Chips participantes={listaParticipantes} filtro={"Pendente"} />
               </Grid>
