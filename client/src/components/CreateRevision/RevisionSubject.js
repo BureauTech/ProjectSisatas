@@ -3,29 +3,27 @@ import {
   Grid,
   TextareaAutosize,
   withStyles,
+  Typography
 } from "@material-ui/core";
-import { useState } from "react";
 import { styles } from "../../assets/styles/Styles";
 import "./Components.css";
 
-const Pauta = (props) => {
-  const { classes, setInfoPauta } = props;
-  const [pauta, setPauta] = useState("");
+const RevisionSubject = (props) => {
+  const { classes } = props;
 
   return (
     <Container>
+      <Grid container style={{ marginBottom: 10 }}>
+        <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
+          Assunto da Revisão
+          </Typography>
+      </Grid>
       <Grid container className={classes.grid} style={{ padding: 20 }}>
         <Grid item xs={12}>
           <Grid container>
             <TextareaAutosize
-              rowsMin={4}
-              rowsMax={4}
-              id="pauta"
-              value={pauta}
-              onChange={(e) => {
-                setPauta(e.target.value);
-                setInfoPauta(e.target.value);
-              }}
+              rowsMin={8}
+              rowsMax={8}
               style={{
                 width: "100%",
                 fontSize: "1.8rem",
@@ -40,4 +38,4 @@ const Pauta = (props) => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Pauta);
+export default withStyles(styles, { withTheme: true })(RevisionSubject);
