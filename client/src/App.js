@@ -3,6 +3,7 @@ import Data from "./components/ExibirAta/Data";
 import Register from "./components/RegisterUser/Register";
 import CreateAta from "./pages/Ata/CreateAta/CreateAta";
 import ViewAta from "./pages/Ata/ViewAta/ViewAta";
+import ViewRevisions from "./pages/ViewRevisions/ViewRevisions";
 import Menu from "./components/Menu/Menu";
 import { Grid } from "@material-ui/core";
 import EditUser from "./pages/User/EditUser";
@@ -34,6 +35,7 @@ function App() {
               <Route path="/show-records" component={() => <Data />} />
               <Route path="/new-revision" component={() => <CreateRevision />} />
               <Route path="/view-ata" component={() => <ViewAta />} />
+              <Route path="/show-revisions" component={() => <ViewRevisions />} />
 
               <Route exact path="/" />
               <Route path="/edit-user" component={() => <EditUser />} />
