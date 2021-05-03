@@ -13,6 +13,7 @@ import CreateRevision from "./pages/CreateRevision/CreateRevision";
 import AtaTemplate from "./components/Ata/AtaModel/AtaTemplate";
 import InfoAtaProvider, { useInfoAta } from "./context/InfoAta";
 import ViewComments from "./pages/Comment/ViewComments";
+import Comentarios from "./pages/Revisao/Comentarios";
 
 function App() {
   const ata = {
@@ -37,6 +38,7 @@ function App() {
               <Route path="/new-revision" component={() => <CreateRevision />} />
               <Route path="/view-ata" component={() => <ViewAta />} />
               <Route path="/show-revisions" component={() => <ViewRevisions />} />
+              <Route path="/cadastrar-comentarios" component={() => <Comentarios />} />
 
               <Route exact path="/" />
               <Route path="/edit-user" component={() => <EditUser />} />
