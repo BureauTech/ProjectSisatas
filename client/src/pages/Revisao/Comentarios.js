@@ -20,7 +20,7 @@ const CreateComentario = (props) => {
     e.preventDefault();
     const body = {
       comDescricao: newNewComentario,
-      contemRevisao: 1,
+      contemRevisao: 1, //precisa ser mexido ainda
     };
     console.log()
     try {
