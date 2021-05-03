@@ -4,6 +4,10 @@ input[type="datetime-local"] {
   text-align: center !important;
 }
 
+.align-self-center {
+  align-self: center;
+}
+
 .MuiAutocomplete-input {
   padding-left: 0.4rem !important;
 }

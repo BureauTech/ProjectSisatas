@@ -33,10 +33,10 @@ const RevisionHeader = (props) => {
           <Grid item sm={10} md={3} lg={4}>
             <Grid container justify="center">
               <Grid container justify="center">
-                <Typography className={classes.biggerText}>Revisão Nº:</Typography>
+                <Typography className={classes.biggerText}>Revisão</Typography>
               </Grid>
               <Grid container justify="center">
-                <Typography className={classes.biggerText}>02</Typography>
+                <Typography className={classes.biggerText}>Nº: 02</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -50,7 +50,7 @@ const RevisionHeader = (props) => {
                     Ata Ref.
                   </FormLabel>
                 </Grid>
-                <Grid item xs={12} md={8} lg={6} >
+                <Grid item xs={12} md={8} lg={6} className="align-self-center">
                   <Grid container justify="space-between">
                     <Grid item xs={7} md={6} lg={5}>
                       <FormLabel className={classes.normalText}>
@@ -69,7 +69,7 @@ const RevisionHeader = (props) => {
                 </Grid>
                 <Grid item xs={12} md={8} lg={8}>
                   <Grid container justify="space-between">
-                    <Grid item xs={7} md={8} lg={8}>
+                    <Grid item xs={3} md={10} lg={8}>
                       <Input
                         className={classes.textField}
                         disableUnderline
