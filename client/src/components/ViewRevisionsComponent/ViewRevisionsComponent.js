@@ -5,14 +5,64 @@ import {
   Typography,
   FormLabel,
   Input,
+  TextareaAutosize,
+  Button,
+  useTheme
 } from "@material-ui/core";
 import "./Components.css";
 import { styles } from "../../assets/styles/Styles";
+import Chips from "./Chips";
+import { useState } from "react";
 
 // Alterando css de componentes
 
 const ViewRevisionsComponent = (props) => {
   const { classes } = props;
+  const theme = useTheme();
+  const [listaParticipantes, setListaParticipantes] = useState([
+    {
+      nome: "Denis Lima",
+      area: "Development",
+      telefone: "12 123456789",
+      email: "denis@bureautech.com",
+      status: "Aprovado",
+    },
+    {
+      nome: "Charles Ferreira",
+      area: "Product Owner",
+      telefone: "12 123456439",
+      email: "charles@bureautech.com",
+      status: "Aprovado",
+    },
+    {
+      nome: "Bia Coutinho",
+      area: "Development",
+      telefone: "12 1267796789",
+      email: "bia@bureautech.com",
+      status: "Aprovado",
+    },
+    {
+      nome: "Teste Pessoa",
+      area: "Development",
+      telefone: "12 123456789",
+      email: "pessoa@bureautech.com",
+      status: "Pendente",
+    },
+    {
+      nome: "Pessoa Fulano",
+      area: "Product Owner",
+      telefone: "12 123456439",
+      email: "fulano@bureautech.com",
+      status: "Aprovado",
+    },
+    {
+      nome: "Beltrano da Silva",
+      area: "Development",
+      telefone: "12 1267796789",
+      email: "beltrano@bureautech.com",
+      status: "Pendente",
+    },
+  ]);
 
   return (
     <Container>
@@ -96,6 +146,68 @@ const ViewRevisionsComponent = (props) => {
                   <FormLabel className={classes.normalText}><strong>Fulano da Silva</strong></FormLabel>
                 </Grid>
               </Grid>
+            </Grid>
+          </Grid>
+          <Grid container className={classes.grid} style={{ padding: 20 }}>
+            <Grid container className={classes.rowMargin}>
+              <Grid item md={4} lg={4}>
+                <FormLabel className={classes.normalText}>
+                  Assunto da Revisão
+                  </FormLabel>
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container>
+                <TextareaAutosize
+                  disabled
+                  rowsMin={7}
+                  rowsMax={15}
+                  // value={infoRevision}
+                  style={{
+                    width: "100%",
+                    fontSize: "1.8rem",
+                    borderBottomLeftRadius: "20px",
+                    borderTopLeftRadius: "20px",
+                    color: "white",
+                    paddingLeft: 10,
+                    paddingBottom: 20,
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid container className={classes.grid} justify="center" style={{ paddingBottom: 0, paddingRight: 0 }}>
+            <Grid item xs={3} style={{ margin: "15px 0px" }}>
+              <Typography className={classes.normalText}>Aprovado</Typography>
+            </Grid>
+            <Grid item xs={8} style={{ margin: "15px 0px" }}>
+              <Grid container>
+                <Chips participantes={listaParticipantes} filtro={"Aprovado"} />
+              </Grid>
+            </Grid>
+            <Grid item xs={3} style={{ margin: "15px 0px" }}>
+              <Typography className={classes.normalText}>Pendente</Typography>
+            </Grid>
+            <Grid item xs={8} style={{ margin: "15px 0px" }}>
+              <Grid container>
+                <Chips participantes={listaParticipantes} filtro={"Pendente"} />
+              </Grid>
+            </Grid>
+            <Grid item style={{ margin: "15px 0px" }}>
+              <Button
+                variant="contained"
+                className="bold"
+                style={{
+                  backgroundColor: "white",
+                  color: theme.palette.secondary.main,
+                  fontWeight: 700,
+                  fontSize: "1.5rem",
+                  borderRadius: 16,
+                  padding: "0 5px",
+                }}
+              >
+                Exibir Comentários
+              </Button>
             </Grid>
           </Grid>
         </Grid>
