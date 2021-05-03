@@ -4,16 +4,18 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.iacit.sisatas.models.Usuarios;
+import br.com.iacit.sisatas.models.UsuariosModel;
 
-public interface UsuariosRepository extends JpaRepository<Usuarios, String> {
+public interface UsuariosRepository extends JpaRepository<UsuariosModel, String> {
 
-	Usuarios findByusuId(long usuId);
+	UsuariosModel findByusuId(long usuId);
 
-	List<Usuarios> searchByusuNomeContainingIgnoreCase(String usuNome);
+	Boolean existsByusuId(long usuId);
 
-	List<Usuarios> searchByusuAreaEmpresaContainingIgnoreCase( String usuAreaEmpresa);
+	Boolean existsByusuEmail(String usuEmail);
 
-	List<Usuarios> searchByusuEmailContainingIgnoreCase( String usuEmail);
+	<T> List<T> findBy(Class<T> projection);
 	
+	UsuariosModel findTopBy();
+
 }

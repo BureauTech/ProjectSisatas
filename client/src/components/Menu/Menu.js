@@ -167,7 +167,7 @@ export default function Menu() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.font}>
-            Sisatas
+            SISATAS
           </Typography>
         </Toolbar>
       </AppBar>

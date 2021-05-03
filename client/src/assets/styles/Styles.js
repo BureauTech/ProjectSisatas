@@ -45,7 +45,7 @@ const styles = (theme) => ({
     color: "white",
     "&:hover": {
       color: "#26BAF4",
-    }
+    },
   },
 
   radio: {
@@ -65,6 +65,11 @@ const styles = (theme) => ({
     backgroundColor: "#26BAF4",
   },
 
+  hoverSecondary: {
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
 });
 
 export { styles };

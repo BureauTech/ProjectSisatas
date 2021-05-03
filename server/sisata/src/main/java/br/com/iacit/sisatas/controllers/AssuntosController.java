@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.iacit.sisatas.models.Assuntos;
+import br.com.iacit.sisatas.models.AssuntosModel;
 import br.com.iacit.sisatas.repository.AssuntosRepository;
 
 @Controller
@@ -23,7 +23,7 @@ public class AssuntosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarAssuntos", method = RequestMethod.POST, consumes = "application/json")
-	public String cadastrarAssuntos(@RequestBody Assuntos assunto) {
+	public String cadastrarAssuntos(@RequestBody AssuntosModel assunto) {
 		String result = null;
 		if (assunto.equals(null)) {
 			try {
@@ -44,8 +44,8 @@ public class AssuntosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/listarAssuntos", method = RequestMethod.GET)
-	public List<Assuntos> listarAssuntos() {
-		List<Assuntos> assuntos = null;
+	public List<AssuntosModel> listarAssuntos() {
+		List<AssuntosModel> assuntos = null;
 		try {
 			assuntos = ap.findAll();
 		} catch (DataAccessException e) {
@@ -60,7 +60,7 @@ public class AssuntosController {
 	public String excluirAssuntos(@PathVariable long ass_id) {
 		String result = null;
 		try {
-			Assuntos assuntoSelecionado = ap.findByassId(ass_id);
+			AssuntosModel assuntoSelecionado = ap.findByassId(ass_id);
 			ap.delete(assuntoSelecionado);
 		} catch (DataAccessException e) {
 			result = e.getMessage();
