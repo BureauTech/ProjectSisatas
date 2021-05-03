@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Data from "./components/ExibirAta/Data";
-import Register from "./components/RegisterUser/Register";
+import RegisterUser from "./components/RegisterUser/RegisterUser";
+import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
 import CreateAta from "./pages/Ata/CreateAta/CreateAta";
 import ViewAta from "./pages/Ata/ViewAta/ViewAta";
 import ViewRevisions from "./pages/ViewRevisions/ViewRevisions";
@@ -30,7 +31,8 @@ function App() {
             style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
           >
             <Switch>
-              <Route path="/registeruser" component={() => <Register />} />
+              <Route path="/register-user" component={() => <RegisterUser />} />
+              <Route path="/register-password" component={() => <RegisterPassword />} />
               <Route path="/new-record" component={() => <CreateAta />} />
               <Route path="/show-records" component={() => <Data />} />
               <Route path="/new-revision" component={() => <CreateRevision />} />
