@@ -1,10 +1,4 @@
-import {
-  Button,
-  Container,
-  Grid,
-  Typography,
-  withStyles,
-} from "@material-ui/core";
+import { Button, Container, Grid, Typography, withStyles } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
 import logo from "../../assets/images/BureauTechFundoBranco-01.png";
 import "../Ata/CreateAta/Style.css";
@@ -13,6 +7,7 @@ import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
+import { BrokenImage } from "@material-ui/icons";
 
 const UserProfile = (props) => {
   const { classes } = props;
@@ -81,17 +76,9 @@ const UserProfile = (props) => {
     <Container>
       {isLoading && <Loading />}
       {!isLoading && (
-        <Grid
-          container
-          justify="center"
-          className={classes.grid}
-          style={{ paddingBottom: 40 }}
-        >
+        <Grid container justify="center" className={classes.grid} style={{ paddingBottom: 40 }}>
           <Grid container justify="center">
-            <Typography
-              className={classes.biggerText}
-              style={{ paddingBottom: 80, paddingTop: 20 }}
-            >
+            <Typography className={classes.biggerText} style={{ paddingBottom: 80, paddingTop: 20 }}>
               Perfil de Usuário
             </Typography>
           </Grid>
@@ -257,23 +244,20 @@ const UserProfile = (props) => {
             <Grid item md={5}>
               <Grid container justify="center">
                 <Grid container justify="center">
-                  <img
-                    // Alteração Daniel
-                    src={"data:image/png;base64," + usuario.usuAssinatura}
-                    alt="Imagem da assinatura"
-                    style={{ maxWidth: 400, maxHeight: 400 }}
-                  />
+                  {usuario.usuAssinatura && (
+                    <img
+                      // Alteração Daniel
+                      src={"data:image/png;base64," + usuario.usuAssinatura}
+                      alt="Imagem da assinatura"
+                      style={{ maxWidth: 400, maxHeight: 400 }}
+                    />
+                  )}
+                  {!usuario.usuAssinatura && <BrokenImage color="secondary" style={{ width: 300, height: 300 }} />}
                 </Grid>
                 <Grid container justify="center" style={{ paddingTop: 20 }}>
-                  <Typography className={classes.normalText}>
-                    Assinatura Atual
-                  </Typography>
+                  <Typography className={classes.normalText}>Assinatura Atual</Typography>
                 </Grid>
-                <Grid
-                  container
-                  justify="space-around"
-                  style={{ paddingTop: 50 }}
-                >
+                <Grid container justify="space-around" style={{ paddingTop: 50 }}>
                   <Button
                     variant="contained"
                     color="secondary"
@@ -309,12 +293,7 @@ const UserProfile = (props) => {
           </Grid>
         </Grid>
       )}
-      <Alerta
-        isOpen={openSnack}
-        setIsOpen={setOpenSnack}
-        sucesso={msgSucesso}
-        erro={msgErro}
-      />
+      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
     </Container>
   );
 };

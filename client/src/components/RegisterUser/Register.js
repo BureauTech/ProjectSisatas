@@ -30,6 +30,7 @@ const Register = (props) => {
   const [telefone, setTelefone] = useState();
   const [cargo, setCargo] = useState();
   const [area, setArea] = useState();
+  const [preview, setPreview] = useState("");
 
   const clear = () => {
     setPerfil("USU");
@@ -38,6 +39,12 @@ const Register = (props) => {
     setTelefone("");
     setCargo("");
     setArea("");
+  };
+
+  const changePreview = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => setPreview(reader.result);
   };
 
   const handleSubmit = (e) => {
@@ -58,11 +65,11 @@ const Register = (props) => {
       usuTelefone: telefone,
       usuCargo: cargo,
       usuAreaEmpresa: area,
-       /* Alterações Daniel */
-      usuPerfil: perfilId
+      /* Alterações Daniel */
+      usuPerfil: perfilId,
     };
 
-    var imagem = document.querySelector('#assinatura').files[0];
+    var imagem = document.querySelector("#assinatura").files[0];
 
     var formData = new FormData();
     formData.append("usuario", JSON.stringify(body));
@@ -76,34 +83,23 @@ const Register = (props) => {
   };
 
   return (
-    <Container>
+    <Container style={{ marginTop: 40 }}>
       <Grid container className={classes.grid}>
         {/* cabeçalho */}
         <Grid container justify="center">
-          <Typography
-            className={classes.normalText}
-            style={{ paddingBottom: 60 }}
-          >
+          <Typography className={classes.normalText} style={{ paddingBottom: 60 }}>
             Cadastro de Usuário
           </Typography>
         </Grid>
 
         {/* formulario */}
         <Grid container>
-          <form
-            id="form"
-            onSubmit={(e) => handleSubmit(e)}
-            style={{ width: "100%" }}
-          >
+          <form id="form" onSubmit={(e) => handleSubmit(e)} style={{ width: "100%" }}>
             {/* inputs */}
             <Grid item sm={8}>
               <Grid container alignItems="center" justify="center">
                 {/* input nome */}
-                <Grid
-                  container
-                  alignItems="center"
-                  style={{ paddingBottom: 15 }}
-                >
+                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
                   <Grid item>
                     <FormLabel htmlFor="nome">
                       <Typography
@@ -131,11 +127,7 @@ const Register = (props) => {
                 </Grid>
 
                 {/* input email */}
-                <Grid
-                  container
-                  alignItems="center"
-                  style={{ paddingBottom: 15 }}
-                >
+                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
                   <Grid item>
                     <FormLabel htmlFor="email">
                       <Typography
@@ -164,11 +156,7 @@ const Register = (props) => {
                 </Grid>
 
                 {/* input telefone */}
-                <Grid
-                  container
-                  alignItems="center"
-                  style={{ paddingBottom: 15 }}
-                >
+                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
                   <Grid item>
                     <FormLabel htmlFor="telefone">
                       <Typography
@@ -197,11 +185,7 @@ const Register = (props) => {
                 </Grid>
 
                 {/* input cargo */}
-                <Grid
-                  container
-                  alignItems="center"
-                  style={{ paddingBottom: 15 }}
-                >
+                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
                   <Grid item>
                     <FormLabel htmlFor="cargo">
                       <Typography
@@ -229,11 +213,7 @@ const Register = (props) => {
                 </Grid>
 
                 {/* input área/empresa */}
-                <Grid
-                  container
-                  alignItems="center"
-                  style={{ paddingBottom: 15 }}
-                >
+                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
                   <Grid item>
                     <FormLabel htmlFor="area">
                       <Typography
@@ -290,14 +270,7 @@ const Register = (props) => {
                         control={
                           <Radio
                             className={classes.radio}
-                            checkedIcon={
-                              <span
-                                className={clsx(
-                                  classes.icon,
-                                  classes.checkedIcon
-                                )}
-                              />
-                            }
+                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
                             icon={<span className={classes.icon} />}
                             {...props}
                           />
@@ -311,14 +284,7 @@ const Register = (props) => {
                         control={
                           <Radio
                             className={classes.radio}
-                            checkedIcon={
-                              <span
-                                className={clsx(
-                                  classes.icon,
-                                  classes.checkedIcon
-                                )}
-                              />
-                            }
+                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
                             icon={<span className={classes.icon} />}
                             {...props}
                           />
@@ -332,14 +298,7 @@ const Register = (props) => {
                         control={
                           <Radio
                             className={classes.radio}
-                            checkedIcon={
-                              <span
-                                className={clsx(
-                                  classes.icon,
-                                  classes.checkedIcon
-                                )}
-                              />
-                            }
+                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
                             icon={<span className={classes.icon} />}
                             {...props}
                           />
@@ -354,13 +313,20 @@ const Register = (props) => {
                 <Grid container alignItems="center">
                   <Grid item>
                     <FormLabel htmlFor="assinatura">
-                      <Typography style={{ fontSize: '1.5rem', paddingRight: 20, color: 'white' }}>
+                      <Typography style={{ fontSize: "1.5rem", paddingRight: 20, color: "white" }}>
                         Assinatura
-                    </Typography>
+                      </Typography>
                     </FormLabel>
                   </Grid>
                   <Grid item xs>
-                    <input name="assinatura" accept="image/*" id="assinatura" type="file" style={{ display: "none" }} />
+                    <input
+                      name="assinatura"
+                      accept="image/*"
+                      id="assinatura"
+                      type="file"
+                      style={{ display: "none" }}
+                      onChange={(e) => changePreview(e.target.files[0])}
+                    />
                     <label htmlFor="assinatura">
                       <IconButton color="primary" aria-label="upload picture" component="span" className="no-margin">
                         <ImageOutlinedIcon className={classes.uploadFile} style={{ width: 50, height: 50 }} />
@@ -369,16 +335,17 @@ const Register = (props) => {
                   </Grid>
                 </Grid>
               </Grid>
+              {preview && (
+                <Grid item xs style={{ marginTop: 10 }}>
+                  <Typography style={{ color: "white" }}>Prévia: </Typography>
+                  <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
+                </Grid>
+              )}
             </Grid>
 
             {/* button cadastrar */}
             <Grid container justify="flex-end" style={{ paddingRight: 20 }}>
-              <Button
-                variant="contained"
-                color="secondary"
-                type="submit"
-                style={{ borderRadius: 18 }}
-              >
+              <Button variant="contained" color="secondary" type="submit" style={{ borderRadius: 18 }}>
                 Cadastrar
               </Button>
             </Grid>
