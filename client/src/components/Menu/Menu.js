@@ -222,13 +222,13 @@ export default function Menu() {
           </Typography>
           <Typography className={classes.font}>
             <Link
-              to="/new-record"
+              to="/nova-ata"
               className={classes.link}
               onClick={(e) => handleIconSelected(1)}
             >
               <ListItem
                 button
-                key="new-record"
+                key="nova-ata"
                 className={active === 1 ? classes.blueColor : {}}
               >
                 <ListItemIcon
@@ -247,13 +247,13 @@ export default function Menu() {
           </Typography>
           <Typography className={classes.font}>
             <Link
-              to="/show-records"
+              to="/visualizar-atas"
               className={classes.link}
               onClick={(e) => handleIconSelected(2)}
             >
               <ListItem
                 button
-                key="show-records"
+                key="visualizar-atas"
                 className={active === 2 ? classes.blueColor : {}}
               >
                 <ListItemIcon
