@@ -20,7 +20,7 @@ import clsx from "clsx";
 import "./Register.css";
 import userServices from "../../services/user";
 
-const RegisterUser = (props) => {
+const Register = (props) => {
   const { classes } = props;
   const theme = useTheme();
 
@@ -76,14 +76,13 @@ const RegisterUser = (props) => {
   };
 
   return (
-    <Container style={{width: "50%"}}>
-      <Grid container className={classes.grid} style={{paddingBottom: 20}}>
-
+    <Container>
+      <Grid container className={classes.grid}>
         {/* cabeçalho */}
-        <Grid container justify="center" style={{paddingTop: 10}}>
+        <Grid container justify="center">
           <Typography
             className={classes.normalText}
-            style={{ paddingBottom: 30 }}
+            style={{ paddingBottom: 60 }}
           >
             Cadastro de Usuário
           </Typography>
@@ -97,7 +96,7 @@ const RegisterUser = (props) => {
             style={{ width: "100%" }}
           >
             {/* inputs */}
-            <Grid item sm={11}>
+            <Grid item sm={8}>
               <Grid container alignItems="center" justify="center">
                 {/* input nome */}
                 <Grid
@@ -373,7 +372,7 @@ const RegisterUser = (props) => {
             </Grid>
 
             {/* button cadastrar */}
-            <Grid container justify="flex-end" style={{ paddingRight: 25 }}>
+            <Grid container justify="flex-end" style={{ paddingRight: 20 }}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -383,10 +382,8 @@ const RegisterUser = (props) => {
                 Cadastrar
               </Button>
             </Grid>
-
           </form>
         </Grid>
-
       </Grid>
 
       {/* button voltar */}
@@ -408,9 +405,8 @@ const RegisterUser = (props) => {
           </Button>
         </Link>
       </Grid>
-
     </Container>
   );
 };
 
-export default withStyles(styles, { withTheme: true })(RegisterUser);
+export default withStyles(styles, { withTheme: true })(Register);
