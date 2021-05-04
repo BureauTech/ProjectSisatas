@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Data from "./components/ExibirAta/Data";
-import RegisterUser from "./components/RegisterUser/RegisterUser";
-import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
+import Register from "./components/RegisterUser/Register";
 import CreateAta from "./pages/Ata/CreateAta/CreateAta";
 import ViewAta from "./pages/Ata/ViewAta/ViewAta";
 import ViewRevisions from "./pages/ViewRevisions/ViewRevisions";
