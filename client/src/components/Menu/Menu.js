@@ -325,13 +325,13 @@ export default function Menu() {
           </Typography>
           <Typography className={classes.font}>
             <Link
-              to="/users-list"
+              to="/listar-usuarios"
               className={classes.link}
               onClick={(e) => handleIconSelected(5)}
             >
               <ListItem
                 button
-                key="users-list"
+                key="listar-usuarios"
                 className={active === 5 ? classes.blueColor : {}}
               >
                 <ListItemIcon
