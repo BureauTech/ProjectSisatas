@@ -31,8 +31,6 @@ function App() {
             style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
           >
             <Switch>
-              <Route path="/register-user" component={() => <RegisterUser />} />
-              <Route path="/register-password" component={() => <RegisterPassword />} />
               <Route path="/new-record" component={() => <CreateAta />} />
               <Route path="/show-records" component={() => <Data />} />
               <Route path="/new-revision" component={() => <CreateRevision />} />
