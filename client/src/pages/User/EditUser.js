@@ -284,7 +284,7 @@ const EditUser = (props) => {
               {/* input perfil */}
               <Grid container alignItems="center" style={{ paddingBottom: 50 }}>
                 <Grid item>
-                  <FormLabel htmlFor="perfil">
+                  <FormLabel htmlFor="profile">
                     <Typography
                       className={classes.normalText}
                       style={{
@@ -298,7 +298,7 @@ const EditUser = (props) => {
                 </Grid>
                 <Grid item xs>
                   <Select
-                    id="perfil"
+                    id="profile"
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
