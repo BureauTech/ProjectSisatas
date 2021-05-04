@@ -17,7 +17,7 @@ import { styles } from "../../assets/styles/Styles";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import { useState } from "react";
 import clsx from "clsx";
-import "./RegisterUser.css";
+import "./Register.css";
 import userServices from "../../services/user";
 
 const RegisterUser = (props) => {
