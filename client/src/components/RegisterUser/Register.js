@@ -20,7 +20,7 @@ import clsx from "clsx";
 import "./Register.css";
 import userServices from "../../services/user";
 
-const Register = (props) => {
+const RegisterUser = (props) => {
   const { classes } = props;
   const theme = useTheme();
 
@@ -76,13 +76,14 @@ const Register = (props) => {
   };
 
   return (
-    <Container>
-      <Grid container className={classes.grid}>
+    <Container style={{width: "50%"}}>
+      <Grid container className={classes.grid} style={{paddingBottom: 20}}>
+
         {/* cabeçalho */}
-        <Grid container justify="center">
+        <Grid container justify="center" style={{paddingTop: 10}}>
           <Typography
             className={classes.normalText}
-            style={{ paddingBottom: 60 }}
+            style={{ paddingBottom: 30 }}
           >
             Cadastro de Usuário
           </Typography>
@@ -96,7 +97,7 @@ const Register = (props) => {
             style={{ width: "100%" }}
           >
             {/* inputs */}
-            <Grid item sm={8}>
+            <Grid item sm={11}>
               <Grid container alignItems="center" justify="center">
                 {/* input nome */}
                 <Grid
@@ -372,7 +373,7 @@ const Register = (props) => {
             </Grid>
 
             {/* button cadastrar */}
-            <Grid container justify="flex-end" style={{ paddingRight: 20 }}>
+            <Grid container justify="flex-end" style={{ paddingRight: 25 }}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -382,8 +383,10 @@ const Register = (props) => {
                 Cadastrar
               </Button>
             </Grid>
+
           </form>
         </Grid>
+
       </Grid>
 
       {/* button voltar */}
@@ -405,8 +408,9 @@ const Register = (props) => {
           </Button>
         </Link>
       </Grid>
+
     </Container>
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Register);
+export default withStyles(styles, { withTheme: true })(RegisterUser);
