@@ -74,7 +74,7 @@ const UserProfile = (props) => {
   }, [location]);
 
   const editar = () => {
-    history.push("/edit-user", { id: usuario.usuId });
+    history.push("/editar-usuario", { id: usuario.usuId });
   };
 
   return (

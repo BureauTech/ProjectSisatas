@@ -127,7 +127,7 @@ export default function UserList() {
       renderCell: (params) => (
         <Button
           onClick={() =>
-            history.push("edit-user", { id: params.getValue("id") })
+            history.push("editar-usuario", { id: params.getValue("id") })
           }
         >
           <EditIcon className="icon" />
@@ -179,7 +179,7 @@ export default function UserList() {
         disableSelectionOnClick={true}
       />
       <Grid container className={classes.container}>
-        <Link to="/registeruser" style={{ textDecoration: "none" }}>
+        <Link to="/cadastrar-usuario" style={{ textDecoration: "none" }}>
           <Button className={classes.btn}>Novo Usuário</Button>
         </Link>
       </Grid>

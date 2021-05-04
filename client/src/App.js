@@ -31,18 +31,18 @@ function App() {
             style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
           >
             <Switch>
-              <Route path="/registeruser" component={() => <Register />} />
-              <Route path="/new-record" component={() => <CreateAta />} />
-              <Route path="/show-records" component={() => <Data />} />
-              <Route path="/new-revision" component={() => <CreateRevision />} />
-              <Route path="/view-ata" component={() => <ViewAta />} />
-              <Route path="/show-revisions" component={() => <ViewRevisions />} />
+              <Route path="/nova-ata" component={() => <CreateAta />} />
+              <Route path="/visualizar-atas" component={() => <Data />} />
+              <Route path="/nova-revisao" component={() => <CreateRevision />} />
+              <Route path="/ata" component={() => <ViewAta />} />
+              <Route path="/revisoes" component={() => <ViewRevisions />} />
               <Route path="/cadastrar-comentarios" component={() => <Comentarios />} />
 
               <Route exact path="/" />
-              <Route path="/edit-user" component={() => <EditUser />} />
+              <Route path="/cadastrar-usuario" component={() => <Register />} />
+              <Route path="/editar-usuario" component={() => <EditUser />} />
               <Route path="/profile" component={() => <UserProfile id={0} />} />
-              <Route path="/users-list" component={() => <UserList ata={ata} />} />
+              <Route path="/listar-usuarios" component={() => <UserList ata={ata} />} />
             </Switch>
           </Grid>
         </div>

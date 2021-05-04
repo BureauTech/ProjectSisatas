@@ -298,7 +298,7 @@ export default function Menu() {
           <Typography className={classes.font}>
             <Link
               to={{
-                pathname: "/profile",
+                pathname: "/perfil",
                 state: { id: 0 },
               }}
               className={classes.link}
@@ -306,7 +306,7 @@ export default function Menu() {
             >
               <ListItem
                 button
-                key="profile"
+                key="perfil"
                 className={active === 4 ? classes.blueColor : {}}
               >
                 <ListItemIcon
@@ -325,13 +325,13 @@ export default function Menu() {
           </Typography>
           <Typography className={classes.font}>
             <Link
-              to="/users-list"
+              to="/listar-usuarios"
               className={classes.link}
               onClick={(e) => handleIconSelected(5)}
             >
               <ListItem
                 button
-                key="users-list"
+                key="listar-usuarios"
                 className={active === 5 ? classes.blueColor : {}}
               >
                 <ListItemIcon
