@@ -6,7 +6,7 @@ const ViewCommentsComponent = (props) => {
   const { classes, comentario } = props;
 
   return (
-    <Container style={{ marginTop: 40 }}>
+    <Container style={{ marginTop: 40, marginBottom: 40 }}>
       <Grid container>
         <Grid container className={classes.grid} style={{ padding: "20px 10px" }}>
           <ResponsibleItem text1={"Responsável"} text2={comentario.responsavel} xs1={6} />

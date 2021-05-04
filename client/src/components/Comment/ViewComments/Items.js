@@ -4,7 +4,7 @@ import { styles } from "../../../assets/styles/Styles";
 const ResponsibleItem = (props) => {
   const { classes, theme, text1, text2, xs1, xs } = props;
   return (
-    <Grid item xs={xs1} style={{ marginBottom: 15 }}>
+    <Grid item xs={xs1} style={{ marginBottom: 15, marginTop: 15 }}>
       <Grid container justify="center" alignItems="center">
         <Grid item>
           <Typography className={classes.normalText} style={{ fontSize: "1.5rem", margin: "0px 25px" }}>
