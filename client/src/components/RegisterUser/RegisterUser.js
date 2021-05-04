@@ -391,7 +391,7 @@ const RegisterUser = (props) => {
 
       {/* button voltar */}
       <Grid container>
-        <Link to="/users-list" style={{ textDecoration: "none" }}>
+        <Link to="/listar-usuarios" style={{ textDecoration: "none" }}>
           <Button
             variant="contained"
             className="bold"

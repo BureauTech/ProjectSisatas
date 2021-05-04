@@ -5,6 +5,8 @@ import {
   useTheme,
 } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
+
 import ViewRevisionsComponent from "../../components/ViewRevisionsComponent/ViewRevisionsComponent";
 import "./Style.css";
 
@@ -17,6 +19,7 @@ const ViewRevisions = (props) => {
         <Grid container style={{ marginBottom: 10 }}>
           <ViewRevisionsComponent />
         </Grid>
+        <Link to="/ata" style={{ textDecoration: 'none' }}>
         <Grid container justify="space-between" style={{ padding: 24 }}>
           <Button
             variant="contained"
@@ -33,6 +36,7 @@ const ViewRevisions = (props) => {
             Voltar
           </Button>
         </Grid>
+        </Link>
       </form>
     </Container>
   );
