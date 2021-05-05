@@ -1,7 +1,8 @@
 package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
-import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,13 +40,13 @@ public class AtasModel implements Serializable{
 	@Id
 	private String ataId;
 	@Column(nullable = false)
-	private DateFormat ataDataInicio;
+	private LocalDate ataDataInicio;
 	@Column(nullable = false)
-	private DateFormat ataDataFim;
+	private LocalDate ataDataFim;
 	@Column(nullable = false)
-	private DateFormat ataHoraInicio;
+	private LocalTime ataHoraInicio;
 	@Column(nullable = false)
-	private DateFormat ataHoraFim;
+	private LocalTime ataHoraFim;
 	@Column(nullable = false, length = 30)
 	private String ataLocal;
 	@Column(nullable = false, length = 30)
@@ -62,6 +63,7 @@ public class AtasModel implements Serializable{
 			joinColumns = @JoinColumn(name = "fkPkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkPkAtaId")),
 			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkPkUsuId")) 
 	)
+	@JsonManagedReference
 	private List<UsuariosModel> participaAtas = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contemAssuntos", fetch = FetchType.EAGER)

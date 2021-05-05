@@ -1,7 +1,7 @@
 package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +17,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,10 +42,10 @@ public class AssuntosModel implements Serializable {
 	@Column(nullable = false, length = 30)
 	private String assAssunto;
 	@Column(nullable = false)
-	private Date assPrazo;
+	private String assPrazo;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkAtaId")) // OK
+	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkAtaId"))
 	private AtasModel contemAssuntos;
 	
 	
@@ -55,6 +57,8 @@ public class AssuntosModel implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkPkUsuId")) 
 																										
 	)
-	private List<UsuariosModel> responsavelAssuntos; // OK
+	@JsonManagedReference
+	private List<UsuariosModel> responsavelAssuntos = new ArrayList<>();
+	
 	
 }

@@ -7,21 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.iacit.sisatas.mapper.AtasMapper;
-import br.com.iacit.sisatas.models.AtasHeaderControllerModel;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.com.iacit.sisatas.models.AtasBodyModel;
 import br.com.iacit.sisatas.models.AtasModel;
-import br.com.iacit.sisatas.models.AtasPautaControllerModel;
-import br.com.iacit.sisatas.models.AtasProjectControllerModel;
-import br.com.iacit.sisatas.models.AtasTopicsControllerModel;
 import br.com.iacit.sisatas.projections.AtasProjectionId;
 import br.com.iacit.sisatas.repository.AtasRepository;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/atas")
 public class AtasController {
@@ -49,18 +48,24 @@ public class AtasController {
 		 *
 		 */	
 		@ResponseBody
-		@RequestMapping(value = "/cadastrarAtas", method = RequestMethod.POST, consumes = "application/json")
-		public ResponseEntity<String> cadastrarAtas(@RequestBody AtasHeaderControllerModel ataHeader, 
-									@RequestBody AtasProjectControllerModel ataProject,
-									@RequestBody AtasPautaControllerModel ataPauta,
-									@RequestBody AtasTopicsControllerModel ataTopics) throws IOException {
+		@RequestMapping(value = "/cadastrarAtas", method = RequestMethod.POST, consumes = { "multipart/form-data" })
+		public String cadastrarAtas(String ata) throws IOException {
+			System.out.println(ata);
+			
+			String result = null;
+			
+			ObjectMapper mapper = new ObjectMapper();
+			AtasBodyModel pessoa = mapper.readValue(ata, AtasBodyModel.class);
+			System.out.println(pessoa);
+			
 			try {
-				ap.save(AtasMapper.converter(ataHeader, ataProject, ataPauta, ataTopics));
+				//System.out.println(pessoa);
+				//ap.save(AtasMapper.converter(ataHeader, ataProject, ataPauta, ataTopics));
 			} catch (DataAccessException e) {
 				e.printStackTrace();
-				return ResponseEntity.badRequest().body(e.getMessage());
+				result = e.getMessage();
 			}
-			return ResponseEntity.ok().build();
+			return result;
 		}
 		
 		@ResponseBody

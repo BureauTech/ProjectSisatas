@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.iacit.sisatas.models.AssuntosModel;
 import br.com.iacit.sisatas.repository.AssuntosRepository;
 
@@ -23,16 +27,18 @@ public class AssuntosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarAssuntos", method = RequestMethod.POST, consumes = "application/json")
-	public String cadastrarAssuntos(@RequestBody AssuntosModel assunto) {
+	public String cadastrarAssuntos(@RequestBody String assunto) throws JsonMappingException, JsonProcessingException {
 		String result = null;
-		if (assunto.equals(null)) {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		AssuntosModel ass = mapper.readValue(assunto, AssuntosModel.class);
+		System.out.println(ass);
 			try {
-				ap.save(assunto);
+				//ap.save(assunto);
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 				result = e.getMessage();
 			}	
-		}
 		return result;
 	}
 	
