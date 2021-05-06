@@ -1,11 +1,4 @@
-import {
-  Container,
-  Grid,
-  withStyles,
-  Typography,
-  FormLabel,
-  Input,
-} from "@material-ui/core";
+import { Container, Grid, withStyles, Typography, FormLabel, Input } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import "./Components.css";
 import { styles } from "../../../assets/styles/Styles";
@@ -51,12 +44,7 @@ const AtaHeader = (props) => {
   return (
     <Container>
       <Grid container>
-        <Grid
-          container
-          className={classes.grid}
-          alignItems="center"
-          justify="space-evenly"
-        >
+        <Grid container className={classes.grid} alignItems="center" justify="space-evenly">
           {/* LATERAL ESQUERDA (NÚMERO DA ATA)*/}
           <Grid item sm={10} md={3} lg={3}>
             <Grid container justify="center">
@@ -70,13 +58,11 @@ const AtaHeader = (props) => {
           </Grid>
           {/* CONTEINER DA DIREITA (INPUTS)*/}
           <Grid item xs={12} sm={10} md={9} lg={9}>
-            <Grid item xs={11} md={10} lg={10}>
+            <Grid item xs={11} md={11} lg={10}>
               {/* ROW DATA INÍCIO */}
               <Grid container className={classes.rowMargin}>
                 <Grid item md={4} lg={3}>
-                  <FormLabel className={classes.normalText}>
-                    Data Início
-                  </FormLabel>
+                  <FormLabel className={classes.normalText}>Data Início</FormLabel>
                 </Grid>
                 <Grid item xs={12} md={8} lg={7}>
                   <Grid container justify="space-between">
@@ -106,9 +92,7 @@ const AtaHeader = (props) => {
               {/* ROW DATA FINAL */}
               <Grid container className={classes.rowMargin}>
                 <Grid item md={4} lg={3}>
-                  <FormLabel className={classes.normalText}>
-                    Data Final
-                  </FormLabel>
+                  <FormLabel className={classes.normalText}>Data Final</FormLabel>
                 </Grid>
                 <Grid item xs={12} md={8} lg={7}>
                   <Grid container justify="space-between">
