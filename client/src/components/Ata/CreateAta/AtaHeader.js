@@ -44,9 +44,9 @@ const AtaHeader = (props) => {
   return (
     <Container>
       <Grid container>
-        <Grid container className={classes.grid} alignItems="center" justify="space-evenly">
+        <Grid container className={classes.grid} alignItems="center" justify="center" style={{ padding: 15 }}>
           {/* LATERAL ESQUERDA (NÚMERO DA ATA)*/}
-          <Grid item sm={10} md={3} lg={3}>
+          {/* <Grid item sm={10} md={3} lg={3}>
             <Grid container justify="center">
               <Grid container justify="center">
                 <Typography className={classes.biggerText}>ATA Nº:</Typography>
@@ -55,87 +55,87 @@ const AtaHeader = (props) => {
                 <Typography className={classes.biggerText}>{id}</Typography>
               </Grid>
             </Grid>
-          </Grid>
+          </Grid> */}
           {/* CONTEINER DA DIREITA (INPUTS)*/}
-          <Grid item xs={12} sm={10} md={9} lg={9}>
-            <Grid item xs={11} md={11} lg={10}>
-              {/* ROW DATA INÍCIO */}
-              <Grid container className={classes.rowMargin}>
-                <Grid item md={4} lg={3}>
-                  <FormLabel className={classes.normalText}>Data Início</FormLabel>
-                </Grid>
-                <Grid item xs={12} md={8} lg={7}>
-                  <Grid container justify="space-between">
-                    <Grid item xs={7} md={6} lg={5}>
-                      <Input
-                        className={classes.textField}
-                        id="dtInicio"
-                        disableUnderline
-                        type="date"
-                        value={dtInicio}
-                        onChange={(e) => setDtInicio(e.target.value)}
-                      />
-                    </Grid>
-                    <Grid xs={4} md={5}>
-                      <Input
-                        className={classes.textField}
-                        id="hrInicio"
-                        disableUnderline
-                        type="time"
-                        value={hrInicio}
-                        onChange={(e) => setHrInicio(e.target.value)}
-                      />
-                    </Grid>
-                  </Grid>
-                </Grid>
+          <Grid item xs={11} sm={10} md={9} lg={9}>
+            {/* <Grid item xs={11} md={11} lg={10}> */}
+            {/* ROW DATA INÍCIO */}
+            <Grid container className={classes.rowMargin}>
+              <Grid item md={4} lg={3}>
+                <FormLabel className={classes.normalText}>Data Início</FormLabel>
               </Grid>
-              {/* ROW DATA FINAL */}
-              <Grid container className={classes.rowMargin}>
-                <Grid item md={4} lg={3}>
-                  <FormLabel className={classes.normalText}>Data Final</FormLabel>
-                </Grid>
-                <Grid item xs={12} md={8} lg={7}>
-                  <Grid container justify="space-between">
-                    <Grid item xs={7} md={6} lg={5}>
-                      <Input
-                        className={classes.textField}
-                        id="dtFinal"
-                        disableUnderline
-                        type="date"
-                        value={dtFinal}
-                        onChange={(e) => setDtFinal(e.target.value)}
-                      />
-                    </Grid>
-                    <Grid item xs={4} md={5}>
-                      <Input
-                        className={classes.textField}
-                        id="hrFinal"
-                        disableUnderline
-                        type="time"
-                        value={hrFinal}
-                        onChange={(e) => setHrFinal(e.target.value)}
-                      />
-                    </Grid>
+              <Grid item xs={12} md={8} lg={7}>
+                <Grid container justify="space-between">
+                  <Grid item xs={7} md={6} lg={5}>
+                    <Input
+                      className={classes.textField}
+                      id="dtInicio"
+                      disableUnderline
+                      type="date"
+                      value={dtInicio}
+                      onChange={(e) => setDtInicio(e.target.value)}
+                    />
                   </Grid>
-                </Grid>
-              </Grid>
-              {/* ROW LOCAL */}
-              <Grid container className={classes.rowMargin}>
-                <Grid item xs={10} md={2} lg={2}>
-                  <FormLabel className={classes.normalText}>Local</FormLabel>
-                </Grid>
-                <Grid item xs={12} md={10} lg={8}>
-                  <Input
-                    className={classes.textField}
-                    id="local"
-                    disableUnderline
-                    type="text"
-                    value={local}
-                    onChange={(e) => setLocal(e.target.value)}
-                  />
+                  <Grid xs={4} md={5}>
+                    <Input
+                      className={classes.textField}
+                      id="hrInicio"
+                      disableUnderline
+                      type="time"
+                      value={hrInicio}
+                      onChange={(e) => setHrInicio(e.target.value)}
+                    />
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
+            {/* ROW DATA FINAL */}
+            <Grid container className={classes.rowMargin}>
+              <Grid item md={4} lg={3}>
+                <FormLabel className={classes.normalText}>Data Final</FormLabel>
+              </Grid>
+              <Grid item xs={12} md={8} lg={7}>
+                <Grid container justify="space-between">
+                  <Grid item xs={7} md={6} lg={5}>
+                    <Input
+                      className={classes.textField}
+                      id="dtFinal"
+                      disableUnderline
+                      type="date"
+                      value={dtFinal}
+                      onChange={(e) => setDtFinal(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={4} md={5}>
+                    <Input
+                      className={classes.textField}
+                      id="hrFinal"
+                      disableUnderline
+                      type="time"
+                      value={hrFinal}
+                      onChange={(e) => setHrFinal(e.target.value)}
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+            {/* ROW LOCAL */}
+            <Grid container className={classes.rowMargin}>
+              <Grid item xs={10} md={2} lg={2}>
+                <FormLabel className={classes.normalText}>Local</FormLabel>
+              </Grid>
+              <Grid item xs={12} md={10} lg={8}>
+                <Input
+                  className={classes.textField}
+                  id="local"
+                  disableUnderline
+                  type="text"
+                  value={local}
+                  onChange={(e) => setLocal(e.target.value)}
+                />
+              </Grid>
+            </Grid>
+            {/* </Grid> */}
           </Grid>
         </Grid>
       </Grid>
