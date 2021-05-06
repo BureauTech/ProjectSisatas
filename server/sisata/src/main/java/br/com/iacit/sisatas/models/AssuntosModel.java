@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +17,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties
 @Table(name = "Assuntos")
 public class AssuntosModel implements Serializable {
 
@@ -42,19 +45,20 @@ public class AssuntosModel implements Serializable {
 	@Column(nullable = false)
 	private Date assPrazo;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkAtaId")) // OK
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fk_AtaId"))
+	@JsonBackReference
 	private AtasModel contemAssuntos;
 	
 	
 	
 	@ManyToMany
 	@JoinTable(name = "Responsavel",
-			joinColumns = @JoinColumn(name = "fkPkAssId", referencedColumnName = "assId", foreignKey = @ForeignKey(name = "fkPkAssId")), 
+			joinColumns = @JoinColumn(name = "fkPkAssId", referencedColumnName = "assId", foreignKey = @ForeignKey(name = "fk_PkAssId")), 
 																								
-			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkPkUsuId")) 
+			inverseJoinColumns = @JoinColumn(name = "fkPkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fk_PkUsuId")) 
 																										
 	)
-	private List<UsuariosModel> responsavelAssuntos; // OK
+	private List<UsuariosModel> responsavelAssuntos;
 	
 }
