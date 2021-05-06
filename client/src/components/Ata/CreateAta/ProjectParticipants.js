@@ -160,7 +160,7 @@ const ProjectParticipants = (props) => {
   return (
     <Container>
       <Grid container className={classes.grid} style={{ paddingBottom: 0, paddingRight: 0 }}>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={12} style={{ padding: "0px 25px" }}>
           <Grid
             container
             justify={windowSize >= 960 ? "flex-start" : "center"}
