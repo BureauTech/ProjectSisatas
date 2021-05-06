@@ -1,8 +1,7 @@
 package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -40,13 +41,15 @@ public class AtasModel implements Serializable{
 	@Id
 	private String ataId;
 	@Column(nullable = false)
-	private LocalDate ataDataInicio;
+	private Date ataDataInicio;
 	@Column(nullable = false)
-	private LocalDate ataDataFim;
+	private Date ataDataFim;
 	@Column(nullable = false)
-	private LocalTime ataHoraInicio;
+	private Date ataHoraInicio;
 	@Column(nullable = false)
-	private LocalTime ataHoraFim;
+	private Date ataHoraFim;
+	@Temporal(TemporalType.TIMESTAMP)     
+	private Date dataEnvio = new java.sql.Date(System.currentTimeMillis());
 	@Column(nullable = false, length = 30)
 	private String ataLocal;
 	@Column(nullable = false, length = 30)
