@@ -76,7 +76,7 @@ const UserProfile = (props) => {
     <Container>
       {isLoading && <Loading />}
       {!isLoading && (
-        <Grid container justify="center" className={classes.grid} style={{ paddingBottom: 40 }}>
+        <Grid container justify="center" className={classes.grid} style={{ padding: "0px 25px 20px" }}>
           <Grid container justify="center">
             <Typography className={classes.biggerText} style={{ paddingBottom: 80, paddingTop: 20 }}>
               Perfil de Usuário
@@ -268,6 +268,7 @@ const UserProfile = (props) => {
                       fontSize: "1.5rem",
                       borderRadius: 40,
                       padding: "10px 50px",
+                      margin: "10px 0px",
                     }}
                   >
                     Voltar
@@ -282,6 +283,7 @@ const UserProfile = (props) => {
                       fontSize: "1.5rem",
                       borderRadius: 40,
                       padding: "10px 50px",
+                      margin: "10px 0px",
                     }}
                     disabled={String(usuario.usuId).length ? false : true}
                   >
