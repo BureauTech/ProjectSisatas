@@ -21,9 +21,9 @@ function App() {
 
   const ajustarLayout = () => {
     if (window.innerWidth < 600) {
-      document.body.style.padding = "60px 0px 0px 0px";
+      document.body.style.padding = "80px 0px 0px 0px";
     } else {
-      document.body.style.padding = "60px 0px 0px 100px";
+      document.body.style.padding = "80px 0px 0px 100px";
     }
   };
 
