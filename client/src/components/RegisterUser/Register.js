@@ -47,7 +47,7 @@ const Register = (props) => {
     setTelefone("");
     setCargo("");
     setArea("");
-    setPreview("")
+    setPreview("");
   };
 
   const changePreview = (file) => {
@@ -97,7 +97,7 @@ const Register = (props) => {
             <form id="form" onSubmit={(e) => handleSubmit(e)} style={{ width: "100%" }}>
               {/* inputs */}
               <Grid container alignItems="center" justify="center">
-                <Grid item xs={11} sm={11}>
+                <Grid item xs={11} sm={10}>
                   {/* input nome */}
                   <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
                     <Grid item>
@@ -336,7 +336,7 @@ const Register = (props) => {
                   </Grid>
                 </Grid>
                 {preview && (
-                  <Grid item xs={11} style={{ marginTop: 10 }}>
+                  <Grid item xs={11} sm={10} style={{ marginTop: 10 }}>
                     <Typography style={{ color: "white" }}>Prévia: </Typography>
                     <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
                   </Grid>
