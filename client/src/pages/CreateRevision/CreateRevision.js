@@ -9,13 +9,26 @@ import RevisionHeader from "../../components/CreateRevision/RevisionHeader";
 import RevisionSubject from "../../components/CreateRevision/RevisionSubject";
 import { useState } from "react";
 import "./Style.css";
+import revisaoServices from "../../services/revisao";
 
 const CreateRevision = (props) => {
   const theme = useTheme();
+  const CriarRevisao = (e) => {
+    e.preventDefault();
+    const body = {
+      revAssunto: "assunto1",
+      revPrazo: "12/12/12"
+    }
+    try {
+      revisaoServices.criarRevisao(body);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Container>
-      <form>
+      <form onSubmit={(e) => CriarRevisao(e)}>
         <Grid container style={{ marginBottom: 10 }}>
           <RevisionHeader />
         </Grid>
