@@ -1,4 +1,5 @@
 import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import AtaHeader from "../../../components/Ata/ViewAta/AtaHeader";
 import ProjectParticipants from "../../../components/Ata/ViewAta/ProjectParticipants";
@@ -11,6 +12,7 @@ import Status from "../../../components/Ata/ViewAta/Status";
 import { useInfoAta } from "../../../context/InfoAta";
 
 const ViewAta = (props) => {
+
   const theme = useTheme();
   const { setInfoAta } = useInfoAta();
 
@@ -117,6 +119,8 @@ const ViewAta = (props) => {
     setIsOpen(!isOpen);
   };
 
+
+
   return (
     <Container>
       <Grid container style={{ marginBottom: 10 }}>
@@ -180,19 +184,22 @@ const ViewAta = (props) => {
         >
           Revisões Pendentes
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          className="bold"
-          style={{
-            color: "white",
-            fontSize: "1.5rem",
-            borderRadius: 16,
-            padding: "0 5px",
-          }}
-        >
-          Visualizar Revisões
-        </Button>
+        <Link to="/revisoes" style={{ textDecoration: 'none' }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            className="bold"
+            style={{
+              color: "white",
+              fontSize: "1.5rem",
+              borderRadius: 16,
+              padding: "0 5px",
+            }}
+          >
+            Visualizar Revisões
+          </Button>
+        </Link>
+        <Link to="/nova-revisao" style={{ textDecoration: 'none' }}>
         <Button
           variant="contained"
           color="secondary"
@@ -206,6 +213,7 @@ const ViewAta = (props) => {
         >
           Nova Revisão
         </Button>
+        </Link>
       </Grid>
     </Container>
   );

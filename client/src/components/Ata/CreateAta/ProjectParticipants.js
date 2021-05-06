@@ -49,7 +49,7 @@ const ProjectParticipants = (props) => {
       nome: "Bia Coutinho",
       area: "Dev",
       telefone: "12 1267796789",
-      email: "bia@bureautech.com",
+      email: "denislima99@gmail.com",
     },
   ]);
 
@@ -61,6 +61,13 @@ const ProjectParticipants = (props) => {
   });
   const [isOpen, setIsOpen] = useState(false);
   const [checkeds, setCheckeds] = useState([]);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setWindowSize(window.innerWidth);
+  };
+
+  window.addEventListener("resize", handleResize);
 
   // Verifica se o participante já existe na lista de adicionados
   const existeParticipante = (novo) => {
@@ -154,7 +161,12 @@ const ProjectParticipants = (props) => {
     <Container>
       <Grid container className={classes.grid} style={{ paddingBottom: 0, paddingRight: 0 }}>
         <Grid item xs={12}>
-          <Grid container justify="flex-start" alignItems="center" style={{ marginBottom: 30, paddingTop: 20 }}>
+          <Grid
+            container
+            justify={windowSize >= 960 ? "flex-start" : "center"}
+            alignItems="center"
+            style={{ marginBottom: 30, paddingTop: 20 }}
+          >
             <FormLabel className={classes.normalText} style={{ marginRight: 15 }}>
               Projeto
             </FormLabel>
@@ -170,9 +182,9 @@ const ProjectParticipants = (props) => {
             atual={atual}
           />
         </Grid>
-        <Grid container justify="flex-end" alignItems="center" style={{ paddingTop: 10 }}>
+        <Grid container justify="center" alignItems="center" style={{ paddingTop: 10 }}>
           <Grid item xs={7}>
-            <Grid container justify="flex-end">
+            <Grid container justify="center">
               <Button variant="contained" color="secondary" onClick={handleClick}>
                 Lista de participantes
               </Button>
@@ -231,12 +243,12 @@ const ProjectParticipants = (props) => {
               </Dialog>
             </Grid>
           </Grid>
-          <Grid item xs>
-            <Grid container justify="flex-end" alignItems="flex-end" style={{ height: "100%" }}>
-              <IconButton className="no-margin" onClick={() => adicionarParticipante(atual)}>
-                <AddCircle className="largeIcon" style={{ color: "white" }}></AddCircle>
-              </IconButton>
-            </Grid>
+        </Grid>
+        <Grid item xs>
+          <Grid container justify="flex-end" alignItems="flex-end" style={{ height: "100%" }}>
+            <IconButton className="no-margin" onClick={() => adicionarParticipante(atual)}>
+              <AddCircle className="largeIcon" style={{ color: "white" }}></AddCircle>
+            </IconButton>
           </Grid>
         </Grid>
       </Grid>

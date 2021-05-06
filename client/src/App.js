@@ -5,13 +5,13 @@ import CreateAta from "./pages/Ata/CreateAta/CreateAta";
 import ViewAta from "./pages/Ata/ViewAta/ViewAta";
 import ViewRevisions from "./pages/ViewRevisions/ViewRevisions";
 import Menu from "./components/Menu/Menu";
-import { Grid } from "@material-ui/core";
 import EditUser from "./pages/User/EditUser";
 import UserList from "./components/UserList/UserList";
 import UserProfile from "./pages/User/UserProfile";
 import CreateRevision from "./pages/CreateRevision/CreateRevision";
 import AtaTemplate from "./components/Ata/AtaModel/AtaTemplate";
-import InfoAtaProvider, { useInfoAta } from "./context/InfoAta";
+import InfoAtaProvider from "./context/InfoAta";
+import ViewComments from "./pages/Comment/ViewComments";
 import Comentarios from "./pages/Revisao/Comentarios";
 
 function App() {
@@ -19,32 +19,37 @@ function App() {
     id: "01/21",
   };
 
+  const ajustarLayout = () => {
+    if (window.innerWidth < 600) {
+      document.body.style.padding = "60px 0px 0px 0px";
+    } else {
+      document.body.style.padding = "60px 0px 0px 100px";
+    }
+  };
+
+  window.addEventListener("resize", ajustarLayout);
+
   return (
     <InfoAtaProvider>
       <Router>
         <div className="App no-print">
           <Menu />
-          <Grid
-            container
-            alignItems="center"
-            justify="center"
-            style={{ marginTop: 60, marginLeft: 100, marginRight: 0 }}
-          >
-            <Switch>
-              <Route path="/registeruser" component={() => <Register />} />
-              <Route path="/new-record" component={() => <CreateAta />} />
-              <Route path="/show-records" component={() => <Data />} />
-              <Route path="/new-revision" component={() => <CreateRevision />} />
-              <Route path="/view-ata" component={() => <ViewAta />} />
-              <Route path="/show-revisions" component={() => <ViewRevisions />} />
-              <Route path="/cadastrar-comentarios" component={() => <Comentarios />} />
+          <Switch>
+            <Route path="/nova-ata" component={() => <CreateAta />} />
+            <Route path="/visualizar-atas" component={() => <Data />} />
+            <Route path="/nova-revisao" component={() => <CreateRevision />} />
+            <Route path="/ata" component={() => <ViewAta />} />
+            <Route path="/revisoes" component={() => <ViewRevisions />} />
+            <Route path="/cadastrar-comentarios" component={() => <Comentarios />} />
 
-              <Route exact path="/" />
-              <Route path="/edit-user" component={() => <EditUser />} />
-              <Route path="/profile" component={() => <UserProfile id={0} />} />
-              <Route path="/users-list" component={() => <UserList ata={ata} />} />
-            </Switch>
-          </Grid>
+            <Route exact path="/" />
+            <Route path="/cadastrar-usuario" component={() => <Register />} />
+            <Route path="/editar-usuario" component={() => <EditUser />} />
+            <Route path="/profile" component={() => <UserProfile id={0} />} />
+            <Route path="/users-list" component={() => <UserList ata={ata} />} />
+            <Route path="/view-comments" component={() => <ViewComments />} />
+            <Route path="/listar-usuarios" component={() => <UserList ata={ata} />} />
+          </Switch>
         </div>
         <AtaTemplate />
       </Router>

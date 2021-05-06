@@ -19,6 +19,7 @@ import userServices from "../../services/user";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
+import { BrokenImage } from "@material-ui/icons";
 
 const EditUser = (props) => {
   const { classes } = props;
@@ -29,6 +30,7 @@ const EditUser = (props) => {
   const [openSnack, setOpenSnack] = useState(false);
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
+  const [preview, setPreview] = useState("");
   const history = useHistory();
   const voltar = () => {
     history.goBack();
@@ -82,11 +84,17 @@ const EditUser = (props) => {
     setOpen(true);
   };
 
+  const changePreview = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => setPreview(reader.result);
+  };
+
   const atualizarUsuario = (event) => {
     event.preventDefault();
     setIsLoadingBtn(true);
 
-    var imagem = document.querySelector('#assinatura').files[0];
+    var imagem = document.querySelector("#assinatura").files[0];
     var formData = new FormData();
     formData.append("usuario", JSON.stringify(usuario));
     formData.append("imagem", imagem);
@@ -98,7 +106,7 @@ const EditUser = (props) => {
         setMsgSucesso("Sucesso ao salvar alterações!");
         setMsgErro(false);
         setOpenSnack(true);
-        history.push("profile", { id: usuario.usuId })
+        history.push("profile", { id: usuario.usuId });
       })
       .catch((err) => {
         console.log(err.message);
@@ -110,21 +118,13 @@ const EditUser = (props) => {
   };
 
   return (
-    <Container>
+    <Container style={{ marginTop: 30, marginBottom: 20 }}>
       {isLoading && <Loading />}
       {!isLoading && (
-        <Grid
-          container
-          justify="center"
-          className={classes.grid}
-          style={{ paddingBottom: 40 }}
-        >
+        <Grid container justify="center" className={classes.grid} style={{ paddingBottom: 40 }}>
           <Grid container justify="center">
-            <Typography
-              className={classes.biggerText}
-              style={{ paddingBottom: 80, paddingTop: 20 }}
-            >
-              Perfil de Usuário
+            <Typography className={classes.biggerText} style={{ paddingBottom: 80, paddingTop: 20 }}>
+              Edição do perfil
             </Typography>
           </Grid>
           <Grid container justify="space-around">
@@ -150,9 +150,7 @@ const EditUser = (props) => {
                     name="nome"
                     id="nome"
                     value={usuario.usuNome}
-                    onChange={(e) =>
-                      setUsuario({ ...usuario, usuNome: e.target.value })
-                    }
+                    onChange={(e) => setUsuario({ ...usuario, usuNome: e.target.value })}
                     className={classes.textField}
                     disableUnderline
                   />
@@ -181,9 +179,7 @@ const EditUser = (props) => {
                     name="email"
                     id="email"
                     value={usuario.usuEmail}
-                    onChange={(e) =>
-                      setUsuario({ ...usuario, usuEmail: e.target.value })
-                    }
+                    onChange={(e) => setUsuario({ ...usuario, usuEmail: e.target.value })}
                     className={classes.textField}
                     disableUnderline
                   />
@@ -212,9 +208,7 @@ const EditUser = (props) => {
                     name="telefone"
                     id="telefone"
                     value={usuario.usuTelefone}
-                    onChange={(e) =>
-                      setUsuario({ ...usuario, usuTelefone: e.target.value })
-                    }
+                    onChange={(e) => setUsuario({ ...usuario, usuTelefone: e.target.value })}
                     className={classes.textField}
                     disableUnderline
                   />
@@ -242,9 +236,7 @@ const EditUser = (props) => {
                     name="cargo"
                     id="cargo"
                     value={usuario.usuCargo}
-                    onChange={(e) =>
-                      setUsuario({ ...usuario, usuCargo: e.target.value })
-                    }
+                    onChange={(e) => setUsuario({ ...usuario, usuCargo: e.target.value })}
                     className={classes.textField}
                     disableUnderline
                   />
@@ -272,9 +264,7 @@ const EditUser = (props) => {
                     name="area"
                     id="area"
                     value={usuario.usuAreaEmpresa}
-                    onChange={(e) =>
-                      setUsuario({ ...usuario, usuAreaEmpresa: e.target.value })
-                    }
+                    onChange={(e) => setUsuario({ ...usuario, usuAreaEmpresa: e.target.value })}
                     className={classes.textField}
                     disableUnderline
                   />
@@ -284,7 +274,7 @@ const EditUser = (props) => {
               {/* input perfil */}
               <Grid container alignItems="center" style={{ paddingBottom: 50 }}>
                 <Grid item>
-                  <FormLabel htmlFor="perfil">
+                  <FormLabel htmlFor="profile">
                     <Typography
                       className={classes.normalText}
                       style={{
@@ -298,7 +288,7 @@ const EditUser = (props) => {
                 </Grid>
                 <Grid item xs>
                   <Select
-                    id="perfil"
+                    id="profile"
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
@@ -337,43 +327,39 @@ const EditUser = (props) => {
                     id="assinatura"
                     type="file"
                     style={{ display: "none" }}
+                    onChange={(e) => changePreview(e.target.files[0])}
                   />
                   <label htmlFor="assinatura">
-                    <IconButton
-                      color="primary"
-                      aria-label="upload picture"
-                      component="span"
-                      className="no-margin"
-                    >
-                      <ImageOutlinedIcon
-                        className={classes.uploadFile}
-                        style={{ width: 100, height: 100 }}
-                      />
+                    <IconButton color="primary" aria-label="upload picture" component="span" className="no-margin">
+                      <ImageOutlinedIcon className={classes.uploadFile} style={{ width: 100, height: 100 }} />
                     </IconButton>
                   </label>
                 </Grid>
               </Grid>
+              {preview && (
+                <Grid item xs style={{ marginTop: 10 }}>
+                  <Typography style={{ color: "white" }}>Prévia: </Typography>
+                  <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
+                </Grid>
+              )}
             </Grid>
             <Grid item md={5}>
               <Grid container justify="center">
                 <Grid container justify="center">
-                  <img
-                  // Alteração Daniel
-                    src={"data:image/png;base64," + usuario.usuAssinatura}
-                    alt="Imagem da assinatura"
-                    style={{ maxWidth: 400, maxHeight: 400 }}
-                  />
+                  {usuario.usuAssinatura && (
+                    <img
+                      // Alteração Daniel
+                      src={"data:image/png;base64," + usuario.usuAssinatura}
+                      alt="Imagem da assinatura"
+                      style={{ maxWidth: 400, maxHeight: 400 }}
+                    />
+                  )}
+                  {!usuario.usuAssinatura && <BrokenImage color="secondary" style={{ width: 300, height: 300 }} />}
                 </Grid>
                 <Grid container justify="center" style={{ paddingTop: 20 }}>
-                  <Typography className={classes.normalText}>
-                    Assinatura Atual
-                  </Typography>
+                  <Typography className={classes.normalText}>Assinatura Atual</Typography>
                 </Grid>
-                <Grid
-                  container
-                  justify="space-around"
-                  style={{ paddingTop: 50 }}
-                >
+                <Grid container justify="space-around" style={{ paddingTop: 50 }}>
                   <Button
                     variant="contained"
                     color="secondary"
@@ -406,12 +392,7 @@ const EditUser = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <Alerta
-            isOpen={openSnack}
-            setIsOpen={setOpenSnack}
-            sucesso={msgSucesso}
-            erro={msgErro}
-          />
+          <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
         </Grid>
       )}
     </Container>

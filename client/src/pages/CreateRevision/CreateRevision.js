@@ -5,6 +5,8 @@ import {
   useTheme,
 } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
+
 import RevisionHeader from "../../components/CreateRevision/RevisionHeader";
 import RevisionSubject from "../../components/CreateRevision/RevisionSubject";
 import { useState } from "react";
@@ -36,6 +38,7 @@ const CreateRevision = (props) => {
           <RevisionSubject />
         </Grid>
         <Grid container justify="space-between" style={{ padding: 24 }}>
+        <Link to="/ata" style={{ textDecoration: 'none' }}>
           <Button
             variant="contained"
             className="bold"
@@ -50,6 +53,7 @@ const CreateRevision = (props) => {
           >
             Cancelar
           </Button>
+          </Link>
           <Button
             variant="contained"
             color="secondary"

@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  DataGrid,
-  GridToolbar,
-  setGridRowCountStateUpdate,
-} from "@material-ui/data-grid";
+import { DataGrid, GridToolbar, setGridRowCountStateUpdate } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Grid,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-} from "@material-ui/core";
+import { Grid, Button, Dialog, DialogTitle, DialogActions } from "@material-ui/core";
 import "../../index.js";
 import "./UserList.css";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -76,6 +66,7 @@ export default function UserList() {
     userServices
       .listarUsuarios("DataGrid")
       .then((res) => {
+        console.log(res);
         let lista = res.data;
         let lista2 = [];
         lista.forEach((user) => {
@@ -113,9 +104,7 @@ export default function UserList() {
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button
-          onClick={() => history.push("profile", { id: params.getValue("id") })}
-        >
+        <Button onClick={() => history.push("profile", { id: params.getValue("id") })}>
           <VisibilityIcon className="icon" />
         </Button>
       ),
@@ -125,11 +114,7 @@ export default function UserList() {
       headerName: "Editar",
       width: 130,
       renderCell: (params) => (
-        <Button
-          onClick={() =>
-            history.push("edit-user", { id: params.getValue("id") })
-          }
-        >
+        <Button onClick={() => history.push("editar-usuario", { id: params.getValue("id") })}>
           <EditIcon className="icon" />
         </Button>
       ),
@@ -179,25 +164,16 @@ export default function UserList() {
         disableSelectionOnClick={true}
       />
       <Grid container className={classes.container}>
-        <Link to="/registeruser" style={{ textDecoration: "none" }}>
+        <Link to="/cadastrar-usuario" style={{ textDecoration: "none" }}>
           <Button className={classes.btn}>Novo Usuário</Button>
         </Link>
       </Grid>
-      <Alerta
-        isOpen={openSnack}
-        setIsOpen={setOpenSnack}
-        sucesso={msgSucesso}
-        erro={msgErro}
-      />
+      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Tem certeza que deseja excluir este usuário?</DialogTitle>
         <DialogActions>
           <Grid container justify="space-evenly">
-            <Button
-              onClick={() => handleDelete(idDelete)}
-              color="primary"
-              variant="contained"
-            >
+            <Button onClick={() => handleDelete(idDelete)} color="primary" variant="contained">
               EXCLUIR
             </Button>
             <Button onClick={handleClose} color="primary" variant="contained">
