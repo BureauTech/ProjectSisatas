@@ -88,15 +88,14 @@ public class UsuariosController {
 			if (!up.existsByusuEmail(pessoa.getUsuEmail())) {
 				// Validar se a imagem é difente de null,
 				// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
-				
 				if (!imagem.equals(null)) {
 					// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
 					up.save(UsuarioMapper.converter(pessoa, imagem));
-					result = "Usuário cadastrado com sucesso.";
 				} else {
+					// save os dados no DB, sem imagem/assinatura.
 					up.save(pessoa);
-					result = "Usuário cadastrado com sucesso.";
 				}
+				result = "Usuário cadastrado com sucesso.";
 			} else {
 				result = "E-mail já cadastrado. Usuário não cadastrado.";
 			}

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +20,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Usuarios", uniqueConstraints = 
-@UniqueConstraint(columnNames = "usuEmail", name = "usuEmail_uk"))
+@JsonIgnoreProperties
+@Table(name = "Usuarios", uniqueConstraints =
+@UniqueConstraint(columnNames = "usuEmail", name = "uk_usuEmail"))
 public class UsuariosModel implements Serializable {
 	
 	/**
@@ -36,7 +39,7 @@ public class UsuariosModel implements Serializable {
 	private String usuEmail;
 	@Column(nullable = true)
 	private String usuSenha;
-	@Column(nullable = false, length = 11)
+	@Column(nullable = false, length = 30)
 	private String usuTelefone;
 	@Column(nullable = false, length = 50)
 	private String usuCargo;
@@ -44,7 +47,7 @@ public class UsuariosModel implements Serializable {
 	private String usuAreaEmpresa;
 	@Column(nullable = true)
 	private byte[] usuAssinatura;
-	@Column(nullable = false)
-	private Long usuPerfil;
+	@Column(nullable = false, length = 15)
+	private String usuPerfil;
 	
 }

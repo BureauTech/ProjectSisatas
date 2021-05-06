@@ -1,6 +1,6 @@
 package br.com.iacit.sisatas.models;
 
-import java.text.DateFormat;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 public class AtasHeaderControllerModel {
 	
 	private String ataId;
-	private DateFormat ataDataInicio;
-	private DateFormat ataHoraInicio;
-	private DateFormat ataDataFim;
-	private DateFormat ataHoraFim;
+	private Date ataDataInicio;
+	private Date ataHoraInicio;
+	private Date ataDataFim;
+	private Date ataHoraFim;
 	private String ataLocal;
 	private UsuariosModel geraAtas;
 

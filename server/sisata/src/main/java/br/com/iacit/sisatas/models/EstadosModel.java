@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties
 @Table(name = "Estados")
 public class EstadosModel implements Serializable{
 
@@ -39,9 +42,9 @@ public class EstadosModel implements Serializable{
 	
 	@ManyToMany
 	@JoinTable(name = "Possui",
-			joinColumns = @JoinColumn(name = "fkPkEstId", referencedColumnName = "estId", foreignKey = @ForeignKey(name = "fkPkEstId")),
-			inverseJoinColumns = @JoinColumn(name = "fkPkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkPkAtaId"))
+			joinColumns = @JoinColumn(name = "fkPkEstId", referencedColumnName = "estId", foreignKey = @ForeignKey(name = "fk_PkEstId")),
+			inverseJoinColumns = @JoinColumn(name = "fkPkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fk_PkAtaId"))
 	)
-	private List<AtasModel> possuiEstados;	// OK
+	private List<AtasModel> possuiEstados;
 
 }

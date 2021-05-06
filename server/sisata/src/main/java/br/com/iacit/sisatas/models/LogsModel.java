@@ -1,7 +1,7 @@
 package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
-import java.text.DateFormat;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,5 +34,5 @@ public class LogsModel implements Serializable {
 	@Column(nullable = false, length = 100)
 	private String logDescricao;
 	@Column(nullable = false)
-	private DateFormat logDataHora;
+	private Date logDataHora;
 }

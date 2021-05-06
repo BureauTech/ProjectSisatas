@@ -1,7 +1,7 @@
 package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
-import java.text.DateFormat;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties
 @Table(name = "Revisoes")
 public class RevisoesModel implements Serializable {
 
@@ -35,15 +39,18 @@ public class RevisoesModel implements Serializable {
 	@Column(nullable = false, length = 30)
 	private String revAssunto;
 	@Column(nullable = false)
-	private DateFormat revPrazo;
+	private Date revPrazo;
 	@Column(nullable = false)
-	private DateFormat revData;
+	private Date revData;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fkUsuId"))
+	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fk_UsuId"))
+	@JsonBackReference
 	private UsuariosModel responsavelRevisoes;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fkAtaId"))
+	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fk_AtaId"))
+	@JsonBackReference
 	private AtasModel contemRevisoes;
+
 }

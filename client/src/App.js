@@ -13,6 +13,7 @@ import AtaTemplate from "./components/Ata/AtaModel/AtaTemplate";
 import InfoAtaProvider from "./context/InfoAta";
 import ViewComments from "./pages/Comment/ViewComments";
 import Comentarios from "./pages/Revisao/Comentarios";
+import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
 
 function App() {
   const ata = {
@@ -44,6 +45,7 @@ function App() {
 
             <Route exact path="/" />
             <Route path="/cadastrar-usuario" component={() => <Register />} />
+            <Route path="/cadastrar-senha" component={() => <RegisterPassword />} />
             <Route path="/editar-usuario" component={() => <EditUser />} />
             <Route path="/profile" component={() => <UserProfile id={0} />} />
             <Route path="/users-list" component={() => <UserList ata={ata} />} />
