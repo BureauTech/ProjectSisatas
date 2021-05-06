@@ -12,5 +12,5 @@ public interface UsuariosProjectionDataGrid {
 
 	String getUsuAreaEmpresa();
 
-	Long getUsuPerfil();
+	String getUsuPerfil();
 }

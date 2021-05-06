@@ -47,6 +47,7 @@ const Register = (props) => {
     setTelefone("");
     setCargo("");
     setArea("");
+    setPreview("")
   };
 
   const changePreview = (file) => {
@@ -57,24 +58,14 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let perfilId = "";
-    if (perfil === "ADM") {
-      perfilId = 1;
-    } else if (perfil === "GER") {
-      perfilId = 2;
-    } else {
-      perfilId = 3;
-    }
-
     const body = {
       usuNome: nome,
       usuEmail: email,
-      usuSenha: "123",
       usuTelefone: telefone,
       usuCargo: cargo,
       usuAreaEmpresa: area,
       /* Alterações Daniel */
-      usuPerfil: perfilId,
+      usuPerfil: perfil,
     };
 
     var imagem = document.querySelector("#assinatura").files[0];

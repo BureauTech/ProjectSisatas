@@ -18,10 +18,7 @@ const UserProfile = (props) => {
     usuCargo: "",
     usuAreaEmpresa: "",
     usuTelefone: "",
-    pertenceUsuarios: {
-      perId: "",
-      perNome: "",
-    },
+    usuPerfil: "",
   });
   const [isLoading, setIsLoading] = useState(true);
   const [openSnack, setOpenSnack] = useState(false);
