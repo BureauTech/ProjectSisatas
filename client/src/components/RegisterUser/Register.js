@@ -19,6 +19,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import "./Register.css";
 import userServices from "../../services/user";
+import Alerta from "../Snackbar/Alerta";
 
 const Register = (props) => {
   const { classes } = props;
@@ -31,6 +32,9 @@ const Register = (props) => {
   const [cargo, setCargo] = useState();
   const [area, setArea] = useState();
   const [preview, setPreview] = useState("");
+  const [openSnack, setOpenSnack] = useState(false);
+  const [msgSucesso, setMsgSucesso] = useState("");
+  const [msgErro, setMsgErro] = useState("");
 
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -77,8 +81,18 @@ const Register = (props) => {
     userServices
       .cadastrarUsuario(formData)
       /* / Alterações Daniel */
-      .then((res) => clear())
-      .catch((err) => console.log(err.message));
+      .then((res) => {
+        clear();
+        setMsgSucesso("Usuário cadastrado com sucesso!");
+        setMsgErro(false);
+        setOpenSnack(true);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao deletar o usuário");
+        setOpenSnack(true);
+      });
   };
 
   return (
@@ -373,6 +387,7 @@ const Register = (props) => {
           </Button>
         </Link>
       </Grid>
+      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
     </Container>
   );
 };
