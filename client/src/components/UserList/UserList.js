@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DataGrid, GridToolbar, setGridRowCountStateUpdate } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Dialog, DialogTitle, DialogActions } from "@material-ui/core";
 import "../../index.js";
@@ -9,7 +9,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ptBR from "../ptBR/DataGrid";
 import { Link, useHistory } from "react-router-dom";
-import api from "../../services/api";
 import userServices from "../../services/user.js";
 import Alerta from "../Snackbar/Alerta.js";
 import Loading from "../../pages/Loading/Loading.js";
@@ -20,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20px",
     padding: 15,
     paddingBottom: 50,
-    width: "60%",
+    [theme.breakpoints.up("md")]: { width: "90%" },
+    [theme.breakpoints.down("md")]: { width: "95%" },
+    [theme.breakpoints.up("lg")]: { width: "80%" },
     height: 800,
     marginRight: 10,
   },
@@ -151,37 +152,43 @@ export default function UserList() {
   };
 
   return (
-    <Grid className={classes.grid} direction="column" alignItems="center">
-      {isLoading && <Loading />}
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        components={{ Toolbar: GridToolbar }}
-        className={classes.datagrid}
-        checkboxSelection={true}
-        hideFooter={true}
-        localeText={ptBR}
-        disableSelectionOnClick={true}
-      />
-      <Grid container className={classes.container}>
-        <Link to="/cadastrar-usuario" style={{ textDecoration: "none" }}>
-          <Button className={classes.btn}>Novo Usuário</Button>
-        </Link>
+    <Grid container justify="center">
+      {/* <Grid item sm={12} lg={12}>
+        <Grid container justify="center"> */}
+      <Grid className={classes.grid} direction="column" alignItems="center">
+        {isLoading && <Loading />}
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+          className={classes.datagrid}
+          checkboxSelection={true}
+          hideFooter={true}
+          localeText={ptBR}
+          disableSelectionOnClick={true}
+        />
+        <Grid container className={classes.container}>
+          <Link to="/cadastrar-usuario" style={{ textDecoration: "none" }}>
+            <Button className={classes.btn}>Novo Usuário</Button>
+          </Link>
+        </Grid>
+        <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Tem certeza que deseja excluir este usuário?</DialogTitle>
+          <DialogActions>
+            <Grid container justify="space-evenly">
+              <Button onClick={() => handleDelete(idDelete)} color="primary" variant="contained">
+                EXCLUIR
+              </Button>
+              <Button onClick={handleClose} color="primary" variant="contained">
+                Cancelar
+              </Button>
+            </Grid>
+          </DialogActions>
+        </Dialog>
       </Grid>
-      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Tem certeza que deseja excluir este usuário?</DialogTitle>
-        <DialogActions>
-          <Grid container justify="space-evenly">
-            <Button onClick={() => handleDelete(idDelete)} color="primary" variant="contained">
-              EXCLUIR
-            </Button>
-            <Button onClick={handleClose} color="primary" variant="contained">
-              Cancelar
-            </Button>
-          </Grid>
-        </DialogActions>
-      </Dialog>
+      {/* </Grid>
+      </Grid> */}
     </Grid>
   );
 }
