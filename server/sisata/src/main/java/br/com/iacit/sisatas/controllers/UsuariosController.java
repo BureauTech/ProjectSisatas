@@ -20,6 +20,7 @@ import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.projections.UsuariosProjectionDataGrid;
 import br.com.iacit.sisatas.projections.UsuariosProjectionParticipante;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
+import br.com.iacit.sisatas.returns.MessageReturn;
 
 @CrossOrigin
 @Controller
@@ -65,18 +66,24 @@ public class UsuariosController {
     		"usuPerfil" : <Long>
 	
 	 * 
-	 * RETURN: Retorna uma String <result>;
-	 * result = "Usuário cadastrado com sucesso."; Persistência realizada.
-	 * result = "E-mail já cadastrado."; Caso já haja um e-mail cadastrado na DB.
-	 * result = "e.getMessage()"; Persistência não realizada;
-	 *
-	 */
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+	 * 	String operacao;
+	 *  Boolean erro;
+	 *  String mensagem;
+	 * )
+	 * operacao: "cadastrarUsuarios";
+	 * erro: true, erro ao realizar a persistência ou e-mail já cadastrado; false: persistência realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 * 
+	 */ 
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = { "multipart/form-data" })
-	public String cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
-		String result = null;
-
+	public MessageReturn cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
+		MessageReturn result = new MessageReturn();
+		
+		result.setOperacao("cadastrarUsuarios");
+		
 		ObjectMapper mapper = new ObjectMapper();
 		UsuariosModel pessoa = null;
 
@@ -88,21 +95,23 @@ public class UsuariosController {
 			if (!up.existsByusuEmail(pessoa.getUsuEmail())) {
 				// Validar se a imagem é difente de null,
 				// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
-				
 				if (!imagem.equals(null)) {
 					// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
 					up.save(UsuarioMapper.converter(pessoa, imagem));
-					result = "Usuário cadastrado com sucesso.";
 				} else {
+					// save os dados no DB, sem imagem/assinatura.
 					up.save(pessoa);
-					result = "Usuário cadastrado com sucesso.";
 				}
+				result.setMensagem("Usuário cadastrado com sucesso.");
+				result.setErro(false);
 			} else {
-				result = "E-mail já cadastrado. Usuário não cadastrado.";
+				result.setMensagem("E-mail já cadastrado. Usuário não cadastrado.");
+				result.setErro(true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return e.getMessage();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
 		}
 		return result;
 	}
@@ -125,17 +134,23 @@ public class UsuariosController {
 
 		<usuId> deverá ser informado, pois será utilizado como referência para realizar a atualização;
 	 * 
-	 * RETURN: Retorna uma String <result>;
-	 * result = "Usuário cadastrado com sucesso."; Persistência realizada.
-	 * result = "E-mail já cadastrado."; Caso já haja um e-mail cadastrado na DB.
-	 * result = "e.getMessage()"; Persistência não realizada;
-	 *
-	 */
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+	 * 	String operacao;
+	 *  Boolean erro;
+	 *  String mensagem;
+	 * )
+	 * operacao: "atualizarUsuarios";
+	 * erro: true, erro ao realizar a persistência ou e-mail já cadastrado; false: persistência realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 * 
+	 */ 
 	
 	@ResponseBody
 	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.PUT, consumes = { "multipart/form-data" })
-	public String atualizarUsuarios(MultipartFile imagem, String usuario) {
-		String result = null;
+	public MessageReturn atualizarUsuarios(MultipartFile imagem, String usuario) {
+		MessageReturn result = new MessageReturn();
+
+		result.setOperacao("atualizarUsuarios");
 
 		ObjectMapper mapper = new ObjectMapper();
 		UsuariosModel usuarioController = null;
@@ -156,33 +171,34 @@ public class UsuariosController {
 					if (!imagem.equals(null)) {
 						// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
 						up.save(UsuarioMapper.converter(usuarioController, imagem));
-						result = "Usuário atualizado com sucesso.";
 					} else {
 						// save os dados no DB, antes, faz o mepeamento dos dados sem a imagem.
 						up.save(usuarioController);
-						result = "Usuário atualizado com sucesso.";
 					}
+					result.setMensagem("Usuário atualizado com sucesso.");
+					result.setErro(false);
 				} else {
-					result = "E-mail já cadastrado. Usuário não atualizado.";
+					result.setMensagem("E-mail já cadastrado. Usuário não atualizado.");
+					result.setErro(true);
 				}
-
 			} else {
 				// Validar se a imagem é difente de null,
 				// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
 				if (!imagem.equals(null)) {
 					// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
 					up.save(UsuarioMapper.converter(usuarioController, imagem));
-					result = "Usuário atualizado com sucesso.";
 				} else {
 					// save os dados no DB, antes, faz o mepeamento dos dados sem a imagem.
 					up.save(usuarioController);
-					result = "Usuário atualizado com sucesso.";
 				}
+				result.setMensagem("Usuário atualizado com sucesso.");
+				result.setErro(false);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return e.getMessage();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
 		}
 		return result;
 	}
@@ -200,6 +216,7 @@ public class UsuariosController {
 	 *
 	 */
 
+	
 	@ResponseBody
 	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
 	public List<?> listarUsuarios(@RequestParam String lista) {
@@ -229,6 +246,48 @@ public class UsuariosController {
 		return usuarios;
 	}
 
+	/*
+	@ResponseBody
+	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
+	public MessageReturn listarUsuarios(@RequestParam String lista) {
+		
+		MessageReturn result = new MessageReturn();
+
+		result.setOperacao("listarUsuarios");
+		List<?> usuarios= null;
+		
+		switch (lista) {
+		case "DataGrid":
+			try {
+				
+				usuarios = up.findBy(UsuariosProjectionDataGrid.class);
+				result.setMensagem("Listagem realizada com sucesso.");
+				result.setErro(false);
+				result.setData(usuarios);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "Participante":
+			try {
+				usuarios = up.findBy(UsuariosProjectionParticipante.class);
+				result.setMensagem("Listagem realizada com sucesso.");
+				result.setErro(false);
+				result.setData(usuarios);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.setMensagem(e.getMessage());
+				result.setErro(true);
+			}
+			break;
+		default:
+			break;
+		}
+		return result;
+	} */
+	
 	/**
 	 * @author Denis Lima
 	 * 

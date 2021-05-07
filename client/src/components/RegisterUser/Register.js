@@ -19,6 +19,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import "./Register.css";
 import userServices from "../../services/user";
+import Alerta from "../Snackbar/Alerta";
 
 const Register = (props) => {
   const { classes } = props;
@@ -31,6 +32,17 @@ const Register = (props) => {
   const [cargo, setCargo] = useState();
   const [area, setArea] = useState();
   const [preview, setPreview] = useState("");
+  const [openSnack, setOpenSnack] = useState(false);
+  const [msgSucesso, setMsgSucesso] = useState("");
+  const [msgErro, setMsgErro] = useState("");
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setWindowSize(window.innerWidth);
+  };
+
+  window.addEventListener("resize", handleResize);
 
   const clear = () => {
     setPerfil("USU");
@@ -39,6 +51,7 @@ const Register = (props) => {
     setTelefone("");
     setCargo("");
     setArea("");
+    setPreview("");
   };
 
   const changePreview = (file) => {
@@ -49,24 +62,14 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let perfilId = "";
-    if (perfil === "ADM") {
-      perfilId = 1;
-    } else if (perfil === "GER") {
-      perfilId = 2;
-    } else {
-      perfilId = 3;
-    }
-
     const body = {
       usuNome: nome,
       usuEmail: email,
-      usuSenha: "123",
       usuTelefone: telefone,
       usuCargo: cargo,
       usuAreaEmpresa: area,
       /* Alterações Daniel */
-      usuPerfil: perfilId,
+      usuPerfil: perfil,
     };
 
     var imagem = document.querySelector("#assinatura").files[0];
@@ -78,278 +81,290 @@ const Register = (props) => {
     userServices
       .cadastrarUsuario(formData)
       /* / Alterações Daniel */
-      .then((res) => clear())
-      .catch((err) => console.log(err.message));
+      .then((res) => {
+        clear();
+        setMsgSucesso("Usuário cadastrado com sucesso!");
+        setMsgErro(false);
+        setOpenSnack(true);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao deletar o usuário");
+        setOpenSnack(true);
+      });
   };
 
   return (
-    <Container style={{ marginTop: 40 }}>
-      <Grid container className={classes.grid}>
-        {/* cabeçalho */}
-        <Grid container justify="center">
-          <Typography className={classes.normalText} style={{ paddingBottom: 60 }}>
-            Cadastro de Usuário
-          </Typography>
-        </Grid>
+    <Container style={{ marginTop: 40 }} maxWidth="md">
+      <Grid container className={classes.grid} style={{ padding: "0px 15px 20px" }} justify="center">
+        <Grid item xs={12}>
+          {/* cabeçalho */}
+          <Grid container justify="center" style={{ paddingTop: 20 }}>
+            <Typography className={classes.normalText} style={{ paddingBottom: 60, textAlign: "center" }}>
+              Cadastro de Usuário
+            </Typography>
+          </Grid>
 
-        {/* formulario */}
-        <Grid container>
-          <form id="form" onSubmit={(e) => handleSubmit(e)} style={{ width: "100%" }}>
-            {/* inputs */}
-            <Grid item sm={8}>
+          {/* formulario */}
+          <Grid container justify="center">
+            <form id="form" onSubmit={(e) => handleSubmit(e)} style={{ width: "100%" }}>
+              {/* inputs */}
               <Grid container alignItems="center" justify="center">
-                {/* input nome */}
-                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
-                  <Grid item>
-                    <FormLabel htmlFor="nome">
-                      <Typography
-                        style={{
-                          fontSize: "1.5rem",
-                          paddingRight: 20,
-                          color: "white",
-                        }}
-                      >
-                        Nome
-                      </Typography>
-                    </FormLabel>
-                  </Grid>
-                  <Grid item xs>
-                    <Input
-                      required
-                      name="nome"
-                      id="nome"
-                      className={classes.textField}
-                      onChange={(e) => setNome(e.target.value)}
-                      value={nome}
-                      disableUnderline
-                    />
-                  </Grid>
-                </Grid>
-
-                {/* input email */}
-                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
-                  <Grid item>
-                    <FormLabel htmlFor="email">
-                      <Typography
-                        style={{
-                          fontSize: "1.5rem",
-                          paddingRight: 20,
-                          color: "white",
-                        }}
-                      >
-                        Email
-                      </Typography>
-                    </FormLabel>
-                  </Grid>
-                  <Grid item xs>
-                    <Input
-                      type="email"
-                      required
-                      name="email"
-                      id="email"
-                      className={classes.textField}
-                      onChange={(e) => setEmail(e.target.value)}
-                      value={email}
-                      disableUnderline
-                    />
-                  </Grid>
-                </Grid>
-
-                {/* input telefone */}
-                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
-                  <Grid item>
-                    <FormLabel htmlFor="telefone">
-                      <Typography
-                        style={{
-                          fontSize: "1.5rem",
-                          paddingRight: 20,
-                          color: "white",
-                        }}
-                      >
-                        Telefone
-                      </Typography>
-                    </FormLabel>
-                  </Grid>
-                  <Grid item xs>
-                    <Input
-                      type="tel"
-                      required
-                      name="telefone"
-                      id="telefone"
-                      className={classes.textField}
-                      onChange={(e) => setTelefone(e.target.value)}
-                      value={telefone}
-                      disableUnderline
-                    />
-                  </Grid>
-                </Grid>
-
-                {/* input cargo */}
-                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
-                  <Grid item>
-                    <FormLabel htmlFor="cargo">
-                      <Typography
-                        style={{
-                          fontSize: "1.5rem",
-                          paddingRight: 20,
-                          color: "white",
-                        }}
-                      >
-                        Cargo
-                      </Typography>
-                    </FormLabel>
-                  </Grid>
-                  <Grid item xs>
-                    <Input
-                      required
-                      name="cargo"
-                      id="cargo"
-                      className={classes.textField}
-                      onChange={(e) => setCargo(e.target.value)}
-                      value={cargo}
-                      disableUnderline
-                    />
-                  </Grid>
-                </Grid>
-
-                {/* input área/empresa */}
-                <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
-                  <Grid item>
-                    <FormLabel htmlFor="area">
-                      <Typography
-                        style={{
-                          fontSize: "1.5rem",
-                          paddingRight: 20,
-                          color: "white",
-                        }}
-                      >
-                        Área/Empresa
-                      </Typography>
-                    </FormLabel>
-                  </Grid>
-                  <Grid item xs>
-                    <Input
-                      required
-                      name="area"
-                      id="area"
-                      className={classes.textField}
-                      onChange={(e) => setArea(e.target.value)}
-                      value={area}
-                      disableUnderline
-                    />
-                  </Grid>
-                </Grid>
-
-                {/* inputradio perfil */}
-                <Grid container alignItems="center">
-                  <Grid item>
-                    <FormLabel>
-                      <Typography
-                        style={{
-                          paddingRight: 20,
-                          fontSize: "1.5rem",
-                          color: "white",
-                        }}
-                      >
-                        Perfil
-                      </Typography>
-                    </FormLabel>
-                  </Grid>
-                  <Grid item xs>
-                    <RadioGroup
-                      row
-                      name="perfil"
-                      style={{ color: "white" }}
-                      onChange={(e) => setPerfil(e.target.value)}
-                      value={perfil}
-                    >
-                      <FormControlLabel
-                        style={{ paddingLeft: 5 }}
-                        labelPlacement="end"
-                        value="ADM"
-                        control={
-                          <Radio
-                            className={classes.radio}
-                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-                            icon={<span className={classes.icon} />}
-                            {...props}
-                          />
-                        }
-                        label="ADM"
+                <Grid item xs={11} sm={10}>
+                  {/* input nome */}
+                  <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
+                    <Grid item>
+                      <FormLabel htmlFor="nome">
+                        <Typography
+                          style={{
+                            fontSize: "1.5rem",
+                            paddingRight: 20,
+                            color: "white",
+                          }}
+                        >
+                          Nome
+                        </Typography>
+                      </FormLabel>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                      <Input
+                        required
+                        name="nome"
+                        id="nome"
+                        className={classes.textField}
+                        onChange={(e) => setNome(e.target.value)}
+                        value={nome}
+                        disableUnderline
                       />
-                      <FormControlLabel
-                        style={{ paddingLeft: 15 }}
-                        labelPlacement="end"
-                        value="GER"
-                        control={
-                          <Radio
-                            className={classes.radio}
-                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-                            icon={<span className={classes.icon} />}
-                            {...props}
-                          />
-                        }
-                        label="GER"
-                      />
-                      <FormControlLabel
-                        style={{ paddingLeft: 15 }}
-                        labelPlacement="end"
-                        value="USU"
-                        control={
-                          <Radio
-                            className={classes.radio}
-                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-                            icon={<span className={classes.icon} />}
-                            {...props}
-                          />
-                        }
-                        label="USU"
-                      />
-                    </RadioGroup>
+                    </Grid>
                   </Grid>
-                </Grid>
 
-                {/* upload assinatura */}
-                <Grid container alignItems="center">
-                  <Grid item>
-                    <FormLabel htmlFor="assinatura">
-                      <Typography style={{ fontSize: "1.5rem", paddingRight: 20, color: "white" }}>
-                        Assinatura
-                      </Typography>
-                    </FormLabel>
+                  {/* input email */}
+                  <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
+                    <Grid item>
+                      <FormLabel htmlFor="email">
+                        <Typography
+                          style={{
+                            fontSize: "1.5rem",
+                            paddingRight: 20,
+                            color: "white",
+                          }}
+                        >
+                          Email
+                        </Typography>
+                      </FormLabel>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                      <Input
+                        type="email"
+                        required
+                        name="email"
+                        id="email"
+                        className={classes.textField}
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        disableUnderline
+                      />
+                    </Grid>
                   </Grid>
-                  <Grid item xs>
-                    <input
-                      name="assinatura"
-                      accept="image/*"
-                      id="assinatura"
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={(e) => changePreview(e.target.files[0])}
-                    />
-                    <label htmlFor="assinatura">
-                      <IconButton color="primary" aria-label="upload picture" component="span" className="no-margin">
-                        <ImageOutlinedIcon className={classes.uploadFile} style={{ width: 50, height: 50 }} />
-                      </IconButton>
-                    </label>
+
+                  {/* input telefone */}
+                  <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
+                    <Grid item>
+                      <FormLabel htmlFor="telefone">
+                        <Typography
+                          style={{
+                            fontSize: "1.5rem",
+                            paddingRight: 20,
+                            color: "white",
+                          }}
+                        >
+                          Telefone
+                        </Typography>
+                      </FormLabel>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                      <Input
+                        type="tel"
+                        required
+                        name="telefone"
+                        id="telefone"
+                        className={classes.textField}
+                        onChange={(e) => setTelefone(e.target.value)}
+                        value={telefone}
+                        disableUnderline
+                      />
+                    </Grid>
+                  </Grid>
+
+                  {/* input cargo */}
+                  <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
+                    <Grid item>
+                      <FormLabel htmlFor="cargo">
+                        <Typography
+                          style={{
+                            fontSize: "1.5rem",
+                            paddingRight: 20,
+                            color: "white",
+                          }}
+                        >
+                          Cargo
+                        </Typography>
+                      </FormLabel>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                      <Input
+                        required
+                        name="cargo"
+                        id="cargo"
+                        className={classes.textField}
+                        onChange={(e) => setCargo(e.target.value)}
+                        value={cargo}
+                        disableUnderline
+                      />
+                    </Grid>
+                  </Grid>
+
+                  {/* input área/empresa */}
+                  <Grid container alignItems="center" style={{ paddingBottom: 15 }}>
+                    <Grid item>
+                      <FormLabel htmlFor="area">
+                        <Typography
+                          style={{
+                            fontSize: "1.5rem",
+                            paddingRight: 20,
+                            color: "white",
+                          }}
+                        >
+                          Área/Empresa
+                        </Typography>
+                      </FormLabel>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                      <Input
+                        required
+                        name="area"
+                        id="area"
+                        className={classes.textField}
+                        onChange={(e) => setArea(e.target.value)}
+                        value={area}
+                        disableUnderline
+                      />
+                    </Grid>
+                  </Grid>
+
+                  {/* inputradio perfil */}
+                  <Grid container alignItems="center">
+                    <Grid item>
+                      <FormLabel>
+                        <Typography
+                          style={{
+                            paddingRight: 20,
+                            fontSize: "1.5rem",
+                            color: "white",
+                          }}
+                        >
+                          Perfil
+                        </Typography>
+                      </FormLabel>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                      <RadioGroup
+                        row={windowSize >= 600 ? true : false}
+                        name="perfil"
+                        style={{ color: "white" }}
+                        onChange={(e) => setPerfil(e.target.value)}
+                        value={perfil}
+                      >
+                        <FormControlLabel
+                          style={{ paddingLeft: 15 }}
+                          labelPlacement="end"
+                          value="ADM"
+                          control={
+                            <Radio
+                              className={classes.radio}
+                              checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+                              icon={<span className={classes.icon} />}
+                              {...props}
+                            />
+                          }
+                          label="ADM"
+                        />
+                        <FormControlLabel
+                          style={{ paddingLeft: 15 }}
+                          labelPlacement="end"
+                          value="GER"
+                          control={
+                            <Radio
+                              className={classes.radio}
+                              checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+                              icon={<span className={classes.icon} />}
+                              {...props}
+                            />
+                          }
+                          label="GER"
+                        />
+                        <FormControlLabel
+                          style={{ paddingLeft: 15 }}
+                          labelPlacement="end"
+                          value="USU"
+                          control={
+                            <Radio
+                              className={classes.radio}
+                              checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+                              icon={<span className={classes.icon} />}
+                              {...props}
+                            />
+                          }
+                          label="USU"
+                        />
+                      </RadioGroup>
+                    </Grid>
+                  </Grid>
+
+                  {/* upload assinatura */}
+                  <Grid container alignItems="center">
+                    <Grid item>
+                      <FormLabel htmlFor="assinatura">
+                        <Typography style={{ fontSize: "1.5rem", paddingRight: 20, color: "white" }}>
+                          Assinatura
+                        </Typography>
+                      </FormLabel>
+                    </Grid>
+                    <Grid item xs>
+                      <input
+                        name="assinatura"
+                        accept="image/*"
+                        id="assinatura"
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={(e) => changePreview(e.target.files[0])}
+                      />
+                      <label htmlFor="assinatura">
+                        <IconButton color="primary" aria-label="upload picture" component="span" className="no-margin">
+                          <ImageOutlinedIcon className={classes.uploadFile} style={{ width: 50, height: 50 }} />
+                        </IconButton>
+                      </label>
+                    </Grid>
                   </Grid>
                 </Grid>
+                {preview && (
+                  <Grid item xs={11} sm={10} style={{ marginTop: 10 }}>
+                    <Typography style={{ color: "white" }}>Prévia: </Typography>
+                    <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
+                  </Grid>
+                )}
               </Grid>
-              {preview && (
-                <Grid item xs style={{ marginTop: 10 }}>
-                  <Typography style={{ color: "white" }}>Prévia: </Typography>
-                  <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
-                </Grid>
-              )}
-            </Grid>
 
-            {/* button cadastrar */}
-            <Grid container justify="flex-end" style={{ paddingRight: 20 }}>
-              <Button variant="contained" color="secondary" type="submit" style={{ borderRadius: 18 }}>
-                Cadastrar
-              </Button>
-            </Grid>
-          </form>
+              {/* button cadastrar */}
+              <Grid container justify="flex-end" style={{ paddingRight: 20, marginTop: 10 }}>
+                <Button variant="contained" color="secondary" type="submit" style={{ borderRadius: 18 }}>
+                  Cadastrar
+                </Button>
+              </Grid>
+            </form>
+          </Grid>
         </Grid>
       </Grid>
 
@@ -372,6 +387,7 @@ const Register = (props) => {
           </Button>
         </Link>
       </Grid>
+      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
     </Container>
   );
 };

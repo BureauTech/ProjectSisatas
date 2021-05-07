@@ -121,7 +121,7 @@ const EditUser = (props) => {
     <Container style={{ marginTop: 30, marginBottom: 20 }}>
       {isLoading && <Loading />}
       {!isLoading && (
-        <Grid container justify="center" className={classes.grid} style={{ paddingBottom: 40 }}>
+        <Grid container justify="center" className={classes.grid} style={{ padding: "0px 25px 20px" }}>
           <Grid container justify="center">
             <Typography className={classes.biggerText} style={{ paddingBottom: 80, paddingTop: 20 }}>
               Edição do perfil
@@ -370,6 +370,7 @@ const EditUser = (props) => {
                       fontSize: "1.5rem",
                       borderRadius: 40,
                       padding: "10px 50px",
+                      margin: "10px 0px",
                     }}
                   >
                     {isLoadingBtn ? <Loading /> : "Salvar"}
@@ -384,6 +385,7 @@ const EditUser = (props) => {
                       fontSize: "1.5rem",
                       borderRadius: 40,
                       padding: "10px 50px",
+                      margin: "10px 0px",
                     }}
                   >
                     {isLoadingBtn ? <Loading /> : "Voltar"}
