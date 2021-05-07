@@ -2,8 +2,7 @@ const styles = (theme) => ({
   grid: {
     backgroundColor: theme.palette.primary.main,
     borderRadius: "20px",
-    padding: 5,
-    paddingLeft: 25,
+    paddingTop: 10
   },
 
   textField: {
