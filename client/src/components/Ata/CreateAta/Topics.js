@@ -53,7 +53,7 @@ const Topics = (props) => {
   // Rastreia o participante atualmente escolhido
   const getPerson = (person) => {
     if (person) {
-      setAtual(person.nome);
+      setAtual(person.usuNome);
     } else {
       setAtual("");
     }
@@ -89,7 +89,7 @@ const Topics = (props) => {
   };
 
   const options = listaAdicionados.map((option) => {
-    const firstLetter = option.nome[0].toUpperCase();
+    const firstLetter = option.usuNome[0].toUpperCase();
     return {
       firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
       ...option,
@@ -99,13 +99,7 @@ const Topics = (props) => {
   return (
     <Container>
       <Grid item xs={12}>
-        <Grid
-          container
-          className={classes.grid}
-          style={{ padding: 0 }}
-          alignItems="stretch"
-          justify="space-between"
-        >
+        <Grid container className={classes.grid} style={{ padding: 0 }} alignItems="stretch" justify="space-between">
           <Grid container>
             <Grid item xs={11}>
               <Grid
@@ -118,18 +112,10 @@ const Topics = (props) => {
                 <Grid item className="no-margin">
                   <Grid container justify="center">
                     <Grid item style={{ margin: 10 }}>
-                      <Typography
-                        align="center"
-                        className={classes.normalText}
-                        style={{ textAlign: "center" }}
-                      >
+                      <Typography align="center" className={classes.normalText} style={{ textAlign: "center" }}>
                         ID
                       </Typography>
-                      <Typography
-                        align="center"
-                        className={classes.normalText}
-                        style={{ textAlign: "center" }}
-                      >
+                      <Typography align="center" className={classes.normalText} style={{ textAlign: "center" }}>
                         {idAtual}
                       </Typography>
                     </Grid>
@@ -138,18 +124,11 @@ const Topics = (props) => {
                 <Grid item md={8} xs={12} className="no-margin">
                   <Grid container justify="space-around">
                     {windowWidth >= 960 && (
-                      <Divider
-                        orientation="vertical"
-                        style={{ backgroundColor: "white" }}
-                        flexItem
-                      />
+                      <Divider orientation="vertical" style={{ backgroundColor: "white" }} flexItem />
                     )}
                     <Grid item md={5} sm={7} xs={9} style={{ margin: 10 }}>
                       <Grid container justify="space-around">
-                        <FormLabel
-                          htmlFor="assunto"
-                          className={classes.normalText}
-                        >
+                        <FormLabel htmlFor="assunto" className={classes.normalText}>
                           Assunto
                         </FormLabel>
                         <Input
@@ -162,30 +141,20 @@ const Topics = (props) => {
                       </Grid>
                     </Grid>
                     {windowWidth >= 960 && (
-                      <Divider
-                        orientation="vertical"
-                        style={{ backgroundColor: "white" }}
-                        flexItem
-                      />
+                      <Divider orientation="vertical" style={{ backgroundColor: "white" }} flexItem />
                     )}
                     <Grid item md={5} sm={7} xs={9} style={{ margin: 10 }}>
                       <Grid container justify="center">
-                        <FormLabel
-                          htmlFor="responsavel"
-                          className={classes.normalText}
-                        >
+                        <FormLabel htmlFor="responsavel" className={classes.normalText}>
                           Responsável
                         </FormLabel>
                         <Autocomplete
                           id="responsavel"
                           className="no-margin"
                           style={{ width: "100%" }}
-                          options={options.sort(
-                            (a, b) =>
-                              -b.firstLetter.localeCompare(a.firstLetter)
-                          )}
+                          options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
                           groupBy={(option) => option.firstLetter}
-                          getOptionLabel={(option) => option.nome}
+                          getOptionLabel={(option) => option.usuNome}
                           onChange={(e, value) => getPerson(value)}
                           renderInput={(params) => (
                             <TextField
@@ -200,26 +169,15 @@ const Topics = (props) => {
                       </Grid>
                     </Grid>
                     {windowWidth >= 960 && (
-                      <Divider
-                        orientation="vertical"
-                        style={{ backgroundColor: "white" }}
-                        flexItem
-                      />
+                      <Divider orientation="vertical" style={{ backgroundColor: "white" }} flexItem />
                     )}
                   </Grid>
                 </Grid>
                 <Grid item md={3} xs={12} className="no-margin">
                   <Grid container justify="space-around" alignItems="center">
                     <Grid item md={12} sm={7} xs={9} style={{ margin: 10 }}>
-                      <Grid
-                        container
-                        justify="space-around"
-                        alignItems="center"
-                      >
-                        <FormLabel
-                          htmlFor="prazo"
-                          className={classes.normalText}
-                        >
+                      <Grid container justify="space-around" alignItems="center">
+                        <FormLabel htmlFor="prazo" className={classes.normalText}>
                           Prazo
                         </FormLabel>
                         <Input
@@ -237,17 +195,9 @@ const Topics = (props) => {
               </Grid>
             </Grid>
             <Grid item xs={1}>
-              <Grid
-                container
-                justify="flex-end"
-                alignItems="flex-end"
-                style={{ height: "100%" }}
-              >
+              <Grid container justify="flex-end" alignItems="flex-end" style={{ height: "100%" }}>
                 <IconButton className="no-margin" onClick={handleAddition}>
-                  <AddCircle
-                    className="largeIcon"
-                    style={{ color: "white" }}
-                  ></AddCircle>
+                  <AddCircle className="largeIcon" style={{ color: "white" }}></AddCircle>
                 </IconButton>
               </Grid>
             </Grid>
@@ -264,10 +214,7 @@ const Topics = (props) => {
                 >
                   <AccordionSummary expandIcon={<ExpandMore />}>
                     <Grid container justify="center">
-                      <Typography
-                        style={{ color: "white" }}
-                        className={classes.normalText}
-                      >
+                      <Typography style={{ color: "white" }} className={classes.normalText}>
                         Assuntos adicionados
                       </Typography>
                     </Grid>
@@ -276,18 +223,11 @@ const Topics = (props) => {
                     {listaAssuntos.map((topic, index) => {
                       return (
                         <Grid item xs={8} md={5}>
-                          <AccordionDetails
-                            key={index + 1}
-                            style={{ width: "100%" }}
-                          >
+                          <AccordionDetails key={index + 1} style={{ width: "100%" }}>
                             <Grid item xs={12}>
                               <Accordion style={{ width: "100%" }}>
                                 <AccordionSummary expandIcon={<ExpandMore />}>
-                                  <Grid
-                                    container
-                                    alignItems="center"
-                                    justify="space-between"
-                                  >
+                                  <Grid container alignItems="center" justify="space-between">
                                     <Grid item xs={3}>
                                       <IconButton
                                         onClick={(e) => {
@@ -310,20 +250,13 @@ const Topics = (props) => {
                                     </Grid>
                                   </Grid>
                                 </AccordionSummary>
-                                <AccordionDetails
-                                  key={index + 1}
-                                  className="no-margin"
-                                >
+                                <AccordionDetails key={index + 1} className="no-margin">
                                   <Grid container justify="center">
                                     <Grid item>
-                                      <Typography style={{ padding: 10 }}>
-                                        {topic.inCharge}
-                                      </Typography>
+                                      <Typography style={{ padding: 10 }}>{topic.inCharge}</Typography>
                                     </Grid>
                                     <Grid item>
-                                      <Typography style={{ padding: 10 }}>
-                                        {formatDatetime(topic.datetime)}
-                                      </Typography>
+                                      <Typography style={{ padding: 10 }}>{formatDatetime(topic.datetime)}</Typography>
                                     </Grid>
                                   </Grid>
                                 </AccordionDetails>

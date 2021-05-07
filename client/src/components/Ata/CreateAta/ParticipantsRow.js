@@ -8,7 +8,7 @@ const ParticipantsRow = (props) => {
 
   // ORDERNAR A LISTA DE PARTICIPANTES EM ORDEM ALFABÉTICA, SEPARADO EM GRUPOS NO SELECT/AUTOCOMPLETE
   const options = listaParticipantes.map((option) => {
-    const firstLetter = option.nome[0].toUpperCase();
+    const firstLetter = option.usuNome[0].toUpperCase();
     return {
       firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
       ...option,
@@ -30,7 +30,7 @@ const ParticipantsRow = (props) => {
               style={{ width: "100%" }}
               options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
               groupBy={(option) => option.firstLetter}
-              getOptionLabel={(option) => option.nome}
+              getOptionLabel={(option) => option.usuNome}
               onChange={(e, value) => pegarParticipante(value)}
               renderInput={(params) => (
                 <TextField
@@ -48,21 +48,21 @@ const ParticipantsRow = (props) => {
         <Grid item xs={12} sm={5} md={3} className="inputsGrid">
           <FormLabel className={classes.normalText}>Área</FormLabel>
           <Grid item md={11}>
-            <Input className={classes.textField} id="area" value={atual.area} disableUnderline />
+            <Input className={classes.textField} id="usuAreaEmpresa" value={atual.usuAreaEmpresa} disableUnderline />
           </Grid>
         </Grid>
         {/* INPUT - TELEFONE */}
         <Grid item xs={12} sm={5} md={3} className="inputsGrid">
           <FormLabel className={classes.normalText}>Telefone</FormLabel>
           <Grid item md={11}>
-            <Input className={classes.textField} id="telefone" value={atual.telefone} disableUnderline />
+            <Input className={classes.textField} id="usuTelefone" value={atual.usuTelefone} disableUnderline />
           </Grid>
         </Grid>
         {/* INPUT - EMAIL */}
         <Grid item xs={12} sm={5} md={3} className="inputsGrid">
           <FormLabel className={classes.normalText}>E-mail</FormLabel>
           <Grid item md={11}>
-            <Input className={classes.textField} id="email" value={atual.email} disableUnderline />
+            <Input className={classes.textField} id="usuEmail" value={atual.usuEmail} disableUnderline />
           </Grid>
         </Grid>
       </Grid>
