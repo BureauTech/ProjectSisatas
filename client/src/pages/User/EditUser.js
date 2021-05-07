@@ -11,7 +11,6 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
-import logo from "../../assets/images/BureauTechFundoBranco-01.png";
 import "../Ata/CreateAta/Style.css";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import Loading from "../Loading/Loading";
@@ -53,27 +52,17 @@ const EditUser = (props) => {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
         setIsLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   const handleChange = (event) => {
-    const value = event.target.value;
-    let nomePerfil = "";
-    if (value === 1) {
-      nomePerfil = "ADM";
-    } else if (value === 2) {
-      nomePerfil = "GER";
-    } else {
-      nomePerfil = "USU";
-    }
     setUsuario({
       ...usuario,
       usuPerfil: event.target.value,
     });
-    console.log(usuario);
   };
 
   const handleClose = () => {
@@ -97,7 +86,7 @@ const EditUser = (props) => {
     var imagem = document.querySelector("#assinatura").files[0];
     var formData = new FormData();
     formData.append("usuario", JSON.stringify(usuario));
-    formData.append("imagem", imagem);
+    formData.append("imagem", imagem ? imagem : null);
 
     userServices
       .atualizarUsuario(formData)
@@ -106,7 +95,7 @@ const EditUser = (props) => {
         setMsgSucesso("Sucesso ao salvar alterações!");
         setMsgErro(false);
         setOpenSnack(true);
-        history.push("profile", { id: usuario.usuId });
+        history.push("perfil", { id: usuario.usuId });
       })
       .catch((err) => {
         console.log(err.message);
@@ -298,9 +287,9 @@ const EditUser = (props) => {
                     className={classes.textField}
                     style={{ width: "7rem" }}
                   >
-                    <MenuItem value={1}>ADM</MenuItem>
-                    <MenuItem value={2}>GER</MenuItem>
-                    <MenuItem value={3}>USU</MenuItem>
+                    <MenuItem value={"ADM"}>ADM</MenuItem>
+                    <MenuItem value={"GER"}>GER</MenuItem>
+                    <MenuItem value={"USU"}>USU</MenuItem>
                   </Select>
                 </Grid>
               </Grid>

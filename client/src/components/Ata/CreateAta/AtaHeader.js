@@ -37,7 +37,6 @@ const AtaHeader = (props) => {
 
   useEffect(() => {
     setId(somarIdAta(ata.id));
-    console.log("mudei id");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

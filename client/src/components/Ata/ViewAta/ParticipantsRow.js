@@ -4,7 +4,6 @@ import "./Components.css";
 
 const ParticipantsRow = (props) => {
   const { classes, listaParticipantes } = props;
-  console.log(listaParticipantes);
 
   return (
     <Grid item xs={12}>
