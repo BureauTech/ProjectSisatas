@@ -37,7 +37,7 @@ const ProjectParticipants = (props) => {
 
   useEffect(() => {
     userServices
-      .listarUsuarios("DataGrid")
+      .listarUsuarios("Participante")
       .then((res) => {
         console.log(res.data);
         setListaParticipantes(res.data);
