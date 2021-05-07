@@ -1,9 +1,4 @@
-import {
-  Button,
-  Container,
-  Grid,
-  useTheme,
-} from "@material-ui/core";
+import { Button, Container, Grid, useTheme } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
 
@@ -19,14 +14,14 @@ const CreateRevision = (props) => {
     e.preventDefault();
     const body = {
       revAssunto: "assunto1",
-      revPrazo: "12/12/12"
-    }
+      revPrazo: "12/12/12",
+    };
     try {
       revisaoServices.criarRevisao(body);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
-  }
+  };
 
   return (
     <Container>
@@ -38,21 +33,21 @@ const CreateRevision = (props) => {
           <RevisionSubject />
         </Grid>
         <Grid container justify="space-between" style={{ padding: 24 }}>
-        <Link to="/ata" style={{ textDecoration: 'none' }}>
-          <Button
-            variant="contained"
-            className="bold"
-            style={{
-              backgroundColor: "white",
-              color: theme.palette.secondary.main,
-              fontWeight: 700,
-              fontSize: "1.5rem",
-              borderRadius: 20,
-              padding: "0 30px",
-            }}
-          >
-            Cancelar
-          </Button>
+          <Link to="/ata" style={{ textDecoration: "none" }}>
+            <Button
+              variant="contained"
+              className="bold"
+              style={{
+                backgroundColor: "white",
+                color: theme.palette.secondary.main,
+                fontWeight: 700,
+                fontSize: "1.5rem",
+                borderRadius: 20,
+                padding: "0 30px",
+              }}
+            >
+              Cancelar
+            </Button>
           </Link>
           <Button
             variant="contained"

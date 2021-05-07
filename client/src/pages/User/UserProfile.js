@@ -53,10 +53,12 @@ const UserProfile = (props) => {
         if (!isEmpty(user.data)) {
           setUsuario(user.data);
           setIsLoading(false);
+        } else {
+          setIsLoading(false);
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
         setIsLoading(false);
         setMsgSucesso(false);
         setMsgErro("Ocorreu um erro ao carregar informações deste perfil");

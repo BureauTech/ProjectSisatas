@@ -35,7 +35,7 @@ const CreateAta = (props) => {
     try {
       ataServices.criarAta(body);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

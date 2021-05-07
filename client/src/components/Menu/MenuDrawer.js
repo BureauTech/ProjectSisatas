@@ -81,7 +81,7 @@ const MenuDrawer = (props) => {
         <Typography className={classes.font}>
           <Link
             to={{
-              pathname: "/profile",
+              pathname: "/perfil",
               state: { id: 0 },
             }}
             className={classes.link}

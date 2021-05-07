@@ -60,7 +60,6 @@ const Topics = (props) => {
   };
 
   const handleDelete = (id) => {
-    console.log(id);
     let newId = id;
     let newList = [...listaAssuntos];
     newList.splice(id - 1, 1);

@@ -67,7 +67,6 @@ export default function UserList() {
     userServices
       .listarUsuarios("DataGrid")
       .then((res) => {
-        console.log(res);
         let lista = res.data;
         let lista2 = [];
         lista.forEach((user) => {
@@ -105,7 +104,7 @@ export default function UserList() {
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => history.push("profile", { id: params.getValue("id") })}>
+        <Button onClick={() => history.push("perfil", { id: params.getValue("id") })}>
           <VisibilityIcon className="icon" />
         </Button>
       ),
@@ -143,7 +142,7 @@ export default function UserList() {
         setOpenSnack(true);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
         setMsgSucesso(false);
         setMsgErro("Ocorreu um erro ao deletar o usuário");
         setOpenSnack(true);

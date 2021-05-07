@@ -1,10 +1,4 @@
-import {
-  Button,
-  Container,
-  Grid,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core";
 
 import Campo from "../../components/Comentarios/Comentarios";
 import { useState } from "react";
@@ -22,11 +16,10 @@ const CreateComentario = (props) => {
       comDescricao: newNewComentario,
       contemRevisao: 1, //precisa ser mexido ainda
     };
-    console.log()
     try {
       ataServices.salvarComentario(body);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -34,9 +27,7 @@ const CreateComentario = (props) => {
     <Container>
       <form onSubmit={(e) => handleSubmit(e)}>
         <Grid container style={{ marginBottom: 10 }}>
-          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>
-            Comentários
-          </Typography>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Comentários</Typography>
           <Campo setNewComentario={setNewNewComentario} commmm={newNewComentario} />
         </Grid>
         <Grid container justify="space-between" style={{ padding: 24 }}>
