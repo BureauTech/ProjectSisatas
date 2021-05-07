@@ -168,7 +168,7 @@ public class UsuariosController {
 				if (!up.existsByusuEmail(usuarioController.getUsuEmail())) {
 					// Validar se a imagem é difente de null,
 					// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
-					if (!imagem.equals(null)) {
+					if (imagem != null) {
 						// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
 						up.save(UsuarioMapper.converter(usuarioController, imagem));
 					} else {
@@ -184,7 +184,7 @@ public class UsuariosController {
 			} else {
 				// Validar se a imagem é difente de null,
 				// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
-				if (!imagem.equals(null)) {
+				if (imagem != null) {
 					// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
 					up.save(UsuarioMapper.converter(usuarioController, imagem));
 				} else {
