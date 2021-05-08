@@ -38,10 +38,7 @@ const ProjectParticipants = (props) => {
   useEffect(() => {
     userServices
       .listarUsuarios("Participante")
-      .then((res) => {
-        console.log(res.data);
-        setListaParticipantes(res.data);
-      })
+      .then((res) => setListaParticipantes(res.data))
       .catch((err) => console.log(err.message));
   }, []);
 

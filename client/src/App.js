@@ -21,11 +21,15 @@ function App() {
     id: "01/21",
   };
 
-  const ajustarLayout = () => {
-    if (window.innerWidth < 600) {
-      document.body.style.padding = "80px 0px 0px 0px";
+  const ajustarLayout = (n) => {
+    if (n === "0") {
+      document.body.style.padding = "0px 0px 0px 0px";
     } else {
-      document.body.style.padding = "80px 0px 0px 100px";
+      if (window.innerWidth < 600) {
+        document.body.style.padding = "80px 0px 0px 0px";
+      } else {
+        document.body.style.padding = "80px 0px 0px 100px";
+      }
     }
   };
 
@@ -44,7 +48,7 @@ function App() {
             <Route path="/nova-ata" component={() => <CreateAta />} />
             <Route path="/visualizar-atas" component={() => <Data />} />
             <Route path="/nova-revisao" component={() => <CreateRevision />} />
-            <Route path="/ata" component={() => <ViewAta />} />
+            <Route path="/ata" component={() => <ViewAta ajustarLayout={ajustarLayout} />} />
             <Route path="/revisoes" component={() => <ViewRevisions />} />
             <Route path="/cadastrar-comentarios" component={() => <Comentarios />} />
 
