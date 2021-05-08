@@ -11,8 +11,7 @@ import ataServices from "../../../services/ata";
 import Status from "../../../components/Ata/ViewAta/Status";
 import { useInfoAta } from "../../../context/InfoAta";
 
-const ViewAta = (props) => {
-
+const ViewAta = ({ ajustarLayout }) => {
   const theme = useTheme();
   const { setInfoAta } = useInfoAta();
 
@@ -119,13 +118,11 @@ const ViewAta = (props) => {
     setIsOpen(!isOpen);
   };
 
-
-
   return (
     <Container>
       <Grid container style={{ marginBottom: 10 }}>
         <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Cabeçalho</Typography>
-        <AtaHeader infoHeader={infoHeader} />
+        <AtaHeader infoHeader={infoHeader} ajustarLayout={ajustarLayout} />
       </Grid>
       <Grid container style={{ marginBottom: 10 }}>
         <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>ATA de Reunião</Typography>
@@ -184,7 +181,7 @@ const ViewAta = (props) => {
         >
           Revisões Pendentes
         </Button>
-        <Link to="/revisoes" style={{ textDecoration: 'none' }}>
+        <Link to="/revisoes" style={{ textDecoration: "none" }}>
           <Button
             variant="contained"
             color="secondary"
@@ -199,20 +196,20 @@ const ViewAta = (props) => {
             Visualizar Revisões
           </Button>
         </Link>
-        <Link to="/nova-revisao" style={{ textDecoration: 'none' }}>
-        <Button
-          variant="contained"
-          color="secondary"
-          className="bold"
-          style={{
-            color: "white",
-            fontSize: "1.5rem",
-            borderRadius: 16,
-            padding: "0 5px",
-          }}
-        >
-          Nova Revisão
-        </Button>
+        <Link to="/nova-revisao" style={{ textDecoration: "none" }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            className="bold"
+            style={{
+              color: "white",
+              fontSize: "1.5rem",
+              borderRadius: 16,
+              padding: "0 5px",
+            }}
+          >
+            Nova Revisão
+          </Button>
         </Link>
       </Grid>
     </Container>

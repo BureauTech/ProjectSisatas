@@ -8,7 +8,7 @@ const ProjectParticipants = (props) => {
 
   return (
     <Container>
-      <Grid container className={classes.grid} style={{ paddingBottom: 15, paddingRight: 0 }}>
+      <Grid container className={classes.grid} style={{ paddingBottom: 15, padding: "0px 25px 15px" }}>
         <Grid item xs={12}>
           <Grid container justify="flex-start" alignItems="center" style={{ marginBottom: 30, paddingTop: 20 }}>
             <FormLabel className={classes.normalText} style={{ marginRight: 15 }}>

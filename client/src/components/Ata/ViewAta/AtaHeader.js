@@ -7,7 +7,13 @@ import pdf from "../../../assets/images/svg/pdf.svg";
 // Alterando css de componentes
 
 const AtaHeader = (props) => {
-  const { classes, infoHeader } = props;
+  const { classes, infoHeader, ajustarLayout } = props;
+
+  const printPDF = () => {
+    ajustarLayout("0");
+    window.onafterprint = (e) => ajustarLayout();
+    window.print();
+  };
 
   return (
     <Container>
@@ -120,7 +126,7 @@ const AtaHeader = (props) => {
                 </IconButton>
               </Grid>
               <Grid item xs={6}>
-                <IconButton onClick={() => window.print()}>
+                <IconButton onClick={() => printPDF()}>
                   <Icon className="largeIcon">
                     <img alt="PDF export" src={pdf} style={{ width: 40, height: 40 }} />
                   </Icon>

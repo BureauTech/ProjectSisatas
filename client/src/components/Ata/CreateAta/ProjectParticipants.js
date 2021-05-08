@@ -23,7 +23,8 @@ import { AddCircle, Cancel, Delete, ExpandMore } from "@material-ui/icons";
 import "./Components.css";
 import { styles } from "../../../assets/styles/Styles";
 import ParticipantsRow from "./ParticipantsRow";
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import userServices from "../../../services/user";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -32,32 +33,20 @@ const Transition = forwardRef(function Transition(props, ref) {
 const ProjectParticipants = (props) => {
   const { classes, listaAdicionados, setListaAdicionados, setInfoProject } = props;
 
-  const [listaParticipantes, setListaParticipantes] = useState([
-    {
-      nome: "Denis Lima",
-      area: "Dev",
-      telefone: "12 123456789",
-      email: "denis@bureautech.com",
-    },
-    {
-      nome: "Charles Ferreira",
-      area: "PO",
-      telefone: "12 123456439",
-      email: "charles@bureautech.com",
-    },
-    {
-      nome: "Bia Coutinho",
-      area: "Dev",
-      telefone: "12 1267796789",
-      email: "denislima99@gmail.com",
-    },
-  ]);
+  const [listaParticipantes, setListaParticipantes] = useState([]);
+
+  useEffect(() => {
+    userServices
+      .listarUsuarios("Participante")
+      .then((res) => setListaParticipantes(res.data))
+      .catch((err) => console.log(err.message));
+  }, []);
 
   const [atual, setAtual] = useState({
-    nome: "",
-    email: "",
-    telefone: "",
-    area: "",
+    usuNome: "",
+    usuEmail: "",
+    usuTelefone: "",
+    usuAreaEmpresa: "",
   });
   const [isOpen, setIsOpen] = useState(false);
   const [checkeds, setCheckeds] = useState([]);
@@ -75,7 +64,7 @@ const ProjectParticipants = (props) => {
 
     for (let i = 0; i < listaAdicionados.length; i++) {
       const each = listaAdicionados[i];
-      if (each.nome === novo.nome && each.email === novo.email) {
+      if (each.usuNome === novo.usuNome && each.usuEmail === novo.usuEmail) {
         existe = true;
         break;
       }
@@ -90,10 +79,10 @@ const ProjectParticipants = (props) => {
       participante
         ? participante
         : {
-            nome: "",
-            email: "",
-            telefone: "",
-            area: "",
+            usuNome: "",
+            usuEmail: "",
+            usuTelefone: "",
+            usuAreaEmpresa: "",
           }
     );
   };
@@ -105,10 +94,10 @@ const ProjectParticipants = (props) => {
     const temNome = Object.values(novo)[0].length;
     if (!existe && temNome) {
       setAtual({
-        nome: "",
-        email: "",
-        telefone: "",
-        area: "",
+        usuNome: "",
+        usuEmail: "",
+        usuTelefone: "",
+        usuAreaEmpresa: "",
       });
       setListaAdicionados([...listaAdicionados, novo]);
       setInfoProject([...listaAdicionados, novo]);
@@ -199,7 +188,7 @@ const ProjectParticipants = (props) => {
                             <AccordionSummary expandIcon={<ExpandMore />}>
                               <FormControlLabel
                                 control={<Checkbox onChange={(e) => pegarCheckbox(e.target.value)} value={index} />}
-                                label={dados.nome}
+                                label={dados.usuNome}
                                 onClick={(event) => event.stopPropagation()}
                                 onFocus={(event) => event.stopPropagation()}
                               />
@@ -207,13 +196,13 @@ const ProjectParticipants = (props) => {
                             <AccordionDetails>
                               <Grid container justify="space-between" className="light">
                                 <Grid item>
-                                  <Typography style={{ padding: 10 }}>{dados.area}</Typography>
+                                  <Typography style={{ padding: 10 }}>{dados.usuAreaEmpresa}</Typography>
                                 </Grid>
                                 <Grid item>
-                                  <Typography style={{ padding: 10 }}>{dados.telefone}</Typography>
+                                  <Typography style={{ padding: 10 }}>{dados.usuTelefone}</Typography>
                                 </Grid>
                                 <Grid item>
-                                  <Typography style={{ padding: 10 }}>{dados.email}</Typography>
+                                  <Typography style={{ padding: 10 }}>{dados.usuEmail}</Typography>
                                 </Grid>
                               </Grid>
                             </AccordionDetails>

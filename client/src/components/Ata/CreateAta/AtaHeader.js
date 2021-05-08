@@ -1,4 +1,4 @@
-import { Container, Grid, withStyles, Typography, FormLabel, Input } from "@material-ui/core";
+import { Container, Grid, withStyles, FormLabel, Input } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import "./Components.css";
 import { styles } from "../../../assets/styles/Styles";
@@ -26,12 +26,15 @@ const AtaHeader = (props) => {
 
   useEffect(() => {
     setInfoHeader({
-      id: id,
-      dtInicio: dtInicio,
-      hrInicio: hrInicio,
-      dtFinal: dtFinal,
-      hrFinal: hrFinal,
-      local: local,
+      //id: id,
+      ataDataInicio: dtInicio,
+      ataHoraInicio: hrInicio,
+      ataDataFim: dtFinal,
+      ataHoraFim: hrFinal,
+      ataLocal: local,
+      geraAtas: {
+        usuId: 1,
+      },
     });
   }, [dtFinal, dtInicio, hrFinal, hrInicio, id, local, setInfoHeader]);
 

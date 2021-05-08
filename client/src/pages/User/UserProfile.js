@@ -1,6 +1,5 @@
 import { Button, Container, Grid, Typography, withStyles } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
-import logo from "../../assets/images/BureauTechFundoBranco-01.png";
 import "../Ata/CreateAta/Style.css";
 import userServices from "../../services/user";
 import { useEffect, useState } from "react";
