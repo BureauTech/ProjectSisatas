@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import br.com.iacit.sisatas.mapper.AtasMapper;
 import br.com.iacit.sisatas.models.AtasHeaderControllerModel;
@@ -22,6 +23,7 @@ import br.com.iacit.sisatas.models.AtasTopicsControllerModel;
 import br.com.iacit.sisatas.projections.AtasProjectionId;
 import br.com.iacit.sisatas.repository.AtasRepository;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/atas")
 public class AtasController {
