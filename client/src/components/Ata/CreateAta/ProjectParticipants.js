@@ -31,7 +31,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const ProjectParticipants = (props) => {
-  const { classes, listaAdicionados, setListaAdicionados, setInfoProject } = props;
+  const { classes, listaAdicionados, setListaAdicionados, setInfoProject, tema, setTema } = props;
 
   const [listaParticipantes, setListaParticipantes] = useState([]);
 
@@ -160,7 +160,13 @@ const ProjectParticipants = (props) => {
               Projeto
             </FormLabel>
             <Grid item xs={12} sm={5} md={4}>
-              <Input className={classes.textField} id="temaProjeto" disableUnderline />
+              <Input
+                className={classes.textField}
+                id="temaProjeto"
+                value={tema}
+                onChange={(e) => setTema(e.target.value)}
+                disableUnderline
+              />
             </Grid>
           </Grid>
           <ParticipantsRow

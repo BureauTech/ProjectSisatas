@@ -19,9 +19,10 @@ import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
 
 const Topics = (props) => {
-  const { classes, listaAdicionados, setInfoTopics } = props;
+  const { classes, listaAdicionados, setInfoTopics, ataId } = props;
 
   const [atual, setAtual] = useState("");
+  const [idPessoa, setIdPessoa] = useState("");
 
   const [assunto, setAssunto] = useState("");
   const [idAtual, setIdAtual] = useState(1);
@@ -31,12 +32,19 @@ const Topics = (props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleAddition = () => {
-    if (atual && assunto && datetime) {
+    if (atual && assunto && datetime && idPessoa) {
+      const d = new Date();
       const newTopic = {
-        id: idAtual,
-        topic: assunto,
+        assId: idAtual,
+        assAssunto: assunto,
+        ataId: ataId,
         inCharge: atual,
-        datetime: datetime,
+        assPrazo: datetime + ":" + d.getSeconds() + "." + d.getMilliseconds() + "+00:00",
+        responsavelAssuntos: [
+          {
+            usuId: idPessoa,
+          },
+        ],
       };
       setListaAssuntos([...listaAssuntos, newTopic]);
       setIdAtual(idAtual + 1);
@@ -54,8 +62,10 @@ const Topics = (props) => {
   const getPerson = (person) => {
     if (person) {
       setAtual(person.usuNome);
+      setIdPessoa(person.usuId);
     } else {
       setAtual("");
+      setIdPessoa("");
     }
   };
 
@@ -82,9 +92,11 @@ const Topics = (props) => {
   };
 
   const formatDatetime = (datetime) => {
+    //":" + d.getSeconds() + "." + d.getMilliseconds() + "+00:00"
     let [date, time] = datetime.split("T");
     date = date.split("-").reverse().join("/");
-    const formated = date + " " + time;
+    let hour = time.split(":");
+    const formated = date + " " + hour.splice(0, 2).join(":");
     return formated;
   };
 
@@ -244,7 +256,7 @@ const Topics = (props) => {
                                     <Grid item xs>
                                       <Typography style={{ color: "black" }}>
                                         <strong>
-                                          {topic.id} - {topic.topic}
+                                          {topic.assId} - {topic.assAssunto}
                                         </strong>
                                       </Typography>
                                     </Grid>
@@ -256,7 +268,7 @@ const Topics = (props) => {
                                       <Typography style={{ padding: 10 }}>{topic.inCharge}</Typography>
                                     </Grid>
                                     <Grid item>
-                                      <Typography style={{ padding: 10 }}>{formatDatetime(topic.datetime)}</Typography>
+                                      <Typography style={{ padding: 10 }}>{formatDatetime(topic.assPrazo)}</Typography>
                                     </Grid>
                                   </Grid>
                                 </AccordionDetails>

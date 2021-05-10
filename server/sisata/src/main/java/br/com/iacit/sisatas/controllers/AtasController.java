@@ -40,7 +40,7 @@ public class AtasController {
 		@ResponseBody
 		@RequestMapping(value = "/ultimoRegistro", method = RequestMethod.GET)
 		public AtasProjectionId ultimoRegistro() {
-			return ap.findTopBy();
+			return ap.findTopByOrderByAtaIdDesc();
 		}
 		
 		
@@ -64,6 +64,19 @@ public class AtasController {
 			}
 			return ResponseEntity.ok().build();
 		}
+
+
+		@ResponseBody
+        @RequestMapping(value = "/cadastrarAta", method = RequestMethod.POST, consumes = "application/json")
+        public ResponseEntity<String> cadastrarAtas(@RequestBody AtasModel ata) throws IOException {
+            try {
+                ap.save(ata);
+            } catch (DataAccessException e) {
+                e.printStackTrace();
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+            return ResponseEntity.ok().build();
+        }
 		
 		@ResponseBody
 		@RequestMapping(value = "/atualizarAtas", method = RequestMethod.GET)
