@@ -42,14 +42,14 @@ const RevisionHeader = (props) => {
             <Grid item xs={11} md={12} lg={12}>
               {/* ROW ATA REF */}
               <Grid sm={12} container className={classes.rowMargin} justify={windowSize >= 960 ? "flex-start" : "center"}>
-                <Grid item xs={5} sm={4} md={12} lg={4} justify={windowSize >= 960 ? "flex-start" : "center"}>
+                <Grid item xs={5} sm={4} md={12} lg={4} className="align-self-center" justify={windowSize >= 960 ? "flex-start" : "center"}>
                   <FormLabel className={classes.normalText}>
                     Ata Ref.
                   </FormLabel>
                 </Grid>
                 {/* <Grid item xs={12} lg={6} className="align-self-center">
                   <Grid container justify={windowSize >= 960 ? "space-between" : "center"}> */}
-                <Grid item sm={3} md={12} lg={3} justify={windowSize >= 960 ? "flex-start" : "center"} alignItems="center">
+                <Grid item sm={3} md={12} lg={3} className="align-self-center" justify={windowSize >= 960 ? "flex-start" : "center"} alignItems="center">
                   <FormLabel className={classes.normalText}>
                     <strong>01/21</strong>
                   </FormLabel>

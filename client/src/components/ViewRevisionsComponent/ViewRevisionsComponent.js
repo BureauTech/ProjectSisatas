@@ -64,6 +64,14 @@ const ViewRevisionsComponent = (props) => {
     },
   ]);
 
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setWindowSize(window.innerWidth);
+  };
+
+  window.addEventListener("resize", handleResize);
+
   return (
     <Container>
       <Grid container style={{ marginBottom: 10 }}>
@@ -91,18 +99,18 @@ const ViewRevisionsComponent = (props) => {
             </Grid>
           </Grid>
           {/* CONTEINER DA DIREITA (INFOS)*/}
-          <Grid item xs={12} sm={10} md={5} lg={4}>
-            <Grid item xs={11} md={10} lg={12}>
+          <Grid item xs={6} sm={4} md={4} lg={4} justify="center">
+            <Grid item md={10} lg={12} justify="center">
               {/* ROW ATA REF */}
-              <Grid container className={classes.rowMargin}>
-                <Grid item md={4} lg={4}>
+              <Grid container className={classes.rowMargin} justify={windowSize >= 960 ? "flex-start" : "center"}>
+                <Grid item xs={12} sm={6} md={4} lg={4} justify={windowSize >= 960 ? "flex-start" : "center"}>
                   <FormLabel className={classes.normalText}>
                     Ata Ref.
                   </FormLabel>
                 </Grid>
-                <Grid item xs={12} md={8} lg={6} className="align-self-center">
+                <Grid item xs={12} sm={6} md={8} lg={6} className="align-self-center">
                   <Grid container justify="space-between">
-                    <Grid item xs={7} md={6} lg={5}>
+                    <Grid item md={6} lg={5}>
                       <FormLabel className={classes.normalText}>
                         <strong>01/21</strong>
                       </FormLabel>
@@ -112,14 +120,14 @@ const ViewRevisionsComponent = (props) => {
               </Grid>
               {/* ROW PRAZO */}
               <Grid container className={classes.rowMargin}>
-                <Grid item md={4} lg={4}>
+                <Grid item xs={12} sm={5} md={4} lg={4}>
                   <FormLabel className={classes.normalText}>
                     Prazo
                   </FormLabel>
                 </Grid>
-                <Grid item xs={12} md={8} lg={8}>
+                <Grid item xs={12} sm={12} md={8} lg={8}>
                   <Grid container justify="space-between">
-                    <Grid item xs={7} md={8} lg={8}>
+                    <Grid item sm={12} md={10} lg={8}>
                       <Input
                         className={classes.textField}
                         disableUnderline
@@ -131,18 +139,18 @@ const ViewRevisionsComponent = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={10} md={4} lg={4}>
-            <Grid item xs={11} md={10} lg={12}>
+          <Grid item xs={12} sm={5} md={4} lg={4}>
+            <Grid item md={10} lg={12}>
               {/* ROW RESPONSAVEL*/}
               <Grid container className={classes.rowMargin}>
-                <Grid item md={4} lg={4}>
+                <Grid item>
                   <FormLabel className={classes.normalText}>
                     Responsável
                   </FormLabel>
                 </Grid>
               </Grid>
               <Grid container className={classes.rowMargin}>
-                <Grid item xs={10} md={12} lg={12}>
+                <Grid item md={12} lg={12}>
                   <FormLabel className={classes.normalText}><strong>Fulano da Silva</strong></FormLabel>
                 </Grid>
               </Grid>
@@ -177,18 +185,18 @@ const ViewRevisionsComponent = (props) => {
             </Grid>
           </Grid>
           <Grid container className={classes.grid} justify="center" style={{ paddingBottom: 0, paddingRight: 0 }}>
-            <Grid item xs={4} sm={4} md={3} style={{ margin: "15px 0px" }}>
+            <Grid item sm={4} md={3} style={{ margin: "15px 0px" }}>
               <Typography className={classes.normalText}>Aprovado</Typography>
             </Grid>
-            <Grid item xs={6} sm={7} md={8} style={{ margin: "15px 0px" }}>
+            <Grid item sm={7} md={8} style={{ margin: "15px 0px" }}>
               <Grid container>
                 <Chips participantes={listaParticipantes} filtro={"Aprovado"} />
               </Grid>
             </Grid>
-            <Grid item xs={4} sm={4} md={3} style={{ margin: "15px 0px" }}>
+            <Grid item sm={4} md={3} style={{ margin: "15px 0px" }}>
               <Typography className={classes.normalText}>Pendente</Typography>
             </Grid>
-            <Grid item xs={6} sm={7} md={8} style={{ margin: "15px 0px" }}>
+            <Grid item sm={7} md={8} style={{ margin: "15px 0px" }}>
               <Grid container>
                 <Chips participantes={listaParticipantes} filtro={"Pendente"} />
               </Grid>
