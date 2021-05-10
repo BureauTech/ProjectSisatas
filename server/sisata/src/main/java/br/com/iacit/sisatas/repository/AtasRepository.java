@@ -14,6 +14,8 @@ public interface AtasRepository extends JpaRepository<AtasModel, String> {
 	Boolean existsByataId(long ataId);
 
 	AtasProjectionId findTopBy();
+
+	AtasProjectionId findTopByOrderByAtaIdDesc();
 	
 	<T> List<T> findBy(Class<T> projection);
 

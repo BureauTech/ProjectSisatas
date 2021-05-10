@@ -1,23 +1,13 @@
-import { Container, Grid, withStyles, FormLabel, Input } from "@material-ui/core";
+import { Container, Grid, withStyles, FormLabel, Input, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import "./Components.css";
 import { styles } from "../../../assets/styles/Styles";
+import ataServices from "../../../services/ata";
 
 // Alterando css de componentes
 
 const AtaHeader = (props) => {
-  const { classes, ata, setInfoHeader } = props;
-
-  // recebe último ID do banco e soma 1
-  const somarIdAta = (id) => {
-    let parte1 = id.split("/")[0];
-    const parte2 = id.split("/")[1];
-    parte1 = (Number(parte1) + 1).toString();
-    if (parte1.length === 1) parte1 = "0" + parte1;
-    return parte1 + "/" + parte2;
-  };
-
-  const [id, setId] = useState(ata.id);
+  const { classes, setInfoHeader, id } = props;
   const [dtInicio, setDtInicio] = useState();
   const [hrInicio, setHrInicio] = useState();
   const [dtFinal, setDtFinal] = useState();
@@ -25,30 +15,31 @@ const AtaHeader = (props) => {
   const [local, setLocal] = useState();
 
   useEffect(() => {
+    let d = new Date();
+
+    const final = ":" + d.getSeconds() + "." + d.getMilliseconds() + "+00:00";
+    const datetimeInicio = dtInicio + "T" + hrInicio + final;
+    const datetimeFinal = dtFinal + "T" + hrFinal + final;
     setInfoHeader({
       //id: id,
-      ataDataInicio: dtInicio,
-      ataHoraInicio: hrInicio,
-      ataDataFim: dtFinal,
-      ataHoraFim: hrFinal,
+      ataDataInicio: datetimeInicio,
+      ataHoraInicio: datetimeInicio,
+      ataDataFim: datetimeFinal,
+      ataHoraFim: datetimeFinal,
       ataLocal: local,
       geraAtas: {
         usuId: 1,
       },
+      ataDataCriacao: "",
     });
-  }, [dtFinal, dtInicio, hrFinal, hrInicio, id, local, setInfoHeader]);
-
-  useEffect(() => {
-    setId(somarIdAta(ata.id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dtFinal, dtInicio, hrFinal, hrInicio, local, setInfoHeader]);
 
   return (
     <Container>
       <Grid container>
         <Grid container className={classes.grid} alignItems="center" justify="center" style={{ padding: 15 }}>
           {/* LATERAL ESQUERDA (NÚMERO DA ATA)*/}
-          {/* <Grid item sm={10} md={3} lg={3}>
+          <Grid item sm={10} md={3} lg={3}>
             <Grid container justify="center">
               <Grid container justify="center">
                 <Typography className={classes.biggerText}>ATA Nº:</Typography>
@@ -57,7 +48,7 @@ const AtaHeader = (props) => {
                 <Typography className={classes.biggerText}>{id}</Typography>
               </Grid>
             </Grid>
-          </Grid> */}
+          </Grid>
           {/* CONTEINER DA DIREITA (INPUTS)*/}
           <Grid item xs={11} sm={10} md={9} lg={9}>
             {/* <Grid item xs={11} md={11} lg={10}> */}
