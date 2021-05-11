@@ -7,7 +7,7 @@ import ataServices from "../../../services/ata";
 // Alterando css de componentes
 
 const AtaHeader = (props) => {
-  const { classes, setInfoHeader, id } = props;
+  const { classes, setInfoHeader } = props;
   const [dtInicio, setDtInicio] = useState();
   const [hrInicio, setHrInicio] = useState();
   const [dtFinal, setDtFinal] = useState();
@@ -15,9 +15,7 @@ const AtaHeader = (props) => {
   const [local, setLocal] = useState();
 
   useEffect(() => {
-    let d = new Date();
-
-    const final = ":" + d.getSeconds() + "." + d.getMilliseconds() + "+00:00";
+    const final = ":00.000+00:00";
     const datetimeInicio = dtInicio + "T" + hrInicio + final;
     const datetimeFinal = dtFinal + "T" + hrFinal + final;
     setInfoHeader({
@@ -39,7 +37,7 @@ const AtaHeader = (props) => {
       <Grid container>
         <Grid container className={classes.grid} alignItems="center" justify="center" style={{ padding: 15 }}>
           {/* LATERAL ESQUERDA (NÚMERO DA ATA)*/}
-          <Grid item sm={10} md={3} lg={3}>
+          {/* <Grid item sm={10} md={3} lg={3}>
             <Grid container justify="center">
               <Grid container justify="center">
                 <Typography className={classes.biggerText}>ATA Nº:</Typography>
@@ -48,12 +46,12 @@ const AtaHeader = (props) => {
                 <Typography className={classes.biggerText}>{id}</Typography>
               </Grid>
             </Grid>
-          </Grid>
+          </Grid> */}
           {/* CONTEINER DA DIREITA (INPUTS)*/}
-          <Grid item xs={11} sm={10} md={9} lg={9}>
+          <Grid item xs={12} sm={10} md={10} lg={10}>
             {/* <Grid item xs={11} md={11} lg={10}> */}
             {/* ROW DATA INÍCIO */}
-            <Grid container className={classes.rowMargin}>
+            <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item md={4} lg={3}>
                 <FormLabel className={classes.normalText}>Data Início</FormLabel>
               </Grid>
@@ -83,7 +81,7 @@ const AtaHeader = (props) => {
               </Grid>
             </Grid>
             {/* ROW DATA FINAL */}
-            <Grid container className={classes.rowMargin}>
+            <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item md={4} lg={3}>
                 <FormLabel className={classes.normalText}>Data Final</FormLabel>
               </Grid>
@@ -113,7 +111,7 @@ const AtaHeader = (props) => {
               </Grid>
             </Grid>
             {/* ROW LOCAL */}
-            <Grid container className={classes.rowMargin}>
+            <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item xs={10} md={2} lg={2}>
                 <FormLabel className={classes.normalText}>Local</FormLabel>
               </Grid>
