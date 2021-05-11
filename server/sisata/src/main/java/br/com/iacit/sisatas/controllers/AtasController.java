@@ -71,7 +71,12 @@ public class AtasController {
 		@ResponseBody
         @RequestMapping(value = "/cadastrarAta", method = RequestMethod.POST, consumes = "application/json")
         public ResponseEntity<String> cadastrarAtas(@RequestBody AtasModel ata) throws IOException {
-					String ultimoId = ap.findTopByOrderByAtaIdDesc().getAtaId();
+					String ultimoId = "";
+					if (ap.findTopByOrderByAtaIdDesc() == null)
+						ultimoId = "00/00";
+					else
+						ultimoId = ap.findTopByOrderByAtaIdDesc().getAtaId();
+					
 
 					Conversor conversor = new Conversor();
 					String novoId = conversor.calcularId(ultimoId);
