@@ -11,9 +11,9 @@ import ataServices from "../../../services/ata";
 const CreateAta = (props) => {
   const theme = useTheme();
 
-  const ata = {
-    id: "01/21",
-  };
+  // const ata = {
+  //   id: "01/21",
+  // };
 
   const [listaAdicionados, setListaAdicionados] = useState([]);
 
@@ -24,23 +24,23 @@ const CreateAta = (props) => {
   const [tema, setTema] = useState("");
   const [id, setId] = useState("");
 
-  useEffect(() => {
-    ataServices.ultimoId().then((res) => {
-      setId(somarIdAta(res.data.ataId));
-      console.log(res.data.ataId);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   ataServices.ultimoId().then((res) => {
+  //     setId(somarIdAta(res.data.ataId));
+  //     console.log(res.data.ataId);
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  // recebe último ID do banco e soma 1
-  const somarIdAta = (id) => {
-    console.log(id);
-    let parte1 = id.split("/")[0];
-    const parte2 = id.split("/")[1];
-    parte1 = (Number(parte1) + 1).toString();
-    if (parte1.length === 1) parte1 = "0" + parte1;
-    return parte1 + "/" + parte2;
-  };
+  // // recebe último ID do banco e soma 1
+  // const somarIdAta = (id) => {
+  //   console.log(id);
+  //   let parte1 = id.split("/")[0];
+  //   const parte2 = id.split("/")[1];
+  //   parte1 = (Number(parte1) + 1).toString();
+  //   if (parte1.length === 1) parte1 = "0" + parte1;
+  //   return parte1 + "/" + parte2;
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,7 +65,7 @@ const CreateAta = (props) => {
       participantesIds.push(id);
     });
 
-    const header = { ...infoHeader, ataId: id };
+    const header = { ...infoHeader };
 
     const body = {
       ...header,
@@ -89,7 +89,7 @@ const CreateAta = (props) => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <Grid container style={{ marginBottom: 10 }}>
           <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Cabeçalho</Typography>
-          <AtaHeader ata={ata} setInfoHeader={setInfoHeader} id={id} />
+          <AtaHeader setInfoHeader={setInfoHeader} id={id} />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
           <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>ATA de Reunião</Typography>
@@ -119,6 +119,7 @@ const CreateAta = (props) => {
               fontSize: "1.5rem",
               borderRadius: 20,
               padding: "0 30px",
+              marginTop: 10,
             }}
           >
             Cancelar
@@ -133,6 +134,7 @@ const CreateAta = (props) => {
               fontSize: "1.5rem",
               borderRadius: 20,
               padding: "0 30px",
+              marginTop: 10,
             }}
           >
             Salvar

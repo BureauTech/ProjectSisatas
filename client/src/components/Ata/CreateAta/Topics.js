@@ -37,9 +37,8 @@ const Topics = (props) => {
       const newTopic = {
         assId: idAtual,
         assAssunto: assunto,
-        ataId: ataId,
         inCharge: atual,
-        assPrazo: datetime + ":" + d.getSeconds() + "." + d.getMilliseconds() + "+00:00",
+        assPrazo: datetime + ":00.000+00:00",
         responsavelAssuntos: [
           {
             usuId: idPessoa,
@@ -138,7 +137,7 @@ const Topics = (props) => {
                     {windowWidth >= 960 && (
                       <Divider orientation="vertical" style={{ backgroundColor: "white" }} flexItem />
                     )}
-                    <Grid item md={5} sm={7} xs={9} style={{ margin: 10 }}>
+                    <Grid item md={5} sm={10} xs={10} style={{ margin: 10 }}>
                       <Grid container justify="space-around">
                         <FormLabel htmlFor="assunto" className={classes.normalText}>
                           Assunto
@@ -155,7 +154,7 @@ const Topics = (props) => {
                     {windowWidth >= 960 && (
                       <Divider orientation="vertical" style={{ backgroundColor: "white" }} flexItem />
                     )}
-                    <Grid item md={5} sm={7} xs={9} style={{ margin: 10 }}>
+                    <Grid item md={5} sm={10} xs={10} style={{ margin: 10 }}>
                       <Grid container justify="center">
                         <FormLabel htmlFor="responsavel" className={classes.normalText}>
                           Responsável
@@ -187,7 +186,7 @@ const Topics = (props) => {
                 </Grid>
                 <Grid item md={3} xs={12} className="no-margin">
                   <Grid container justify="space-around" alignItems="center">
-                    <Grid item md={12} sm={7} xs={9} style={{ margin: 10 }}>
+                    <Grid item md={12} sm={10} xs={10} style={{ margin: 10 }}>
                       <Grid container justify="space-around" alignItems="center">
                         <FormLabel htmlFor="prazo" className={classes.normalText}>
                           Prazo
@@ -226,7 +225,7 @@ const Topics = (props) => {
                 >
                   <AccordionSummary expandIcon={<ExpandMore />}>
                     <Grid container justify="center">
-                      <Typography style={{ color: "white" }} className={classes.normalText}>
+                      <Typography style={{ color: "white", fontSize: "1.5rem" }} className={classes.normalText}>
                         Assuntos adicionados
                       </Typography>
                     </Grid>
