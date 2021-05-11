@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import "./Style.css";
 import ataServices from "../../../services/ata";
 
+import Alerta from "../../../components/Snackbar/Alerta";
+
 const CreateAta = (props) => {
   const theme = useTheme();
 
@@ -23,6 +25,10 @@ const CreateAta = (props) => {
   const [infoTopics, setInfoTopics] = useState();
   const [tema, setTema] = useState("");
   const [id, setId] = useState("");
+
+  const [openSnack, setOpenSnack] = useState(false);
+  const [msgSucesso, setMsgSucesso] = useState("");
+  const [msgErro, setMsgErro] = useState("");
 
   // useEffect(() => {
   //   ataServices.ultimoId().then((res) => {
@@ -79,8 +85,14 @@ const CreateAta = (props) => {
 
     try {
       ataServices.criarAta(body);
+      setMsgSucesso("Ata cadastrada com sucesso!");
+      setMsgErro(false);
+      setOpenSnack(true);
     } catch (error) {
       console.log(error.message);
+      setMsgSucesso(false);
+      setMsgErro("Ocorreu um erro ao cadastrar a ata");
+      setOpenSnack(true);
     }
   };
 
@@ -141,6 +153,7 @@ const CreateAta = (props) => {
           </Button>
         </Grid>
       </form>
+      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
     </Container>
   );
 };
