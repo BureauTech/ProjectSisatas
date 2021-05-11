@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     { field: "ataProjeto", headerName: "Projeto", width: 200 },
     { field: "ataPauta", headerName: "Pauta", width: 200 },
     { field: "ataDataCriacao", headerName: "Criado em", width: 150 },
-    /*git{ field: "ataLocal", headerName: "Local", width: 150 },    { field: "tipo", headerName: "Tipo", width: 150 }, 
+    /*{ field: "ataLocal", headerName: "Local", width: 150 },    { field: "tipo", headerName: "Tipo", width: 150 }, 
     { field: "estado", headerName: "Estado", width: 150 },*/
     {
       field: "Exibir",
