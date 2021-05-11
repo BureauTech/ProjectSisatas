@@ -3,11 +3,11 @@ import api from "./api";
 const endpoint = "/atas";
 
 const criarAta = (data) => {
-  api.post(`${endpoint}/cadastrarAta`, data);
+  return api.post(`${endpoint}/cadastrarAta`, data);
 };
 
 const pegarParticipantes = () => {
-  api.get(`${endpoint}/`);
+  return api.get(`${endpoint}/`);
 };
 
 const ultimoId = () => {
