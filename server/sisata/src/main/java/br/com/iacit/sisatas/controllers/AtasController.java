@@ -1,6 +1,7 @@
 package br.com.iacit.sisatas.controllers;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import br.com.iacit.sisatas.models.AtasProjectControllerModel;
 import br.com.iacit.sisatas.models.AtasTopicsControllerModel;
 import br.com.iacit.sisatas.projections.AtasProjectionId;
 import br.com.iacit.sisatas.repository.AtasRepository;
+import br.com.iacit.sisatas.conversor.Conversor;
 
 @CrossOrigin
 @Controller
@@ -69,13 +71,19 @@ public class AtasController {
 		@ResponseBody
         @RequestMapping(value = "/cadastrarAta", method = RequestMethod.POST, consumes = "application/json")
         public ResponseEntity<String> cadastrarAtas(@RequestBody AtasModel ata) throws IOException {
-            try {
-                ap.save(ata);
-            } catch (DataAccessException e) {
-                e.printStackTrace();
-                return ResponseEntity.badRequest().body(e.getMessage());
-            }
-            return ResponseEntity.ok().build();
+					String ultimoId = ap.findTopByOrderByAtaIdDesc().getAtaId();
+
+					Conversor conversor = new Conversor();
+					String novoId = conversor.calcularId(ultimoId);
+					ata.setAtaId(novoId);
+					
+					try {
+							ap.save(ata);
+					} catch (DataAccessException e) {
+							e.printStackTrace();
+							return ResponseEntity.badRequest().body(e.getMessage());
+					}
+					return ResponseEntity.ok().build();
         }
 		
 		@ResponseBody

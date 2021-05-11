@@ -74,4 +74,8 @@ public class AtasModel implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contemAssuntos")
 	@JsonManagedReference
 	private List<AssuntosModel> assuntos;
+
+	public void setAtaId(String id) {
+		this.ataId = id;
+	}
 }
