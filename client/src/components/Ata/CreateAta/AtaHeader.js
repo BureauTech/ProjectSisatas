@@ -1,8 +1,7 @@
-import { Container, Grid, withStyles, FormLabel, Input, Typography } from "@material-ui/core";
+import { Container, Grid, withStyles, FormLabel, Input } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import "./Components.css";
 import { styles } from "../../../assets/styles/Styles";
-import ataServices from "../../../services/ata";
 
 // Alterando css de componentes
 
@@ -16,19 +15,18 @@ const AtaHeader = (props) => {
 
   useEffect(() => {
     const final = ":00.000+00:00";
-    const datetimeInicio = dtInicio + "T" + hrInicio + final;
-    const datetimeFinal = dtFinal + "T" + hrFinal + final;
+    const datetimeInicio = dtInicio && hrInicio ? dtInicio + "T" + hrInicio + final : "";
+    const datetimeFinal = dtFinal && hrFinal ? dtFinal + "T" + hrFinal + final : "";
     setInfoHeader({
       //id: id,
       ataDataInicio: datetimeInicio,
       ataHoraInicio: datetimeInicio,
       ataDataFim: datetimeFinal,
       ataHoraFim: datetimeFinal,
-      ataLocal: local,
+      ataLocal: local ? local : "",
       geraAtas: {
         usuId: 1,
       },
-      ataDataCriacao: "",
     });
   }, [dtFinal, dtInicio, hrFinal, hrInicio, local, setInfoHeader]);
 
