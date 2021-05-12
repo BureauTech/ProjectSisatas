@@ -22,6 +22,7 @@ import br.com.iacit.sisatas.models.AtasPautaControllerModel;
 import br.com.iacit.sisatas.models.AtasProjectControllerModel;
 import br.com.iacit.sisatas.models.AtasTopicsControllerModel;
 import br.com.iacit.sisatas.projections.AtasProjectionDataGrid;
+import br.com.iacit.sisatas.projections.AtasProjectionExibir;
 import br.com.iacit.sisatas.projections.AtasProjectionId;
 import br.com.iacit.sisatas.repository.AtasRepository;
 import br.com.iacit.sisatas.conversor.Conversor;
@@ -112,26 +113,27 @@ public class AtasController {
 		
 		@ResponseBody
 		@RequestMapping(value = "/pegarAta/{numeroId}", method = RequestMethod.GET)
-		public ResponseEntity<AtasModel> pegarAta(@PathVariable String numeroId) {
+		public AtasProjectionExibir pegarAta(@PathVariable String numeroId) {
 			String ata_id = numeroId.substring(0, numeroId.length() -2) + "/" + numeroId.substring(numeroId.length() -2);
+			AtasProjectionExibir ataSelecionada = null;
 			try {
 				if (ap.existsByataId(ata_id)) {
-					AtasModel ataSelecionada = ap.findByataId(ata_id);
-			        return ResponseEntity.ok(ataSelecionada);
-			    }
+					ataSelecionada = ap.findByataId(ata_id);
+			    
+			  }
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 			}
-			return ResponseEntity.notFound().build();
+			return ataSelecionada;
 		}
 
 		@ResponseBody
 		@RequestMapping(value = "/excluirAtas/{ata_id}", method = RequestMethod.DELETE)
 		public ResponseEntity<String> excluirAtas(@PathVariable String ata_id) {
 			try {
-				AtasModel ataSelecionada = ap.findByataId(ata_id);
+				//AtasModel ataSelecionada = ap.findByataId(ata_id);
 				if (ap.existsByataId(ata_id)) {
-					ap.delete(ataSelecionada);
+					//ap.delete(ataSelecionada);
 			        return ResponseEntity.ok().build();
 			    }
 			} catch (DataAccessException e) {
