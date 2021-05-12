@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.iacit.sisatas.models.Estados;
+import br.com.iacit.sisatas.models.EstadosModel;
 import br.com.iacit.sisatas.repository.EstadosRepository;
 
 @Controller
@@ -23,7 +23,7 @@ public class EstadosController {
 
 			@ResponseBody
 			@RequestMapping(value = "/cadastrarEstados", method = RequestMethod.POST, consumes = "application/json")
-			public String cadastrarEstados(@RequestBody Estados estado) {
+			public String cadastrarEstados(@RequestBody EstadosModel estado) {
 				String result = null;
 				try {
 					ep.save(estado);
@@ -42,8 +42,8 @@ public class EstadosController {
 
 			@ResponseBody
 			@RequestMapping(value = "/listarEstados", method = RequestMethod.GET)
-			public List<Estados> listarEstados() {
-				List<Estados> estados = null;
+			public List<EstadosModel> listarEstados() {
+				List<EstadosModel> estados = null;
 				try {
 					estados = ep.findAll();
 				} catch (DataAccessException e) {
@@ -57,7 +57,7 @@ public class EstadosController {
 			public String excluirEstados(@PathVariable long est_id) {
 				String result = null;
 				try {
-					Estados estadoSelecionado = ep.findByestId(est_id);
+					EstadosModel estadoSelecionado = ep.findByestId(est_id);
 					ep.delete(estadoSelecionado);
 				} catch (DataAccessException e) {
 					result = e.getMessage();

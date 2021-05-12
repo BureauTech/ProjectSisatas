@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.iacit.sisatas.models.Logs;
+import br.com.iacit.sisatas.models.LogsModel;
 import br.com.iacit.sisatas.repository.LogsRepository;
 
 @Controller
@@ -22,7 +22,7 @@ public class LogsController {
 
 		@ResponseBody
 		@RequestMapping(value = "/cadastrarLogs", method = RequestMethod.POST, consumes = "application/json")
-		public String cadastrarLogs(@RequestBody Logs log) {
+		public String cadastrarLogs(@RequestBody LogsModel log) {
 			String result = null;
 			try {
 				lp.save(log);
@@ -35,8 +35,8 @@ public class LogsController {
 		
 		@ResponseBody
 		@RequestMapping(value = "/listarLogs", method = RequestMethod.GET)
-		public List<Logs> listarLogs() {
-			List<Logs> log = null;
+		public List<LogsModel> listarLogs() {
+			List<LogsModel> log = null;
 			try {
 				log = lp.findAll();
 			} catch (DataAccessException e) {

@@ -2,10 +2,10 @@ package br.com.iacit.sisatas.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.iacit.sisatas.models.Assuntos;
+import br.com.iacit.sisatas.models.AssuntosModel;
 
-public interface AssuntosRepository extends JpaRepository<Assuntos, String> {
+public interface AssuntosRepository extends JpaRepository<AssuntosModel, String> {
 	
-	Assuntos findByassId(long assId);
+	AssuntosModel findByassId(long assId);
 
 }

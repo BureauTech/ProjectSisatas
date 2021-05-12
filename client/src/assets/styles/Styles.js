@@ -2,8 +2,9 @@ const styles = (theme) => ({
   grid: {
     backgroundColor: theme.palette.primary.main,
     borderRadius: "20px",
-    padding: 5,
-    paddingLeft: 25,
+    //padding: "10px 25px",
+    paddingTop: 10,
+    //paddingLeft: 25,
   },
 
   textField: {
@@ -45,7 +46,7 @@ const styles = (theme) => ({
     color: "white",
     "&:hover": {
       color: "#26BAF4",
-    }
+    },
   },
 
   radio: {
@@ -65,6 +66,11 @@ const styles = (theme) => ({
     backgroundColor: "#26BAF4",
   },
 
+  hoverSecondary: {
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
 });
 
 export { styles };

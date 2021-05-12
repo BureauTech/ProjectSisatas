@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-import br.com.iacit.sisatas.models.Revisoes;
+import br.com.iacit.sisatas.models.RevisoesModel;
 import br.com.iacit.sisatas.repository.RevisoesRepository;
-
+@CrossOrigin
 @Controller
 @RequestMapping("/revisoes")
 public class RevisoesController {
@@ -23,7 +24,7 @@ public class RevisoesController {
 
 		@ResponseBody
 		@RequestMapping(value = "/cadastrarRevisoes", method = RequestMethod.POST, consumes = "application/json")
-		public String cadastrarRevisoes(@RequestBody Revisoes usuario) {
+		public String cadastrarRevisoes(@RequestBody RevisoesModel usuario) {
 			String result = null;
 			try {
 				rp.save(usuario);
@@ -42,8 +43,8 @@ public class RevisoesController {
 
 		@ResponseBody
 		@RequestMapping(value = "/listarRevisoes", method = RequestMethod.GET)
-		public List<Revisoes> listarRevisoes() {
-			List<Revisoes> revisoes = null;
+		public List<RevisoesModel> listarRevisoes() {
+			List<RevisoesModel> revisoes = null;
 			try {
 				revisoes = rp.findAll();
 			} catch (DataAccessException e) {
@@ -58,7 +59,7 @@ public class RevisoesController {
 		public String excluirRevisoes(@PathVariable long rev_id) {
 			String result = null;
 			try {
-				Revisoes revisaoSelecionada = rp.findByrevId(rev_id);
+				RevisoesModel revisaoSelecionada = rp.findByrevId(rev_id);
 				rp.delete(revisaoSelecionada);
 			} catch (DataAccessException e) {
 				result = e.getMessage();

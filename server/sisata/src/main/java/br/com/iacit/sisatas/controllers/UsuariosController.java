@@ -1,22 +1,26 @@
 package br.com.iacit.sisatas.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.iacit.sisatas.models.Usuarios;
+import br.com.iacit.sisatas.mapper.UsuarioMapper;
+import br.com.iacit.sisatas.models.UsuariosModel;
+import br.com.iacit.sisatas.projections.UsuariosProjectionDataGrid;
+import br.com.iacit.sisatas.projections.UsuariosProjectionParticipante;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
+import br.com.iacit.sisatas.returns.MessageReturn;
 
 @CrossOrigin
 @Controller
@@ -24,7 +28,7 @@ import br.com.iacit.sisatas.repository.UsuariosRepository;
 public class UsuariosController {
 	
 	/**
-	 * @author daniel.oliveira
+	 * @Author Daniel Oliveira
 	 * 
 	 * Atribuição à variável <up> os métodos implementados de JpaRepository<>,
 	 * via interface <br.com.iacit.sisatas.repository.UsuariosRepository>
@@ -33,156 +37,257 @@ public class UsuariosController {
 	
 	@Autowired
 	private UsuariosRepository up;
-
+	
+	
 	/**
-	 * @author daniel.oliveira
+	 * @Author Daniel Oliveira
+	 *
+	 * Valida se e-mail já está cadastrado no DB.
+	 *
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/validadorUsuEmail", method = RequestMethod.GET)
+	public Boolean validadorUsuEmail(@RequestParam String usuEmail) {
+		return up.existsByusuEmail(usuEmail);
+	}
+	
+	/**
+	 * @Author Daniel Oliveira
 	 * 
 	 * METHOD: POST; Para cadastrar Usuários.
 	 * URL: http://localhost:8080/usuarios/cadastrarUsuarios
-	 * BODY: 
-	 * {
-    		"usu_nome": "<String>",
-    		"usu_email": "<String>",
-    		"usu_senha" : "<String>",
-    		"usu_telefone": "<String>",
-    		"usu_cargo": "<String>",
-    		"usu_area_empresa": "<String>",
-    		"usu_assinatura": "<String>",
-    		"pertenceUsuarios": {
-        							"id":<int>,
-        							"per_nome": "<String>"
-    							}
-		}
-		Conforme <models.Usuarios>;
-		Obs: <pertenceUsuarios>, deverá ser atribuído um objeto, este objeto deverá existir no banco de dados;
-		Pode passar os dois argumentos ou somente o <id> para o objeto <pertenceUsuarios>.
-	 * 
-	 * RETURN: Retorna uma String <result>;
-	 * result = 1, persistência realizada com sucesso;
-	 * result != 1, persistência não realizada; null ou a mensagem de erro apresentada ao tentar realizar a persistência.
 	 *
-	 */
+	 		imagem: multipart/form-data
+    		"usuNome": "<String>",
+    		"usuEmail": "<String>",
+    		"usuTelefone": "<String>",
+    		"usuCargo": "<String>",
+    		"usuAreaEmpresa": "<String>",
+    		"usuPerfil" : <Long>
+	
+	 * 
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+	 * 	String operacao;
+	 *  Boolean erro;
+	 *  String mensagem;
+	 * )
+	 * operacao: "cadastrarUsuarios";
+	 * erro: true, erro ao realizar a persistência ou e-mail já cadastrado; false: persistência realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 * 
+	 */ 
 	
 	@ResponseBody
-	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = "application/json")
-	public String cadastrarUsuario(@RequestBody Usuarios usuario) {
-		String result = null;
+	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = { "multipart/form-data" })
+	public MessageReturn cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
+		MessageReturn result = new MessageReturn();
+		
+		result.setOperacao("cadastrarUsuarios");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		UsuariosModel pessoa = null;
+
 		try {
-			up.save(usuario);
-		} catch (DataAccessException e) {
+
+			pessoa = mapper.readValue(usuario, UsuariosModel.class);
+			// Validar unicidade de e-mail.
+			
+			if (!up.existsByusuEmail(pessoa.getUsuEmail())) {
+				// Validar se a imagem é difente de null,
+				// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
+				if (!imagem.equals(null)) {
+					// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
+					up.save(UsuarioMapper.converter(pessoa, imagem));
+				} else {
+					// save os dados no DB, sem imagem/assinatura.
+					up.save(pessoa);
+				}
+				result.setMensagem("Usuário cadastrado com sucesso.");
+				result.setErro(false);
+			} else {
+				result.setMensagem("E-mail já cadastrado. Usuário não cadastrado.");
+				result.setErro(true);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-			result = e.getMessage();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
 		}
 		return result;
 	}
 	
 	/**
-	 * @author daniel.oliveira
+	 * @Author Daniel Oliveira
 	 * 
-	 * METHOD: POST; Para atualizar Usuários.
+	 * METHOD: PUT; Para atualizar Usuários.
 	 * URL: http://localhost:8080/usuarios/atualizarUsuarios
 	 * BODY: 
-	 * {	
-	 		"id": <long>,
-    		"usu_nome": "<String>",
-    		"usu_email": "<String>",
-    		"usu_senha" : "<String>",
-    		"usu_telefone": "<String>",
-    		"usu_cargo": "<String>",
-    		"usu_area_empresa": "<String>",
-    		"usu_assinatura": "<String>",
-    		"pertenceUsuarios": {
-        							"id":<long>,
-        							"per_nome": "<String>"
-    							}
-		}
-		Conforme <models.Perfis>
-		Obs: <pertenceUsuarios>, deverá ser atribuído um objeto, este objeto deverá existir no banco de dados;
-		Pode passar os dois argumentos ou somente o <id> para o objeto <pertenceUsuarios>.
-			 <id> deverá ser informado, pois será utilizado como referência para realizar a atualização;
+	 *  	imagem: multipart/form-data
+	 *  	"usuId": Long,
+    		"usuNome": "<String>",
+    		"usuEmail": "<String>",
+    		"usuTelefone": "<String>",
+    		"usuCargo": "<String>",
+    		"usuAreaEmpresa": "<String>",
+    		"usuAssinatura": "<String>",
+    		"usuPerfil" : <Long>		
+
+		<usuId> deverá ser informado, pois será utilizado como referência para realizar a atualização;
 	 * 
-	 * RETURN: Retorna uma String <result>;
-	 * result = 1, Atualização realizada com sucesso;
-	 * result != 1, Atualização não realizada; null ou a mensagem de erro apresentada ao tentar realizar a persistência.
-	 *
-	 */
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+	 * 	String operacao;
+	 *  Boolean erro;
+	 *  String mensagem;
+	 * )
+	 * operacao: "atualizarUsuarios";
+	 * erro: true, erro ao realizar a persistência ou e-mail já cadastrado; false: persistência realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 * 
+	 */ 
 	
 	@ResponseBody
-	@Query(value = "")
-	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.POST, consumes = "application/json")
-	public String atualizarUsuarios(@RequestBody Usuarios usuario) {
-		String result = null;
+	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.PUT, consumes = { "multipart/form-data" })
+	public MessageReturn atualizarUsuarios(MultipartFile imagem, String usuario) {
+		MessageReturn result = new MessageReturn();
+
+		result.setOperacao("atualizarUsuarios");
+
+		ObjectMapper mapper = new ObjectMapper();
+		UsuariosModel usuarioController = null;
+
 		try {
-			up.save(usuario);
-		} catch (DataAccessException e) {
+			// Mapeia o usuário vindo do front para UsuariosModel;
+			usuarioController = mapper.readValue(usuario, UsuariosModel.class);
+			// Constroi o objeto, para comparar os emails antes de fazer a atualização;
+			UsuariosModel usuarioBanco = up.findByusuId(usuarioController.getUsuId());
+
+			// Verifica se o e-mail salvo no banco é o mesmo enviado do front;
+			if (!usuarioBanco.getUsuEmail().equals(usuarioController.getUsuEmail())) {
+
+				// Validar unicidade de e-mail.
+				if (!up.existsByusuEmail(usuarioController.getUsuEmail())) {
+					// Validar se a imagem é difente de null,
+					// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
+					if (imagem != null) {
+						// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
+						up.save(UsuarioMapper.converter(usuarioController, imagem));
+					} else {
+						// save os dados no DB, antes, faz o mepeamento dos dados sem a imagem.
+						up.save(usuarioController);
+					}
+					result.setMensagem("Usuário atualizado com sucesso.");
+					result.setErro(false);
+				} else {
+					result.setMensagem("E-mail já cadastrado. Usuário não atualizado.");
+					result.setErro(true);
+				}
+			} else {
+				// Validar se a imagem é difente de null,
+				// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
+				if (imagem != null) {
+					// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
+					up.save(UsuarioMapper.converter(usuarioController, imagem));
+				} else {
+					// save os dados no DB, antes, faz o mepeamento dos dados sem a imagem.
+					up.save(usuarioController);
+				}
+				result.setMensagem("Usuário atualizado com sucesso.");
+				result.setErro(false);
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			result = e.getMessage();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
 		}
 		return result;
 	}
 	
 	/**
-	 * @author daniel.oliveira
+	 * @Author Daniel Oliveira
 	 * 
 	 * METHOD: GET; Para listar Usuários.
 	 * URL: http://localhost:8080/usuarios/listarUsuarios
+	 * PARAM: lista
 	 * 
-	 * RETURN: Retorna uma List<Usuarios> <usuarios>;
+	 * DataGrid ou Participante
+	 * 
+	 * RETURN: Retorna uma Lista <usuarios> List<UsuariosProjectionDataGrid> ou List<UsuariosProjectionParticipante>;
 	 *
 	 */
 
+	
 	@ResponseBody
 	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuarios() {
-		List<Usuarios> usuarios = null;
-		try {
-			usuarios = up.findAll();
-		} catch (DataAccessException e) {
-			e.printStackTrace();
+	public List<?> listarUsuarios(@RequestParam String lista) {
+		
+		List<?> usuarios= null;
+		
+		switch (lista) {
+		case "DataGrid":
+			try {
+				usuarios = up.findBy(UsuariosProjectionDataGrid.class);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "Participante":
+			try {
+				usuarios = up.findBy(UsuariosProjectionParticipante.class);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		default:
+			break;
 		}
-
 		return usuarios;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuNome", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuNome(@RequestParam("usuNome") String usuNome) {
-		List<Usuarios> usuarios = null;
-		try {
-			usuarios = up.searchByusuNomeContainingIgnoreCase(usuNome);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
 
-		return usuarios;
-	}
 	/*
 	@ResponseBody
-	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuAreaEmpresa", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuAreaEmpresa(@RequestParam("usuAreaEmpresa") String usuAreaEmpresa) {
-		List<Usuarios> usuarios = null;
-		try {
-			usuarios = up.searchByusuAreaEmpresaContainingIgnoreCase(usuAreaEmpresa);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
+	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
+	public MessageReturn listarUsuarios(@RequestParam String lista) {
+		
+		MessageReturn result = new MessageReturn();
 
-		return usuarios;
-	}*/
+		result.setOperacao("listarUsuarios");
+		List<?> usuarios= null;
+		
+		switch (lista) {
+		case "DataGrid":
+			try {
+				
+				usuarios = up.findBy(UsuariosProjectionDataGrid.class);
+				result.setMensagem("Listagem realizada com sucesso.");
+				result.setErro(false);
+				result.setData(usuarios);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "Participante":
+			try {
+				usuarios = up.findBy(UsuariosProjectionParticipante.class);
+				result.setMensagem("Listagem realizada com sucesso.");
+				result.setErro(false);
+				result.setData(usuarios);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.setMensagem(e.getMessage());
+				result.setErro(true);
+			}
+			break;
+		default:
+			break;
+		}
+		return result;
+	} */
 	
-	@ResponseBody
-	@RequestMapping(value = "/listarUsuariosContainingIgnoreCaseUsuEmail", method = RequestMethod.GET)
-	public List<Usuarios> listarUsuariosContainingIgnoreCaseUsuEmail(@RequestParam("usuEmail") String usuEmail) {
-		List<Usuarios> usuarios = null;
-		try {
-			usuarios = up.searchByusuEmailContainingIgnoreCase(usuEmail);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-
-		return usuarios;
-	}
-
 	/**
 	 * @author Denis Lima
 	 * 
@@ -191,25 +296,26 @@ public class UsuariosController {
 	 * 
 	 * PathVariable: {usu_id}
 	 * 
-	 * RETURN: Retorna um usuário <Usuarios>;
+	 * RETURN: Retorna um usuário <UsuariosModel>;
 	 *
 	 */
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/pegarUsuario/{usu_id}", method = RequestMethod.GET)
-	public Usuarios pegarUsuario(@PathVariable long usu_id) {
-		Usuarios result = null;
+	public UsuariosModel pegarUsuario(@PathVariable long usu_id) {
+		UsuariosModel usuarioSelecionado = null;
 		try {
-			Usuarios usuarioSelecionado = up.findByusuId(usu_id);
-			result = usuarioSelecionado;
-		} catch (DataAccessException e) {
+			usuarioSelecionado = up.findByusuId(usu_id);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return usuarioSelecionado;	
 	}
+	
 
 	/**
-	 * @author daniel.oliveira
+	 * @Author Daniel Oliveira
+	 * @Updated Denis Lima
 	 * 
 	 * METHOD: DELETE; Para excluir Perfis.
 	 * URL: http://localhost:8080/usuarios/excluirUsuarios/{usu_id}
@@ -217,8 +323,8 @@ public class UsuariosController {
 	 * PathVariable: {usu_id}
 	 * 
 	 * RETURN: Retorna uma String <result>;
-	 * result = 1, Exclusão realizada com sucesso;
-	 * result != 1, Exclusão não realizada; null ou a mensagem de erro apresentada ao tentar realizar a persistência.
+	 * result = "Exclusão realizada com sucesso.";
+	 * result = "Mensagem da exceção apresentada.", caso ocorra.
 	 *
 	 */
 	
@@ -226,11 +332,11 @@ public class UsuariosController {
 	@RequestMapping(value = "/excluirUsuarios/{usu_id}", method = RequestMethod.DELETE)
 	public String excluirUsuarios(@PathVariable long usu_id) {
 		String result = null;
-		System.out.println(usu_id);
 		try {
-			Usuarios usuarioSelecionado = up.findByusuId(usu_id);
+			UsuariosModel usuarioSelecionado = up.findByusuId(usu_id);
 			up.delete(usuarioSelecionado);
-		} catch (DataAccessException e) {
+			result = "Exclusão realizada com sucesso.";
+		} catch (Exception e) {
 			result = e.getMessage();
 		}
 		return result;
