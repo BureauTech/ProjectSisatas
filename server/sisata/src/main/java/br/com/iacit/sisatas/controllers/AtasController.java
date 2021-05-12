@@ -21,6 +21,7 @@ import br.com.iacit.sisatas.models.AtasModel;
 import br.com.iacit.sisatas.models.AtasPautaControllerModel;
 import br.com.iacit.sisatas.models.AtasProjectControllerModel;
 import br.com.iacit.sisatas.models.AtasTopicsControllerModel;
+import br.com.iacit.sisatas.projections.AtasProjectionDataGrid;
 import br.com.iacit.sisatas.projections.AtasProjectionId;
 import br.com.iacit.sisatas.repository.AtasRepository;
 import br.com.iacit.sisatas.conversor.Conversor;
@@ -99,10 +100,10 @@ public class AtasController {
 
 		@ResponseBody
 		@RequestMapping(value = "/listarAtas", method = RequestMethod.GET)
-		public List<AtasModel> listarAtas() {
-			List<AtasModel> atas = null;
+		public List<?> listarAtas() {
+			List<?> atas = null;
 			try {
-				atas = ap.findAll();
+				atas = ap.findBy(AtasProjectionDataGrid.class);
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 			}
