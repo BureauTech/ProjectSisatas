@@ -82,10 +82,17 @@ const Register = (props) => {
       .cadastrarUsuario(formData)
       /* / Alterações Daniel */
       .then((res) => {
-        clear();
-        setMsgSucesso("Usuário cadastrado com sucesso!");
-        setMsgErro(false);
-        setOpenSnack(true);
+        if (res.data.erro == true){
+          setMsgSucesso(false);
+          setMsgErro(res.data.mensagem);
+          setOpenSnack(true);
+        }
+        else{
+          clear();
+          setMsgSucesso("Usuário cadastrado com sucesso!");
+          setMsgErro(false);
+          setOpenSnack(true);
+        }
       })
       .catch((err) => {
         console.log(err.message);
