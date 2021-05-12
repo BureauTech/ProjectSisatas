@@ -9,9 +9,9 @@ import br.com.iacit.sisatas.projections.AtasProjectionId;
 
 public interface AtasRepository extends JpaRepository<AtasModel, String> {
 
-	AtasModel findByataId(long ataId);
+	AtasModel findByataId(String ataId);
 
-	Boolean existsByataId(long ataId);
+	Boolean existsByataId(String ataId);
 
 	AtasProjectionId findTopBy();
 

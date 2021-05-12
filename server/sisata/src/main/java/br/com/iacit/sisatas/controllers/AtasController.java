@@ -110,8 +110,9 @@ public class AtasController {
 		}
 		
 		@ResponseBody
-		@RequestMapping(value = "/pegarAta/{ata_id}", method = RequestMethod.GET)
-		public ResponseEntity<AtasModel> pegarAta(@PathVariable long ata_id) {
+		@RequestMapping(value = "/pegarAta/{numeroId}", method = RequestMethod.GET)
+		public ResponseEntity<AtasModel> pegarAta(@PathVariable String numeroId) {
+			String ata_id = numeroId.substring(0, numeroId.length() -2) + "/" + numeroId.substring(numeroId.length() -2);
 			try {
 				if (ap.existsByataId(ata_id)) {
 					AtasModel ataSelecionada = ap.findByataId(ata_id);
@@ -125,7 +126,7 @@ public class AtasController {
 
 		@ResponseBody
 		@RequestMapping(value = "/excluirAtas/{ata_id}", method = RequestMethod.DELETE)
-		public ResponseEntity<String> excluirAtas(@PathVariable long ata_id) {
+		public ResponseEntity<String> excluirAtas(@PathVariable String ata_id) {
 			try {
 				AtasModel ataSelecionada = ap.findByataId(ata_id);
 				if (ap.existsByataId(ata_id)) {
