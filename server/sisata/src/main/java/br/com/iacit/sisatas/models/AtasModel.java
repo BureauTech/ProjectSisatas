@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -42,12 +43,16 @@ public class AtasModel implements Serializable{
 	@Id
 	private String ataId;
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ataDataInicio;
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ataDataFim;
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "HH:mm:ss")
 	private Date ataHoraInicio;
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "HH:mm:ss")
 	private Date ataHoraFim;
 	@Column(nullable = false)
 	@CreationTimestamp
@@ -74,8 +79,4 @@ public class AtasModel implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contemAssuntos")
 	@JsonManagedReference
 	private List<AssuntosModel> assuntos;
-
-	public void setAtaId(String id) {
-		this.ataId = id;
-	}
 }

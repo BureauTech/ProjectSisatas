@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -43,6 +45,7 @@ public class AssuntosModel implements Serializable {
 	@Column(nullable = false, length = 30)
 	private String assAssunto;
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date assPrazo;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
