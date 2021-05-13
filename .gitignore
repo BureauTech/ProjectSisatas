@@ -1,3 +1,5 @@
 
 server/sisata/target/classes/META-INF/maven/br.com.iacit/sisata/pom.properties
 server/sisata/target/test-classes/br/com/iacit/sisata/SisatasApplicationTests.class
+server/sisata/src/main/resources/application.properties
+server/sisata/target/classes/application.properties
