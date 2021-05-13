@@ -12,15 +12,16 @@ import { useInfoAta } from "../../../context/InfoAta";
 
 const AtaTemplate = (props) => {
   const { infoAta } = useInfoAta();
+  console.log(infoAta);
 
   const dados = {
-    id: infoAta.header.id ? infoAta.header.id : "",
-    data: infoAta.header.dtInicio ? infoAta.header.dtInicio + " - " + infoAta.header.dtFinal : "",
-    inicio: infoAta.header.hrInicio ? infoAta.header.hrInicio : "",
-    fim: infoAta.header.hrFinal ? infoAta.header.hrFinal : "",
-    local: infoAta.header.local ? infoAta.header.local : "",
+    id: infoAta.header.ataId ? infoAta.header.ataId : "",
+    data: infoAta.header.ataDataInicio ? infoAta.header.ataDataInicio + " - " + infoAta.header.ataDataFim : "",
+    inicio: infoAta.header.ataHoraInicio ? infoAta.header.ataHoraInicio : "",
+    fim: infoAta.header.ataHoraFim ? infoAta.header.ataHoraFim : "",
+    local: infoAta.header.ataLocal ? infoAta.header.ataLocal : "",
     logo: logo,
-    tema: infoAta.projeto.projeto ? infoAta.projeto.projeto : "",
+    tema: infoAta.projeto.ataProjeto ? infoAta.projeto.ataProjeto : "",
     listaParticipantes: infoAta.projeto.participantes ? infoAta.projeto.participantes : [],
     pauta: infoAta.pauta,
     observacoes: infoAta.observacoes ? infoAta.observacoes : [],

@@ -2,6 +2,12 @@ import { Container, Table, TableBody, TableCell, TableContainer, TableHead, Tabl
 
 const Assunto = (props) => {
   const { assuntos } = props.dados;
+
+  const formatDate = (date) => {
+    const formated = date.split("-").reverse().join("/");
+    return formated;
+  };
+
   return (
     <Container style={{ marginTop: 20, padding: 0 }}>
       <TableContainer>
@@ -54,7 +60,7 @@ const Assunto = (props) => {
           </TableHead>
           <TableBody>
             {assuntos &&
-              assuntos.map((dados) => (
+              assuntos.map((dados, index) => (
                 <TableRow>
                   <TableCell
                     style={{
@@ -63,7 +69,7 @@ const Assunto = (props) => {
                       border: "1px solid black",
                     }}
                   >
-                    {dados.id}.
+                    {index}.
                   </TableCell>
                   <TableCell
                     style={{
@@ -72,7 +78,7 @@ const Assunto = (props) => {
                       border: "1px solid black",
                     }}
                   >
-                    {dados.topic}
+                    {dados.assAssunto}
                   </TableCell>
                   <TableCell
                     align="center"
@@ -82,7 +88,7 @@ const Assunto = (props) => {
                       border: "1px solid black",
                     }}
                   >
-                    {dados.inCharge}
+                    {dados.responsavelAssuntos[0].usuNome}
                   </TableCell>
                   <TableCell
                     align="center"
@@ -92,7 +98,7 @@ const Assunto = (props) => {
                       border: "1px solid black",
                     }}
                   >
-                    {dados.datetime}
+                    {formatDate(dados.assPrazo)}
                   </TableCell>
                 </TableRow>
               ))}

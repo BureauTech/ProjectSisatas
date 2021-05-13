@@ -51,7 +51,7 @@ const Participantes = (props) => {
                     fontSize: "10pt",
                   }}
                 >
-                  {participante.cargo} - {participante.nome}
+                  {participante.usuCargo} - {participante.usuNome}
                 </TableCell>
                 <TableCell
                   style={{
@@ -61,7 +61,7 @@ const Participantes = (props) => {
                     fontSize: "10pt",
                   }}
                 >
-                  {participante.area}
+                  {participante.usuAreaEmpresa}
                 </TableCell>
                 <TableCell
                   style={{
@@ -71,7 +71,7 @@ const Participantes = (props) => {
                     fontSize: "10pt",
                   }}
                 >
-                  {participante.email}
+                  {participante.usuEmail}
                 </TableCell>
                 <TableCell
                   style={{
@@ -81,7 +81,7 @@ const Participantes = (props) => {
                     fontSize: "10pt",
                   }}
                 >
-                  {participante.telefone}
+                  {participante.usuTelefone}
                 </TableCell>
               </TableRow>
             ))}
