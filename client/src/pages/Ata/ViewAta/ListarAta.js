@@ -4,9 +4,10 @@ import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import "./Data.css";
-import ptBR from "../ptBR/DataGrid";
-import dataServices from "../../services/data.js";
+import "../../../components/ExibirAta/ListarAta.css";
+import ptBR from "../../../components/ptBR/DataGrid";
+import ataServices from "../../../services/ata.js";
+import Alerta from "../../../components/Snackbar/Alerta.js";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -49,14 +50,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Data() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
-  const [openSnack, setOpenSnack] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [msgSucesso, setMsgSucesso] = useState("");
-  const [msgErro, setMsgErro] = useState("");
   const history = useHistory();
 
   useEffect(() => {
-    dataServices
+    ataServices
       .listarAtas("DataGrid")
       .then((res) => {
         let lista = res.data;
@@ -68,10 +65,6 @@ export default function Data() {
       })
       .catch((err) => {
         console.log(err.message);
-        setIsLoading(false);
-        setMsgSucesso(false);
-        setMsgErro("Ocorreu um erro ao carregar a lista de atas");
-        setOpenSnack(true);
       });
   }, [setRows]);
 

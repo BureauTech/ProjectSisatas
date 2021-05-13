@@ -14,10 +14,15 @@ const ultimoId = () => {
   return api.get(`${endpoint}/ultimoRegistro`);
 };
 
+const listarAtas = (param) => {
+  return api.get(`${endpoint}/listarAtas?lista=${param}`);
+};
+
 const ataServices = {
   criarAta,
   pegarAta,
   ultimoId,
+  listarAtas,
 };
 
 export default ataServices;
