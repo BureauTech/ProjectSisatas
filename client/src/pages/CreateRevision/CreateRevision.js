@@ -4,20 +4,34 @@ import { Link } from "react-router-dom";
 
 import RevisionHeader from "../../components/CreateRevision/RevisionHeader";
 import RevisionSubject from "../../components/CreateRevision/RevisionSubject";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Style.css";
 import revisaoServices from "../../services/revisao";
+import userServices from "../../services/user";
+import ataServices from "../../services/ata";
 
 const CreateRevision = (props) => {
+  const {ataid, user} = props;
   const theme = useTheme();
+
+  const [revAssunto, setInfoAss] = useState("");
+  const [infoHeader, setRevHeader] = useState({});
+
+  const [usu, setUsu] = useState();
+  const [ata, setAta] = useState();
+
+  const body = {
+    ...infoHeader,
+    revAssunto
+   };
+   //body.infoHeader.contemRevisoes.ataId = props.ataid;
+   //body.responsavelRevisoes.usuId = props.user;
+
   const CriarRevisao = (e) => {
     e.preventDefault();
-    const body = {
-      revAssunto: "assunto1",
-      revPrazo: "12/12/12",
-    };
     try {
-      revisaoServices.criarRevisao(body);
+      //revisaoServices.criarRevisao(body);
+      console.log("olha"+ JSON.stringify(body));
     } catch (error) {
       console.log(error.message);
     }
@@ -27,10 +41,10 @@ const CreateRevision = (props) => {
     <Container>
       <form onSubmit={(e) => CriarRevisao(e)}>
         <Grid container style={{ marginBottom: 10 }}>
-          <RevisionHeader />
+          <RevisionHeader setRevHeader={setRevHeader} resp={props.user} ataid={props.ataid}/>
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
-          <RevisionSubject />
+          <RevisionSubject setInfoAss={setInfoAss}/>
         </Grid>
         <Grid container justify="space-between" style={{ padding: 24 }}>
           <Link to="/ata" style={{ textDecoration: "none" }}>
