@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import br.com.iacit.sisatas.models.AssuntosModel;
 import br.com.iacit.sisatas.models.UsuariosModel;
@@ -39,17 +42,20 @@ public class EscritorExcel {
 	}
 	
 	private void writeCabecalho() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
+
 		Cell numero = sheet.getRow(1).getCell(1);
 		numero.setCellValue("ATA Nº.: " + ata.getAtaId());
 
 		Cell data = sheet.getRow(1).getCell(3);
-		data.setCellValue("DATA: " + ata.getAtaDataInicio());
+		data.setCellValue("DATA: " + dateFormat.format(ata.getAtaDataInicio()));
 
 		Cell horaInicio = sheet.getRow(2).getCell(3);
-		horaInicio.setCellValue("INÍCIO: " + ata.getAtaHoraInicio());
+		horaInicio.setCellValue("INÍCIO: " + timeFormat.format(ata.getAtaHoraInicio()));
 
 		Cell horaFim = sheet.getRow(2).getCell(4);
-		horaFim.setCellValue("FIM: " + ata.getAtaHoraFim());
+		horaFim.setCellValue("FIM: " + timeFormat.format(ata.getAtaHoraFim()));
 
 		Cell local = sheet.getRow(3).getCell(3);
 		local.setCellValue("LOCAL: " + ata.getAtaLocal());
@@ -145,29 +151,84 @@ public class EscritorExcel {
 	}
 	
 	private void writeAssuntos() {
-		rownum += 3;
+		rownum += 2;
+
+		XSSFCellStyle borderBottom = workbook.createCellStyle();
+		borderBottom.setBorderBottom(BorderStyle.THIN);
+		for(int col = 1; col < 6; col++)
+			sheet.getRow(rownum-1).getCell(col).setCellStyle(borderBottom);
+
+		XSSFCellStyle styleCell = workbook.createCellStyle();
+		XSSFFont font = workbook.createFont();
+		font.setFontHeightInPoints((short)10);
+		font.setFontName("Arial");
+		font.setBold(true);
+		font.setItalic(false);
+		styleCell.setFont(font);
+
+		XSSFCellStyle borderLeft = workbook.createCellStyle();
+		borderLeft.setBorderLeft(BorderStyle.THIN);
+		borderLeft.setFont(font);
+
+		XSSFCellStyle borderRight = workbook.createCellStyle();
+		borderRight.setBorderRight(BorderStyle.THIN);
+		borderRight.setFont(font);
+
+		XSSFCell assuntosIdCab = sheet.getRow(rownum).getCell(1);
+		assuntosIdCab.setCellValue("ID");
+		assuntosIdCab.setCellStyle(borderLeft);
+
+        sheet.addMergedRegion(new CellRangeAddress(rownum, rownum, 2, 3));
+        XSSFCell assuntosCab = sheet.getRow(rownum).getCell(2);
+        assuntosCab.setCellValue("ASSUNTO");
+        assuntosCab.setCellStyle(styleCell);
+
+        XSSFCell assuntosRespCab = sheet.getRow(rownum).getCell(4);
+        assuntosRespCab.setCellValue("RESPONSÁVEL");
+        assuntosRespCab.setCellStyle(styleCell);
+
+        XSSFCell assuntosPrazoCab = sheet.getRow(rownum).getCell(5);
+        assuntosPrazoCab.setCellValue("PRAZO");
+        assuntosPrazoCab.setCellStyle(borderRight);
 
 		for (AssuntosModel assunto : ata.getAssuntos()) {
-			Cell idAssunto1 = sheet.getRow(rownum).getCell(1);
-			idAssunto1.setCellValue(assunto.getAssId());
+			borderLeft = workbook.createCellStyle();
+			borderLeft.setBorderLeft(BorderStyle.THIN);
 
+			borderRight = workbook.createCellStyle();
+			borderRight.setBorderRight(BorderStyle.THIN);
+
+			Cell idAssunto1 = sheet.getRow(++rownum).getCell(1);
+			idAssunto1.setCellValue(assunto.getAssId().toString());
+			idAssunto1.setCellStyle(borderLeft);
+
+			sheet.addMergedRegion(new CellRangeAddress(rownum, rownum, 2, 3));
 			Cell nomeAssunto1 = sheet.getRow(rownum).getCell(2);
 			nomeAssunto1.setCellValue(assunto.getAssAssunto());
 
 			Cell responsavelAssunto1 = sheet.getRow(rownum).getCell(4);
-			responsavelAssunto1.setCellValue(assunto.getResponsavelAssuntos().get(0).getUsuNome());
 
+			ArrayList<String> nomes = new ArrayList<>();
+			for (UsuariosModel participante: assunto.getResponsavelAssuntos())
+				nomes.add(participante.getUsuNome());
+			responsavelAssunto1.setCellValue(String.join(", ", nomes));
+
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 			Cell prazoAssunto1 = sheet.getRow(rownum).getCell(5);
-			prazoAssunto1.setCellValue(assunto.getAssPrazo().toString());
+			prazoAssunto1.setCellValue(dateFormat.format(assunto.getAssPrazo()));
+			prazoAssunto1.setCellStyle(borderRight);
 
-			rownum++;
-
-			// http://localhost:8080/download/ata/excel/01/21
 		}
+
+		XSSFCellStyle borderTop = workbook.createCellStyle();
+		borderTop.setBorderTop(BorderStyle.THIN);
+		for(int col = 1; col < 6; col++)
+			sheet.getRow(rownum+1).getCell(col).setCellStyle(borderTop);
 	}
 	
 	private void writeAsssinaturas() {
-		
+		// http://localhost:8080/download/ata/excel/01/21
+
 	}
 
 	public byte[] getByteArray() throws IOException {
