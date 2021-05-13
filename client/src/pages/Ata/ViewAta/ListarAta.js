@@ -52,6 +52,11 @@ export default function Data() {
   const [rows, setRows] = useState([]);
   const history = useHistory();
 
+  const formatDate = (date) => {
+    const data = new Date(date).toLocaleDateString();
+    return data;
+  };
+
   useEffect(() => {
     ataServices
       .listarAtas("DataGrid")
@@ -59,6 +64,7 @@ export default function Data() {
         let lista = res.data;
         let lista2 = [];
         lista.forEach((ata) => {
+          ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
           lista2.push({ id: ata["ataId"], ...ata });
         });
         setRows(lista2);
