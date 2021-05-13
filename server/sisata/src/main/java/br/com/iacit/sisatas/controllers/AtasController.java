@@ -213,7 +213,7 @@ public class AtasController {
 
 		try {
 			if (ap.existsByataId(ata_id)) {
-				AtasModel ataSelecionada = ap.findByataId(ata_id);
+				AtasModel ataSelecionada = (AtasModel) ap.findByataId(ata_id);
 				ap.delete(ataSelecionada);
 				result.setMensagem("Ata excluída com sucesso.");
 				result.setErro(false);
