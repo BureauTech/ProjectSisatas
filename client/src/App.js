@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Data from "./components/ExibirAta/Data";
+import ListarAta from "./pages/Ata/ViewAta/ListarAta";
 import Register from "./components/RegisterUser/Register";
 import CreateAta from "./pages/Ata/CreateAta/CreateAta";
 import ViewAta from "./pages/Ata/ViewAta/ViewAta";
@@ -47,7 +47,7 @@ function App() {
           <Menu />
           <Switch>
             <Route path="/nova-ata" component={() => <CreateAta />} />
-            <Route path="/visualizar-atas" component={() => <Data />} />
+            <Route path="/visualizar-atas" component={() => <ListarAta />} />
             <Route path="/nova-revisao" component={() => <CreateRevision />} />
             <Route path="/ata" component={() => <ViewAta ajustarLayout={ajustarLayout} />} />
             <Route path="/revisoes" component={() => <ViewRevisions />} />
