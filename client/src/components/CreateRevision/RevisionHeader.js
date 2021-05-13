@@ -8,19 +8,46 @@ import {
 } from "@material-ui/core";
 import "./Components.css";
 import { styles } from "../../assets/styles/Styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import userServices from "../../services/user";
 
 // Alterando css de componentes
 
 const RevisionHeader = (props) => {
-  const { classes } = props;
+  const { classes, setRevHeader } = props;
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
+  const [infoHeader, setInfoheader] = useState();
+  const [resp, setResp] = useState("");
   const handleResize = () => {
     setWindowSize(window.innerWidth);
   };
 
   window.addEventListener("resize", handleResize);
+
+  useEffect(() => {
+    userServices.pegarUsuario(props.resp)
+    .then(res => { setResp(res.data.usuNome) })
+
+
+  }, [])
+
+  const dat = {
+    revPrazo: "",
+    revData: "",
+  }
+
+  const alt = () => {
+    const header = {
+      revId: "",
+      ...dat,
+      responsavelRevisoes: {usuId: props.resp},
+      contemRevisoes: {ataId: props.ataid}
+    }
+
+      setInfoheader(header);
+      setRevHeader(header);
+  }
 
   return (
     <Container>
@@ -51,7 +78,7 @@ const RevisionHeader = (props) => {
                   <Grid container justify={windowSize >= 960 ? "space-between" : "center"}> */}
                 <Grid item sm={3} md={12} lg={3} className="align-self-center" justify={windowSize >= 960 ? "flex-start" : "center"} alignItems="center">
                   <FormLabel className={classes.normalText}>
-                    <strong>01/21</strong>
+                    <strong>{props.ataid}</strong>
                   </FormLabel>
                 </Grid>
                 {/* </Grid>
@@ -70,6 +97,16 @@ const RevisionHeader = (props) => {
                       className={classes.textField}
                       disableUnderline
                       type="date"
+                      onChange={e => {
+                        dat.revData = e.target.value;
+                        dat.revPrazo = e.target.value;
+                        alt()
+                        
+                        
+                        
+                        
+                      }}
+                      
                     />
                   </Grid>
                 </Grid>
@@ -88,7 +125,7 @@ const RevisionHeader = (props) => {
               </Grid>
               <Grid container className={classes.rowMargin} justify="center">
                 <Grid item md={12} justify="center">
-                  <FormLabel className={classes.normalText}><strong>Fulano da Silva</strong></FormLabel>
+                  <FormLabel className={classes.normalText}><strong>{resp}</strong></FormLabel>
                 </Grid>
               </Grid>
             </Grid>
