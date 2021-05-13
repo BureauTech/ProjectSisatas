@@ -38,7 +38,7 @@ public class RevisoesModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long revId;
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false)
 	private String revAssunto;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
