@@ -3,9 +3,14 @@ import { Container, Table, TableBody, TableCell, TableContainer, TableHead, Tabl
 const Assunto = (props) => {
   const { assuntos } = props.dados;
 
+  // const formatDate = (date) => {
+  //   const formated = date.split("-").reverse().join("/");
+  //   return formated;
+  // };
+
   const formatDate = (date) => {
-    const formated = date.split("-").reverse().join("/");
-    return formated;
+    const data = new Date(date).toLocaleDateString();
+    return data;
   };
 
   return (

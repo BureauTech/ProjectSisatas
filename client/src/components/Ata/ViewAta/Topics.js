@@ -25,9 +25,14 @@ const Transition = forwardRef(function Transition(props, ref) {
 const Topics = (props) => {
   const { isOpen, handleClick, infoTopics } = props;
 
+  // const formatDate = (date) => {
+  //   const formated = date.split("-").reverse().join("/");
+  //   return formated;
+  // };
+
   const formatDate = (date) => {
-    const formated = date.split("-").reverse().join("/");
-    return formated;
+    const data = new Date(date).toLocaleDateString();
+    return data;
   };
 
   return (

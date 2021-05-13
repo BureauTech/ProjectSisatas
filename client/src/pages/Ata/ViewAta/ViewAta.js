@@ -19,8 +19,13 @@ const ViewAta = ({ ajustarLayout }) => {
 
   const location = useLocation();
   const formatDate = (date) => {
-    const formated = date.split("-").reverse().join("/");
-    return formated;
+    const data = new Date(date).toLocaleDateString();
+    return data;
+  };
+
+  const formatTime = (time) => {
+    const tempo = new Date(time).toLocaleTimeString();
+    return tempo;
   };
 
   useEffect(() => {
@@ -34,9 +39,9 @@ const ViewAta = ({ ajustarLayout }) => {
         const infoHeader = {
           ataId: dados.ataId,
           ataDataInicio: formatDate(dados.ataDataInicio),
-          ataHoraInicio: dados.ataHoraInicio,
+          ataHoraInicio: formatTime(dados.ataHoraInicio),
           ataDataFim: formatDate(dados.ataDataFim),
-          ataHoraFim: dados.ataHoraFim,
+          ataHoraFim: formatTime(dados.ataHoraFim),
           ataLocal: dados.ataLocal,
         };
         const infoProject = {
@@ -49,8 +54,9 @@ const ViewAta = ({ ajustarLayout }) => {
           pauta: dados.ataPauta,
           assuntos: dados.assuntos,
         });
+        console.log("setado");
       })
-      .catch((err) => console.log(err.message))
+      .catch((err) => console.log("erro:", err.message))
       .finally(() => setIsLoading(false));
 
     // Ao desmontar o componente, limpar as informações da ata
