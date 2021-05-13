@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { DataGrid, GridToolbar	} from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid } from "@material-ui/core";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import "./Data.css";
-import ptBR from "../ptBR/DataGrid";
-import dataServices from "../../services/data.js";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import "../../../components/ExibirAta/ListarAta.css";
+import ptBR from "../../../components/ptBR/DataGrid";
+import ataServices from "../../../services/ata.js";
+import Alerta from "../../../components/Snackbar/Alerta.js";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -46,34 +47,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-  export default function Data() {
-    const classes = useStyles();
-    const [rows, setRows] = useState([]);
-    const [openSnack, setOpenSnack] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const [msgSucesso, setMsgSucesso] = useState("");
-    const [msgErro, setMsgErro] = useState("");
-    const history = useHistory();
+export default function Data() {
+  const classes = useStyles();
+  const [rows, setRows] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
-    dataServices
-    .listarAtas("DataGrid")
-    .then((res) => {
-      let lista = res.data;
-      let lista2 = [];
-      lista.forEach((ata) => {
-        lista2.push({ id: ata["ataId"], ...ata });
+    ataServices
+      .listarAtas("DataGrid")
+      .then((res) => {
+        let lista = res.data;
+        let lista2 = [];
+        lista.forEach((ata) => {
+          lista2.push({ id: ata["ataId"], ...ata });
+        });
+        setRows(lista2);
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
-      setRows(lista2);
-    })
-    .catch((err) => {
-      console.log(err.message);
-      setIsLoading(false);
-      setMsgSucesso(false);
-      setMsgErro("Ocorreu um erro ao carregar a lista de atas");
-      setOpenSnack(true);
-    });
-}, [setRows]);
+  }, [setRows]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
@@ -93,22 +86,21 @@ const useStyles = makeStyles((theme) => ({
       ),
     },
   ];
-  
-    return (
-      <Grid container justify="center">
-        <Grid className={classes.grid} direction="column" alignItems="center">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            components={{ Toolbar: GridToolbar }}
-            className={classes.datagrid}
-            checkboxSelection={true}
-            hideFooter={true}
-            localeText={ptBR}
-            disableSelectionOnClick={true}
-          />
-        </Grid>
+
+  return (
+    <Grid container justify="center">
+      <Grid className={classes.grid} direction="column" alignItems="center">
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+          className={classes.datagrid}
+          checkboxSelection={true}
+          hideFooter={true}
+          localeText={ptBR}
+          disableSelectionOnClick={true}
+        />
       </Grid>
-    );
-    
-};
+    </Grid>
+  );
+}

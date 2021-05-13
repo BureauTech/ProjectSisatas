@@ -7,7 +7,7 @@ import pdf from "../../../assets/images/svg/pdf.svg";
 // Alterando css de componentes
 
 const AtaHeader = (props) => {
-  const { classes, infoHeader, ajustarLayout } = props;
+  const { classes, header, ajustarLayout } = props;
 
   const printPDF = () => {
     ajustarLayout("0");
@@ -26,7 +26,7 @@ const AtaHeader = (props) => {
                 <Typography className={classes.biggerText}>ATA Nº:</Typography>
               </Grid>
               <Grid container justify="center">
-                <Typography className={classes.biggerText}>{infoHeader.id}</Typography>
+                <Typography className={classes.biggerText}>{header.ataId}</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -48,7 +48,7 @@ const AtaHeader = (props) => {
                           color: "white",
                         }}
                       >
-                        <strong>{infoHeader.dtInicio}</strong>
+                        <strong>{header.ataDataInicio}</strong>
                       </Typography>
                     </Grid>
                     <Grid xs={4} md={5}>
@@ -59,7 +59,7 @@ const AtaHeader = (props) => {
                           color: "white",
                         }}
                       >
-                        <strong>{infoHeader.hrInicio}</strong>
+                        <strong>{header.ataHoraInicio}</strong>
                       </Typography>
                     </Grid>
                   </Grid>
@@ -80,7 +80,7 @@ const AtaHeader = (props) => {
                           color: "white",
                         }}
                       >
-                        <strong>{infoHeader.dtFinal}</strong>
+                        <strong>{header.ataDataFim}</strong>
                       </Typography>
                     </Grid>
                     <Grid item xs={4} md={5}>
@@ -91,7 +91,7 @@ const AtaHeader = (props) => {
                           color: "white",
                         }}
                       >
-                        <strong>{infoHeader.hrFinal}</strong>
+                        <strong>{header.ataHoraFim}</strong>
                       </Typography>
                     </Grid>
                   </Grid>
@@ -110,7 +110,7 @@ const AtaHeader = (props) => {
                       color: "white",
                     }}
                   >
-                    <strong>{infoHeader.local}</strong>
+                    <strong>{header.ataLocal}</strong>
                   </Typography>
                 </Grid>
               </Grid>

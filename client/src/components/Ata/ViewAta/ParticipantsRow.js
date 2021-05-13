@@ -34,7 +34,7 @@ const ParticipantsRow = (props) => {
                   className={classes.normalText}
                   style={{ fontWeight: "bold", fontSize: "1.2rem" }}
                 >
-                  {participante.nome}
+                  {participante.usuNome}
                 </Typography>
               </Grid>
             </Grid>
@@ -42,7 +42,7 @@ const ParticipantsRow = (props) => {
             <Grid item xs={12} sm={5} md={3} className="inputsGrid">
               <Grid item md={11}>
                 <Typography id="area" className={classes.normalText} style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
-                  {participante.area}
+                  {participante.usuAreaEmpresa}
                 </Typography>
               </Grid>
             </Grid>
@@ -54,7 +54,7 @@ const ParticipantsRow = (props) => {
                   className={classes.normalText}
                   style={{ fontWeight: "bold", fontSize: "1.2rem" }}
                 >
-                  {participante.telefone}
+                  {participante.usuTelefone}
                 </Typography>
               </Grid>
             </Grid>
@@ -66,7 +66,7 @@ const ParticipantsRow = (props) => {
                   className={classes.normalText}
                   style={{ fontWeight: "bold", fontSize: "1.2rem" }}
                 >
-                  {participante.email}
+                  {participante.usuEmail}
                 </Typography>
               </Grid>
             </Grid>

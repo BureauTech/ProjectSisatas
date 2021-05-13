@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Data from "./components/ExibirAta/Data";
+import ListarAta from "./pages/Ata/ViewAta/ListarAta";
 import Register from "./components/RegisterUser/Register";
 import CreateAta from "./pages/Ata/CreateAta/CreateAta";
 import ViewAta from "./pages/Ata/ViewAta/ViewAta";
@@ -12,6 +12,7 @@ import CreateRevision from "./pages/CreateRevision/CreateRevision";
 import AtaTemplate from "./components/Ata/AtaModel/AtaTemplate";
 import InfoAtaProvider from "./context/InfoAta";
 import ViewComments from "./pages/Comment/ViewComments";
+import ViewSubjects from "./pages/Subject/ViewSubjects";
 import Comentarios from "./pages/Revisao/Comentarios";
 import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
 import { useEffect } from "react";
@@ -46,7 +47,7 @@ function App() {
           <Menu />
           <Switch>
             <Route path="/nova-ata" component={() => <CreateAta />} />
-            <Route path="/visualizar-atas" component={() => <Data />} />
+            <Route path="/visualizar-atas" component={() => <ListarAta />} />
             <Route path="/nova-revisao" component={() => <CreateRevision />} />
             <Route path="/ata" component={() => <ViewAta ajustarLayout={ajustarLayout} />} />
             <Route path="/revisoes" component={() => <ViewRevisions />} />
@@ -57,8 +58,8 @@ function App() {
             <Route path="/cadastrar-senha" component={() => <RegisterPassword />} />
             <Route path="/editar-usuario" component={() => <EditUser />} />
             <Route path="/perfil" component={() => <UserProfile id={0} />} />
-            <Route path="/users-list" component={() => <UserList ata={ata} />} />
-            <Route path="/view-comments" component={() => <ViewComments />} />
+            <Route path="/comentarios" component={() => <ViewComments />} />
+            <Route path="/assuntos" component={() => <ViewSubjects />} />
             <Route path="/listar-usuarios" component={() => <UserList ata={ata} />} />
           </Switch>
         </div>

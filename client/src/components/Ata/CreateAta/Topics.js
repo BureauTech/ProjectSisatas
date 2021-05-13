@@ -19,7 +19,7 @@ import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
 
 const Topics = (props) => {
-  const { classes, listaAdicionados, setInfoTopics, ataId } = props;
+  const { classes, listaAdicionados, setInfoTopics } = props;
 
   const [atual, setAtual] = useState("");
   const [idPessoa, setIdPessoa] = useState("");
@@ -33,7 +33,6 @@ const Topics = (props) => {
 
   const handleAddition = () => {
     if (atual && assunto && datetime && idPessoa) {
-      const d = new Date();
       const newTopic = {
         assId: idAtual,
         assAssunto: assunto,

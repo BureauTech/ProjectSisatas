@@ -7,7 +7,7 @@ export default function InfoAtaProvider({ children }) {
     header: "",
     projeto: "",
     pauta: "",
-    assuntos: "",
+    assuntos: [],
   });
   return <InfoAtaContext.Provider value={{ infoAta, setInfoAta }}>{children}</InfoAtaContext.Provider>;
 }
