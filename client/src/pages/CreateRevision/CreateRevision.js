@@ -7,18 +7,19 @@ import RevisionSubject from "../../components/CreateRevision/RevisionSubject";
 import { useEffect, useState } from "react";
 import "./Style.css";
 import revisaoServices from "../../services/revisao";
-import userServices from "../../services/user";
-import ataServices from "../../services/ata";
+import Alerta from "../../components/Snackbar/Alerta";
+
 
 const CreateRevision = (props) => {
-  const {ataid, user} = props;
   const theme = useTheme();
 
   const [revAssunto, setInfoAss] = useState("");
   const [infoHeader, setRevHeader] = useState({});
 
-  const [usu, setUsu] = useState();
-  const [ata, setAta] = useState();
+  const [openSnack, setOpenSnack] = useState(false);
+  const [msgSucesso, setMsgSucesso] = useState("");
+  const [msgErro, setMsgErro] = useState("");
+
 
   const body = {
     ...infoHeader,
@@ -29,12 +30,23 @@ const CreateRevision = (props) => {
 
   const CriarRevisao = (e) => {
     e.preventDefault();
-    try {
-      //revisaoServices.criarRevisao(body);
+
+    revisaoServices.criarRevisao(body)
+    .then((res) => {
+
+        console.log(JSON.stringify(res));
+        setMsgSucesso("Revisão cadastrada com sucesso!");
+        setMsgErro(false);
+        setOpenSnack(true);
+    })
+    .catch(err => {
+      console.log(err);
+      setMsgSucesso(false);
+      setMsgErro("Ocorreu um erro ao cadastrar a revisão");
+      setOpenSnack(true);
+    })
       console.log("olha"+ JSON.stringify(body));
-    } catch (error) {
-      console.log(error.message);
-    }
+
   };
 
   return (
@@ -79,6 +91,7 @@ const CreateRevision = (props) => {
           </Button>
         </Grid>
       </form>
+      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
     </Container>
   );
 };

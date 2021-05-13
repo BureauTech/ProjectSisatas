@@ -24,6 +24,7 @@ const RevisionSubject = (props) => {
         <Grid item xs={12}>
           <Grid container>
             <TextareaAutosize
+              required
               rowsMin={8}
               rowsMax={8}
               value={ass}
