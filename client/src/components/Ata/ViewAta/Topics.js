@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import { styles } from "../../../assets/styles/Styles";
 import "../CreateAta/Components.css";
 
@@ -25,10 +25,8 @@ const Transition = forwardRef(function Transition(props, ref) {
 const Topics = (props) => {
   const { isOpen, handleClick, infoTopics } = props;
 
-  const formatDatetime = (datetime) => {
-    let [date, time] = datetime.split("T");
-    date = date.split("-").reverse().join("/");
-    const formated = date + " " + time;
+  const formatDate = (date) => {
+    const formated = date.split("-").reverse().join("/");
     return formated;
   };
 
@@ -39,9 +37,9 @@ const Topics = (props) => {
           <DialogTitle>Assuntos</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {infoTopics.length && (
-                <Grid container justify="space-around">
-                  {infoTopics.map((topic, index) => {
+              <Grid container justify="space-around">
+                {infoTopics &&
+                  infoTopics.map((topic, index) => {
                     return (
                       <Grid item xs={12} key={index + 1} style={{ padding: "10px" }}>
                         <Accordion style={{ width: "100%" }} className="light">
@@ -55,7 +53,7 @@ const Topics = (props) => {
                                   }}
                                 >
                                   <strong>
-                                    {topic.id} - {topic.topic}
+                                    {index} - {topic.assAssunto}
                                   </strong>
                                 </Typography>
                               </Grid>
@@ -70,7 +68,7 @@ const Topics = (props) => {
                                     fontSize: "1.2rem",
                                   }}
                                 >
-                                  {topic.inCharge}
+                                  {topic.responsavelAssuntos[0].usuNome}
                                 </Typography>
                               </Grid>
                               <Grid item>
@@ -80,7 +78,7 @@ const Topics = (props) => {
                                     fontSize: "1.2rem",
                                   }}
                                 >
-                                  {formatDatetime(topic.datetime)}
+                                  {formatDate(topic.assPrazo)}
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -89,8 +87,7 @@ const Topics = (props) => {
                       </Grid>
                     );
                   })}
-                </Grid>
-              )}
+              </Grid>
             </DialogContentText>
           </DialogContent>
         </Dialog>

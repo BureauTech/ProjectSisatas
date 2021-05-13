@@ -6,8 +6,8 @@ const criarAta = (data) => {
   return api.post(`${endpoint}/cadastrarAta`, data);
 };
 
-const pegarParticipantes = () => {
-  return api.get(`${endpoint}/`);
+const pegarAta = (id) => {
+  return api.get(`${endpoint}/pegarAta/${id}`);
 };
 
 const ultimoId = () => {
@@ -16,7 +16,7 @@ const ultimoId = () => {
 
 const ataServices = {
   criarAta,
-  pegarParticipantes,
+  pegarAta,
   ultimoId,
 };
 
