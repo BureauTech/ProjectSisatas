@@ -94,6 +94,7 @@ const RevisionHeader = (props) => {
                 <Grid item xs={6} sm={6} md={12} lg={6} justify={windowSize >= 960 ? "flex-start" : "center"} alignItems="center">
                   <Grid item xs={12} sm={12} md={6} lg={11}>
                     <Input
+                      required
                       className={classes.textField}
                       disableUnderline
                       type="date"
