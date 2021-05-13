@@ -54,7 +54,7 @@ public class RevisoesModel implements Serializable {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fk_AtaId"))
-	@JsonBackReference
+	//@JsonBackReference
 	private AtasModel contemRevisoes;
 
 }

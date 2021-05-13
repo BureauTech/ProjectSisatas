@@ -1,7 +1,7 @@
 import api from "./api";
 
 const criarRevisao = (data) => {
-  api.post("/revisoes/cadastrarRevisoes", data);
+  return api.post("/revisoes/cadastrarRevisoes", data);
 };
 
 const revisaoServices = {

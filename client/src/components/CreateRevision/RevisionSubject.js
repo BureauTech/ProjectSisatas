@@ -7,9 +7,11 @@ import {
 } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
 import "./Components.css";
+import { useState } from "react";
 
 const RevisionSubject = (props) => {
-  const { classes } = props;
+  const { classes, setInfoAss } = props;
+  const [ass, seAss] = useState("");
 
   return (
     <Container>
@@ -22,8 +24,14 @@ const RevisionSubject = (props) => {
         <Grid item xs={12}>
           <Grid container>
             <TextareaAutosize
+              required
               rowsMin={8}
               rowsMax={8}
+              value={ass}
+              onChange={(e) => {
+                seAss(e.target.value);
+                setInfoAss(e.target.value);
+              }}
               style={{
                 width: "100%",
                 fontSize: "1.8rem",
