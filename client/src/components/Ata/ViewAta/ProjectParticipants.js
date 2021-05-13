@@ -16,7 +16,7 @@ const ProjectParticipants = (props) => {
             </FormLabel>
             <Grid item xs={12} sm={5} md={4}>
               <Typography id="temaProjeto" className={classes.normalText} style={{ fontWeight: "bold" }}>
-                {infoProject.projeto}
+                {infoProject.ataProjeto}
               </Typography>
             </Grid>
           </Grid>
