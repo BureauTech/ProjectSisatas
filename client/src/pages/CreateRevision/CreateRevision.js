@@ -1,6 +1,6 @@
 import { Button, Container, Grid, useTheme } from "@material-ui/core";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 import RevisionHeader from "../../components/CreateRevision/RevisionHeader";
 import RevisionSubject from "../../components/CreateRevision/RevisionSubject";
@@ -20,6 +20,14 @@ const CreateRevision = (props) => {
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
 
+  const [user, setUser] = useState("");
+  const [ataid, setAtaid] = useState("");
+
+  const location = useLocation();
+
+
+  const history = useHistory();
+
 
   const body = {
     ...infoHeader,
@@ -30,6 +38,7 @@ const CreateRevision = (props) => {
 
   const CriarRevisao = (e) => {
     e.preventDefault();
+    
 
     revisaoServices.criarRevisao(body)
     .then((res) => {
@@ -47,19 +56,23 @@ const CreateRevision = (props) => {
     })
       console.log("olha"+ JSON.stringify(body));
 
+      let seu_tempo_ta_acabando = setTimeout(
+        function() {
+          history.push("ata", { id: location.state.ataid });
+      }, 4000)
   };
+
 
   return (
     <Container>
       <form onSubmit={(e) => CriarRevisao(e)}>
         <Grid container style={{ marginBottom: 10 }}>
-          <RevisionHeader setRevHeader={setRevHeader} resp={props.user} ataid={props.ataid}/>
+          <RevisionHeader setRevHeader={setRevHeader} resp={location.state.user} ataid={location.state.ataid}/>
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
           <RevisionSubject setInfoAss={setInfoAss}/>
         </Grid>
         <Grid container justify="space-between" style={{ padding: 24 }}>
-          <Link to="/ata" style={{ textDecoration: "none" }}>
             <Button
               variant="contained"
               className="bold"
@@ -71,10 +84,11 @@ const CreateRevision = (props) => {
                 borderRadius: 20,
                 padding: "0 30px",
               }}
+              onClick={() => history.push("ata", { id: location.state.ataid })}
+              
             >
               Cancelar
             </Button>
-          </Link>
           <Button
             variant="contained"
             color="secondary"
