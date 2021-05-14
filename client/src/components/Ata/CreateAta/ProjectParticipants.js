@@ -166,6 +166,7 @@ const ProjectParticipants = (props) => {
                 value={tema}
                 onChange={(e) => setTema(e.target.value)}
                 disableUnderline
+                required
               />
             </Grid>
           </Grid>

@@ -6,29 +6,66 @@ import { styles } from "../../../assets/styles/Styles";
 // Alterando css de componentes
 
 const AtaHeader = (props) => {
-  const { classes, setInfoHeader } = props;
-  const [dtInicio, setDtInicio] = useState();
-  const [hrInicio, setHrInicio] = useState();
-  const [dtFinal, setDtFinal] = useState();
-  const [hrFinal, setHrFinal] = useState();
-  const [local, setLocal] = useState();
+  const { classes, setInfoHeader, setIsOpen, setMsgErro, setMsgSucesso } = props;
+  const [dtInicio, setDtInicio] = useState("");
+  const [hrInicio, setHrInicio] = useState("");
+  const [dtFinal, setDtFinal] = useState("");
+  const [hrFinal, setHrFinal] = useState("");
+  const [local, setLocal] = useState("");
 
   useEffect(() => {
-    const final = ":00.000+00:00";
-    const datetimeInicio = dtInicio && hrInicio ? dtInicio + "T" + hrInicio + final : "";
-    const datetimeFinal = dtFinal && hrFinal ? dtFinal + "T" + hrFinal + final : "";
     setInfoHeader({
       //id: id,
-      ataDataInicio: datetimeInicio,
-      ataHoraInicio: datetimeInicio,
-      ataDataFim: datetimeFinal,
-      ataHoraFim: datetimeFinal,
+      ataDataInicio: dtInicio ? dtInicio : "",
+      ataHoraInicio: hrInicio ? hrInicio : "",
+      ataDataFim: dtFinal ? dtFinal : "",
+      ataHoraFim: hrFinal ? hrFinal : "",
       ataLocal: local ? local : "",
       geraAtas: {
         usuId: 1,
       },
     });
   }, [dtFinal, dtInicio, hrFinal, hrInicio, local, setInfoHeader]);
+
+  const setarDataFinal = (valor, setarValor, dataInicio) => {
+    if (dataInicio && valor) {
+      const dInicio = dataInicio.split("-");
+      const inicio = new Date(`${Number(dInicio[0])}-${Number(dInicio[1])}-${Number(dInicio[2])}`);
+      const dFinal = valor.split("-");
+      const final = new Date(`${Number(dFinal[0])}-${Number(dFinal[1])}-${Number(dFinal[2])}`);
+
+      if (inicio.getTime() > final.getTime()) {
+        setarValor("");
+        setIsOpen(true);
+        setMsgErro("A data final não pode ser menor que a inicial!");
+        setMsgSucesso(false);
+      } else {
+        setarValor(valor);
+      }
+    } else {
+      setarValor(valor);
+    }
+  };
+
+  const setarDataInicio = (valor, setarValor, dataFinal) => {
+    if (dataFinal && valor) {
+      const dInicio = valor.split("-");
+      const inicio = new Date(`${Number(dInicio[0])}-${Number(dInicio[1])}-${Number(dInicio[2])}`);
+      const dFinal = dataFinal.split("-");
+      const final = new Date(`${Number(dFinal[0])}-${Number(dFinal[1])}-${Number(dFinal[2])}`);
+
+      if (inicio.getTime() > final.getTime()) {
+        setarValor("");
+        setIsOpen(true);
+        setMsgErro("A data final não pode ser menor que a inicial!");
+        setMsgSucesso(false);
+      } else {
+        setarValor(valor);
+      }
+    } else {
+      setarValor(valor);
+    }
+  };
 
   return (
     <Container>
@@ -62,7 +99,8 @@ const AtaHeader = (props) => {
                       disableUnderline
                       type="date"
                       value={dtInicio}
-                      onChange={(e) => setDtInicio(e.target.value)}
+                      onChange={(e) => setarDataInicio(e.target.value, setDtInicio, dtFinal)}
+                      required
                     />
                   </Grid>
                   <Grid xs={4} md={5}>
@@ -73,6 +111,7 @@ const AtaHeader = (props) => {
                       type="time"
                       value={hrInicio}
                       onChange={(e) => setHrInicio(e.target.value)}
+                      required
                     />
                   </Grid>
                 </Grid>
@@ -92,7 +131,8 @@ const AtaHeader = (props) => {
                       disableUnderline
                       type="date"
                       value={dtFinal}
-                      onChange={(e) => setDtFinal(e.target.value)}
+                      onChange={(e) => setarDataFinal(e.target.value, setDtFinal, dtInicio)}
+                      required
                     />
                   </Grid>
                   <Grid item xs={4} md={5}>
@@ -103,6 +143,7 @@ const AtaHeader = (props) => {
                       type="time"
                       value={hrFinal}
                       onChange={(e) => setHrFinal(e.target.value)}
+                      required
                     />
                   </Grid>
                 </Grid>
@@ -121,6 +162,7 @@ const AtaHeader = (props) => {
                   type="text"
                   value={local}
                   onChange={(e) => setLocal(e.target.value)}
+                  required
                 />
               </Grid>
             </Grid>

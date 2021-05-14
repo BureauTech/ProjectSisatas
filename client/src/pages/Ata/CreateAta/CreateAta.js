@@ -32,7 +32,17 @@ const CreateAta = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!infoTopics.length || !infoProject.length || !tema.length || Object.values(infoHeader).includes("")) {
+    if (!infoProject.length) {
+      setMsgErro("Por favor, adicione um participante");
+      setMsgSucesso(false);
+      setOpenSnack(true);
+      return;
+    }
+
+    if (!infoTopics.length) {
+      setMsgErro("Por favor, adicione um assunto");
+      setMsgSucesso(false);
+      setOpenSnack(true);
       return;
     }
 
@@ -80,7 +90,12 @@ const CreateAta = (props) => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <Grid container style={{ marginBottom: 10 }}>
           <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Cabeçalho</Typography>
-          <AtaHeader setInfoHeader={setInfoHeader} />
+          <AtaHeader
+            setInfoHeader={setInfoHeader}
+            setIsOpen={setOpenSnack}
+            setMsgErro={setMsgErro}
+            setMsgSucesso={setMsgSucesso}
+          />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
           <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>ATA de Reunião</Typography>
@@ -97,7 +112,14 @@ const CreateAta = (props) => {
           <Pauta setInfoPauta={setInfoPauta} />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
-          <Topics listaAdicionados={listaAdicionados} setInfoTopics={setInfoTopics} />
+          <Topics
+            listaAdicionados={listaAdicionados}
+            setInfoTopics={setInfoTopics}
+            setIsOpen={setOpenSnack}
+            setMsgErro={setMsgErro}
+            setMsgSucesso={setMsgSucesso}
+            dataInicio={infoHeader.ataDataInicio}
+          />
         </Grid>
         <Grid container justify="space-between" style={{ padding: 24 }}>
           <Button
