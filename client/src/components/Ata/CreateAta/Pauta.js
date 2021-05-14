@@ -1,9 +1,4 @@
-import {
-  Container,
-  Grid,
-  TextareaAutosize,
-  withStyles,
-} from "@material-ui/core";
+import { Container, Grid, TextareaAutosize, withStyles } from "@material-ui/core";
 import { useState } from "react";
 import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
@@ -32,6 +27,7 @@ const Pauta = (props) => {
                 borderBottomLeftRadius: "20px",
                 borderTopLeftRadius: "20px",
               }}
+              required
             />
           </Grid>
         </Grid>

@@ -19,7 +19,7 @@ import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
 
 const Topics = (props) => {
-  const { classes, listaAdicionados, setInfoTopics } = props;
+  const { classes, listaAdicionados, setInfoTopics, setIsOpen, setMsgErro, setMsgSucesso, dataInicio } = props;
 
   const [atual, setAtual] = useState("");
   const [idPessoa, setIdPessoa] = useState("");
@@ -28,16 +28,16 @@ const Topics = (props) => {
   const [idAtual, setIdAtual] = useState(1);
   const [listaAssuntos, setListaAssuntos] = useState([]);
 
-  const [datetime, setDatetime] = useState("");
+  const [prazo, setPrazo] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleAddition = () => {
-    if (atual && assunto && datetime && idPessoa) {
+    if (atual && assunto && prazo && idPessoa) {
       const newTopic = {
         assId: idAtual,
         assAssunto: assunto,
         inCharge: atual,
-        assPrazo: datetime + ":00.000+00:00",
+        assPrazo: prazo,
         responsavelAssuntos: [
           {
             usuId: idPessoa,
@@ -86,6 +86,26 @@ const Topics = (props) => {
       setIdAtual(1);
       setListaAssuntos([]);
       setInfoTopics([]);
+    }
+  };
+
+  const setarDataPrazo = (valor, setarValor, dataInicio) => {
+    if (dataInicio && valor) {
+      const dInicio = dataInicio.split("-");
+      const inicio = new Date(`${Number(dInicio[0])}-${Number(dInicio[1])}-${Number(dInicio[2])}`);
+      const dPrazo = valor.split("-");
+      const prazo = new Date(`${Number(dPrazo[0])}-${Number(dPrazo[1])}-${Number(dPrazo[2])}`);
+
+      if (inicio.getTime() > prazo.getTime()) {
+        setarValor("");
+        setIsOpen(true);
+        setMsgErro("A data do prazo não pode ser menor que a inicial!");
+        setMsgSucesso(false);
+      } else {
+        setarValor(valor);
+      }
+    } else {
+      setarValor(valor);
     }
   };
 
@@ -194,9 +214,9 @@ const Topics = (props) => {
                           className={classes.textField}
                           disableUnderline
                           id="prazo"
-                          type="datetime-local"
-                          value={datetime}
-                          onChange={(e) => setDatetime(e.target.value)}
+                          type="date"
+                          value={prazo}
+                          onChange={(e) => setarDataPrazo(e.target.value, setPrazo, dataInicio)}
                         />
                       </Grid>
                     </Grid>
