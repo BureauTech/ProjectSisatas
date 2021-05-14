@@ -209,6 +209,8 @@ public class AtasController {
 	public MessageReturn excluirAtas(@PathVariable String ata_id) {
 		MessageReturn result = new MessageReturn();
 
+		//	/{cod}/{ano}
+		//	AtasModel ata = ap.getOne(cod + "/" + ano);
 		result.setOperacao("excluirAtas");
 
 		try {
