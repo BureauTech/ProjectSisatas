@@ -41,6 +41,7 @@ const Topics = (props) => {
         responsavelAssuntos: [
           {
             usuId: idPessoa,
+            usuNome: atual,
           },
         ],
       };
@@ -58,6 +59,7 @@ const Topics = (props) => {
 
   // Rastreia o participante atualmente escolhido
   const getPerson = (person) => {
+    console.log(person);
     if (person) {
       setAtual(person.usuNome);
       setIdPessoa(person.usuId);
@@ -110,6 +112,7 @@ const Topics = (props) => {
   };
 
   const formatDatetime = (date) => {
+    console.log(listaAssuntos);
     const data = date.split("-").reverse().join("/");
     return data;
   };
@@ -279,7 +282,9 @@ const Topics = (props) => {
                                 <AccordionDetails key={index + 1} className="no-margin">
                                   <Grid container justify="center">
                                     <Grid item>
-                                      <Typography style={{ padding: 10 }}>{topic.usuNome}</Typography>
+                                      <Typography style={{ padding: 10 }}>
+                                        {topic.responsavelAssuntos[0].usuNome}
+                                      </Typography>
                                     </Grid>
                                     <Grid item>
                                       <Typography style={{ padding: 10 }}>{formatDatetime(topic.assPrazo)}</Typography>
