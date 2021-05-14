@@ -109,13 +109,9 @@ const Topics = (props) => {
     }
   };
 
-  const formatDatetime = (datetime) => {
-    //":" + d.getSeconds() + "." + d.getMilliseconds() + "+00:00"
-    let [date, time] = datetime.split("T");
-    date = date.split("-").reverse().join("/");
-    let hour = time.split(":");
-    const formated = date + " " + hour.splice(0, 2).join(":");
-    return formated;
+  const formatDatetime = (date) => {
+    const data = date.split("-").reverse().join("/");
+    return data;
   };
 
   const options = listaAdicionados.map((option) => {
@@ -283,7 +279,7 @@ const Topics = (props) => {
                                 <AccordionDetails key={index + 1} className="no-margin">
                                   <Grid container justify="center">
                                     <Grid item>
-                                      <Typography style={{ padding: 10 }}>{topic.inCharge}</Typography>
+                                      <Typography style={{ padding: 10 }}>{topic.usuNome}</Typography>
                                     </Grid>
                                     <Grid item>
                                       <Typography style={{ padding: 10 }}>{formatDatetime(topic.assPrazo)}</Typography>
