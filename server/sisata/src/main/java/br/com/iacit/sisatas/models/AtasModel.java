@@ -2,6 +2,8 @@ package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -44,16 +46,16 @@ public class AtasModel implements Serializable{
 	private String ataId;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date ataDataInicio;
+	private LocalDate ataDataInicio;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date ataDataFim;
+	private LocalDate ataDataFim;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "HH:mm:ss")
-	private Date ataHoraInicio;
+	private LocalTime ataHoraInicio;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "HH:mm:ss")
-	private Date ataHoraFim;
+	private LocalTime ataHoraFim;
 	@Column(nullable = false)
 	@CreationTimestamp
 	private Date ataDataCriacao;
@@ -61,7 +63,7 @@ public class AtasModel implements Serializable{
 	private String ataLocal;
 	@Column(nullable = false, length = 30)
 	private String ataProjeto;
-	@Column(nullable = false, length = 600)
+	@Column(nullable = false, columnDefinition="TEXT")
 	private String ataPauta;
 	
 	@ManyToOne(optional = false)

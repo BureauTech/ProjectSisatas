@@ -38,7 +38,7 @@ public class RevisoesModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long revId;
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition="TEXT")
 	private String revAssunto;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -54,7 +54,6 @@ public class RevisoesModel implements Serializable {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fk_AtaId"))
-	//@JsonBackReference
 	private AtasModel contemRevisoes;
 
 }
