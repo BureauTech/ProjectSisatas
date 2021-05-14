@@ -1,5 +1,5 @@
 import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 import AtaHeader from "../../../components/Ata/ViewAta/AtaHeader";
 import ProjectParticipants from "../../../components/Ata/ViewAta/ProjectParticipants";
@@ -17,7 +17,11 @@ const ViewAta = ({ ajustarLayout }) => {
   const { setInfoAta, infoAta } = useInfoAta();
   const [isLoading, setIsLoading] = useState(true);
 
+  const [idAta, setIdAta] = useState();
+
+  
   const location = useLocation();
+  const history = useHistory();
   const formatDate = (date) => {
     const data = new Date(date).toLocaleDateString();
     return data;
@@ -36,6 +40,7 @@ const ViewAta = ({ ajustarLayout }) => {
       .pegarAta(idBuscar.split("/").join(""))
       .then((res) => {
         const dados = res.data;
+        setIdAta(dados.ataId)
         const infoHeader = {
           ataId: dados.ataId,
           ataDataInicio: formatDate(dados.ataDataInicio),
@@ -103,20 +108,22 @@ const ViewAta = ({ ajustarLayout }) => {
             <Status />
           </Grid> */}
           <Grid container justify="space-between" style={{ padding: 24 }}>
-            <Button
-              variant="contained"
-              className="bold"
-              style={{
-                backgroundColor: "white",
-                color: theme.palette.secondary.main,
-                fontWeight: 700,
-                fontSize: "1.5rem",
-                borderRadius: 16,
-                padding: "0 5px",
-              }}
-            >
-              Cancelar
-            </Button>
+            <Link to="/visualizar-atas" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                className="bold"
+                style={{
+                  backgroundColor: "white",
+                  color: theme.palette.secondary.main,
+                  fontWeight: 700,
+                  fontSize: "1.5rem",
+                  borderRadius: 16,
+                  padding: "0 5px",
+                }}
+              >
+                Cancelar
+              </Button>
+            </Link>
             <Button
               variant="contained"
               color="secondary"
@@ -159,7 +166,7 @@ const ViewAta = ({ ajustarLayout }) => {
                 Visualizar Revisões
               </Button>
             </Link>
-            <Link to="/nova-revisao" style={{ textDecoration: "none" }}>
+            
               <Button
                 variant="contained"
                 color="secondary"
@@ -170,10 +177,11 @@ const ViewAta = ({ ajustarLayout }) => {
                   borderRadius: 16,
                   padding: "0 5px",
                 }}
+                onClick={() => history.push("nova-revisao", { user:  1, ataid: idAta })}
               >
                 Nova Revisão
               </Button>
-            </Link>
+           
           </Grid>
         </>
       )}
