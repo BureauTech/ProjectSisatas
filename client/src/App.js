@@ -18,10 +18,6 @@ import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
 import { useEffect } from "react";
 
 function App() {
-  const ata = {
-    id: "01/21",
-  };
-
   const ajustarLayout = (n) => {
     if (n === "0") {
       document.body.style.padding = "0px 0px 0px 0px";
@@ -57,10 +53,10 @@ function App() {
             <Route path="/cadastrar-usuario" component={() => <Register />} />
             <Route path="/cadastrar-senha" component={() => <RegisterPassword />} />
             <Route path="/editar-usuario" component={() => <EditUser />} />
-            <Route path="/perfil" component={() => <UserProfile id={0} />} />
+            <Route path="/perfil" component={() => <UserProfile id={1} />} />
             <Route path="/comentarios" component={() => <ViewComments />} />
             <Route path="/assuntos" component={() => <ViewSubjects />} />
-            <Route path="/listar-usuarios" component={() => <UserList ata={ata} />} />
+            <Route path="/listar-usuarios" component={() => <UserList />} />
           </Switch>
         </div>
         <AtaTemplate />

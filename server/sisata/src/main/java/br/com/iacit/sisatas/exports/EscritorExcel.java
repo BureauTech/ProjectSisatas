@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import br.com.iacit.sisatas.models.AssuntosModel;
@@ -42,20 +43,25 @@ public class EscritorExcel {
 	}
 	
 	private void writeCabecalho() {
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
+		//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		//DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm:ss");
 
 		Cell numero = sheet.getRow(1).getCell(1);
 		numero.setCellValue("ATA Nº.: " + ata.getAtaId());
 
 		Cell data = sheet.getRow(1).getCell(3);
-		data.setCellValue("DATA: " + dateFormat.format(ata.getAtaDataInicio()));
+		//data.setCellValue("DATA: " + dateFormat.format(ata.getAtaDataInicio()));
+		data.setCellValue("DATA: " + ata.getAtaDataInicio().format(dateFormat) + " - " + ata.getAtaDataFim().format(dateFormat));
 
 		Cell horaInicio = sheet.getRow(2).getCell(3);
-		horaInicio.setCellValue("INÍCIO: " + timeFormat.format(ata.getAtaHoraInicio()));
+		//horaInicio.setCellValue("INÍCIO: " + timeFormat.format(ata.getAtaHoraInicio()));
+		horaInicio.setCellValue("INÍCIO: " + ata.getAtaHoraInicio().format(timeFormat));
 
 		Cell horaFim = sheet.getRow(2).getCell(4);
-		horaFim.setCellValue("FIM: " + timeFormat.format(ata.getAtaHoraFim()));
+		//horaFim.setCellValue("FIM: " + timeFormat.format(ata.getAtaHoraFim()));
+		horaFim.setCellValue("FIM: " + ata.getAtaHoraFim().format(timeFormat));
 
 		Cell local = sheet.getRow(3).getCell(3);
 		local.setCellValue("LOCAL: " + ata.getAtaLocal());
@@ -213,9 +219,10 @@ public class EscritorExcel {
 				nomes.add(participante.getUsuNome());
 			responsavelAssunto1.setCellValue(String.join(", ", nomes));
 
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+			//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			Cell prazoAssunto1 = sheet.getRow(rownum).getCell(5);
-			prazoAssunto1.setCellValue(dateFormat.format(assunto.getAssPrazo()));
+			prazoAssunto1.setCellValue(assunto.getAssPrazo().format(dateFormat));
 			prazoAssunto1.setCellStyle(borderRight);
 
 		}

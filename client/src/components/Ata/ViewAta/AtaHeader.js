@@ -3,6 +3,7 @@ import "./Components.css";
 import { styles } from "../../../assets/styles/Styles";
 import excel from "../../../assets/images/svg/excel.svg";
 import pdf from "../../../assets/images/svg/pdf.svg";
+import downloadServices from "../../../services/download";
 
 // Alterando css de componentes
 
@@ -13,6 +14,12 @@ const AtaHeader = (props) => {
     ajustarLayout("0");
     window.onafterprint = (e) => ajustarLayout();
     window.print();
+  };
+
+  const downloadExcel = () => {
+    const id = header.ataId.split("/")[0];
+    const ano = header.ataId.split("/")[1];
+    downloadServices.excel(id, ano);
   };
 
   return (
@@ -119,7 +126,7 @@ const AtaHeader = (props) => {
           <Grid item xs={12} sm={10} md={2}>
             <Grid container justify="flex-end">
               <Grid item xs={6}>
-                <IconButton>
+                <IconButton onClick={() => downloadExcel()}>
                   <Icon className="largeIcon">
                     <img alt="Excel export" src={excel} style={{ width: 40, height: 40 }} />
                   </Icon>
