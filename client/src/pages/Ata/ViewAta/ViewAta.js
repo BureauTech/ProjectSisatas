@@ -189,7 +189,10 @@ const ViewAta = ({ ajustarLayout }) => {
               }}
               onClick={() => {
                 ll();
-                history.push("revisoes", { listaRevisoes: listaRevisoes, idAta: idAta });
+                history.push("revisoes", {
+                  listaRevisoes: listaRevisoes,
+                  idAta: idAta,
+                });
               }}
             >
               Visualizar Revisões
@@ -206,7 +209,9 @@ const ViewAta = ({ ajustarLayout }) => {
                 borderRadius: 16,
                 padding: "0 5px",
               }}
-              onClick={() => history.push("nova-revisao", { user: 1, ataid: idAta })}
+              onClick={() =>
+                history.push("nova-revisao", { user: 1, ataid: idAta, ataDataInicio: infoAta.header.ataDataInicio })
+              }
             >
               Nova Revisão
             </Button>

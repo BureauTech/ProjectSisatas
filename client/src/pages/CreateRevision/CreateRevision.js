@@ -54,12 +54,21 @@ const CreateRevision = (props) => {
       history.push("ata", { id: location.state.ataid });
     }, 4000);
   };
+  console.log(location.state);
 
   return (
     <Container>
       <form onSubmit={(e) => CriarRevisao(e)}>
         <Grid container style={{ marginBottom: 10 }}>
-          <RevisionHeader setRevHeader={setRevHeader} resp={location.state.user} ataid={location.state.ataid} />
+          <RevisionHeader
+            setRevHeader={setRevHeader}
+            resp={location.state.user}
+            ataid={location.state.ataid}
+            ataDataInicio={location.state.ataDataInicio}
+            setMsgSucesso={setMsgSucesso}
+            setMsgErro={setMsgErro}
+            setIsOpen={setOpenSnack}
+          />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
           <RevisionSubject setInfoAss={setInfoAss} />
