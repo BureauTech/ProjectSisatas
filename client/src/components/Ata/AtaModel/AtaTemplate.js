@@ -12,7 +12,6 @@ import { useInfoAta } from "../../../context/InfoAta";
 
 const AtaTemplate = (props) => {
   const { infoAta } = useInfoAta();
-  console.log(infoAta);
 
   const dados = {
     id: infoAta.header.ataId ? infoAta.header.ataId : "",

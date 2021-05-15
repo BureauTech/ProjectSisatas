@@ -13,7 +13,6 @@ import { useInfoAta } from "../../../context/InfoAta";
 import Loading from "../../Loading/Loading";
 import revisaoServices from "../../../services/revisao";
 
-
 const ViewAta = ({ ajustarLayout }) => {
   const theme = useTheme();
   const { setInfoAta, infoAta } = useInfoAta();
@@ -23,18 +22,13 @@ const ViewAta = ({ ajustarLayout }) => {
   const [idAta, setIdAta] = useState();
   const [revis, setRevis] = useState({});
 
-  var dados = {}
-  const listaRevisoes = []
+  var dados = {};
+  const listaRevisoes = [];
 
   const location = useLocation();
   const history = useHistory();
 
-  const [Revisoes, setRevisoes] = useState({
-  })
-
-
-  //lista das revisoes que vem do banco
-  //console.log("olaola"+idAta)
+  const [Revisoes, setRevisoes] = useState({});
 
   const formatDate = (date) => {
     const data = new Date(date).toLocaleDateString();
@@ -48,15 +42,16 @@ const ViewAta = ({ ajustarLayout }) => {
 
   useEffect(() => {
     const idBuscar = location.state.id;
-    setIdAta(idBuscar)
+    setIdAta(idBuscar);
 
     //busca revisoes e faz o tratamento
-    revisaoServices.listarRevisoes()
-    .then(res => {
-      setInfos(res.data)
-      //console.log("sbdhb"+res.data)
-    })
-    .catch(err => console.log(err))
+    revisaoServices
+      .listarRevisoes()
+      .then((res) => {
+        setInfos(res.data);
+        //console.log("sbdhb"+res.data)
+      })
+      .catch((err) => console.log(err));
 
     // Id sem a barra "/"
     ataServices
@@ -103,10 +98,10 @@ const ViewAta = ({ ajustarLayout }) => {
     for (var k = 0; k < infos.length; k++) {
       if (infos[k].contemRevisoes.ataId == idAta) {
         dados = infos[k];
-        listaRevisoes.push(infos[k])
+        listaRevisoes.push(infos[k]);
       }
     }
-  }
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   // Alterna entre os estados "Open" e "Close" da lista
@@ -182,23 +177,23 @@ const ViewAta = ({ ajustarLayout }) => {
               Revisões Pendentes
             </Button>
             {/*<Link to="/revisoes" style={{ textDecoration: "none" }}>*/}
-              <Button
-                variant="contained"
-                color="secondary"
-                className="bold"
-                style={{
-                  color: "white",
-                  fontSize: "1.5rem",
-                  borderRadius: 16,
-                  padding: "0 5px",
-                }}
-                onClick={() => {
-                  console.log("aqi"+JSON.stringify(revis))
-                  ll()
-                  history.push("revisoes", listaRevisoes)}}
-              >
-                Visualizar Revisões
-              </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              className="bold"
+              style={{
+                color: "white",
+                fontSize: "1.5rem",
+                borderRadius: 16,
+                padding: "0 5px",
+              }}
+              onClick={() => {
+                ll();
+                history.push("revisoes", { listaRevisoes: listaRevisoes, idAta: idAta });
+              }}
+            >
+              Visualizar Revisões
+            </Button>
             {/*</Link>*/}
 
             <Button
