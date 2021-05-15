@@ -9,9 +9,14 @@ const listarRevisoes = () => {
   return api.get(`${endpoint}/listarRevisoes`)
 }
 
+const excluirRevisao = (revId) => {
+  return api.get(`${endpoint}/excluirRevisoes/${revId}`)
+}
+
 const revisaoServices = {
   criarRevisao,
   listarRevisoes,
+  excluirRevisao
 };
 
 export default revisaoServices;
