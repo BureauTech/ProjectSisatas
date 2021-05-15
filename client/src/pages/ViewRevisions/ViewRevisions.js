@@ -21,11 +21,11 @@ const ViewRevisions = (props) => {
   const { idAta } = location.state;
   for (var k = 0; k < param.length; k++) {
     var coi = {
-      revId: location.state[k].revId,
-      ataRef: location.state[k].contemRevisoes.ataId,
-      ataPrazo: location.state[k].revPrazo,
-      usuNome: location.state[k].contemRevisoes.participaAtas[0].usuNome,
-      revAssunto: location.state[k].revAssunto,
+      revId: location.state.listaRevisoes[k].revId,
+      ataRef: location.state.listaRevisoes[k].contemRevisoes.ataId,
+      ataPrazo: location.state.listaRevisoes[k].revPrazo,
+      usuNome: location.state.listaRevisoes[k].contemRevisoes.participaAtas[0].usuNome,
+      revAssunto: location.state.listaRevisoes[k].revAssunto,
     };
     revsCoi.push(coi);
   }
