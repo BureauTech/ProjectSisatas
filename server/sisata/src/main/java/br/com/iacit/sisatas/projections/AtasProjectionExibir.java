@@ -1,6 +1,7 @@
 package br.com.iacit.sisatas.projections;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface AtasProjectionExibir {
@@ -9,10 +10,10 @@ public interface AtasProjectionExibir {
 	String getAtaLocal();
 	String getAtaProjeto();
 	String getAtaPauta();
-	Date getAtaDataInicio();
-	Date getAtaDataFim();
-	Date getAtaHoraInicio();
-	Date getAtaHoraFim();
+	LocalDate getAtaDataInicio();
+	LocalDate getAtaDataFim();
+	LocalTime getAtaHoraInicio();
+	LocalTime getAtaHoraFim();
 	
 	List<AtasProjectionUsuarios> getParticipaAtas();
 
@@ -32,7 +33,7 @@ public interface AtasProjectionExibir {
 	interface AtasProjectionAssuntos {
 
 		String getAssAssunto();
-		Date getAssPrazo();
+		LocalDate getAssPrazo();
 		
 		List<AtasProjectionAssuntosUsuarios> getResponsavelAssuntos();
 

@@ -20,12 +20,11 @@ const ptBR = {
   toolbarFiltersLabel: "Mostrar filtros",
   toolbarFiltersTooltipHide: "Esconder filtros",
   toolbarFiltersTooltipShow: "Mostrar filtros",
-  toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} filtros ativos` : `${count} filtro ativo`,
+  toolbarFiltersTooltipActive: (count) => (count !== 1 ? `${count} filtros ativos` : `${count} filtro ativo`),
 
   // Export selector toolbar button text
-  toolbarExport: "Exportar",
-  toolbarExportLabel: "Exportar",
+  toolbarExport: "Exportar CSV",
+  toolbarExportLabel: "Exportar CSV",
   toolbarExportCSV: "Baixar como CSV",
 
   // Columns panel text
@@ -67,16 +66,13 @@ const ptBR = {
   columnMenuSortDesc: "Ordenar decrescente",
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} filtros ativos` : `${count} filtro ativo`,
+  columnHeaderFiltersTooltipActive: (count) => (count !== 1 ? `${count} filtros ativos` : `${count} filtro ativo`),
   columnHeaderFiltersLabel: "Mostrar filtros",
   columnHeaderSortIconLabel: "Ordenar",
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} linhas selecionadas`
-      : `${count.toLocaleString()} linha selecionada`,
+    count !== 1 ? `${count.toLocaleString()} linhas selecionadas` : `${count.toLocaleString()} linha selecionada`,
 
   // Total rows footer text
   footerTotalRows: "Total de linhas:",

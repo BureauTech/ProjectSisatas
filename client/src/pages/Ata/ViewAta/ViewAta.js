@@ -19,7 +19,6 @@ const ViewAta = ({ ajustarLayout }) => {
 
   const [idAta, setIdAta] = useState();
 
-  
   const location = useLocation();
   const history = useHistory();
   const formatDate = (date) => {
@@ -28,7 +27,7 @@ const ViewAta = ({ ajustarLayout }) => {
   };
 
   const formatTime = (time) => {
-    const tempo = new Date(time).toLocaleTimeString();
+    const tempo = time.join(":");
     return tempo;
   };
 
@@ -40,7 +39,7 @@ const ViewAta = ({ ajustarLayout }) => {
       .pegarAta(idBuscar.split("/").join(""))
       .then((res) => {
         const dados = res.data;
-        setIdAta(dados.ataId)
+        setIdAta(dados.ataId);
         const infoHeader = {
           ataId: dados.ataId,
           ataDataInicio: formatDate(dados.ataDataInicio),
@@ -59,7 +58,6 @@ const ViewAta = ({ ajustarLayout }) => {
           pauta: dados.ataPauta,
           assuntos: dados.assuntos,
         });
-        console.log("setado");
       })
       .catch((err) => console.log("erro:", err.message))
       .finally(() => setIsLoading(false));
@@ -166,22 +164,21 @@ const ViewAta = ({ ajustarLayout }) => {
                 Visualizar Revisões
               </Button>
             </Link>
-            
-              <Button
-                variant="contained"
-                color="secondary"
-                className="bold"
-                style={{
-                  color: "white",
-                  fontSize: "1.5rem",
-                  borderRadius: 16,
-                  padding: "0 5px",
-                }}
-                onClick={() => history.push("nova-revisao", { user:  1, ataid: idAta })}
-              >
-                Nova Revisão
-              </Button>
-           
+
+            <Button
+              variant="contained"
+              color="secondary"
+              className="bold"
+              style={{
+                color: "white",
+                fontSize: "1.5rem",
+                borderRadius: 16,
+                padding: "0 5px",
+              }}
+              onClick={() => history.push("nova-revisao", { user: 1, ataid: idAta })}
+            >
+              Nova Revisão
+            </Button>
           </Grid>
         </>
       )}
