@@ -59,7 +59,6 @@ const Topics = (props) => {
 
   // Rastreia o participante atualmente escolhido
   const getPerson = (person) => {
-    console.log(person);
     if (person) {
       setAtual(person.usuNome);
       setIdPessoa(person.usuId);
@@ -112,7 +111,6 @@ const Topics = (props) => {
   };
 
   const formatDatetime = (date) => {
-    console.log(listaAssuntos);
     const data = date.split("-").reverse().join("/");
     return data;
   };
