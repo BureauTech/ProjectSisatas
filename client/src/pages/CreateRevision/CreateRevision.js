@@ -19,6 +19,7 @@ const CreateRevision = (props) => {
   const [openSnack, setOpenSnack] = useState(false);
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
+  const [disab, setDisab] = useState(false);
 
   const [user, setUser] = useState("");
   const [ataid, setAtaid] = useState("");
@@ -47,6 +48,12 @@ const CreateRevision = (props) => {
         setMsgSucesso("Revisão cadastrada com sucesso!");
         setMsgErro(false);
         setOpenSnack(true);
+        setDisab(true);
+
+        setTimeout(
+          function() {
+            history.push("ata", { id: location.state.ataid });
+        }, 1250)
     })
     .catch(err => {
       console.log(err);
@@ -56,10 +63,6 @@ const CreateRevision = (props) => {
     })
       console.log("olha"+ JSON.stringify(body));
 
-      let seu_tempo_ta_acabando = setTimeout(
-        function() {
-          history.push("ata", { id: location.state.ataid });
-      }, 4000)
   };
 
 
@@ -100,6 +103,7 @@ const CreateRevision = (props) => {
               borderRadius: 20,
               padding: "0 30px",
             }}
+            disabled={disab}
           >
             Salvar
           </Button>
