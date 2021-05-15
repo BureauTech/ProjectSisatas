@@ -7,18 +7,63 @@ import {
   Input,
   TextareaAutosize,
   Button,
-  useTheme
+  useTheme,
+  Dialog, DialogTitle, DialogActions
 } from "@material-ui/core";
 import "./Components.css";
 import { styles } from "../../assets/styles/Styles";
 import Chips from "./Chips";
 import { useState } from "react";
+import revisaoServices from "../../services/revisao";
+import ataServices from "../../services/ata";
+import Alerta from "../Snackbar/Alerta";
+import { useHistory } from "react-router-dom";
 
 // Alterando css de componentes
 
 const ViewRevisionsComponent = (props) => {
   const { classes, setInfos } = props;
   const theme = useTheme();
+
+  const history = useHistory();
+
+  const [openSnack, setOpenSnack] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [msgSucesso, setMsgSucesso] = useState("");
+  const [msgErro, setMsgErro] = useState("");
+  const [idDelete, setIdDelete] = useState(null);
+
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleAskDelete = (id) => {
+    setIdDelete(id);
+    setOpen(true);
+  };
+
+
+  const handleDelete = () => {
+    revisaoServices.excluirRevisao(props.coi.revId)
+      .then((res) => {
+        setMsgSucesso(`Revisão ${props.coi.revId} excluida com sucesso! Você será redirecionado para a ata`);
+        setMsgErro(false);
+        setOpenSnack(true);
+         setTimeout(
+          function() {
+            history.push("ata", { id: props.coi.ataRef });
+        }, 1250)
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setMsgSucesso(false);
+        setMsgErro(`Erro ao excluir a revisão ${props.coi.revId}!`);
+        setOpenSnack(true);
+      });
+    setOpen(false);
+  };
 
   const [listaParticipantes, setListaParticipantes] = useState([
     {
@@ -65,6 +110,7 @@ const ViewRevisionsComponent = (props) => {
     },
   ]);
 
+  
   var dia = props.coi.ataPrazo[2]
   var mes = props.coi.ataPrazo[1]
 
@@ -87,6 +133,7 @@ const ViewRevisionsComponent = (props) => {
   };
 
   window.addEventListener("resize", handleResize);
+
 
   return (
     <Container>
@@ -220,6 +267,7 @@ const ViewRevisionsComponent = (props) => {
                 <Chips participantes={listaParticipantes} filtro={"Pendente"} />
               </Grid>
             </Grid>
+            <Grid container justify="space-around">
             <Grid item style={{ margin: "15px 0px" }}>
               <Button
                 variant="contained"
@@ -236,9 +284,42 @@ const ViewRevisionsComponent = (props) => {
                 Exibir Comentários
               </Button>
             </Grid>
+            <Grid item style={{ margin: "15px 0px" }}>
+              <Button
+                variant="contained"
+                className="bold"
+                style={{
+                  backgroundColor: "white",
+                  color: theme.palette.secondary.main,
+                  fontWeight: 700,
+                  fontSize: "1.5rem",
+                  borderRadius: 16,
+                  padding: "0 5px",
+                }}
+                onClick={handleAskDelete}
+              >
+                Excluir Revisão
+              </Button>
+            </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
+
+      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Tem certeza que deseja excluir a revisao?</DialogTitle>
+          <DialogActions>
+            <Grid container justify="space-evenly">
+              <Button onClick={() => handleDelete()} color="primary" variant="contained">
+                EXCLUIR
+              </Button>
+              <Button onClick={handleClose} color="primary" variant="contained">
+                Cancelar
+              </Button>
+            </Grid>
+          </DialogActions>
+        </Dialog>
     </Container>
   );
 };
