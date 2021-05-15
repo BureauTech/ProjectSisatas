@@ -1,7 +1,7 @@
 package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,11 +38,11 @@ public class ComentariosModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long comId;
-	@Column(nullable = false, length = 300)
+	@Column(nullable = false, columnDefinition="TEXT")
 	public String comDescricao;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	public Date comData;
+	public LocalDate comData;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkRevId", referencedColumnName = "revId", foreignKey = @ForeignKey(name = "fk_RevId"))

@@ -1,7 +1,6 @@
 package br.com.iacit.sisatas.models;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -58,7 +57,7 @@ public class AtasModel implements Serializable{
 	private LocalTime ataHoraFim;
 	@Column(nullable = false)
 	@CreationTimestamp
-	private Date ataDataCriacao;
+	private LocalDate ataDataCriacao;
 	@Column(nullable = false, length = 30)
 	private String ataLocal;
 	@Column(nullable = false, length = 30)

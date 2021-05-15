@@ -1,12 +1,12 @@
 package br.com.iacit.sisatas.projections;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public interface AtasProjectionDataGrid {
 	
 	String getAtaId();
 	String getAtaProjeto();
 	String getAtaPauta();
-	Date getAtaDataCriacao();
+	LocalDate getAtaDataCriacao();
 
 }
