@@ -17,8 +17,9 @@ import { useState } from "react";
 // Alterando css de componentes
 
 const ViewRevisionsComponent = (props) => {
-  const { classes } = props;
+  const { classes, setInfos } = props;
   const theme = useTheme();
+
   const [listaParticipantes, setListaParticipantes] = useState([
     {
       nome: "Denis Lima",
@@ -64,6 +65,21 @@ const ViewRevisionsComponent = (props) => {
     },
   ]);
 
+  var dia = props.coi.ataPrazo[2]
+  var mes = props.coi.ataPrazo[1]
+
+  if (`${props.coi.ataPrazo[1]}`.length == 1){
+    var tmp = props.coi.ataPrazo[1]
+    mes = "0"+tmp
+  }
+
+  if (`${props.coi.ataPrazo[2]}`.length == 1){
+    var tmp = props.coi.ataPrazo[2]
+    dia = "0"+tmp
+  }
+  
+  var data = `${props.coi.ataPrazo[0]}-${mes}-${dia}`
+
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
   const handleResize = () => {
@@ -94,7 +110,7 @@ const ViewRevisionsComponent = (props) => {
                 <Typography className={classes.biggerText}>Revisão</Typography>
               </Grid>
               <Grid container justify="center">
-                <Typography className={classes.biggerText}>Nº: 02</Typography>
+                <Typography className={classes.biggerText}>{props.coi.revId}</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -112,7 +128,7 @@ const ViewRevisionsComponent = (props) => {
                   <Grid container justify="space-between">
                     <Grid item md={6} lg={5}>
                       <FormLabel className={classes.normalText}>
-                        <strong>01/21</strong>
+                        <strong>{props.coi.ataRef}</strong>
                       </FormLabel>
                     </Grid>
                   </Grid>
@@ -132,6 +148,8 @@ const ViewRevisionsComponent = (props) => {
                         className={classes.textField}
                         disableUnderline
                         type="date"
+                        disabled
+                        value={data}
                       />
                     </Grid>
                   </Grid>
@@ -151,7 +169,7 @@ const ViewRevisionsComponent = (props) => {
               </Grid>
               <Grid container className={classes.rowMargin}>
                 <Grid item md={12} lg={12}>
-                  <FormLabel className={classes.normalText}><strong>Fulano da Silva</strong></FormLabel>
+                  <FormLabel className={classes.normalText}><strong>{props.coi.usuNome}</strong></FormLabel>
                 </Grid>
               </Grid>
             </Grid>
@@ -171,6 +189,7 @@ const ViewRevisionsComponent = (props) => {
                   rowsMin={7}
                   rowsMax={15}
                   // value={infoRevision}
+                  value={props.coi.revAssunto}
                   style={{
                     width: "100%",
                     fontSize: "1.8rem",

@@ -11,16 +11,31 @@ import ataServices from "../../../services/ata";
 import Status from "../../../components/Ata/ViewAta/Status";
 import { useInfoAta } from "../../../context/InfoAta";
 import Loading from "../../Loading/Loading";
+import revisaoServices from "../../../services/revisao";
+
 
 const ViewAta = ({ ajustarLayout }) => {
   const theme = useTheme();
   const { setInfoAta, infoAta } = useInfoAta();
   const [isLoading, setIsLoading] = useState(true);
+  const [infos, setInfos] = useState([]);
 
   const [idAta, setIdAta] = useState();
+  const [revis, setRevis] = useState({});
+
+  var dados = {}
+  const listaRevisoes = []
 
   const location = useLocation();
   const history = useHistory();
+
+  const [Revisoes, setRevisoes] = useState({
+  })
+
+
+  //lista das revisoes que vem do banco
+  //console.log("olaola"+idAta)
+
   const formatDate = (date) => {
     const data = new Date(date).toLocaleDateString();
     return data;
@@ -33,6 +48,15 @@ const ViewAta = ({ ajustarLayout }) => {
 
   useEffect(() => {
     const idBuscar = location.state.id;
+    setIdAta(idBuscar)
+
+    //busca revisoes e faz o tratamento
+    revisaoServices.listarRevisoes()
+    .then(res => {
+      setInfos(res.data)
+      //console.log("sbdhb"+res.data)
+    })
+    .catch(err => console.log(err))
 
     // Id sem a barra "/"
     ataServices
@@ -74,13 +98,21 @@ const ViewAta = ({ ajustarLayout }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //verifica se o id da ata esta na revisao
+  const ll = () => {
+    for (var k = 0; k < infos.length; k++) {
+      if (infos[k].contemRevisoes.ataId == idAta) {
+        dados = infos[k];
+        listaRevisoes.push(infos[k])
+      }
+    }
+  }
   const [isOpen, setIsOpen] = useState(false);
 
   // Alterna entre os estados "Open" e "Close" da lista
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
-
   return (
     <Container>
       {isLoading && <Loading />}
@@ -149,7 +181,7 @@ const ViewAta = ({ ajustarLayout }) => {
             >
               Revisões Pendentes
             </Button>
-            <Link to="/revisoes" style={{ textDecoration: "none" }}>
+            {/*<Link to="/revisoes" style={{ textDecoration: "none" }}>*/}
               <Button
                 variant="contained"
                 color="secondary"
@@ -160,10 +192,14 @@ const ViewAta = ({ ajustarLayout }) => {
                   borderRadius: 16,
                   padding: "0 5px",
                 }}
+                onClick={() => {
+                  console.log("aqi"+JSON.stringify(revis))
+                  ll()
+                  history.push("revisoes", listaRevisoes)}}
               >
                 Visualizar Revisões
               </Button>
-            </Link>
+            {/*</Link>*/}
 
             <Button
               variant="contained"
