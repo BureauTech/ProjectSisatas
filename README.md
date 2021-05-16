@@ -64,10 +64,12 @@ Representação da entrega:
 
 ![representacao]()
 
+**Documentação entregue:**
+- [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software-%20Caixa%20Preta.pdf)
+
 # Burndown
 
-**Documentação entregue:**
-- [Testes de Software- Caixa Preta](./docs/Testes%20de%20Software-%20Caixa%20Preta.pdf)
+- [Gráfico Burndown]()
 
 # Backlog 
 
