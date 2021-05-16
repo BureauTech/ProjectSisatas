@@ -55,7 +55,7 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - **Sprint 3**
 
-Entregas realizadas:
+**Entregas realizadas:**
 
 ![cards](./assets/png/Sprint%203%20-%20Cards-1.png)
 ![cards](./assets/png/Sprint%203%20-%20Cards-2.png)
