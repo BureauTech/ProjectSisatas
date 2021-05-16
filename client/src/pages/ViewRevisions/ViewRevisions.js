@@ -1,9 +1,11 @@
-import { Button, Container, Grid, useTheme } from "@material-ui/core";
+import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core";
+import { useEffect, useState } from "react";
 //import { useState } from "react";
 
 import { useLocation, useHistory } from "react-router-dom";
 
 import ViewRevisionsComponent from "../../components/ViewRevisionsComponent/ViewRevisionsComponent";
+import revisaoServices from "../../services/revisao";
 import "./Style.css";
 
 const ViewRevisions = (props) => {
@@ -11,29 +13,29 @@ const ViewRevisions = (props) => {
 
   const location = useLocation();
   const history = useHistory();
+  const [revisoes, setRevisoes] = useState([]);
+  const { idAta } = location.state;
+
+  useEffect(() => {
+    const idBuscar = location.state.id;
+
+    //busca revisoes e faz o tratamento
+    revisaoServices
+      .listarRevisoes()
+      .then((res) => {
+        const revisoesDaAta = res.data.filter((revisao) => revisao.contemRevisoes.ataId === idAta);
+        setRevisoes(revisoesDaAta);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   //logica para renderizar as revisoes de acordo com o tanto que tem no bd
-  //recebe os parametros quando chama a url
-  var param = [];
-  var revsCoi = [];
   var revisRend = [];
-  param = location.state.listaRevisoes;
-  const { idAta } = location.state;
-  for (var k = 0; k < param.length; k++) {
-    var coi = {
-      revId: location.state.listaRevisoes[k].revId,
-      ataRef: location.state.listaRevisoes[k].contemRevisoes.ataId,
-      ataPrazo: location.state.listaRevisoes[k].revPrazo,
-      usuNome: location.state.listaRevisoes[k].contemRevisoes.participaAtas[0].usuNome,
-      revAssunto: location.state.listaRevisoes[k].revAssunto,
-    };
-    revsCoi.push(coi);
-  }
-  //renderiza de acordo com o dados que tem na lista que veio
-  for (var k = 0; k < revsCoi.length; k++) {
+
+  for (var k = 0; k < revisoes.length; k++) {
     revisRend.push(
       <Grid container style={{ marginBottom: 10 }}>
-        <ViewRevisionsComponent coi={revsCoi[k]} />
+        <ViewRevisionsComponent revisoes={revisoes[k]} customId={k + 1} />
       </Grid>
     );
   }
@@ -41,6 +43,9 @@ const ViewRevisions = (props) => {
   return (
     <Container>
       <form>
+        <Grid container style={{ marginBottom: 10 }}>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Exibir Revisões</Typography>
+        </Grid>
         {revisRend ? revisRend : "Sem revisões"}
         <Grid container justify="space-between" style={{ padding: 24 }}>
           <Button

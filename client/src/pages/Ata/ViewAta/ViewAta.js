@@ -96,8 +96,7 @@ const ViewAta = ({ ajustarLayout }) => {
   //verifica se o id da ata esta na revisao
   const ll = () => {
     for (var k = 0; k < infos.length; k++) {
-      if (infos[k].contemRevisoes.ataId == idAta) {
-        dados = infos[k];
+      if (infos[k].contemRevisoes.ataId === idAta) {
         listaRevisoes.push(infos[k]);
       }
     }

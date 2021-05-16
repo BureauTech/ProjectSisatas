@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.iacit.sisatas.models.AtasModel;
 import br.com.iacit.sisatas.models.RevisoesModel;
+import br.com.iacit.sisatas.projections.RevisoesProjection;
 import br.com.iacit.sisatas.repository.RevisoesRepository;
 import br.com.iacit.sisatas.returns.MessageReturn;
 
@@ -44,10 +45,10 @@ public class RevisoesController {
 
 		@ResponseBody
 		@RequestMapping(value = "/listarRevisoes", method = RequestMethod.GET)
-		public List<RevisoesModel> listarRevisoes() {
-			List<RevisoesModel> revisoes = null;
+		public List<RevisoesProjection> listarRevisoes() {
+			List<RevisoesProjection> revisoes = null;
 			try {
-				revisoes = rp.findAll();
+				revisoes = rp.findAllProjectedBy();
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 			}
