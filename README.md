@@ -62,7 +62,7 @@ Entregas realizadas:
 ![cards](./assets/png/Sprint%203%20-%20Cards-2.png)
 Representação da entrega:
 
-![representacao]()
+![representacao](./assets/gifs/Representacao%20-%20Sprint3.gif)
 
 **Documentação entregue:**
 - [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software%20-%20Caixa%20Preta.pdf)
