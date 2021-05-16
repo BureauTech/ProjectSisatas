@@ -71,7 +71,7 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 # Burndown
 
-- [Gráfico Burndown](./assets/png/Burndown%20-%20Sprint%203.png)
+- ![Gráfico Burndown](assets/png/Burndown%20-%20Sprint%203.png)
 
 # Backlog 
 
