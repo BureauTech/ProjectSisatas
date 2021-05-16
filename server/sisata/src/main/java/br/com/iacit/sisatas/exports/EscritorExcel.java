@@ -1,50 +1,66 @@
 package br.com.iacit.sisatas.exports;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import br.com.iacit.sisatas.models.AssuntosModel;
 import br.com.iacit.sisatas.models.UsuariosModel;
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
 import br.com.iacit.sisatas.models.AtasModel;
 
+import javax.imageio.ImageIO;
+
 public class EscritorExcel {
 
-	private AtasModel ata;
-	private String templatePath;
-	private XSSFWorkbook workbook;
-	private XSSFSheet sheet;
+	private final AtasModel ata;
+	private final XSSFWorkbook workbook;
+	private final XSSFSheet sheet;
 	private int rownum;
 	
 	public EscritorExcel(AtasModel ata) throws IOException, URISyntaxException {
 		this.ata = ata;
-		this.templatePath = "templates/template.xlsx";
+		String templatePath = "templates/template.xlsx";
 		
 		ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(templatePath);
-        File file = new File(resource.toURI());
+		assert resource != null;
+		File file = new File(resource.toURI());
 		FileInputStream fileInput = new FileInputStream(file);
 		
 		this.workbook = new XSSFWorkbook(fileInput);
 		this.sheet = workbook.getSheetAt(0);
 	}
+
+	private static BufferedImage resizeImage(BufferedImage originalImage) {
+		Image resultingImage = originalImage.getScaledInstance(190, 90, Image.SCALE_DEFAULT);
+		BufferedImage outputImage = new BufferedImage(190, 90, BufferedImage.TYPE_INT_RGB);
+		outputImage.getGraphics().drawImage(resultingImage, 0, 0, null);
+		return outputImage;
+	}
+
+	private static BufferedImage createImageFromBytes(byte[] imageData) {
+		ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
+		try {
+			return ImageIO.read(bais);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static byte[] toByteArray(BufferedImage bi) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(bi, "PNG", baos);
+		return baos.toByteArray();
+	}
 	
 	private void writeCabecalho() {
-		//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		//DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm:ss");
 
@@ -52,15 +68,12 @@ public class EscritorExcel {
 		numero.setCellValue("ATA Nº.: " + ata.getAtaId());
 
 		Cell data = sheet.getRow(1).getCell(3);
-		//data.setCellValue("DATA: " + dateFormat.format(ata.getAtaDataInicio()));
 		data.setCellValue("DATA: " + ata.getAtaDataInicio().format(dateFormat) + " - " + ata.getAtaDataFim().format(dateFormat));
 
 		Cell horaInicio = sheet.getRow(2).getCell(3);
-		//horaInicio.setCellValue("INÍCIO: " + timeFormat.format(ata.getAtaHoraInicio()));
 		horaInicio.setCellValue("INÍCIO: " + ata.getAtaHoraInicio().format(timeFormat));
 
 		Cell horaFim = sheet.getRow(2).getCell(4);
-		//horaFim.setCellValue("FIM: " + timeFormat.format(ata.getAtaHoraFim()));
 		horaFim.setCellValue("FIM: " + ata.getAtaHoraFim().format(timeFormat));
 
 		Cell local = sheet.getRow(3).getCell(3);
@@ -133,7 +146,6 @@ public class EscritorExcel {
 		font.setFontName("Arial");
 		font.setBold(true);
 		font.setItalic(false);
-
 		stylePauta.setFont(font);
 		pauta.setCellStyle(stylePauta);
 
@@ -141,7 +153,7 @@ public class EscritorExcel {
 		Cell conteudoPauta = sheet.getRow(++rownum).getCell(1);
 		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
 		conteudoPauta.setCellValue(ata.getAtaPauta());
-		conteudoPauta.getRow().setHeight((short) (300 * sheet.getDefaultRowHeightInPoints()));
+		conteudoPauta.getRow().setHeight((short) (350 * sheet.getDefaultRowHeightInPoints()));
 
 		XSSFCellStyle styleConteudoPauta = workbook.createCellStyle();
 		styleConteudoPauta.setBorderBottom(BorderStyle.THIN);
@@ -149,6 +161,7 @@ public class EscritorExcel {
 		styleConteudoPauta.setBorderLeft(BorderStyle.THIN);
 		styleConteudoPauta.setBorderTop(BorderStyle.THIN);
 		styleConteudoPauta.setVerticalAlignment(VerticalAlignment.TOP);
+		styleConteudoPauta.setWrapText(true);
 		conteudoPauta.setCellStyle(styleConteudoPauta);
 
 		for(int col = 1; col < 6; col++)
@@ -233,7 +246,53 @@ public class EscritorExcel {
 			sheet.getRow(rownum+1).getCell(col).setCellStyle(borderTop);
 	}
 	
-	private void writeAsssinaturas() {
+	private void writeAsssinaturas() throws IOException {
+		rownum += 2;
+
+		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
+		Cell dist = sheet.getRow(rownum).getCell(1);
+		dist.setCellValue("DISTRIBUIÇÃO");
+
+		XSSFCellStyle styleAssinatura = workbook.createCellStyle();
+		styleAssinatura.setBorderLeft(BorderStyle.THIN);
+		styleAssinatura.setBorderTop(BorderStyle.THIN);
+		styleAssinatura.setBorderBottom(BorderStyle.THIN);
+		styleAssinatura.setBorderRight(BorderStyle.THIN);
+		styleAssinatura.setAlignment(HorizontalAlignment.CENTER);
+
+		XSSFFont font = workbook.createFont();
+		font.setFontHeightInPoints((short)10);
+		font.setFontName("Arial");
+		font.setBold(true);
+		font.setItalic(false);
+		styleAssinatura.setFont(font);
+
+		for(int col = 1; col < 6; col++)
+			dist.getRow().getCell(col).setCellStyle(styleAssinatura);
+
+		rownum += 2;
+		for (UsuariosModel participante : ata.getParticipaAtas()) {
+			byte[] assinatura = toByteArray(resizeImage(createImageFromBytes(participante.getUsuAssinatura())));
+			int pictureIdx = workbook.addPicture(assinatura, Workbook.PICTURE_TYPE_PNG);
+
+			CreationHelper helper = workbook.getCreationHelper();
+			XSSFDrawing drawing = sheet.createDrawingPatriarch();
+			ClientAnchor anchor = helper.createClientAnchor();
+			anchor.setCol1(1);
+			anchor.setRow1(rownum);
+
+			Picture pict = drawing.createPicture(anchor, pictureIdx);
+			pict.resize();
+
+			Cell nome = sheet.getRow(rownum+6).getCell(1);
+			nome.setCellValue("NOME: " + participante.getUsuNome() + " - " + participante.getUsuAreaEmpresa());
+
+			XSSFCellStyle style = workbook.createCellStyle();
+			style.setWrapText(false);
+			nome.setCellStyle(style);
+
+			rownum += 9;
+		}
 		// http://localhost:8080/download/ata/excel/01/21
 
 	}
