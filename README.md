@@ -59,11 +59,14 @@ Entregas realizadas:
 
 ![cards](./assets/png/Sprint%203%20-%20Cards-1.png)
 ![cards](./assets/png/Sprint%203%20-%20Cards-2.png)
+
+
 Representação da entrega:
 
- <p align="center"> 
-  ![representacao](./assets/gifs/Representacao%20-%20Sprint3.gif)
-</p>
+  <p align="center">
+    <img src="./assets/gifs/Representacao%20-%20Sprint3.gif">
+  </p>
+
 **Documentação entregue:**
 - [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software%20-%20Caixa%20Preta.pdf)
 
