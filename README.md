@@ -1,4 +1,4 @@
-<h1 align="center">SISATAS sprint 3</h1>
+<h1 align="center">SISATAS</h1>
 
 <p align="center">Uma solução web para acompanhamento e gerenciamento de atas de reuniões.</p>
 
