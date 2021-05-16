@@ -57,8 +57,8 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 Entregas realizadas:
 
-![cards](./assets/png/Sprint 3 - Cards-1.png)
-![cards](./assets/png/Cards%20Sprint%202.png)
+![cards](./assets/png/Sprint%203%20-%20Cards-1.png)
+![cards](./assets/png/Sprint%203%20-%20Cards-2.png)
 Representação da entrega:
 
 ![representacao](./assets/gif/../gifs/Representacao%20-%20Sprint2.gif)
