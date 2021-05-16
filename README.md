@@ -64,13 +64,7 @@ Representação da entrega:
 ![representacao](./assets/gif/../gifs/Representacao%20-%20Sprint2.gif)
 
 **Documentação entregue:**
-- Diagrama e descrições de Casos de Uso;
-- Diagrama de Atividades;
-- Diagrama de Contexto;
-- Diagrama de Implantação;
-- Lista de Requisitos
-
-Disponíveis para visualização [aqui](./docs/Documentação%20SISATAS.pdf)
+- [Testes de Software- Caixa Preta]()
 
 # Backlog 
 
