@@ -22,7 +22,15 @@ import { BrokenImage } from "@material-ui/icons";
 
 const EditUser = (props) => {
   const { classes } = props;
-  const [usuario, setUsuario] = useState(null);
+  const [usuario, setUsuario] = useState({
+    usuNome: "",
+    usuId: "",
+    usuEmail: "",
+    usuCargo: "",
+    usuAreaEmpresa: "",
+    usuTelefone: "",
+    usuPerfil: "",
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [open, setOpen] = useState(false);
