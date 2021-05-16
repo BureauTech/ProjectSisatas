@@ -64,7 +64,7 @@ Representação da entrega:
 ![representacao](./assets/gif/../gifs/Representacao%20-%20Sprint2.gif)
 
 **Documentação entregue:**
-- [Testes de Software- Caixa Preta]()
+- [Testes de Software- Caixa Preta](./docs/Testes%20de%20Software-%20Caixa%20Preta.pdf)
 
 # Backlog 
 
