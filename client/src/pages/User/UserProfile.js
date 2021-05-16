@@ -1,27 +1,41 @@
-import {
-  Button,
-  Container,
-  Grid,
-  Typography,
-  withStyles,
-} from "@material-ui/core";
+import { Button, Container, Grid, Typography, withStyles } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
-import logo from "../../assets/images/BureauTechFundoBranco-01.png";
-import "../CreateAta/Style.css";
+import "../Ata/CreateAta/Style.css";
 import userServices from "../../services/user";
 import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
 import { useHistory, useLocation } from "react-router-dom";
+import Alerta from "../../components/Snackbar/Alerta";
+import { BrokenImage } from "@material-ui/icons";
 
 const UserProfile = (props) => {
   const { classes } = props;
-  const [usuario, setUsuario] = useState(null);
+  const [usuario, setUsuario] = useState({
+    usuNome: "",
+    usuId: "",
+    usuEmail: "",
+    usuCargo: "",
+    usuAreaEmpresa: "",
+    usuTelefone: "",
+    usuPerfil: "",
+  });
   const [isLoading, setIsLoading] = useState(true);
+  const [openSnack, setOpenSnack] = useState(false);
+  const [msgSucesso, setMsgSucesso] = useState("");
+  const [msgErro, setMsgErro] = useState("");
   const history = useHistory();
   const voltar = () => {
     history.goBack();
   };
   const location = useLocation();
+
+  const isEmpty = (user) => {
+    const keys = Object.keys(user);
+    if (keys.length === 0) {
+      return 1;
+    }
+    return 0;
+  };
 
   useEffect(() => {
     // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
@@ -35,35 +49,34 @@ const UserProfile = (props) => {
     userServices
       .pegarUsuario(idBuscar)
       .then((user) => {
-        setUsuario(user.data);
-        setIsLoading(false);
+        if (!isEmpty(user.data)) {
+          setUsuario(user.data);
+          setIsLoading(false);
+        } else {
+          setIsLoading(false);
+        }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
         setIsLoading(false);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
+        setOpenSnack(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   const editar = () => {
-    history.push("/edit-user", { id: usuario.usuId });
+    history.push("/editar-usuario", { id: usuario.usuId });
   };
 
   return (
     <Container>
       {isLoading && <Loading />}
       {!isLoading && (
-        <Grid
-          container
-          justify="center"
-          className={classes.grid}
-          style={{ paddingBottom: 40 }}
-        >
+        <Grid container justify="center" className={classes.grid} style={{ padding: "0px 25px 20px" }}>
           <Grid container justify="center">
-            <Typography
-              className={classes.biggerText}
-              style={{ paddingBottom: 80, paddingTop: 20 }}
-            >
+            <Typography className={classes.biggerText} style={{ paddingBottom: 80, paddingTop: 20 }}>
               Perfil de Usuário
             </Typography>
           </Grid>
@@ -220,7 +233,8 @@ const UserProfile = (props) => {
                       color: "white",
                     }}
                   >
-                    <strong>{usuario.pertenceUsuarios.perNome}</strong>
+                    {/* Alteração Daniel */}
+                    <strong>{usuario.usuPerfil}</strong>
                   </Typography>
                 </Grid>
               </Grid>
@@ -228,22 +242,20 @@ const UserProfile = (props) => {
             <Grid item md={5}>
               <Grid container justify="center">
                 <Grid container justify="center">
-                  <img
-                    src={logo}
-                    alt="Imagem da assinatura"
-                    style={{ maxWidth: 400, maxHeight: 400 }}
-                  />
+                  {usuario.usuAssinatura && (
+                    <img
+                      // Alteração Daniel
+                      src={"data:image/png;base64," + usuario.usuAssinatura}
+                      alt="Imagem da assinatura"
+                      style={{ maxWidth: 400, maxHeight: 400 }}
+                    />
+                  )}
+                  {!usuario.usuAssinatura && <BrokenImage color="secondary" style={{ width: 300, height: 300 }} />}
                 </Grid>
                 <Grid container justify="center" style={{ paddingTop: 20 }}>
-                  <Typography className={classes.normalText}>
-                    Assinatura Atual
-                  </Typography>
+                  <Typography className={classes.normalText}>Assinatura Atual</Typography>
                 </Grid>
-                <Grid
-                  container
-                  justify="space-around"
-                  style={{ paddingTop: 50 }}
-                >
+                <Grid container justify="space-around" style={{ paddingTop: 50 }}>
                   <Button
                     variant="contained"
                     color="secondary"
@@ -254,6 +266,7 @@ const UserProfile = (props) => {
                       fontSize: "1.5rem",
                       borderRadius: 40,
                       padding: "10px 50px",
+                      margin: "10px 0px",
                     }}
                   >
                     Voltar
@@ -268,7 +281,9 @@ const UserProfile = (props) => {
                       fontSize: "1.5rem",
                       borderRadius: 40,
                       padding: "10px 50px",
+                      margin: "10px 0px",
                     }}
+                    disabled={String(usuario.usuId).length ? false : true}
                   >
                     Editar
                   </Button>
@@ -278,6 +293,7 @@ const UserProfile = (props) => {
           </Grid>
         </Grid>
       )}
+      <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
     </Container>
   );
 };

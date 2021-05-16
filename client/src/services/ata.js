@@ -1,16 +1,28 @@
 import api from "./api";
 
+const endpoint = "/atas";
+
 const criarAta = (data) => {
-  api.post("/createata", data);
+  return api.post(`${endpoint}/cadastrarAta`, data);
 };
 
-const pegarParticipantes = () => {
-  api.get("/createata");
+const pegarAta = (id) => {
+  return api.get(`${endpoint}/pegarAta/${id}`);
+};
+
+const ultimoId = () => {
+  return api.get(`${endpoint}/ultimoRegistro`);
+};
+
+const listarAtas = (param) => {
+  return api.get(`${endpoint}/listarAtas?lista=${param}`);
 };
 
 const ataServices = {
   criarAta,
-  pegarParticipantes,
+  pegarAta,
+  ultimoId,
+  listarAtas,
 };
 
 export default ataServices;

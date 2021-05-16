@@ -1,0 +1,95 @@
+input[type="time"],
+input[type="date"],
+input[type="datetime-local"] {
+  text-align: center !important;
+}
+
+.MuiAutocomplete-input {
+  padding-left: 0.4rem !important;
+}
+
+/* Scrollbar styles */
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+/* Scrollbar trilho */
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+/* Scrollbar alça de rolagem */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #ccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Botão arrastável do textarea */
+::-webkit-resizer {
+  display: none;
+}
+
+textarea {
+  outline: none;
+}
+
+.primary {
+  background-color: #3379fa !important;
+}
+
+.secondary {
+  background-color: #26baf4 !important;
+}
+
+.light {
+  background-color: #d5e3fd !important;
+}
+
+.largeIcon {
+  height: 2.6rem !important;
+  width: 2.6rem !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.MuiInput-underline:before,
+.MuiInput-underline:after {
+  border-bottom: none !important;
+}
+
+@media screen and (min-width: 600px) and (max-width: 960px) {
+  .inputsGrid {
+    margin-right: 20px !important;
+    margin-bottom: 10px !important;
+  }
+  .center {
+    justify-content: center !important;
+  }
+  .largeIcon {
+    height: 2.6rem !important;
+    width: 2.6rem !important;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .space-around {
+    justify-content: space-evenly !important;
+  }
+  .largeIcon {
+    height: 2rem !important;
+    width: 2rem !important;
+  }
+  .inputsGrid {
+    margin-bottom: 5px !important;
+  }
+}

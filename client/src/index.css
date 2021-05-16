@@ -1,11 +1,12 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  background: linear-gradient(90deg, #b0c4de 0.83%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(0deg, #4682b4, #b0c4de);
 }
 
 * {
@@ -14,12 +15,9 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 .App {
-  background: linear-gradient(90deg, #d5e3fd 0.83%, rgba(255, 255, 255, 0) 100%),
-    linear-gradient(0deg, #84adfb, #84adfb);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
