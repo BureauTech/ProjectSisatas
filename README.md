@@ -17,6 +17,7 @@ Desenvolvido pela Bureau Tech.
    * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
    * [Acompanhamento das Atividades](#acompanhamento-das-atividades)
    * [Entregas](#entregas)
+   * [Burndown](#burndown)
    * [Backlog](#backlog)
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
@@ -62,6 +63,8 @@ Entregas realizadas:
 Representação da entrega:
 
 ![representacao]()
+
+# Burndown
 
 **Documentação entregue:**
 - [Testes de Software- Caixa Preta](./docs/Testes%20de%20Software-%20Caixa%20Preta.pdf)
