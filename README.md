@@ -65,7 +65,7 @@ Representação da entrega:
 ![representacao]()
 
 **Documentação entregue:**
-- [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software-%20Caixa%20Preta.pdf)
+- [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software%20-%20Caixa%20Preta.pdf)
 
 # Burndown
 
