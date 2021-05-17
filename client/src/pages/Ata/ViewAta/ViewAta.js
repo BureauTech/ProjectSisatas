@@ -1,15 +1,14 @@
-import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import {Button, Container, Grid, Typography, useTheme} from "@material-ui/core";
+import {Link, useHistory, useLocation} from "react-router-dom";
 
 import AtaHeader from "../../../components/Ata/ViewAta/AtaHeader";
 import ProjectParticipants from "../../../components/Ata/ViewAta/ProjectParticipants";
 import Pauta from "../../../components/Ata/ViewAta/Pauta";
 import Topics from "../../../components/Ata/ViewAta/Topics";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import "../CreateAta/Style.css";
 import ataServices from "../../../services/ata";
-import Status from "../../../components/Ata/ViewAta/Status";
-import { useInfoAta } from "../../../context/InfoAta";
+import {useInfoAta} from "../../../context/InfoAta";
 import Loading from "../../Loading/Loading";
 import revisaoServices from "../../../services/revisao";
 
@@ -31,13 +30,11 @@ const ViewAta = ({ ajustarLayout }) => {
   const [Revisoes, setRevisoes] = useState({});
 
   const formatDate = (date) => {
-    const data = new Date(date).toLocaleDateString();
-    return data;
+    return new Date(date).toLocaleDateString();
   };
 
   const formatTime = (time) => {
-    const tempo = time.join(":");
-    return tempo;
+    return `${('0' + time[0]).slice(-2)}:${('0' + time[1]).slice(-2)}`;
   };
 
   useEffect(() => {
