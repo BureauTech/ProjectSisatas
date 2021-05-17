@@ -62,7 +62,7 @@ public class EscritorExcel {
 	
 	private void writeCabecalho() {
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm:ss");
+		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm");
 
 		Cell numero = sheet.getRow(1).getCell(1);
 		numero.setCellValue("ATA Nº.: " + ata.getAtaId());
@@ -210,6 +210,7 @@ public class EscritorExcel {
         assuntosPrazoCab.setCellValue("PRAZO");
         assuntosPrazoCab.setCellStyle(borderRight);
 
+        int idAssunto = 0;
 		for (AssuntosModel assunto : ata.getAssuntos()) {
 			borderLeft = workbook.createCellStyle();
 			borderLeft.setBorderLeft(BorderStyle.THIN);
@@ -218,7 +219,7 @@ public class EscritorExcel {
 			borderRight.setBorderRight(BorderStyle.THIN);
 
 			Cell idAssunto1 = sheet.getRow(++rownum).getCell(1);
-			idAssunto1.setCellValue(assunto.getAssId().toString());
+			idAssunto1.setCellValue(String.valueOf(++idAssunto));
 			idAssunto1.setCellStyle(borderLeft);
 
 			sheet.addMergedRegion(new CellRangeAddress(rownum, rownum, 2, 3));
@@ -232,7 +233,6 @@ public class EscritorExcel {
 				nomes.add(participante.getUsuNome());
 			responsavelAssunto1.setCellValue(String.join(", ", nomes));
 
-			//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			Cell prazoAssunto1 = sheet.getRow(rownum).getCell(5);
 			prazoAssunto1.setCellValue(assunto.getAssPrazo().format(dateFormat));
