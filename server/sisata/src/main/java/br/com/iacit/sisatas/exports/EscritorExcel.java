@@ -40,7 +40,7 @@ public class EscritorExcel {
 
 	private static BufferedImage resizeImage(BufferedImage originalImage) {
 		Image resultingImage = originalImage.getScaledInstance(190, 90, Image.SCALE_DEFAULT);
-		BufferedImage outputImage = new BufferedImage(190, 90, BufferedImage.TYPE_INT_RGB);
+		BufferedImage outputImage = new BufferedImage(190, 90, BufferedImage.TYPE_INT_ARGB);
 		outputImage.getGraphics().drawImage(resultingImage, 0, 0, null);
 		return outputImage;
 	}
