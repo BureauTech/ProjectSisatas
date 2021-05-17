@@ -17,6 +17,7 @@ Desenvolvido pela Bureau Tech.
    * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
    * [Acompanhamento das Atividades](#acompanhamento-das-atividades)
    * [Entregas](#entregas)
+   * [Burndown](#burndown)
    * [Backlog](#backlog)
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
@@ -36,7 +37,6 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/SIS
 
 <br>
 
-
 # Acompanhamento das Atividades
 
 <h4 align="center"> 
@@ -51,28 +51,31 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entrega realizada em 28/03/2021.
 
-- **Sprint 2**
+- [Sprint 2](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-2) entrega realizada em 16/05/2021.
 
-Entregas realizadas:
+- **Sprint 3**
 
-![cards](./assets/png/Cards%20Sprint%202.png)
+**Entregas realizadas:**
 
-Representação da entrega:
+![cards](./assets/png/Sprint%203%20-%20Cards-1.png)
+![cards](./assets/png/Sprint%203%20-%20Cards-2.png)
 
-![representacao](./assets/gif/../gifs/Representacao%20-%20Sprint2.gif)
+**Representação da entrega:**
+<p align="center">
+  <img src="./assets/gifs/Representacao%20-%20Sprint3.gif">
+</p>
+
 
 **Documentação entregue:**
-- Diagrama e descrições de Casos de Uso;
-- Diagrama de Atividades;
-- Diagrama de Contexto;
-- Diagrama de Implantação;
-- Lista de Requisitos
+- [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software%20-%20Caixa%20Preta.pdf)
 
-Disponíveis para visualização [aqui](./docs/Documentação%20SISATAS.pdf)
+# Burndown
+
+- ![Gráfico Burndown](assets/png/Burndown%20-%20Sprint%203.png)
 
 # Backlog 
 
-- [Product Backlog](./docs/Product%20Backlog%20do%20Projeto%20-%20SISATAS.pdf)
+- [Product Backlog](./docs/Product%20Backlog%20do%20Projeto%20-%20SISATAS%20-%20v5.pdf)
 
 # Como executar localmente
 
