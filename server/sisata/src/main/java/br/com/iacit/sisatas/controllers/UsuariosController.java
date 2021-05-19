@@ -65,7 +65,11 @@ public class UsuariosController {
 	@ResponseBody
 	@RequestMapping(value = "/validadorToken", method = RequestMethod.GET)
 	public Boolean validadorToken(@RequestParam String usu_token) {
-		return up.existsByusuConfirmationToken(usu_token);
+		Boolean result = false;
+		if(!usu_token.isEmpty() || !usu_token.isBlank() || !(usu_token != null)) {
+			result = up.existsByusuConfirmationToken(usu_token);
+		}
+		return result;
 	}
 	
 	
