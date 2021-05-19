@@ -109,8 +109,22 @@ const EditUser = (props) => {
   const solicitarAlteracaoSenha = (event) => {
     event.preventDefault();
     setIsLoadingBtn(true);
-    history.push("/cadastrar-senha");
-    }
+    userServices
+    .solicitarAlteracaoSenha(usuario.usuEmail)
+    .then((res) => {
+      setIsLoadingBtn(false);
+      setMsgSucesso("Sucesso ao salvar alterações!");
+      setMsgErro(false);
+      setOpenSnack(true);
+      history.push(`/cadastrar-senha?token=${res.data.data}`);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      setIsLoadingBtn(false);
+      setOpenSnack(true);
+      setMsgSucesso(false);
+      setMsgErro("Ocorreu um erro ao salvar alterações");
+    });    }
 
   return (
     <Container style={{ marginTop: 30, marginBottom: 20 }}>
