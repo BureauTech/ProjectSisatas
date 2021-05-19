@@ -8,14 +8,20 @@ import br.com.iacit.sisatas.models.UsuariosModel;
 
 public interface UsuariosRepository extends JpaRepository<UsuariosModel, String> {
 
-	UsuariosModel findByusuId(long usuId);
-
 	Boolean existsByusuId(long usuId);
 
 	Boolean existsByusuEmail(String usuEmail);
-
-	<T> List<T> findBy(Class<T> projection);
 	
+	Boolean existsByusuConfirmationToken(String usuConfirmationToken);
+
 	UsuariosModel findTopBy();
+	
+	UsuariosModel findByusuId(long usuId);
+	
+	UsuariosModel findByusuEmail(String usuEmail);
+	
+	UsuariosModel findByusuConfirmationToken(String usuConfirmationToken);
+	
+	<T> List<T> findBy(Class<T> projection);
 
 }

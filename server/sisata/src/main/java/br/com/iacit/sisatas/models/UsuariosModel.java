@@ -49,5 +49,7 @@ public class UsuariosModel implements Serializable {
 	private byte[] usuAssinatura;
 	@Column(nullable = false, length = 15)
 	private String usuPerfil;
+	@Column
+	private String usuConfirmationToken;
 	
 }
