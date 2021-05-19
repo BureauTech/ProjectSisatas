@@ -101,8 +101,8 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = { "multipart/form-data" })
-	public MessageReturn cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
-		MessageReturn result = new MessageReturn();
+	public MessageReturn<?> cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
+		MessageReturn<?> result = new MessageReturn<String>();
 		
 		result.setOperacao("cadastrarUsuarios");
 		
@@ -169,8 +169,8 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.PUT, consumes = { "multipart/form-data" })
-	public MessageReturn atualizarUsuarios(MultipartFile imagem, String usuario) {
-		MessageReturn result = new MessageReturn();
+	public MessageReturn<?> atualizarUsuarios(MultipartFile imagem, String usuario) {
+		MessageReturn<String> result = new MessageReturn<String>();
 
 		result.setOperacao("atualizarUsuarios");
 
@@ -385,9 +385,9 @@ public class UsuariosController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/solicitarAlteracaoSenha", method = RequestMethod.POST)
-	public MessageReturn solicitarAlteracaoSenha(@RequestParam String usu_email)
+	public MessageReturn<String> solicitarAlteracaoSenha(@RequestParam String usu_email)
 			throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		MessageReturn result = new MessageReturn();
+		MessageReturn<String> result = new MessageReturn<String>();
 
 		result.setOperacao("solicitarAlteracaoSenha");
 		Date data = new Date();
@@ -400,6 +400,7 @@ public class UsuariosController {
 				usuarioDB.setUsuConfirmationToken(token);
 				up.save(usuarioDB);
 				result.setMensagem("Solicitação de alteração de senha realizada com sucesso.");
+				result.setData(token);
 				result.setErro(false);
 				
 				/* Desenvolver o envio do e-mail para enviar ao usuário os parâmetros para alteração da senha */
@@ -437,9 +438,9 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/alterarSenha", method = RequestMethod.POST)
-	public MessageReturn alterarSenha(@RequestParam String usu_token, @RequestParam String usu_senha)
+	public MessageReturn<?> alterarSenha(@RequestParam String usu_token, @RequestParam String usu_senha)
 			throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		MessageReturn result = new MessageReturn();
+		MessageReturn<?> result = new MessageReturn<String>();
 
 		result.setOperacao("alterarSenha");
 		
