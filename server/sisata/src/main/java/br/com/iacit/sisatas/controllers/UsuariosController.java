@@ -56,6 +56,21 @@ public class UsuariosController {
 	
 	/**
 	 * @Author Daniel Oliveira
+	 *
+	 * METHOD: GET; Para validar token para alteração de senha.
+	 * URL: http://localhost:8080/usuarios/validadorToken
+	 *
+	 * RETURN: true ou false.
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/validadorToken", method = RequestMethod.GET)
+	public Boolean validadorToken(@RequestParam String usu_token) {
+		return up.existsByusuConfirmationToken(usu_token);
+	}
+	
+	
+	/**
+	 * @Author Daniel Oliveira
 	 * 
 	 * METHOD: POST; Para cadastrar Usuários.
 	 * URL: http://localhost:8080/usuarios/cadastrarUsuarios
