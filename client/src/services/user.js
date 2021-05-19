@@ -21,8 +21,13 @@ const deletarUsuario = (id) => {
   return api.delete(`${endpoint}/excluirUsuarios/${id}`);
 };
 
+const solicitarAlteracaoSenha = (body) => {
+  return api.post(`${endpoint}/solicitarAlteracaoSenha`)
+}
 
-
+const alterarSenha = (body) => {
+  return api.post(`${endpoint}/solicitarAlteracaoSenha`)
+}
 
 const userServices = {
   pegarUsuario,
@@ -30,6 +35,8 @@ const userServices = {
   cadastrarUsuario,
   atualizarUsuario,
   deletarUsuario,
+  solicitarAlteracaoSenha,
+  alterarSenha
 };
 
 export default userServices;
