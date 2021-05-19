@@ -106,6 +106,12 @@ const EditUser = (props) => {
       });
   };
 
+  const solicitarAlteracaoSenha = (event) => {
+    event.preventDefault();
+    setIsLoadingBtn(true);
+    history.push("/cadastrar-senha");
+    }
+
   return (
     <Container style={{ marginTop: 30, marginBottom: 20 }}>
       {isLoading && <Loading />}
@@ -363,6 +369,21 @@ const EditUser = (props) => {
                     }}
                   >
                     {isLoadingBtn ? <Loading /> : "Salvar"}
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className="bold"
+                    onClick={solicitarAlteracaoSenha}
+                    style={{
+                      color: "white",
+                      fontSize: "1.5rem",
+                      borderRadius: 40,
+                      padding: "10px 50px",
+                      margin: "10px 0px",
+                    }}
+                  >
+                    {isLoadingBtn ? <Loading /> : "Editar senha"}
                   </Button>
                   <Button
                     variant="contained"
