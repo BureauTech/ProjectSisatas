@@ -71,6 +71,10 @@ const styles = (theme) => ({
       backgroundColor: theme.palette.secondary.main,
     },
   },
+
+  secondary: {
+    color: theme.palette.secondary.main,
+  },
 });
 
 export { styles };
