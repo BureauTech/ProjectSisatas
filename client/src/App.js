@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import ListarAta from "./pages/Ata/ViewAta/ListarAta";
 import Register from "./components/RegisterUser/Register";
 import CreateAta from "./pages/Ata/CreateAta/CreateAta";
@@ -16,6 +16,8 @@ import ViewSubjects from "./pages/Subject/ViewSubjects";
 import Comentarios from "./pages/Revisao/Comentarios";
 import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
 import { useEffect } from "react";
+import Login from "./pages/Login/Login";
+import { useAutenticacao } from "./context/Autenticacao";
 
 function App() {
   const ajustarLayout = (n) => {
@@ -36,12 +38,15 @@ function App() {
     ajustarLayout();
   }, []);
 
+  const { usuario } = useAutenticacao();
+
   return (
     <InfoAtaProvider>
       <Router>
         <div className="App no-print">
-          <Menu />
+          {usuario.estaLogado ? <Menu /> : <Redirect to="/login" />}
           <Switch>
+            {/* <Route component={PrivateRoute}> */}
             <Route path="/nova-ata" component={() => <CreateAta />} />
             <Route path="/visualizar-atas" component={() => <ListarAta />} />
             <Route path="/nova-revisao" component={() => <CreateRevision />} />
@@ -57,6 +62,8 @@ function App() {
             <Route path="/comentarios" component={() => <ViewComments />} />
             <Route path="/assuntos" component={() => <ViewSubjects />} />
             <Route path="/listar-usuarios" component={() => <UserList />} />
+            {/* </Route> */}
+            <Route path="/login" component={() => <Login />} />
           </Switch>
         </div>
         <AtaTemplate />
