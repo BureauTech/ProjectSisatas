@@ -1,9 +1,13 @@
 package br.com.iacit.sisatas.controllers;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.iacit.sisatas.conversor.Conversor;
 import br.com.iacit.sisatas.mapper.UsuarioMapper;
 import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.projections.UsuariosProjectionDataGrid;
@@ -51,6 +56,25 @@ public class UsuariosController {
 	
 	/**
 	 * @Author Daniel Oliveira
+	 *
+	 * METHOD: GET; Para validar token para alteração de senha.
+	 * URL: http://localhost:8080/usuarios/validadorToken
+	 *
+	 * RETURN: true ou false.
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/validadorToken", method = RequestMethod.GET)
+	public Boolean validadorToken(@RequestParam String usu_token) {
+		Boolean result = false;
+		if(!usu_token.isEmpty() || !usu_token.isBlank() || !(usu_token != null)) {
+			result = up.existsByusuConfirmationToken(usu_token);
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * @Author Daniel Oliveira
 	 * 
 	 * METHOD: POST; Para cadastrar Usuários.
 	 * URL: http://localhost:8080/usuarios/cadastrarUsuarios
@@ -77,8 +101,8 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = { "multipart/form-data" })
-	public MessageReturn cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
-		MessageReturn result = new MessageReturn();
+	public MessageReturn<?> cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
+		MessageReturn<?> result = new MessageReturn<String>();
 		
 		result.setOperacao("cadastrarUsuarios");
 		
@@ -145,8 +169,8 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.PUT, consumes = { "multipart/form-data" })
-	public MessageReturn atualizarUsuarios(MultipartFile imagem, String usuario) {
-		MessageReturn result = new MessageReturn();
+	public MessageReturn<?> atualizarUsuarios(MultipartFile imagem, String usuario) {
+		MessageReturn<String> result = new MessageReturn<String>();
 
 		result.setOperacao("atualizarUsuarios");
 
@@ -336,6 +360,112 @@ public class UsuariosController {
 			result = "Exclusão realizada com sucesso.";
 		} catch (Exception e) {
 			result = e.getMessage();
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * @Author Daniel Oliveira
+	 * 
+	 * METHOD: POST; Para solicitar a alteração de senha.
+	 * URL: http://localhost:8080/usuarios/solicitarAlteracaoSenha
+	 * PARAM: usu_email
+	 * 
+	 * 
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+	 * 	String operacao;
+	 *  Boolean erro;
+	 *  String mensagem;
+	 * )
+	 * operacao: "excluirAtas";
+	 * erro: true, e-mail/usuario não encontrado; false: solicitação realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 *
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/solicitarAlteracaoSenha", method = RequestMethod.POST)
+	public MessageReturn<String> solicitarAlteracaoSenha(@RequestParam String usu_email)
+			throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		MessageReturn<String> result = new MessageReturn<String>();
+
+		result.setOperacao("solicitarAlteracaoSenha");
+		Date data = new Date();
+		String token = Conversor.geradorHashString(usu_email + data);
+
+		try {
+
+			if (up.existsByusuEmail(usu_email)) {
+				UsuariosModel usuarioDB = up.findByusuEmail(usu_email);
+				usuarioDB.setUsuConfirmationToken(token);
+				up.save(usuarioDB);
+				result.setMensagem("Solicitação de alteração de senha realizada com sucesso.");
+				result.setData(token);
+				result.setErro(false);
+				
+				/* Desenvolver o envio do e-mail para enviar ao usuário os parâmetros para alteração da senha */
+				
+			} else {
+				result.setMensagem("O e-mail informado não está cadastrado no sistema, favor verificar");
+				result.setErro(true);
+			}
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
+		}
+		return result;
+	}
+	
+	/**
+	 * @Author Daniel Oliveira
+	 * 
+	  * METHOD: POST; Para alterar a senha.
+	 * URL: http://localhost:8080/usuarios/alterarSenha
+	 * PARAM: usu_token, usu_senha
+	 * 
+	 * 
+	* RETURN: Retorna um objeto <result> MessageReturn(
+	 * 	String operacao;
+	 *  Boolean erro;
+	 *  String mensagem;
+	 * )
+	 * operacao: "excluirAtas";
+	 * erro: true, token não cadastrado/encontrado; false: alteração realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 *
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "/alterarSenha", method = RequestMethod.POST)
+	public MessageReturn<?> alterarSenha(@RequestParam String usu_token, @RequestParam String usu_senha)
+			throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		MessageReturn<?> result = new MessageReturn<String>();
+
+		result.setOperacao("alterarSenha");
+		
+		String token = Conversor.codificaBase64Encoder(usu_senha);
+		
+		try {
+
+			if (up.existsByusuConfirmationToken(usu_token)) {
+				UsuariosModel usuarioDB = up.findByusuConfirmationToken(usu_token);
+				usuarioDB.setUsuSenha(token);
+				usuarioDB.setUsuConfirmationToken("");
+				up.save(usuarioDB);
+				result.setMensagem("Alteração de senha realizada com sucesso.");
+				result.setErro(false);
+				
+				/* Desenvolver o envio do e-mail para informar ao usuário da alteração de senha realizada */
+				
+			} else {
+				result.setMensagem("Token inválido.");
+				result.setErro(true);
+			}
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
 		}
 		return result;
 	}

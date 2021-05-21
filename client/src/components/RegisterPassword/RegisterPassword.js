@@ -9,11 +9,20 @@ import {
 } from "@material-ui/core";
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
+import { useHistory, useLocation } from "react-router-dom";
+
 import { styles } from "../../assets/styles/Styles";
 import "./RegisterPassword.css";
 
+
 const RegisterPassword = (props) => {
   const { classes } = props;
+
+  const history = useHistory();
+  const voltar = () => {
+    history.push('/perfil');
+  };
+  
 
   return (
     <Container style={{width: "35%"}}>
@@ -109,8 +118,9 @@ const RegisterPassword = (props) => {
                     variant="contained"
                     color="secondary"
                     type="submit"
+                    onClick={voltar}
                     style={{ borderRadius: 18, padding: 0}}
-                  >
+                  >Salvar senha
                     <ArrowRightAltIcon style={{width: 90, height: 30}} />
                   </Button>
                 </Grid>

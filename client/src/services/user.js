@@ -21,7 +21,18 @@ const deletarUsuario = (id) => {
   return api.delete(`${endpoint}/excluirUsuarios/${id}`);
 };
 
+const solicitarAlteracaoSenha = (param) => {
+  return api.post(`${endpoint}/solicitarAlteracaoSenha?usu_email=${param}`);
+}
 
+const alterarSenha = (body) => {
+  return api.post(`${endpoint}/solicitarAlteracaoSenha`)
+}
+
+
+const validadorToken = (param) => {
+  return api.get(`${endpoint}/validadorToken?usu_token=${param}`);
+};
 
 
 const userServices = {
@@ -30,6 +41,9 @@ const userServices = {
   cadastrarUsuario,
   atualizarUsuario,
   deletarUsuario,
+  solicitarAlteracaoSenha,
+  alterarSenha,
+  validadorToken
 };
 
 export default userServices;

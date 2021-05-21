@@ -106,6 +106,26 @@ const EditUser = (props) => {
       });
   };
 
+  const solicitarAlteracaoSenha = (event) => {
+    event.preventDefault();
+    setIsLoadingBtn(true);
+    userServices
+    .solicitarAlteracaoSenha(usuario.usuEmail)
+    .then((res) => {
+      setIsLoadingBtn(false);
+      setMsgSucesso("Sucesso ao salvar alterações!");
+      setMsgErro(false);
+      setOpenSnack(true);
+      history.push(`/cadastrar-senha?token=${res.data.data}`);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      setIsLoadingBtn(false);
+      setOpenSnack(true);
+      setMsgSucesso(false);
+      setMsgErro("Ocorreu um erro ao salvar alterações");
+    });    }
+
   return (
     <Container style={{ marginTop: 30, marginBottom: 20 }}>
       {isLoading && <Loading />}
@@ -363,6 +383,21 @@ const EditUser = (props) => {
                     }}
                   >
                     {isLoadingBtn ? <Loading /> : "Salvar"}
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className="bold"
+                    onClick={solicitarAlteracaoSenha}
+                    style={{
+                      color: "white",
+                      fontSize: "1.5rem",
+                      borderRadius: 40,
+                      padding: "10px 50px",
+                      margin: "10px 0px",
+                    }}
+                  >
+                    {isLoadingBtn ? <Loading /> : "Editar senha"}
                   </Button>
                   <Button
                     variant="contained"
