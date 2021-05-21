@@ -15,10 +15,10 @@ const style = makeStyles((theme) => ({
 }));
 
 const Botao = (props) => {
-  const { type } = props;
+  const { type, onClick } = props;
   const classes = style();
   return (
-    <IconButton type={type ? type : null} className={classes.btn}>
+    <IconButton type={type ? type : null} className={classes.btn} onClick={onClick ? onClick : null}>
       <ArrowRightAlt className={classes.icon} />
     </IconButton>
   );

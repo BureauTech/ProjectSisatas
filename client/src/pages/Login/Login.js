@@ -1,9 +1,11 @@
 import { Container, Grid, makeStyles, Typography, withStyles } from "@material-ui/core";
 import { Lock, MailOutline } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { styles } from "../../assets/styles/Styles";
 import Botao from "../../components/Login/Botao";
 import InputLogin from "../../components/Login/InputLogin";
+import { useAutenticacao } from "../../context/Autenticacao";
 
 const style = makeStyles((theme) => ({
   forgot: {
@@ -17,9 +19,39 @@ const style = makeStyles((theme) => ({
 const Login = (props) => {
   const { classes } = props;
   const useStyles = style();
-  document.body.style.margin = "10% auto";
-  document.body.style.padding = "0";
-  document.body.style.overflow = "hidden";
+  const { setUsuario, usuario } = useAutenticacao();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const history = useHistory();
+
+  console.log(usuario);
+
+  if (usuario.estaLogado) {
+    console.log("Já estou logado");
+    history.push("/");
+  }
+
+  const realizarLogin = (e) => {
+    e.preventDefault();
+
+    if (email && senha) {
+      alert("Logado com sucesso!");
+      setUsuario({
+        estaLogado: true,
+        token: "",
+        usuNome: "",
+        usuId: 1,
+        usuEmail: "teste@teste.com",
+        usuCargo: "dev",
+        usuAreaEmpresa: "Bureau",
+        usuTelefone: "129923123",
+        usuPerfil: "ADM",
+      });
+      history.push("/");
+    } else {
+      alert("Erro ao realizar login!");
+    }
+  };
   return (
     <Container maxWidth="xs">
       <Grid container className={classes.grid} justify="center">
@@ -27,13 +59,31 @@ const Login = (props) => {
           <Typography className={classes.normalText}>Login</Typography>
         </Grid>
         <Grid item xs={11} style={{ paddingBottom: 20 }}>
-          <form>
+          <form onSubmit={realizarLogin}>
             <Grid container justify="center" style={{ paddingTop: 25, paddingBottom: 15 }}>
               <Grid item xs={11}>
-                <InputLogin required label="Email" Icone={MailOutline} type="email" placeholder="Email*" id="email" />
+                <InputLogin
+                  required
+                  label="Email"
+                  Icone={MailOutline}
+                  type="email"
+                  placeholder="Email*"
+                  id="email"
+                  value={email}
+                  setValue={setEmail}
+                />
               </Grid>
               <Grid item xs={11}>
-                <InputLogin required label="Senha" Icone={Lock} type="password" placeholder="Senha*" id="pw" />
+                <InputLogin
+                  required
+                  label="Senha"
+                  Icone={Lock}
+                  type="password"
+                  placeholder="Senha*"
+                  id="pw"
+                  value={senha}
+                  setValue={setSenha}
+                />
               </Grid>
               <Grid item xs={11}>
                 <Link style={{ textDecoration: "none" }}>

@@ -2,7 +2,7 @@ import { FormLabel, Input, Typography, withStyles } from "@material-ui/core";
 import { styles } from "../../assets/styles/Styles";
 
 const InputLogin = (props) => {
-  const { classes, Icone, label, type, required, placeholder, id } = props;
+  const { classes, Icone, label, type, required, placeholder, id, setValue, value } = props;
   return (
     <>
       <FormLabel htmlFor={id ? id : ""}>
@@ -18,6 +18,8 @@ const InputLogin = (props) => {
         endAdornment={<Icone style={{ paddingRight: 10 }} className={classes.secondary} />}
         required={required ? required : false}
         placeholder={placeholder ? placeholder : ""}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
     </>
   );

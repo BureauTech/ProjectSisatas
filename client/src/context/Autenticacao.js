@@ -6,8 +6,13 @@ export default function AutenticacaoProvider({ children }) {
   const [usuario, setUsuario] = useState({
     estaLogado: false,
     token: "",
-    usuNome: "Denis",
-    usuEmail: "denis@denis.com",
+    usuNome: "",
+    usuId: "",
+    usuEmail: "",
+    usuCargo: "",
+    usuAreaEmpresa: "",
+    usuTelefone: "",
+    usuPerfil: "",
   });
   return <Autenticacao.Provider value={{ usuario, setUsuario }}>{children}</Autenticacao.Provider>;
 }
