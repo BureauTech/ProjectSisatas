@@ -18,17 +18,32 @@ import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
 import { useEffect } from "react";
 import Login from "./pages/Login/Login";
 import { useAutenticacao } from "./context/Autenticacao";
+import Routes from "./routes/Routes";
 
 function App() {
+  const { usuario } = useAutenticacao();
+
   const ajustarLayout = (n) => {
-    if (n === "0") {
-      document.body.style.padding = "0px 0px 0px 0px";
-    } else {
-      if (window.innerWidth < 600) {
-        document.body.style.padding = "80px 0px 0px 0px";
+    if (usuario.estaLogado) {
+      if (n === "0") {
+        document.body.style.padding = "0px 0px 0px 0px";
+        document.body.style.margin = "0";
+        document.body.style.overflow = "auto";
       } else {
-        document.body.style.padding = "80px 0px 0px 100px";
+        if (window.innerWidth < 600) {
+          document.body.style.padding = "80px 0px 0px 0px";
+          document.body.style.margin = "0";
+          document.body.style.overflow = "auto";
+        } else {
+          document.body.style.padding = "80px 0px 0px 100px";
+          document.body.style.margin = "0";
+          document.body.style.overflow = "auto";
+        }
       }
+    } else {
+      document.body.style.margin = "10% auto";
+      document.body.style.padding = "0";
+      document.body.style.overflow = "hidden";
     }
   };
 
@@ -38,36 +53,12 @@ function App() {
     ajustarLayout();
   }, []);
 
-  const { usuario } = useAutenticacao();
-
   return (
     <InfoAtaProvider>
-      <Router>
-        <div className="App no-print">
-          {usuario.estaLogado ? <Menu /> : <Redirect to="/login" />}
-          <Switch>
-            {/* <Route component={PrivateRoute}> */}
-            <Route path="/nova-ata" component={() => <CreateAta />} />
-            <Route path="/visualizar-atas" component={() => <ListarAta />} />
-            <Route path="/nova-revisao" component={() => <CreateRevision />} />
-            <Route path="/ata" component={() => <ViewAta ajustarLayout={ajustarLayout} />} />
-            <Route path="/revisoes" component={() => <ViewRevisions />} />
-            <Route path="/cadastrar-comentarios" component={() => <Comentarios />} />
-
-            <Route exact path="/" />
-            <Route path="/cadastrar-usuario" component={() => <Register />} />
-            <Route path="/cadastrar-senha" component={() => <RegisterPassword />} />
-            <Route path="/editar-usuario" component={() => <EditUser />} />
-            <Route path="/perfil" component={() => <UserProfile id={1} />} />
-            <Route path="/comentarios" component={() => <ViewComments />} />
-            <Route path="/assuntos" component={() => <ViewSubjects />} />
-            <Route path="/listar-usuarios" component={() => <UserList />} />
-            {/* </Route> */}
-            <Route path="/login" component={() => <Login />} />
-          </Switch>
-        </div>
-        <AtaTemplate />
-      </Router>
+      <div className="App no-print">
+        <Routes ajustarLayout={ajustarLayout} />
+      </div>
+      <AtaTemplate />
     </InfoAtaProvider>
   );
 }

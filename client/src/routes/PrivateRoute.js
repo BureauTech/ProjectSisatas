@@ -1,11 +1,24 @@
+import { Redirect, Route } from "react-router";
 import Menu from "../components/Menu/Menu";
+import { useAutenticacao } from "../context/Autenticacao";
 
-const PrivateRoute = (props) => {
+const PrivateRoute = ({ component: Component, ajustarLayout, ...rest }) => {
+  const { usuario } = useAutenticacao();
+  ajustarLayout();
   return (
-    <>
-      <Menu />
-      {props.children}
-    </>
+    <Route
+      {...rest}
+      render={(props) =>
+        usuario.estaLogado ? (
+          <>
+            <Menu />
+            <Component {...props} />
+          </>
+        ) : (
+          <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+        )
+      }
+    />
   );
 };
 
