@@ -15,11 +15,14 @@ import ViewSubjects from "../pages/Subject/ViewSubjects";
 import UserList from "../components/UserList/UserList";
 import Login from "../pages/Login/Login";
 import Logout from "../pages/Logout/Logout";
+import ForgotPassword from "../pages/Login/ForgotPassword";
 
 const Routes = ({ ajustarLayout }) => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/login" component={() => <Login />} />
+      <Route exact path="/esqueci-a-senha" component={() => <ForgotPassword />} />
+      <Route ajustarLayout={ajustarLayout} path="/cadastrar-senha" component={() => <RegisterPassword />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/" component={() => <> </>} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/nova-ata" component={() => <CreateAta />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/visualizar-atas" component={() => <ListarAta />} />
@@ -41,12 +44,6 @@ const Routes = ({ ajustarLayout }) => (
         component={() => <Comentarios />}
       />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/cadastrar-usuario" component={() => <Register />} />
-      <PrivateRoute
-        exact
-        ajustarLayout={ajustarLayout}
-        path="/cadastrar-senha"
-        component={() => <RegisterPassword />}
-      />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/comentarios" component={() => <ViewComments />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/assuntos" component={() => <ViewSubjects />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/listar-usuarios" component={() => <UserList />} />
