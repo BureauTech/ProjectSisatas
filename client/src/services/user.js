@@ -23,17 +23,15 @@ const deletarUsuario = (id) => {
 
 const solicitarAlteracaoSenha = (param) => {
   return api.post(`${endpoint}/solicitarAlteracaoSenha?usu_email=${param}`);
-}
+};
 
-const alterarSenha = (body) => {
-  return api.post(`${endpoint}/solicitarAlteracaoSenha`)
-}
-
+const alterarSenha = (usu_token, usu_senha) => {
+  return api.post(`${endpoint}/alterarSenha?usu_token=${usu_token}&usu_senha=${usu_senha}`);
+};
 
 const validadorToken = (param) => {
   return api.get(`${endpoint}/validadorToken?usu_token=${param}`);
 };
-
 
 const userServices = {
   pegarUsuario,
@@ -43,7 +41,7 @@ const userServices = {
   deletarUsuario,
   solicitarAlteracaoSenha,
   alterarSenha,
-  validadorToken
+  validadorToken,
 };
 
 export default userServices;
