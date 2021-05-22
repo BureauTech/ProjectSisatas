@@ -1,7 +1,7 @@
 import { Container, Grid, makeStyles, Typography, withStyles } from "@material-ui/core";
 import { Lock, MailOutline } from "@material-ui/icons";
 import { useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { styles } from "../../assets/styles/Styles";
 import Botao from "../../components/Login/Botao";
 import InputLogin from "../../components/Login/InputLogin";
@@ -24,10 +24,7 @@ const Login = (props) => {
   const [senha, setSenha] = useState("");
   const history = useHistory();
 
-  console.log(usuario);
-
   if (usuario.estaLogado) {
-    console.log("Já estou logado");
     history.push("/");
   }
 
@@ -86,7 +83,7 @@ const Login = (props) => {
                 />
               </Grid>
               <Grid item xs={11}>
-                <Link style={{ textDecoration: "none" }}>
+                <Link to="/esqueci-a-senha" style={{ textDecoration: "none" }}>
                   <Typography className={useStyles.forgot}>Esqueci minha senha</Typography>
                 </Link>
               </Grid>
