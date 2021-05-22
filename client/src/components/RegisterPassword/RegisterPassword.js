@@ -12,6 +12,17 @@ import InputLogin from "../Login/InputLogin";
 import Alerta from "../Snackbar/Alerta";
 import "./RegisterPassword.css";
 
+/**
+ * @author Denis Lima
+ * @param {any} props
+ * @returns Componente de cadastro de senha
+ *
+ * Componente para página de cadastro de senha.
+ * Ao entrar, é necessário pegar o token que virá por meio da URL.
+ * O token precisa ser validado com o servidor para garantir que o mesmo é válido e único.
+ *
+ */
+
 const RegisterPassword = (props) => {
   const { classes } = props;
   const [tokenValido, setTokenValido] = useState(false);
@@ -24,6 +35,7 @@ const RegisterPassword = (props) => {
 
   const history = useHistory();
 
+  // Redireciona o usuário para a página de login
   const redirectDelay = () => {
     setTimeout(() => history.push("/login"), 3000);
   };
@@ -32,6 +44,7 @@ const RegisterPassword = (props) => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("usu_token");
 
+    // Caso não tenha token na URL, informa o usuário e redirecionar para o login
     if (!token) {
       setLoading(false);
       setMsgErro("Não encontrei seus dados, por favor, solicite uma nova redefinição de senha!");
@@ -40,6 +53,7 @@ const RegisterPassword = (props) => {
       redirectDelay();
     }
 
+    // Validação do token antes do componente ser montado
     userServices
       .validadorToken(token)
       .then((r) => {
@@ -62,8 +76,20 @@ const RegisterPassword = (props) => {
         setIsOpen(true);
         redirectDelay();
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /**
+   * @author Denis Lima
+   * @param {Event} e Recebe o evento
+   *
+   * Método para cadastrar senha.
+   * Chamado ao clicar no botão de enviar.
+   * Verifica se as senhas são iguais, caso não sejam, informa o usuário.
+   * Requisita ao servidor a troca de senha, informando a nova senha e o token.
+   * Em caso de sucesso ou erro, informa o usuário e redireciona para a página de Login.
+   *
+   */
   const cadastrarSenha = (e) => {
     e.preventDefault();
     if (tokenValido) {

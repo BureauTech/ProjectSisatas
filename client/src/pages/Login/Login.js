@@ -7,6 +7,7 @@ import Botao from "../../components/Login/Botao";
 import InputLogin from "../../components/Login/InputLogin";
 import { useAutenticacao } from "../../context/Autenticacao";
 
+// Estilo para o texto "Esqueci minha senha"
 const style = makeStyles((theme) => ({
   forgot: {
     "&:hover": {
@@ -16,6 +17,17 @@ const style = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * @author Denis Lima
+ * @param {any} props
+ * @returns Componente de Login
+ *
+ * Componente para página de Login.
+ * Caso o usuário já esteja logado, redireciona para a página principal da aplicação.
+ * Requisita ao servidor se o email e senha estão corretos, caso estejam, guarda as informações da sessão no Context Autenticacao.
+ * Redireciona o usuário para página principal se está correta as informações.
+ *
+ */
 const Login = (props) => {
   const { classes } = props;
   const useStyles = style();
@@ -28,6 +40,16 @@ const Login = (props) => {
     history.push("/");
   }
 
+  /**
+   *@author Denis Lima
+   * @param {Event} e Recebe o evento
+   *
+   * Método para realizar o Login.
+   * Verifica se foi digitado um email e senha e requisita ao servidor que confira as credenciais.
+   * Caso estejam erradas, informa o usuário.
+   * Caso estejam corretas, guarda as informações de sessão do usuário e redireciona para a página principal.
+   *
+   */
   const realizarLogin = (e) => {
     e.preventDefault();
 

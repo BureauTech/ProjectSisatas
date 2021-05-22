@@ -9,6 +9,16 @@ import Alerta from "../../components/Snackbar/Alerta";
 import { useAutenticacao } from "../../context/Autenticacao";
 import userServices from "../../services/user";
 
+/**
+ *
+ * @param {any} props
+ * @returns Componente de Esqueci a senha
+ *
+ * Componente para página de Esqueci minha senha.
+ * Caso o usuário esteja logado, redireciona para a página principal.
+ * Envia um email para o usuário com o link de redefinição de senha caso seu email esteja cadastrado no sistema.
+ *
+ */
 const ForgotPassword = (props) => {
   const { classes } = props;
   const { usuario } = useAutenticacao();
@@ -23,6 +33,16 @@ const ForgotPassword = (props) => {
     history.push("/");
   }
 
+  /**
+   * @author Denis Lima
+   * @param {Event} e Recebe o evento
+   * @async
+   * Método para solicitar a recuperação da senha.
+   * Caso o email esteja digitado, solicita ao servidor que confira o email.
+   * Estando correto, será disparado um email para o usuário com um link para a redefinição de sua senha.
+   * Informa o usuário em caso de sucesso ou erro
+   *
+   */
   const recuperarSenha = async (e) => {
     e.preventDefault();
 
@@ -46,7 +66,9 @@ const ForgotPassword = (props) => {
         setIsOpen(true);
       }
     } else {
-      alert("Erro ao realizar login!");
+      setMsgErro("Por favor, digite seu email");
+      setMsgSucesso(false);
+      setIsOpen(true);
     }
   };
   return (
