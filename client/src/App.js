@@ -15,6 +15,8 @@ import ViewComments from "./pages/Comment/ViewComments";
 import ViewSubjects from "./pages/Subject/ViewSubjects";
 import Comentarios from "./pages/Revisao/Comentarios";
 import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
+import Notificacoes from "./pages/Notificacoes/Notificacoes";
+
 import { useEffect } from "react";
 
 function App() {
@@ -49,7 +51,7 @@ function App() {
             <Route path="/revisoes" component={() => <ViewRevisions />} />
             <Route path="/cadastrar-comentarios" component={() => <Comentarios />} />
 
-            <Route exact path="/" />
+            <Route exact path="/" component={() => <Notificacoes />} />
             <Route path="/cadastrar-usuario" component={() => <Register />} />
             <Route path="/cadastrar-senha" component={() => <RegisterPassword />} />
             <Route path="/editar-usuario" component={() => <EditUser />} />
