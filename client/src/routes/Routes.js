@@ -16,6 +16,7 @@ import UserList from "../components/UserList/UserList";
 import Login from "../pages/Login/Login";
 import Logout from "../pages/Logout/Logout";
 import ForgotPassword from "../pages/Login/ForgotPassword";
+import Notificacoes from "../pages/Notificacoes/Notificacoes";
 
 const Routes = ({ ajustarLayout }) => (
   <BrowserRouter>
@@ -23,7 +24,7 @@ const Routes = ({ ajustarLayout }) => (
       <Route exact path="/login" component={() => <Login />} />
       <Route exact path="/esqueci-a-senha" component={() => <ForgotPassword />} />
       <Route ajustarLayout={ajustarLayout} path="/cadastrar-senha" component={() => <RegisterPassword />} />
-      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/" component={() => <> </>} />
+      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/" component={() => <Notificacoes />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/nova-ata" component={() => <CreateAta />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/visualizar-atas" component={() => <ListarAta />} />
       <PrivateRoute
