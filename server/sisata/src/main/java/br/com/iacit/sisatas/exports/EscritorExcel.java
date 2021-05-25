@@ -168,6 +168,50 @@ public class EscritorExcel {
 			conteudoPauta.getRow().getCell(col).setCellStyle(styleConteudoPauta);
 
 	}
+
+	private void writeObservacao() {
+		rownum++;
+		Cell observacao = sheet.getRow(++rownum).getCell(1);
+		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
+		observacao.setCellValue("OBSERVAÇÕES");
+
+		XSSFCellStyle styleObservacao = workbook.createCellStyle();
+		styleObservacao.setBorderBottom(BorderStyle.THIN);
+		styleObservacao.setBorderLeft(BorderStyle.THIN);
+		styleObservacao.setAlignment(HorizontalAlignment.CENTER);
+		styleObservacao.setBorderTop(BorderStyle.THIN);
+		styleObservacao.setBorderRight(BorderStyle.THIN);
+
+		for(int col = 1; col < 6; col++)
+			observacao.getRow().getCell(col).setCellStyle(styleObservacao);
+
+		XSSFFont font = workbook.createFont();
+		font.setFontHeightInPoints((short)10);
+		font.setFontName("Arial");
+		font.setItalic(false);
+		font.setBold(true);
+		styleObservacao.setFont(font);
+		observacao.setCellStyle(styleObservacao);
+
+		Cell conteudoPauta = sheet.getRow(++rownum).getCell(1);
+		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
+		conteudoPauta.setCellValue(ata.getAtaPauta());
+		//conteudoPauta.setCellValue(ata.getAtaObservacao());
+		conteudoPauta.getRow().setHeight((short) (200 * sheet.getDefaultRowHeightInPoints()));
+
+		XSSFCellStyle styleConteudoPauta = workbook.createCellStyle();
+		styleConteudoPauta.setBorderLeft(BorderStyle.THIN);
+		styleConteudoPauta.setBorderTop(BorderStyle.THIN);
+		styleConteudoPauta.setBorderBottom(BorderStyle.THIN);
+		styleConteudoPauta.setBorderRight(BorderStyle.THIN);
+		styleConteudoPauta.setVerticalAlignment(VerticalAlignment.TOP);
+		styleConteudoPauta.setWrapText(true);
+		conteudoPauta.setCellStyle(styleConteudoPauta);
+
+		for(int col = 1; col < 6; col++)
+			conteudoPauta.getRow().getCell(col).setCellStyle(styleConteudoPauta);
+
+	}
 	
 	private void writeAssuntos() {
 		rownum += 2;
@@ -297,9 +341,10 @@ public class EscritorExcel {
 
 	}
 
-	public byte[] getByteArray() throws IOException {
+	public byte[] getByteArray(boolean comAssinatura) throws IOException {
 		writeCabecalho(); writeParticipantes();
-		writePauta(); writeAssuntos(); writeAsssinaturas();
+		writePauta(); writeObservacao(); writeAssuntos();
+		if (comAssinatura) writeAsssinaturas();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		workbook.write(bos); workbook.close();
 		return bos.toByteArray();
