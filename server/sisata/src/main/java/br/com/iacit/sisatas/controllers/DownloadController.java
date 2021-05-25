@@ -28,7 +28,7 @@ public class DownloadController {
 			
 		AtasModel ata = ap.getOne(cod + "/" + ano);
 		EscritorExcel escritor = new EscritorExcel(ata);
-		byte[] byteArray = escritor.getByteArray();
+		byte[] byteArray = escritor.getByteArray(true);
 		ByteArrayResource resource = new ByteArrayResource(byteArray);
 
 		HttpHeaders header = new HttpHeaders();

@@ -31,29 +31,29 @@ public class EnvioEmail {
 	
 	public static void EnviaAnexo (ConexaoEmail cone) {
 		//Enviar email com anexo
-		 try {
-		// cria o anexo.
-		  EmailAttachment attachment = new EmailAttachment();
-		  attachment.setPath(cone.arq); //caminho do anexo
-		  //attachment.setURL(new URL(url));//endereço remoto anexo
-		  attachment.setDisposition(EmailAttachment.ATTACHMENT);
-		  attachment.setDescription("Sisatas");
-		  attachment.setName(cone.nomeArq); //nome do arquivo
-		  
-		  //Cria a mensagem de e-mail.
-		  MultiPartEmail email = new MultiPartEmail();
-		  	email.setDebug(true);
-		    email.setHostName("smtp.gmail.com");  //host do servidor email
-		    email.setSSL(true);//
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
-		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
-		    email.setSubject("Ata do Sisatas"); //assunto
-		    email.setMsg("Olá " + cone.nomeReceber 
-		    		+". Aqui está sua ata gerada no Sisatas anexada ao email"); //conteudo do e-mail
-		    email.attach(attachment); // adiciona o anexo à mensagem
+		try {
+			// cria o anexo.
+			EmailAttachment attachment = new EmailAttachment();
+			attachment.setPath(cone.arq); //caminho do anexo
+			//attachment.setURL(new URL(url));//endereço remoto anexo
+			attachment.setDisposition(EmailAttachment.ATTACHMENT);
+			attachment.setDescription("Sisatas");
+			attachment.setName(cone.nomeArq); //nome do arquivo
 
-		  email.send();// envia o e-mail  
+			//Cria a mensagem de e-mail.
+			MultiPartEmail email = new MultiPartEmail();
+			email.setDebug(true);
+			email.setHostName("smtp.gmail.com");  //host do servidor email
+			email.setSSL(true);//
+			email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+			email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
+			email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+			email.setSubject("Ata do Sisatas"); //assunto
+			email.setMsg("Olá " + cone.nomeReceber
+				+". Aqui está sua ata gerada no Sisatas anexada ao email"); //conteudo do e-mail
+			email.attach(attachment); // adiciona o anexo à mensagem
+
+		  	email.send();// envia o e-mail
 		 } catch (EmailException e) {
 			 System.out.println(e.getMessage());
 		 }
