@@ -17,6 +17,7 @@ import Login from "../pages/Login/Login";
 import Logout from "../pages/Logout/Logout";
 import ForgotPassword from "../pages/Login/ForgotPassword";
 import Notificacoes from "../pages/Notificacoes/Notificacoes";
+import RestrictedRoute from "./RestrictedRoute";
 
 const Routes = ({ ajustarLayout }) => (
   <BrowserRouter>
@@ -33,7 +34,7 @@ const Routes = ({ ajustarLayout }) => (
         path="/ata"
         component={() => <ViewAta ajustarLayout={ajustarLayout} />}
       />
-      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/reports" component={() => <> </>} />
+      <RestrictedRoute allowed="GER" exact ajustarLayout={ajustarLayout} path="/reports" component={() => <> </>} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/perfil" component={() => <UserProfile id={1} />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/editar-usuario" component={() => <EditUser />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/nova-revisao" component={() => <CreateRevision />} />
@@ -44,10 +45,22 @@ const Routes = ({ ajustarLayout }) => (
         path="/cadastrar-comentarios"
         component={() => <Comentarios />}
       />
-      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/cadastrar-usuario" component={() => <Register />} />
+      <RestrictedRoute
+        allowed="ADM"
+        exact
+        ajustarLayout={ajustarLayout}
+        path="/cadastrar-usuario"
+        component={() => <Register />}
+      />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/comentarios" component={() => <ViewComments />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/assuntos" component={() => <ViewSubjects />} />
-      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/listar-usuarios" component={() => <UserList />} />
+      <RestrictedRoute
+        allowed="ADM"
+        exact
+        ajustarLayout={ajustarLayout}
+        path="/listar-usuarios"
+        component={() => <UserList />}
+      />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/exit" component={() => <Logout />} />
     </Switch>
   </BrowserRouter>

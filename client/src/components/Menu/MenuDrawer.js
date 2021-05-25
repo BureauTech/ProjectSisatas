@@ -17,6 +17,7 @@ import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
 import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 import "./Menu.css";
 import { useStyles } from "./Menu";
+import { useAutenticacao } from "../../context/Autenticacao";
 
 const MenuDrawer = (props) => {
   const { handleDrawerToggle } = props;
@@ -26,6 +27,12 @@ const MenuDrawer = (props) => {
     setActive(index);
   };
   const [active, setActive] = useState(20);
+
+  const { usuario } = useAutenticacao();
+
+  const allowed = (perfil) => {
+    return usuario.usuPerfil === perfil || usuario.usuPerfil === "ADM";
+  };
   return (
     <>
       <div className={classes.toolbar}>
@@ -68,16 +75,18 @@ const MenuDrawer = (props) => {
             </ListItem>
           </Link>
         </Typography>
-        <Typography className={classes.font}>
-          <Link to="/reports" className={classes.link} onClick={(e) => handleIconSelected(3)}>
-            <ListItem button key="reports" className={active === 3 ? classes.blueColor : {}}>
-              <ListItemIcon className={active === 3 ? classes.iconselected : classes.iconitem}>
-                <AssessmentOutlinedIcon className={classes.icons} />
-              </ListItemIcon>
-              <ListItemText primary="Relatórios" className={active === 3 ? classes.textselected : classes.text} />
-            </ListItem>
-          </Link>
-        </Typography>
+        {allowed("GER") && (
+          <Typography className={classes.font}>
+            <Link to="/reports" className={classes.link} onClick={(e) => handleIconSelected(3)}>
+              <ListItem button key="reports" className={active === 3 ? classes.blueColor : {}}>
+                <ListItemIcon className={active === 3 ? classes.iconselected : classes.iconitem}>
+                  <AssessmentOutlinedIcon className={classes.icons} />
+                </ListItemIcon>
+                <ListItemText primary="Relatórios" className={active === 3 ? classes.textselected : classes.text} />
+              </ListItem>
+            </Link>
+          </Typography>
+        )}
         <Typography className={classes.font}>
           <Link
             to={{
@@ -98,19 +107,21 @@ const MenuDrawer = (props) => {
             </ListItem>
           </Link>
         </Typography>
-        <Typography className={classes.font}>
-          <Link to="/listar-usuarios" className={classes.link} onClick={(e) => handleIconSelected(5)}>
-            <ListItem button key="listar-usuarios" className={active === 5 ? classes.blueColor : {}}>
-              <ListItemIcon className={active === 5 ? classes.iconselected : classes.iconitem}>
-                <PeopleAltOutlinedIcon className={classes.icons} />
-              </ListItemIcon>
-              <ListItemText
-                primary="Usuários Cadastrados"
-                className={active === 5 ? classes.textselected : classes.text}
-              />
-            </ListItem>
-          </Link>
-        </Typography>
+        {allowed("ADM") && (
+          <Typography className={classes.font}>
+            <Link to="/listar-usuarios" className={classes.link} onClick={(e) => handleIconSelected(5)}>
+              <ListItem button key="listar-usuarios" className={active === 5 ? classes.blueColor : {}}>
+                <ListItemIcon className={active === 5 ? classes.iconselected : classes.iconitem}>
+                  <PeopleAltOutlinedIcon className={classes.icons} />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Usuários Cadastrados"
+                  className={active === 5 ? classes.textselected : classes.text}
+                />
+              </ListItem>
+            </Link>
+          </Typography>
+        )}
         <Typography className={classes.font}>
           <Link to="/exit" className={classes.link} onClick={(e) => handleIconSelected(6)}>
             <ListItem button key="exit" className={active === 6 ? classes.blueColor : {}}>
