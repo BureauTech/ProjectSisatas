@@ -22,6 +22,7 @@ import br.com.iacit.sisatas.conversor.Conversor;
 import br.com.iacit.sisatas.mapper.UsuarioMapper;
 import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.projections.UsuariosProjectionDataGrid;
+import br.com.iacit.sisatas.projections.UsuariosProjectionLogin;
 import br.com.iacit.sisatas.projections.UsuariosProjectionParticipante;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
 import br.com.iacit.sisatas.returns.MessageReturn;
@@ -446,6 +447,45 @@ public class UsuariosController {
 			result.setMensagem(e.getMessage());
 			result.setErro(true);
 		}
+		return result;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/validarEmailSenha", method = RequestMethod.POST)
+	public MessageReturn<UsuariosProjectionLogin> validarEmailSenha(@RequestParam String usu_email,
+			@RequestParam String usu_senha) {
+		
+		MessageReturn<UsuariosProjectionLogin> result = new MessageReturn<UsuariosProjectionLogin>();
+		result.setOperacao("validarEmailSenha");
+		
+		try {
+			String senhaCodificada = Conversor.codificaBase64Encoder(usu_senha);
+			String tokenSession = Conversor.geradorHashString(usu_email + usu_senha);
+			
+			UsuariosProjectionLogin usuarioReturn = up.getByUsuEmailAndUsuSenha(usu_email, senhaCodificada);
+			
+			if (usuarioReturn != null) {
+				// Busca os dados do usário no banco para salvar o token da seção.
+				UsuariosModel usuarioDB = up.findByusuEmail(usu_email);
+				usuarioDB.setUsuSessionToken(tokenSession);
+				up.save(usuarioDB);
+				
+				result.setMensagem("Email e senha validados com sucesso.");
+				result.setData(usuarioReturn);
+				result.setErro(false);
+
+			} else {
+				result.setMensagem("Dados invalidados.");
+				result.setErro(true);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
+		}
+
 		return result;
 	}
 }

@@ -51,5 +51,7 @@ public class UsuariosModel implements Serializable {
 	private String usuPerfil;
 	@Column
 	private String usuConfirmationToken;
+	@Column
+	private String usuSessionToken;
 	
 }
