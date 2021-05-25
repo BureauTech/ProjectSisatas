@@ -22,6 +22,7 @@ import br.com.iacit.sisatas.conversor.Conversor;
 import br.com.iacit.sisatas.mapper.UsuarioMapper;
 import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.projections.UsuariosProjectionDataGrid;
+import br.com.iacit.sisatas.projections.UsuariosProjectionLogin;
 import br.com.iacit.sisatas.projections.UsuariosProjectionParticipante;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
 import br.com.iacit.sisatas.returns.MessageReturn;
@@ -29,23 +30,22 @@ import br.com.iacit.sisatas.returns.MessageReturn;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuariosController {
-	
+
 	/**
-	 * @Author Daniel Oliveira
+	 *	@Author Daniel Oliveira
 	 * 
-	 * Atribuição à variável <up> os métodos implementados de JpaRepository<>,
-	 * via interface <br.com.iacit.sisatas.repository.UsuariosRepository>
+	 *	Atribuição à variável <up> os métodos implementados de JpaRepository<>, 
+	 *	via interface <br.com.iacit.sisatas.repository.UsuariosRepository>
 	 *
 	 */
-	
+
 	@Autowired
 	private UsuariosRepository up;
-	
-	
+
 	/**
-	 * @Author Daniel Oliveira
+	 *	@Author Daniel Oliveira
 	 *
-	 * Valida se e-mail já está cadastrado no DB.
+	 *	Valida se e-mail já está cadastrado no DB.
 	 *
 	 */
 	@ResponseBody
@@ -53,7 +53,7 @@ public class UsuariosController {
 	public Boolean validadorUsuEmail(@RequestParam String usuEmail) {
 		return up.existsByusuEmail(usuEmail);
 	}
-	
+
 	/**
 	 * @Author Daniel Oliveira
 	 *
@@ -71,41 +71,42 @@ public class UsuariosController {
 		}
 		return result;
 	}
-	
-	
+
 	/**
-	 * @Author Daniel Oliveira
+	 *	@Author Daniel Oliveira
 	 * 
-	 * METHOD: POST; Para cadastrar Usuários.
-	 * URL: http://localhost:8080/usuarios/cadastrarUsuarios
-	 *
-	 		imagem: multipart/form-data
-    		"usuNome": "<String>",
-    		"usuEmail": "<String>",
-    		"usuTelefone": "<String>",
-    		"usuCargo": "<String>",
-    		"usuAreaEmpresa": "<String>",
-    		"usuPerfil" : <Long>
-	
+	 *	METHOD: POST; Para cadastrar Usuários. 
+	 *	URL: http://localhost:8080/usuarios/cadastrarUsuarios
+	 *	FORM-DATA: 
+	 *		<MultipartFile> imagem: multipart/form-data;
+	 *		<String> usuario: {
+	 *							"usuNome": "<String>" <NotNull>,
+	 *							"usuEmail": "<String>" <NotNull>, 
+	 *							"usuTelefone": "<String>" <NotNull>, 
+	 *							"usuCargo": "<String>" <NotNull>,
+	 *        					"usuAreaEmpresa": "<String>" <NotNull>, 
+	 *        					"usuAssinatura": "<String>" <Null>,
+	 *         					"usuPerfil" : <String> <NotNull>
+	 * 						   }	 * 
 	 * 
-	 * RETURN: Retorna um objeto <result> MessageReturn(
-	 * 	String operacao;
-	 *  Boolean erro;
-	 *  String mensagem;
-	 * )
-	 * operacao: "cadastrarUsuarios";
-	 * erro: true, erro ao realizar a persistência ou e-mail já cadastrado; false: persistência realizada com sucesso.
-	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 *	RETURN: Retorna um objeto <result> MessageReturn( 
+	 *														String operacao;
+	 *         												Boolean erro;
+	 *         												String mensagem; 
+	 *         											 ) 
+	 *			operacao: "cadastrarUsuarios"; 
+	 *			erro: true, erro ao realizar a persistência ou e-mail já cadastrado; false: persistência realizada com sucesso; 
+	 *			mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
 	 * 
-	 */ 
-	
+	 */
+
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarUsuarios", method = RequestMethod.POST, consumes = { "multipart/form-data" })
 	public MessageReturn<?> cadastrarUsuario(MultipartFile imagem, String usuario) throws IOException {
 		MessageReturn<?> result = new MessageReturn<String>();
-		
+
 		result.setOperacao("cadastrarUsuarios");
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		UsuariosModel pessoa = null;
 
@@ -113,11 +114,11 @@ public class UsuariosController {
 
 			pessoa = mapper.readValue(usuario, UsuariosModel.class);
 			// Validar unicidade de e-mail.
-			
+
 			if (!up.existsByusuEmail(pessoa.getUsuEmail())) {
 				// Validar se a imagem é difente de null,
 				// Caso seja null, não será feito o mapeamento da imagem, para não gerar erros.
-				if (!imagem.equals(null)) {
+				if (imagem != null) {
 					// save os dados no DB, antes, faz o mepeamento dos dados e da imagem.
 					up.save(UsuarioMapper.converter(pessoa, imagem));
 				} else {
@@ -137,36 +138,37 @@ public class UsuariosController {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * @Author Daniel Oliveira
 	 * 
-	 * METHOD: PUT; Para atualizar Usuários.
-	 * URL: http://localhost:8080/usuarios/atualizarUsuarios
-	 * BODY: 
-	 *  	imagem: multipart/form-data
-	 *  	"usuId": Long,
-    		"usuNome": "<String>",
-    		"usuEmail": "<String>",
-    		"usuTelefone": "<String>",
-    		"usuCargo": "<String>",
-    		"usuAreaEmpresa": "<String>",
-    		"usuAssinatura": "<String>",
-    		"usuPerfil" : <Long>		
+	 *	METHOD: PUT; Para atualizar Usuários. 
+	 *	URL: http://localhost:8080/usuarios/atualizarUsuarios 
+	 *	FORM-DATA: 
+	 *		<MultipartFile> imagem: multipart/form-data;
+	 *		<String> usuario: {
+	 *							"usuId": Long, 
+	 *							"usuNome": "<String>",
+	 *							"usuEmail": "<String>", 
+	 *							"usuTelefone": "<String>", 
+	 *							"usuCargo": "<String>",
+	 *        					"usuAreaEmpresa": "<String>", 
+	 *        					"usuAssinatura": "<String>",
+	 *         					"usuPerfil" : <Long>
+	 * 						   }
+	 *	<usuId> deverá ser informado, pois será utilizado como referência para realizar a atualização;
+	 * 
+	 *	RETURN: Retorna um objeto <result> MessageReturn( 
+	 *														String operacao;
+	 *         												Boolean erro; 
+	 *         												String mensagem; 
+	 *         											) 
+	 *         operacao: "atualizarUsuarios"; 
+	 *         erro: true, erro ao realizar a persistência ou e-mail já cadastrado; false: persistência realizada com sucesso.
+	 *         mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 * 
+	 */
 
-		<usuId> deverá ser informado, pois será utilizado como referência para realizar a atualização;
-	 * 
-	 * RETURN: Retorna um objeto <result> MessageReturn(
-	 * 	String operacao;
-	 *  Boolean erro;
-	 *  String mensagem;
-	 * )
-	 * operacao: "atualizarUsuarios";
-	 * erro: true, erro ao realizar a persistência ou e-mail já cadastrado; false: persistência realizada com sucesso.
-	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
-	 * 
-	 */ 
-	
 	@ResponseBody
 	@RequestMapping(value = "/atualizarUsuarios", method = RequestMethod.PUT, consumes = { "multipart/form-data" })
 	public MessageReturn<?> atualizarUsuarios(MultipartFile imagem, String usuario) {
@@ -224,32 +226,29 @@ public class UsuariosController {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * @Author Daniel Oliveira
 	 * 
-	 * METHOD: GET; Para listar Usuários.
-	 * URL: http://localhost:8080/usuarios/listarUsuarios
-	 * PARAM: lista
+	 *	METHOD: GET; Para listar Usuários. 
+	 *	URL: http://localhost:8080/usuarios/listarUsuarios 
+	 *	PARAM: <String> lista: <DataGrid> ou <Participante>
 	 * 
-	 * DataGrid ou Participante
-	 * 
-	 * RETURN: Retorna uma Lista <usuarios> List<UsuariosProjectionDataGrid> ou List<UsuariosProjectionParticipante>;
+	 *  RETURN: Retorna uma Lista <usuarios> List<UsuariosProjectionDataGrid> ou List<UsuariosProjectionParticipante>;
 	 *
 	 */
 
-	
 	@ResponseBody
 	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
 	public List<?> listarUsuarios(@RequestParam String lista) {
-		
-		List<?> usuarios= null;
-		
+
+		List<?> usuarios = null;
+
 		switch (lista) {
 		case "DataGrid":
 			try {
 				usuarios = up.findBy(UsuariosProjectionDataGrid.class);
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -257,7 +256,7 @@ public class UsuariosController {
 		case "Participante":
 			try {
 				usuarios = up.findBy(UsuariosProjectionParticipante.class);
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -268,57 +267,15 @@ public class UsuariosController {
 		return usuarios;
 	}
 
-	/*
-	@ResponseBody
-	@RequestMapping(value = "/listarUsuarios", method = RequestMethod.GET)
-	public MessageReturn listarUsuarios(@RequestParam String lista) {
-		
-		MessageReturn result = new MessageReturn();
 
-		result.setOperacao("listarUsuarios");
-		List<?> usuarios= null;
-		
-		switch (lista) {
-		case "DataGrid":
-			try {
-				
-				usuarios = up.findBy(UsuariosProjectionDataGrid.class);
-				result.setMensagem("Listagem realizada com sucesso.");
-				result.setErro(false);
-				result.setData(usuarios);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "Participante":
-			try {
-				usuarios = up.findBy(UsuariosProjectionParticipante.class);
-				result.setMensagem("Listagem realizada com sucesso.");
-				result.setErro(false);
-				result.setData(usuarios);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-				result.setMensagem(e.getMessage());
-				result.setErro(true);
-			}
-			break;
-		default:
-			break;
-		}
-		return result;
-	} */
-	
 	/**
 	 * @author Denis Lima
 	 * 
-	 * METHOD: GET; Para pegar apenas 1 usuário.
-	 * URL: http://localhost:8080/usuarios/pegarUsuario/{usu_id}
+	 *	METHOD: GET; Para pegar apenas 1 usuário. 
+	 *	URL: http://localhost:8080/usuarios/pegarUsuario/{usu_id}
+	 *	PathVariable: {usu_id}
 	 * 
-	 * PathVariable: {usu_id}
-	 * 
-	 * RETURN: Retorna um usuário <UsuariosModel>;
+	 *	RETURN: Retorna um usuário <UsuariosModel>;
 	 *
 	 */
 
@@ -331,25 +288,23 @@ public class UsuariosController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return usuarioSelecionado;	
+		return usuarioSelecionado;
 	}
-	
 
 	/**
 	 * @Author Daniel Oliveira
 	 * @Updated Denis Lima
 	 * 
-	 * METHOD: DELETE; Para excluir Usuários.
-	 * URL: http://localhost:8080/usuarios/excluirUsuarios/{usu_id}
+	 *	METHOD: DELETE; Para excluir Usuários. 
+	 *	URL: http://localhost:8080/usuarios/excluirUsuarios/{usu_id}
+	 *	PathVariable: {usu_id}
 	 * 
-	 * PathVariable: {usu_id}
-	 * 
-	 * RETURN: Retorna uma String <result>;
-	 * result = "Exclusão realizada com sucesso.";
-	 * result = "Mensagem da exceção apresentada.", caso ocorra.
+	 * 	RETURN: Retorna uma String <result>; 
+	 * 		result = "Exclusão realizada com sucesso."; 
+	 * 		result = "Mensagem da exceção apresentada.", caso ocorra.
 	 *
 	 */
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/excluirUsuarios/{usu_id}", method = RequestMethod.DELETE)
 	public String excluirUsuarios(@PathVariable long usu_id) {
@@ -363,26 +318,28 @@ public class UsuariosController {
 		}
 		return result;
 	}
-	
-	
+
 	/**
 	 * @Author Daniel Oliveira
 	 * 
-	 * METHOD: POST; Para solicitar a alteração de senha.
-	 * URL: http://localhost:8080/usuarios/solicitarAlteracaoSenha
-	 * PARAM: usu_email
+	 *	METHOD: POST; Para solicitar a alteração de senha. 
+	 *	URL: http://localhost:8080/usuarios/solicitarAlteracaoSenha 
+	 *	PARAM: usu_email
 	 * 
 	 * 
-	 * RETURN: Retorna um objeto <result> MessageReturn(
-	 * 	String operacao;
-	 *  Boolean erro;
-	 *  String mensagem;
-	 * )
-	 * operacao: "excluirAtas";
-	 * erro: true, e-mail/usuario não encontrado; false: solicitação realizada com sucesso.
-	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 *	RETURN: Retorna um objeto <result> MessageReturn( 
+	 *														String operacao;
+	 *         												Boolean erro; 
+	 *         												String mensagem;
+	 *         												T data; 
+	 *         											 ) 
+	 *			operacao: "solicitarAlteracaoSenha"; 
+	 *			erro: true, e-mail/usuario não encontrado; false: solicitação realizada com sucesso.
+	 *			mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 *			data: <String> token registrado para o usuário que solicitou a alteração
 	 *
 	 */
+	
 	@ResponseBody
 	@RequestMapping(value = "/solicitarAlteracaoSenha", method = RequestMethod.POST)
 	public MessageReturn<String> solicitarAlteracaoSenha(@RequestParam String usu_email)
@@ -402,11 +359,70 @@ public class UsuariosController {
 				result.setMensagem("Solicitação de alteração de senha realizada com sucesso.");
 				result.setData(token);
 				result.setErro(false);
-				
-				/* Desenvolver o envio do e-mail para enviar ao usuário os parâmetros para alteração da senha */
-				
+
+				/*
+				 * Desenvolver o envio do e-mail para enviar ao usuário os parâmetros para
+				 * alteração da senha
+				 */
+
 			} else {
 				result.setMensagem("O e-mail informado não está cadastrado no sistema, favor verificar");
+				result.setErro(true);
+			}
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
+		}
+		return result;
+	}
+
+	/**
+	 * @Author Daniel Oliveira
+	 * 
+	 *	METHOD: POST; Para alterar a senha. 
+	 *	URL: http://localhost:8080/usuarios/alterarSenha 
+	 *	PARAM: usu_token e usu_senha
+	 * 
+	 *	RETURN: Retorna um objeto <result> MessageReturn( 
+	 *														String operacao;
+	 *         												Boolean erro; 
+	 *         												String mensagem;
+	 *         												T data; 
+	 *         											) 
+	 *			operacao: "alterarSenha"; 
+	 *			erro: true, token não cadastrado/encontrado; false: alteração realizada com sucesso. 
+	 *			mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 *
+	 */
+
+	@ResponseBody
+	@RequestMapping(value = "/alterarSenha", method = RequestMethod.POST)
+	public MessageReturn<?> alterarSenha(@RequestParam String usu_token, @RequestParam String usu_senha)
+			throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		MessageReturn<?> result = new MessageReturn<String>();
+
+		result.setOperacao("alterarSenha");
+
+		String token = Conversor.codificaBase64Encoder(usu_senha);
+
+		try {
+
+			if (up.existsByusuConfirmationToken(usu_token)) {
+				UsuariosModel usuarioDB = up.findByusuConfirmationToken(usu_token);
+				usuarioDB.setUsuSenha(token);
+				usuarioDB.setUsuConfirmationToken("");
+				up.save(usuarioDB);
+				result.setMensagem("Alteração de senha realizada com sucesso.");
+				result.setErro(false);
+
+				/*
+				 * Desenvolver o envio do e-mail para informar ao usuário da alteração de senha
+				 * realizada
+				 */
+
+			} else {
+				result.setMensagem("Token inválido.");
 				result.setErro(true);
 			}
 		} catch (DataAccessException e) {
@@ -420,53 +436,59 @@ public class UsuariosController {
 	/**
 	 * @Author Daniel Oliveira
 	 * 
-	  * METHOD: POST; Para alterar a senha.
-	 * URL: http://localhost:8080/usuarios/alterarSenha
-	 * PARAM: usu_token, usu_senha
+	 *	METHOD: POST; Para validar Email e Senha
+	 *	URL: http://localhost:8080/usuarios/validarEmailSenha 
+	 *	PARAM: usu_email e usu_senha
 	 * 
-	 * 
-	* RETURN: Retorna um objeto <result> MessageReturn(
-	 * 	String operacao;
-	 *  Boolean erro;
-	 *  String mensagem;
-	 * )
-	 * operacao: "excluirAtas";
-	 * erro: true, token não cadastrado/encontrado; false: alteração realizada com sucesso.
-	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
-	 *
+	 *	RETURN: Retorna um objeto <result> MessageReturn( 
+	 *														String operacao;
+	 *         												Boolean erro; 
+	 *         												String mensagem; 
+	 *        												T data; 
+	 *         											) 
+	 *			operacao: "alterarSenha"; 
+	 *			erro: true, token não cadastrado/encontrado; false: alteração realizada com sucesso. 
+	 *			mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 *			data: <UsuariosProjectionLogin> dados do usuário.
+	 *	
 	 */
 	
+	
 	@ResponseBody
-	@RequestMapping(value = "/alterarSenha", method = RequestMethod.POST)
-	public MessageReturn<?> alterarSenha(@RequestParam String usu_token, @RequestParam String usu_senha)
-			throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		MessageReturn<?> result = new MessageReturn<String>();
-
-		result.setOperacao("alterarSenha");
+	@RequestMapping(value = "/validarEmailSenha", method = RequestMethod.POST)
+	public MessageReturn<UsuariosProjectionLogin> validarEmailSenha(@RequestParam String usu_email,
+			@RequestParam String usu_senha) {
 		
-		String token = Conversor.codificaBase64Encoder(usu_senha);
+		MessageReturn<UsuariosProjectionLogin> result = new MessageReturn<UsuariosProjectionLogin>();
+		result.setOperacao("validarEmailSenha");
 		
 		try {
-
-			if (up.existsByusuConfirmationToken(usu_token)) {
-				UsuariosModel usuarioDB = up.findByusuConfirmationToken(usu_token);
-				usuarioDB.setUsuSenha(token);
-				usuarioDB.setUsuConfirmationToken("");
+			String senhaCodificada = Conversor.codificaBase64Encoder(usu_senha);
+			String tokenSession = Conversor.geradorHashString(usu_email + usu_senha);
+			
+			UsuariosProjectionLogin usuarioReturn = up.getByUsuEmailAndUsuSenha(usu_email, senhaCodificada);
+			
+			if (usuarioReturn != null) {
+				// Busca os dados do usário no banco para salvar o token da seção.
+				UsuariosModel usuarioDB = up.findByusuEmail(usu_email);
+				usuarioDB.setUsuSessionToken(tokenSession);
 				up.save(usuarioDB);
-				result.setMensagem("Alteração de senha realizada com sucesso.");
+				
+				result.setMensagem("Email e senha validados com sucesso.");
+				result.setData(usuarioReturn);
 				result.setErro(false);
-				
-				/* Desenvolver o envio do e-mail para informar ao usuário da alteração de senha realizada */
-				
+
 			} else {
-				result.setMensagem("Token inválido.");
+				result.setMensagem("Dados invalidados.");
 				result.setErro(true);
+				
 			}
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			result.setMensagem(e.getMessage());
 			result.setErro(true);
 		}
+
 		return result;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.iacit.sisatas.models.UsuariosModel;
+import br.com.iacit.sisatas.projections.UsuariosProjectionLogin;
 
 public interface UsuariosRepository extends JpaRepository<UsuariosModel, String> {
 
@@ -21,6 +22,8 @@ public interface UsuariosRepository extends JpaRepository<UsuariosModel, String>
 	UsuariosModel findByusuEmail(String usuEmail);
 	
 	UsuariosModel findByusuConfirmationToken(String usuConfirmationToken);
+	
+	UsuariosProjectionLogin getByUsuEmailAndUsuSenha(String usuEmail, String usuSenha);
 	
 	<T> List<T> findBy(Class<T> projection);
 
