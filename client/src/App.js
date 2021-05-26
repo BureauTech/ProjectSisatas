@@ -3,6 +3,7 @@ import InfoAtaProvider from "./context/InfoAta";
 import { useEffect } from "react";
 import { useAutenticacao } from "./context/Autenticacao";
 import Routes from "./routes/Routes";
+import { getLocalStorage } from "./auth/auth";
 
 function App() {
   const { usuario } = useAutenticacao();
@@ -35,6 +36,12 @@ function App() {
 
   useEffect(() => {
     ajustarLayout();
+    const token = getLocalStorage("sisata_token");
+    if (token) {
+      alert("token encontrado");
+    } else {
+      alert("token não encontrado");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

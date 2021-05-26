@@ -33,6 +33,10 @@ const validadorToken = (param) => {
   return api.get(`${endpoint}/validadorToken?usu_token=${param}`);
 };
 
+const logIn = (usu_email, usu_senha) => {
+  return api.post(`${endpoint}/validarEmailSenha?usu_email=${usu_email}&usu_senha=${usu_senha}`);
+};
+
 const userServices = {
   pegarUsuario,
   listarUsuarios,
@@ -42,6 +46,7 @@ const userServices = {
   solicitarAlteracaoSenha,
   alterarSenha,
   validadorToken,
+  logIn,
 };
 
 export default userServices;

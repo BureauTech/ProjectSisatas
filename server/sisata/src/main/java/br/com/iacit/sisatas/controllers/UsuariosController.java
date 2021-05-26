@@ -473,6 +473,7 @@ public class UsuariosController {
 				UsuariosModel usuarioDB = up.findByusuEmail(usu_email);
 				usuarioDB.setUsuSessionToken(tokenSession);
 				up.save(usuarioDB);
+				usuarioReturn = up.getByUsuEmailAndUsuSenha(usu_email, senhaCodificada);
 				
 				result.setMensagem("Email e senha validados com sucesso.");
 				result.setData(usuarioReturn);

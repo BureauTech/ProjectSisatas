@@ -8,6 +8,7 @@ const Alerta = (props) => {
 
   useEffect(() => {
     setOpen(isOpen);
+    console.log("alerta");
   }, [isOpen, sucesso, erro]);
 
   const handleClose = (event, reason) => {
@@ -20,11 +21,7 @@ const Alerta = (props) => {
   };
   return (
     <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-      <Alert
-        onClose={handleClose}
-        variant="filled"
-        severity={sucesso ? "success" : "error"}
-      >
+      <Alert onClose={handleClose} variant="filled" severity={sucesso ? "success" : "error"}>
         {sucesso ? sucesso : erro}
       </Alert>
     </Snackbar>

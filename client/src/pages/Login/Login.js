@@ -3,9 +3,12 @@ import { Lock, MailOutline } from "@material-ui/icons";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { styles } from "../../assets/styles/Styles";
+import { setLocalStorage } from "../../auth/auth";
 import Botao from "../../components/Login/Botao";
 import InputLogin from "../../components/Login/InputLogin";
+import Alerta from "../../components/Snackbar/Alerta";
 import { useAutenticacao } from "../../context/Autenticacao";
+import userServices from "../../services/user";
 
 // Estilo para o texto "Esqueci minha senha"
 const style = makeStyles((theme) => ({
@@ -34,6 +37,10 @@ const Login = (props) => {
   const { setUsuario, usuario } = useAutenticacao();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [msgSucesso, setMsgSucesso] = useState(false);
+  const [msgErro, setMsgErro] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const history = useHistory();
 
   if (usuario.estaLogado) {
@@ -54,25 +61,39 @@ const Login = (props) => {
     e.preventDefault();
 
     if (email && senha) {
-      alert("Logado com sucesso!");
-      setUsuario({
-        estaLogado: true,
-        token: "",
-        usuNome: "",
-        usuId: 1,
-        usuEmail: "teste@teste.com",
-        usuCargo: "dev",
-        usuAreaEmpresa: "Bureau",
-        usuTelefone: "129923123",
-        usuPerfil: "ADM",
-      });
-      history.push("/");
+      userServices
+        .logIn(email, senha)
+        .then(({ data }) => {
+          if (!data.erro) {
+            const dados = data.data;
+            setUsuario({
+              estaLogado: true,
+              token: dados.usuSessionToken,
+              usuId: dados.usuId,
+              usuNome: dados.usuNome,
+              usuPerfil: dados.usuPerfil,
+            });
+            setLocalStorage("sisata_token", dados.usuSessionToken, 120);
+            history.push("/");
+          } else {
+            setMsgErro(data.mensagem);
+            setMsgSucesso(false);
+            setIsOpen(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+          setMsgErro("Ocorreu um erro na requisição");
+          setMsgSucesso(false);
+          setIsOpen(true);
+        });
     } else {
       alert("Erro ao realizar login!");
     }
   };
   return (
     <Container maxWidth="xs">
+      <Alerta isOpen={isOpen} setIsOpen={setIsOpen} sucesso={msgSucesso} erro={msgErro} />
       <Grid container className={classes.grid} justify="center">
         <Grid item xs={11} style={{ paddingTop: 20 }}>
           <Typography className={classes.normalText}>Login</Typography>
