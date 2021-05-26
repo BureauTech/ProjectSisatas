@@ -3,9 +3,16 @@ import InfoAtaProvider from "./context/InfoAta";
 import { useEffect } from "react";
 import { useAutenticacao } from "./context/Autenticacao";
 import Routes from "./routes/Routes";
+import { getLocalStorage, setLocalStorage } from "./auth/auth";
+import userServices from "./services/user";
 
+/**
+ * Arquivo base da aplicação
+ * @author Denis Lima
+ * @returns Retorna os elementos base da aplicação e suas rotas
+ */
 function App() {
-  const { usuario } = useAutenticacao();
+  const { usuario, setUsuario } = useAutenticacao();
 
   const ajustarLayout = (n) => {
     if (usuario.estaLogado) {
@@ -34,6 +41,24 @@ function App() {
   window.addEventListener("resize", ajustarLayout);
 
   useEffect(() => {
+
+    /**
+     * Função para verificar se há token salvo  
+     * Caso haja e não está expirado, recupera as informações com o servidor
+     * @author Denis Lima
+     */
+    async function verificarLogado() {
+      const token = getLocalStorage("sisata_token");
+      if (token) {
+        const { data } = await userServices.validarTokenSessao(token);
+        if (!data.erro) {
+          const dados = data.data;
+          setUsuario({ ...dados, estaLogado: true });
+          setLocalStorage("sisata_token", dados.usuSessionToken, 120);
+        }
+      }
+    }
+    verificarLogado();
     ajustarLayout();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
