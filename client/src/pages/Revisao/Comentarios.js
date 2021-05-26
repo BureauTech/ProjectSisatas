@@ -5,6 +5,15 @@ import { useState } from "react";
 import "./Style.css";
 import ataServices from "../../services/comentarios";
 
+/*
+ * @author Charles Ramos
+ * @param {any} props
+ * 
+ * @returns Cadastro de comentários em uma revisão.
+ *
+ * Cadastro de comentários em uma revisão que foi recusada.
+*/
+
 const CreateComentario = (props) => {
   const theme = useTheme();
 
