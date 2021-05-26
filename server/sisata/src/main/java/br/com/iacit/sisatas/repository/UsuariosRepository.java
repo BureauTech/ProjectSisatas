@@ -14,6 +14,8 @@ public interface UsuariosRepository extends JpaRepository<UsuariosModel, String>
 	Boolean existsByusuEmail(String usuEmail);
 	
 	Boolean existsByusuConfirmationToken(String usuConfirmationToken);
+	
+	Boolean existsByusuSessionToken(String usuSessionToken);
 
 	UsuariosModel findTopBy();
 	
@@ -24,6 +26,8 @@ public interface UsuariosRepository extends JpaRepository<UsuariosModel, String>
 	UsuariosModel findByusuConfirmationToken(String usuConfirmationToken);
 	
 	UsuariosProjectionLogin getByUsuEmailAndUsuSenha(String usuEmail, String usuSenha);
+	
+	UsuariosProjectionLogin getByusuSessionToken(String usuSessionToken);
 	
 	<T> List<T> findBy(Class<T> projection);
 
