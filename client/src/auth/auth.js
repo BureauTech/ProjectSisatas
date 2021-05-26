@@ -1,3 +1,7 @@
+/**
+ * Verifica se há algum item com a data expirada  
+ * Se encontrar, irá remover o mesmo
+ */
 function localStorageExpires() {
   let toRemove = [], //Itens para serem removidos
     currentDate = new Date().getTime(); //Data atual em milissegundos
@@ -49,7 +53,7 @@ function setLocalStorage(chave, valor, minutos) {
 /**
  * Função para obter itens do localStorage que ainda não expiraram
  * @param {string} chave Chave para obter o valor associado
- * @return {*} Retorna qualquer valor, se o item tiver expirado irá retorna undefined
+ * @return {*} Retorna o token, se o item tiver expirado irá retorna undefined
  */
 function getLocalStorage(chave) {
   localStorageExpires(); //Limpa itens

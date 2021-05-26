@@ -19,6 +19,12 @@ import ForgotPassword from "../pages/Login/ForgotPassword";
 import Notificacoes from "../pages/Notificacoes/Notificacoes";
 import RestrictedRoute from "./RestrictedRoute";
 
+/**
+ * Arquivo com rotas para o frontend
+ * @author Denis Lima
+ * @param {any} props props
+ * @returns Retorna as rotas do frontend
+ */
 const Routes = ({ ajustarLayout }) => (
   <BrowserRouter>
     <Switch>

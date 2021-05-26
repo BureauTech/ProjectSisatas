@@ -6,6 +6,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { ptBR } from "@material-ui/core/locale";
 import AutenticacaoProvider from "./context/Autenticacao";
 
+// Configuração de UI para os componentes
 const theme = createMuiTheme(
   {
     palette: {

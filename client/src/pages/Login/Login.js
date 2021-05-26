@@ -21,15 +21,13 @@ const style = makeStyles((theme) => ({
 }));
 
 /**
- * @author Denis Lima
- * @param {any} props
- * @returns Componente de Login
- *
  * Componente para página de Login.
  * Caso o usuário já esteja logado, redireciona para a página principal da aplicação.
  * Requisita ao servidor se o email e senha estão corretos, caso estejam, guarda as informações da sessão no Context Autenticacao.
  * Redireciona o usuário para página principal se está correta as informações.
- *
+ * @author Denis Lima
+ * @param {any} props
+ * @returns Componente de Login
  */
 const Login = (props) => {
   const { classes } = props;
@@ -48,14 +46,12 @@ const Login = (props) => {
   }
 
   /**
-   *@author Denis Lima
+   * Método para realizar o Login  
+   * Verifica se foi digitado um email e senha e requisita ao servidor que confira as credenciais  
+   * Caso estejam erradas, informa o usuário  
+   * Caso estejam corretas, guarda as informações de sessão do usuário e redireciona para a página principal  
+   * @author Denis Lima
    * @param {Event} e Recebe o evento
-   *
-   * Método para realizar o Login.
-   * Verifica se foi digitado um email e senha e requisita ao servidor que confira as credenciais.
-   * Caso estejam erradas, informa o usuário.
-   * Caso estejam corretas, guarda as informações de sessão do usuário e redireciona para a página principal.
-   *
    */
   const realizarLogin = (e) => {
     e.preventDefault();
@@ -66,13 +62,7 @@ const Login = (props) => {
         .then(({ data }) => {
           if (!data.erro) {
             const dados = data.data;
-            setUsuario({
-              estaLogado: true,
-              token: dados.usuSessionToken,
-              usuId: dados.usuId,
-              usuNome: dados.usuNome,
-              usuPerfil: dados.usuPerfil,
-            });
+            setUsuario({ ...dados, estaLogado: true });
             setLocalStorage("sisata_token", dados.usuSessionToken, 120);
             history.push("/");
           } else {
@@ -94,51 +84,53 @@ const Login = (props) => {
   return (
     <Container maxWidth="xs">
       <Alerta isOpen={isOpen} setIsOpen={setIsOpen} sucesso={msgSucesso} erro={msgErro} />
-      <Grid container className={classes.grid} justify="center">
-        <Grid item xs={11} style={{ paddingTop: 20 }}>
-          <Typography className={classes.normalText}>Login</Typography>
-        </Grid>
-        <Grid item xs={11} style={{ paddingBottom: 20 }}>
-          <form onSubmit={realizarLogin}>
-            <Grid container justify="center" style={{ paddingTop: 25, paddingBottom: 15 }}>
-              <Grid item xs={11}>
-                <InputLogin
-                  required
-                  label="Email"
-                  Icone={MailOutline}
-                  type="email"
-                  placeholder="Email*"
-                  id="email"
-                  value={email}
-                  setValue={setEmail}
-                />
-              </Grid>
-              <Grid item xs={11}>
-                <InputLogin
-                  required
-                  label="Senha"
-                  Icone={Lock}
-                  type="password"
-                  placeholder="Senha*"
-                  id="pw"
-                  value={senha}
-                  setValue={setSenha}
-                />
-              </Grid>
-              <Grid item xs={11}>
-                <Link to="/esqueci-a-senha" style={{ textDecoration: "none" }}>
-                  <Typography className={useStyles.forgot}>Esqueci minha senha</Typography>
-                </Link>
-              </Grid>
-              <Grid item xs={11}>
-                <Grid container justify="flex-end">
-                  <Botao type="submit" />
+      {!usuario.estaLogado && (
+        <Grid container className={classes.grid} justify="center">
+          <Grid item xs={11} style={{ paddingTop: 20 }}>
+            <Typography className={classes.normalText}>Login</Typography>
+          </Grid>
+          <Grid item xs={11} style={{ paddingBottom: 20 }}>
+            <form onSubmit={realizarLogin}>
+              <Grid container justify="center" style={{ paddingTop: 25, paddingBottom: 15 }}>
+                <Grid item xs={11}>
+                  <InputLogin
+                    required
+                    label="Email"
+                    Icone={MailOutline}
+                    type="email"
+                    placeholder="Email*"
+                    id="email"
+                    value={email}
+                    setValue={setEmail}
+                  />
+                </Grid>
+                <Grid item xs={11}>
+                  <InputLogin
+                    required
+                    label="Senha"
+                    Icone={Lock}
+                    type="password"
+                    placeholder="Senha*"
+                    id="pw"
+                    value={senha}
+                    setValue={setSenha}
+                  />
+                </Grid>
+                <Grid item xs={11}>
+                  <Link to="/esqueci-a-senha" style={{ textDecoration: "none" }}>
+                    <Typography className={useStyles.forgot}>Esqueci minha senha</Typography>
+                  </Link>
+                </Grid>
+                <Grid item xs={11}>
+                  <Grid container justify="flex-end">
+                    <Botao type="submit" />
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          </form>
+            </form>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </Container>
   );
 };
