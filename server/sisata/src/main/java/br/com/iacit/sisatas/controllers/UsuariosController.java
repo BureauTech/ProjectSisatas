@@ -77,7 +77,7 @@ public class UsuariosController {
 	 * @Author Daniel Oliveira
 	 *
 	 * METHOD: GET; Para validar token de sessão
-	 * URL: http://localhost:8080/usuarios/validadorTokenSession
+	 * URL: http://localhost:8080/usuarios/validadorSessionToken
 	 * PARAM: usu_sessionToken
 	 *
 	 * RETURN: Retorna um objeto <result> MessageReturn( 
@@ -92,11 +92,11 @@ public class UsuariosController {
 
 	@SuppressWarnings("unused")
 	@ResponseBody
-	@RequestMapping(value = "/validadorTokenSession", method = RequestMethod.GET)
-	public MessageReturn<?> validadorTokenSession(@RequestParam String usu_sessionToken) {
+	@RequestMapping(value = "/validadorSessionToken", method = RequestMethod.GET)
+	public MessageReturn<?> validadorSessionToken(@RequestParam String usu_sessionToken) {
 		MessageReturn<UsuariosProjectionLogin> result = new MessageReturn<UsuariosProjectionLogin>();
 
-		result.setOperacao("validadorTokenSession");
+		result.setOperacao("validadorSessionToken");
 		try {
 			if (!usu_sessionToken.isEmpty() || !usu_sessionToken.isBlank() || !(usu_sessionToken == null)
 					|| up.existsByusuSessionToken(usu_sessionToken)) {
