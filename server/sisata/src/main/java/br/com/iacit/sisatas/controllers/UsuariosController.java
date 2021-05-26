@@ -508,7 +508,8 @@ public class UsuariosController {
 		
 		try {
 			String senhaCodificada = Conversor.codificaBase64Encoder(usu_senha);
-			String tokenSession = Conversor.geradorHashString(usu_email + usu_senha);
+			Date data = new Date();
+			String tokenSession = Conversor.geradorHashString(usu_email + data + usu_senha);
 			
 			UsuariosProjectionLogin usuarioReturn = up.getByUsuEmailAndUsuSenha(usu_email, senhaCodificada);
 			
