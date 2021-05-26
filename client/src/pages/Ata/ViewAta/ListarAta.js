@@ -9,6 +9,17 @@ import ptBR from "../../../components/ptBR/DataGrid";
 import ataServices from "../../../services/ata.js";
 import Alerta from "../../../components/Snackbar/Alerta.js";
 
+/*
+ * @author Charles Ramos
+ * @param {any} params
+ * @returns Listagem de atas cadastradas
+ *
+ * Listagem de atas cadastradas no banco.
+ * 
+ * O token precisa ser validado com o servidor para garantir que o mesmo é válido e único.
+ */
+
+
 const useStyles = makeStyles((theme) => ({
   grid: {
     backgroundColor: theme.palette.primary.main,
