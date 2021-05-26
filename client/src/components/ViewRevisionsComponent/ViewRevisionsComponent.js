@@ -19,7 +19,8 @@ import { useState } from "react";
 import revisaoServices from "../../services/revisao";
 import ataServices from "../../services/ata";
 import Alerta from "../Snackbar/Alerta";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
 
 // Alterando css de componentes
 
@@ -254,6 +255,7 @@ const ViewRevisionsComponent = (props) => {
               </Grid>
             </Grid> */}
             <Grid container justify="space-around">
+            <Link to="/comentarios" style={{ textDecoration: "none" }}>
               <Grid item style={{ margin: "15px 0px" }}>
                 <Button
                   variant="contained"
@@ -270,6 +272,7 @@ const ViewRevisionsComponent = (props) => {
                   Exibir Comentários
                 </Button>
               </Grid>
+              </Link>
               <Grid item style={{ margin: "15px 0px" }}>
                 <Button
                   variant="contained"

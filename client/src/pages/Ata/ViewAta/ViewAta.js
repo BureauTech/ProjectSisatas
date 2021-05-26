@@ -142,7 +142,7 @@ const ViewAta = ({ ajustarLayout }) => {
                   padding: "0 5px",
                 }}
               >
-                Cancelar
+                Voltar
               </Button>
             </Link>
             <Button
