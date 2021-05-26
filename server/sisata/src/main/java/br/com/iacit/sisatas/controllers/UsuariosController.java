@@ -53,12 +53,13 @@ public class UsuariosController {
 	public Boolean validadorUsuEmail(@RequestParam String usuEmail) {
 		return up.existsByusuEmail(usuEmail);
 	}
-
+	
 	/**
 	 * @Author Daniel Oliveira
 	 *
 	 * METHOD: GET; Para validar token para alteração de senha.
 	 * URL: http://localhost:8080/usuarios/validadorToken
+	 * PARAM: usu_token
 	 *
 	 * RETURN: true ou false.
 	 */
@@ -66,8 +67,51 @@ public class UsuariosController {
 	@RequestMapping(value = "/validadorToken", method = RequestMethod.GET)
 	public Boolean validadorToken(@RequestParam String usu_token) {
 		Boolean result = false;
-		if(!usu_token.isEmpty() || !usu_token.isBlank() || !(usu_token != null)) {
+		if(!usu_token.isEmpty() || !usu_token.isBlank() || (usu_token != null)) {
 			result = up.existsByusuConfirmationToken(usu_token);
+		}
+		return result;
+	}
+	
+	/**
+	 * @Author Daniel Oliveira
+	 *
+	 * METHOD: GET; Para validar token de sessão
+	 * URL: http://localhost:8080/usuarios/validadorSessionToken
+	 * PARAM: usu_sessionToken
+	 *
+	 * RETURN: Retorna um objeto <result> MessageReturn( 
+	 *														String operacao;
+	 *         												Boolean erro;
+	 *         												String mensagem; 
+	 *         											 ) 
+	 *			operacao: "validadorTokenSession"; 
+	 *			erro: true, erro ao realizar a verificação ou token não informado; false: token validado com sucesso; 
+	 *			mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 */
+
+	@SuppressWarnings("unused")
+	@ResponseBody
+	@RequestMapping(value = "/validadorSessionToken", method = RequestMethod.GET)
+	public MessageReturn<?> validadorSessionToken(@RequestParam String usu_sessionToken) {
+		MessageReturn<UsuariosProjectionLogin> result = new MessageReturn<UsuariosProjectionLogin>();
+
+		result.setOperacao("validadorSessionToken");
+		try {
+			if (!usu_sessionToken.isEmpty() || !usu_sessionToken.isBlank() || !(usu_sessionToken == null)
+					|| up.existsByusuSessionToken(usu_sessionToken)) {
+				UsuariosProjectionLogin usuarioBD = up.getByusuSessionToken(usu_sessionToken);
+				result.setMensagem("Token de sessão validado com sucesso.");
+				result.setData(usuarioBD);
+				result.setErro(false);
+			} else {
+				result.setMensagem("Token de sessão invalido.");
+				result.setErro(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
 		}
 		return result;
 	}
