@@ -42,17 +42,68 @@ public class AtasController {
 	 *	Retorna o ataId da última Ata.
 	 *
 	 */
+	
 	@ResponseBody
 	@RequestMapping(value = "/ultimoRegistro", method = RequestMethod.GET)
 	public AtasProjectionId ultimoRegistro() {
 		return ap.findTopByOrderByAtaIdDesc();
 	}
+	
+	/**
+	 * @Author Caique
+	 * 
+	 * METHOD: PUT; Para cadastrar Atas.
+	 * URL: http://localhost:8080/atas/cadastrarAta
+	 * BODY: 
+	 * {
+		    "ataDataInicio": <Date>,
+		    "ataDataFim": <Date>,
+		    "ataHoraInicio": <DateTime>,
+		    "ataHoraFim": <DateTime>,
+		    "ataLocal": <String>,
+		    "ataProjeto": <String>,
+		    "ataPauta": <String>,
+		    "ataObservacao": <String>,
+		    "geraAtas": { // Objetos<UsuariosModel.usuId>
+		    	 "usuId": <long>
+		    },
+		    "participaAtas": [ // Lista de Objetos<UsuariosModel.usuId>
+		        {
+		            "usuId": <Long>
+		        }
+		     ],
+		    "assuntos": [ // Lista de Objetos<AssuntosModel>
+		        {
+		            "assId": <Long>,
+		            "assAssunto": <String>,
+		            "assPrazo": <Date>,
+		            "ataId": <String>,
+		            "responsavelAssuntos": [ // Lista de Objetos<UsuariosModel.usuId>
+		                {
+		                    "usuId": <Long>
+		                }
+		            ]
+		        }
+		    ]
+		}
+
+	 * 
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+	 * 														String operacao;
+	 *  													Boolean erro;
+	 *  													String mensagem;
+	 * 													)
+	 * operacao: "cadastrarAta";
+	 * erro: true, erro ao realizar a persistência; false: Ata atualizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 * 
+	 */
 
 	@ResponseBody
 	@RequestMapping(value = "/cadastrarAta", method = RequestMethod.POST, consumes = "application/json")
-	public MessageReturn cadastrarAtas(@RequestBody AtasModel ata) throws IOException {
+	public MessageReturn<?> cadastrarAtas(@RequestBody AtasModel ata) throws IOException {
 
-		MessageReturn result = new MessageReturn();
+		MessageReturn<?> result = new MessageReturn<String>();
 
 		result.setOperacao("cadastrarAta");
 
@@ -93,6 +144,7 @@ public class AtasController {
 		    "ataLocal": <String>,
 		    "ataProjeto": <String>,
 		    "ataPauta": <String>,
+		    "ataObservacao": <String>,
 		    "geraAtas": { // Objetos<UsuariosModel.usuId>
 		    	 "usuId": <long>
 		    },
@@ -128,10 +180,11 @@ public class AtasController {
 	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
 	 * 
 	 */ 
+	
 	@ResponseBody
 	@RequestMapping(value = "/atualizarAtas", method = RequestMethod.PUT)
-	public MessageReturn atualizarAtas(@RequestBody AtasModel ata) {
-		MessageReturn result = new MessageReturn();
+	public MessageReturn<?> atualizarAtas(@RequestBody AtasModel ata) {
+		MessageReturn<?> result = new MessageReturn<String>();
 
 		result.setOperacao("atualizarAtas");
 
@@ -146,6 +199,16 @@ public class AtasController {
 		}
 		return result;
 	}
+	
+	/**
+	 * @Author Daniel Oliveira
+	 * 
+	 * METHOD: GET; Para listar atas.
+	 * URL: http://localhost:8080/atas/listarAtas
+	 * 
+	 * RETURN: Retorna uma Projeção <AtasProjectionDataGrid>;
+	 *
+	 */
 
 	@ResponseBody
 	@RequestMapping(value = "/listarAtas", method = RequestMethod.GET)
@@ -206,8 +269,8 @@ public class AtasController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/excluirAtas/{ata_id}", method = RequestMethod.DELETE)
-	public MessageReturn excluirAtas(@PathVariable String ata_id) {
-		MessageReturn result = new MessageReturn();
+	public MessageReturn<?> excluirAtas(@PathVariable String ata_id) {
+		MessageReturn<?> result = new MessageReturn<String>();
 
 		//	/{cod}/{ano}
 		//	AtasModel ata = ap.getOne(cod + "/" + ano);
