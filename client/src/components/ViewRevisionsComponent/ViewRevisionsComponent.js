@@ -238,7 +238,7 @@ const ViewRevisionsComponent = (props) => {
             </Grid>
           </Grid>
           <Grid container className={classes.grid} justify="center" style={{ paddingBottom: 0, paddingRight: 0 }}>
-            {/* <Grid item sm={4} md={3} style={{ margin: "15px 0px" }}>
+            <Grid item sm={4} md={3} style={{ margin: "15px 0px" }}>
               <Typography className={classes.normalText}>Aprovado</Typography>
             </Grid>
             <Grid item sm={7} md={8} style={{ margin: "15px 0px" }}>
@@ -253,7 +253,7 @@ const ViewRevisionsComponent = (props) => {
               <Grid container>
                 <Chips participantes={listaParticipantes} filtro={"Pendente"} />
               </Grid>
-            </Grid> */}
+            </Grid>
             <Grid container justify="space-around">
             <Link to="/comentarios" style={{ textDecoration: "none" }}>
               <Grid item style={{ margin: "15px 0px" }}>

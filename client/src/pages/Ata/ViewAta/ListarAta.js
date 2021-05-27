@@ -4,10 +4,13 @@ import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import ClearRoundedIcon from '@material-ui/icons/ClearRounded';
+import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import "../../../components/ExibirAta/ListarAta.css";
 import ptBR from "../../../components/ptBR/DataGrid";
 import ataServices from "../../../services/ata.js";
 import Alerta from "../../../components/Snackbar/Alerta.js";
+
 
 /*
  * @author Charles Ramos
@@ -99,6 +102,17 @@ export default function Data() {
       renderCell: (params) => (
         <Button onClick={() => history.push("ata", { id: params.getValue("id") })}>
           <VisibilityIcon className="icon" />
+        </Button>
+      ),
+    },
+    {
+      field: "Status",
+      headerName: "Status",
+      width: 130,
+      renderCell: (params) => (
+        <Button>
+          <CheckRoundedIcon className="icon" onClick={() => history.push("ata", { id: params.getValue("id") })} />
+          <ClearRoundedIcon className="icon" onClick={() => history.push("nova-revisao", { user: 1 })}/>
         </Button>
       ),
     },
