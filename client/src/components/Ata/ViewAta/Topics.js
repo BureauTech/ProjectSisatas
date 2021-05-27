@@ -58,7 +58,7 @@ const Topics = (props) => {
                                   }}
                                 >
                                   <strong>
-                                    {index} - {topic.assAssunto}
+                                    {index + 1} - {topic.assAssunto}
                                   </strong>
                                 </Typography>
                               </Grid>
