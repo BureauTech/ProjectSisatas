@@ -88,7 +88,7 @@ const AtaHeader = (props) => {
             {/* ROW DATA INÍCIO */}
             <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item md={4} lg={3}>
-                <FormLabel className={classes.normalText}>Data Início</FormLabel>
+                <FormLabel className={classes.normalText}>Data Início*</FormLabel>
               </Grid>
               <Grid item xs={12} md={8} lg={7}>
                 <Grid container justify="space-between">
@@ -120,7 +120,7 @@ const AtaHeader = (props) => {
             {/* ROW DATA FINAL */}
             <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item md={4} lg={3}>
-                <FormLabel className={classes.normalText}>Data Final</FormLabel>
+                <FormLabel className={classes.normalText}>Data Final*</FormLabel>
               </Grid>
               <Grid item xs={12} md={8} lg={7}>
                 <Grid container justify="space-between">
@@ -152,7 +152,7 @@ const AtaHeader = (props) => {
             {/* ROW LOCAL */}
             <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item xs={10} md={2} lg={2}>
-                <FormLabel className={classes.normalText}>Local</FormLabel>
+                <FormLabel className={classes.normalText}>Local*</FormLabel>
               </Grid>
               <Grid item xs={12} md={10} lg={8}>
                 <Input

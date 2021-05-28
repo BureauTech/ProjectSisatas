@@ -29,9 +29,11 @@ const AtaHeader = (props) => {
                 <strong>Fim:</strong> {fim}
               </Typography>
             </Grid>
-            <Typography>
-              <strong>Local:</strong> {local}
-            </Typography>
+            <Grid container>
+              <Typography>
+                <strong>Local:</strong> {local}
+              </Typography>
+            </Grid>
           </Grid>
         </Paper>
       </Grid>

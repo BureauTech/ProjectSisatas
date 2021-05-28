@@ -2,13 +2,13 @@ import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core
 
 import AtaHeader from "../../../components/Ata/CreateAta/AtaHeader";
 import ProjectParticipants from "../../../components/Ata/CreateAta/ProjectParticipants";
-import Pauta from "../../../components/Ata/CreateAta/Pauta";
 import Topics from "../../../components/Ata/CreateAta/Topics";
 import { useState } from "react";
 import "./Style.css";
 import ataServices from "../../../services/ata";
 
 import Alerta from "../../../components/Snackbar/Alerta";
+import Textarea from "../../../components/Ata/CreateAta/Textarea";
 
 const CreateAta = (props) => {
   const theme = useTheme();
@@ -24,6 +24,7 @@ const CreateAta = (props) => {
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
   const [id, setId] = useState("1");
+  const [observacao, setObservacao] = useState("");
 
   const clear = () => {
     setId(Math.random().toString());
@@ -65,6 +66,7 @@ const CreateAta = (props) => {
       ...header,
       ataProjeto: tema,
       participaAtas: participantesIds,
+      ataObservacao: observacao,
       ataPauta: infoPauta,
       assuntos: ass,
     };
@@ -108,10 +110,15 @@ const CreateAta = (props) => {
           />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
-          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Pauta</Typography>
-          <Pauta setInfoPauta={setInfoPauta} />
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Pauta*</Typography>
+          <Textarea setInfo={setInfoPauta} idText='pauta' required={true} />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Observações</Typography>
+          <Textarea setInfo={setObservacao} idText='obs' required={false} />
+        </Grid>
+        <Grid container style={{ marginBottom: 10 }}>
+        <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Assuntos*</Typography>
           <Topics
             listaAdicionados={listaAdicionados}
             setInfoTopics={setInfoTopics}
