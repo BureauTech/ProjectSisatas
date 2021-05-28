@@ -427,9 +427,8 @@ public class EscritorExcel {
 
 	public byte[] getByteArray(boolean comAssinatura) throws IOException {
 		writeCabecalho(); writeParticipantes(); writePauta();
-		writeObservacao(); writeAssuntos(); writeRevisoes();
+		writeObservacao(); writeAssuntos(); writeRevisoes(); writeAviso();
 		if (comAssinatura) writeAsssinaturas();
-		writeAviso();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		workbook.write(bos); workbook.close();
 		return bos.toByteArray();
