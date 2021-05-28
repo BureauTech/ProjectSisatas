@@ -245,10 +245,12 @@ public class EscritorExcel {
 
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		StringBuilder texto = new StringBuilder();
+		int cont = 0;
 		for (RevisoesModel revisaoModel : revisoes) {
 			texto.append("\"").append(revisaoModel.getRevAssunto()).append("\"")
 				 .append(" - ").append(revisaoModel.getResponsavelRevisoes().getUsuNome())
-				 .append(", no dia ").append(revisaoModel.getRevData().format(dateFormat)).append(".\n\n");
+				 .append(", no dia ").append(revisaoModel.getRevData().format(dateFormat))
+				 .append(" - ID: ").append(++cont).append(".\n\n");
 		}
 		conteudoRevisao.setCellValue(texto.toString());
 
