@@ -56,6 +56,14 @@ const CreateRevision = (props) => {
   };
   console.log(location.state);
 
+  const historico = () => {
+    if ({ id: location.state.ataid }){
+      history.push("ata", { id: location.state.ataid})
+    } else {
+      history.push("visualizar-atas")
+    }
+  }
+
   return (
     <Container>
       <form onSubmit={(e) => CriarRevisao(e)}>
@@ -85,7 +93,7 @@ const CreateRevision = (props) => {
               borderRadius: 20,
               padding: "0 30px",
             }}
-            onClick={() => history.push("ata", { id: location.state.ataid })}
+            onClick={historico}
           >
             Cancelar
           </Button>

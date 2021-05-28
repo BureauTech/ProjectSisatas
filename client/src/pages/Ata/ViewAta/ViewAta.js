@@ -100,6 +100,11 @@ const ViewAta = ({ ajustarLayout }) => {
   };
   const [isOpen, setIsOpen] = useState(false);
 
+
+  const voltar = () => {
+    history.push("visualizar-atas")
+  }
+
   // Alterna entre os estados "Open" e "Close" da lista
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -129,7 +134,6 @@ const ViewAta = ({ ajustarLayout }) => {
             <Status />
           </Grid> */}
           <Grid container justify="space-between" style={{ padding: 24 }}>
-            <Link to="/visualizar-atas" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 className="bold"
@@ -141,10 +145,10 @@ const ViewAta = ({ ajustarLayout }) => {
                   borderRadius: 16,
                   padding: "0 5px",
                 }}
+                onClick={voltar}
               >
                 Voltar
               </Button>
-            </Link>
             <Button
               variant="contained"
               color="secondary"
