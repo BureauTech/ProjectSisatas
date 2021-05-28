@@ -1,11 +1,4 @@
-import {
-  Container,
-  Grid,
-  TableBody,
-  TableCell,
-  TableContainer,
-  Typography,
-} from "@material-ui/core";
+import { Container, Grid, Table, TableBody, TableCell, TableContainer, Typography } from "@material-ui/core";
 
 const Pauta = (props) => {
   const { pauta } = props.dados;
@@ -17,11 +10,15 @@ const Pauta = (props) => {
         </Typography>
       </Grid>
       <Grid style={{ border: "1px solid black", borderTop: "none" }}>
-        <TableContainer>
-          <TableBody>
-            <TableCell style={{ padding: "5px 20px" }}>{pauta}</TableCell>
-          </TableBody>
-        </TableContainer>
+        <Table>
+          <TableContainer>
+            <TableBody>
+              <TableCell className="breakline" style={{ padding: "5px 20px" }}>
+                {pauta}
+              </TableCell>
+            </TableBody>
+          </TableContainer>
+        </Table>
       </Grid>
     </Container>
   );
