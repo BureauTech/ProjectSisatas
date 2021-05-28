@@ -39,11 +39,9 @@ const EditUser = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
-    let idBuscar = location.state.id !== usuario_logado.usuId ? location.state.id : usuario_logado.usuId;
 
     userServices
-      .pegarUsuario(idBuscar)
+      .pegarUsuario(location.state.id)
       .then((user) => {
         setUsuario(user.data);
         setIsLoading(false);

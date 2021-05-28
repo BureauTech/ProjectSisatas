@@ -40,11 +40,9 @@ const UserProfile = (props) => {
   };
 
   useEffect(() => {
-    // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
-    let idBuscar = location.state.id !== usuario_logado.usuId ? location.state.id : usuario_logado.usuId;
 
     userServices
-      .pegarUsuario(idBuscar)
+      .pegarUsuario(location.state.id)
       .then((user) => {
         if (!isEmpty(user.data)) {
           setUsuario(user.data);
