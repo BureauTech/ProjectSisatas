@@ -197,23 +197,22 @@ public class EscritorExcel {
 		styleObservacao.setFont(font);
 		observacao.setCellStyle(styleObservacao);
 
-		Cell conteudoPauta = sheet.getRow(++rownum).getCell(1);
+		Cell conteudoObservacao = sheet.getRow(++rownum).getCell(1);
 		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
-		conteudoPauta.setCellValue(ata.getAtaPauta());
-		//conteudoPauta.setCellValue(ata.getAtaObservacao());
-		conteudoPauta.getRow().setHeight((short) (200 * sheet.getDefaultRowHeightInPoints()));
+		conteudoObservacao.setCellValue(ata.getAtaObservacao());
+		conteudoObservacao.getRow().setHeight((short) (200 * sheet.getDefaultRowHeightInPoints()));
 
-		XSSFCellStyle styleConteudoPauta = workbook.createCellStyle();
-		styleConteudoPauta.setBorderLeft(BorderStyle.THIN);
-		styleConteudoPauta.setBorderTop(BorderStyle.THIN);
-		styleConteudoPauta.setBorderBottom(BorderStyle.THIN);
-		styleConteudoPauta.setBorderRight(BorderStyle.THIN);
-		styleConteudoPauta.setVerticalAlignment(VerticalAlignment.TOP);
-		styleConteudoPauta.setWrapText(true);
-		conteudoPauta.setCellStyle(styleConteudoPauta);
+		XSSFCellStyle styleConteudoObs = workbook.createCellStyle();
+		styleConteudoObs.setBorderLeft(BorderStyle.THIN);
+		styleConteudoObs.setBorderTop(BorderStyle.THIN);
+		styleConteudoObs.setBorderBottom(BorderStyle.THIN);
+		styleConteudoObs.setBorderRight(BorderStyle.THIN);
+		styleConteudoObs.setVerticalAlignment(VerticalAlignment.TOP);
+		styleConteudoObs.setWrapText(true);
+		conteudoObservacao.setCellStyle(styleConteudoObs);
 
 		for(int col = 1; col < 6; col++)
-			conteudoPauta.getRow().getCell(col).setCellStyle(styleConteudoPauta);
+			conteudoObservacao.getRow().getCell(col).setCellStyle(styleConteudoObs);
 
 	}
 
@@ -246,10 +245,12 @@ public class EscritorExcel {
 
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		StringBuilder texto = new StringBuilder();
+		int cont = 0;
 		for (RevisoesModel revisaoModel : revisoes) {
 			texto.append("\"").append(revisaoModel.getRevAssunto()).append("\"")
 				 .append(" - ").append(revisaoModel.getResponsavelRevisoes().getUsuNome())
-				 .append(", no dia ").append(revisaoModel.getRevData().format(dateFormat)).append(".\n\n");
+				 .append(", no dia ").append(revisaoModel.getRevData().format(dateFormat))
+				 .append(" - ID: ").append(++cont).append(".\n\n");
 		}
 		conteudoRevisao.setCellValue(texto.toString());
 
@@ -428,9 +429,8 @@ public class EscritorExcel {
 
 	public byte[] getByteArray(boolean comAssinatura) throws IOException {
 		writeCabecalho(); writeParticipantes(); writePauta();
-		writeObservacao(); writeAssuntos(); writeRevisoes();
+		writeObservacao(); writeAssuntos(); writeRevisoes(); writeAviso();
 		if (comAssinatura) writeAsssinaturas();
-		writeAviso();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		workbook.write(bos); workbook.close();
 		return bos.toByteArray();

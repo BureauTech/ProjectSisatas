@@ -41,7 +41,7 @@ const Routes = ({ ajustarLayout }) => (
         component={() => <ViewAta ajustarLayout={ajustarLayout} />}
       />
       <RestrictedRoute allowed="GER" exact ajustarLayout={ajustarLayout} path="/reports" component={() => <> </>} />
-      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/perfil" component={() => <UserProfile id={1} />} />
+      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/perfil" component={() => <UserProfile />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/editar-usuario" component={() => <EditUser />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/nova-revisao" component={() => <CreateRevision />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/revisoes" component={() => <ViewRevisions />} />

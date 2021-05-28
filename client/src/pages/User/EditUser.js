@@ -19,9 +19,11 @@ import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
 import { BrokenImage } from "@material-ui/icons";
+import {useAutenticacao} from "../../context/Autenticacao";
 
 const EditUser = (props) => {
   const { classes } = props;
+  const usuario_logado = useAutenticacao();
   const [usuario, setUsuario] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
@@ -37,16 +39,9 @@ const EditUser = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
-    let idBuscar = "";
-    try {
-      idBuscar = location.state.id;
-    } catch (error) {
-      idBuscar = props.id;
-    }
 
     userServices
-      .pegarUsuario(idBuscar)
+      .pegarUsuario(location.state.id)
       .then((user) => {
         setUsuario(user.data);
         setIsLoading(false);

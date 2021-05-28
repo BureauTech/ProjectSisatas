@@ -23,7 +23,7 @@ const AtaTemplate = (props) => {
     tema: infoAta.projeto.ataProjeto ? infoAta.projeto.ataProjeto : "",
     listaParticipantes: infoAta.projeto.participantes ? infoAta.projeto.participantes : [],
     pauta: infoAta.pauta,
-    observacoes: infoAta.observacoes ? infoAta.observacoes : [],
+    observacoes: infoAta.observacao ? infoAta.observacao : "",
     assuntos: infoAta.assuntos ? infoAta.assuntos : "",
   };
 

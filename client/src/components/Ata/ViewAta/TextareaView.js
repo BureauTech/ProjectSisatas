@@ -2,8 +2,8 @@ import { Container, Grid, TextareaAutosize, withStyles } from "@material-ui/core
 import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
 
-const Pauta = (props) => {
-  const { classes, infoPauta } = props;
+const TextareaView = (props) => {
+  const { classes, infoValue, id } = props;
 
   return (
     <Container>
@@ -13,8 +13,8 @@ const Pauta = (props) => {
             <TextareaAutosize
               disabled
               rowsMax={15}
-              id="pauta"
-              value={infoPauta}
+              id={id}
+              value={infoValue}
               style={{
                 width: "100%",
                 fontSize: "1.8rem",
@@ -32,4 +32,4 @@ const Pauta = (props) => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Pauta);
+export default withStyles(styles, { withTheme: true })(TextareaView);

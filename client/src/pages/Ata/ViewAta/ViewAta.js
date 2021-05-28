@@ -1,16 +1,16 @@
-import {Button, Container, Grid, Typography, useTheme} from "@material-ui/core";
-import {Link, useHistory, useLocation} from "react-router-dom";
+import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import AtaHeader from "../../../components/Ata/ViewAta/AtaHeader";
 import ProjectParticipants from "../../../components/Ata/ViewAta/ProjectParticipants";
-import Pauta from "../../../components/Ata/ViewAta/Pauta";
 import Topics from "../../../components/Ata/ViewAta/Topics";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "../CreateAta/Style.css";
 import ataServices from "../../../services/ata";
-import {useInfoAta} from "../../../context/InfoAta";
+import { useInfoAta } from "../../../context/InfoAta";
 import Loading from "../../Loading/Loading";
 import revisaoServices from "../../../services/revisao";
+import TextareaView from "../../../components/Ata/ViewAta/TextareaView";
 
 const ViewAta = ({ ajustarLayout }) => {
   const theme = useTheme();
@@ -34,7 +34,7 @@ const ViewAta = ({ ajustarLayout }) => {
   };
 
   const formatTime = (time) => {
-    return `${('0' + time[0]).slice(-2)}:${('0' + time[1]).slice(-2)}`;
+    return `${("0" + time[0]).slice(-2)}:${("0" + time[1]).slice(-2)}`;
   };
 
   useEffect(() => {
@@ -73,6 +73,7 @@ const ViewAta = ({ ajustarLayout }) => {
           projeto: infoProject,
           pauta: dados.ataPauta,
           assuntos: dados.assuntos,
+          observacao: dados.ataObservacao,
         });
       })
       .catch((err) => console.log("erro:", err.message))
@@ -85,6 +86,7 @@ const ViewAta = ({ ajustarLayout }) => {
         projeto: "",
         pauta: "",
         assuntos: [],
+        observacao: "",
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -119,7 +121,11 @@ const ViewAta = ({ ajustarLayout }) => {
           </Grid>
           <Grid container style={{ marginBottom: 10 }}>
             <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Pauta</Typography>
-            <Pauta infoPauta={infoAta.pauta} />
+            <TextareaView infoValue={infoAta.pauta} />
+          </Grid>
+          <Grid container style={{ marginBottom: 10 }}>
+            <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Observações</Typography>
+            <TextareaView infoValue={infoAta.observacao} />
           </Grid>
           <Grid container style={{ marginBottom: 10 }}>
             <Topics isOpen={isOpen} handleClick={handleClick} infoTopics={infoAta.assuntos} />
