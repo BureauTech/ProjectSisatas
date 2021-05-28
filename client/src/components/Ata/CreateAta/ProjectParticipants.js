@@ -157,7 +157,7 @@ const ProjectParticipants = (props) => {
             style={{ marginBottom: 30, paddingTop: 20 }}
           >
             <FormLabel className={classes.normalText} style={{ marginRight: 15 }}>
-              Projeto
+              Projeto*
             </FormLabel>
             <Grid item xs={12} sm={5} md={4}>
               <Input
