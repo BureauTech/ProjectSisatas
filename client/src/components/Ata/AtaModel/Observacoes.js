@@ -1,12 +1,4 @@
-import {
-  Container,
-  Grid,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-} from "@material-ui/core";
+import { Container, Grid, TableBody, TableContainer, Typography } from "@material-ui/core";
 
 const Observacoes = (props) => {
   const { observacoes } = props.dados;
@@ -17,9 +9,7 @@ const Observacoes = (props) => {
           <strong>Observações:</strong>
         </Typography>
         <TableContainer>
-          <TableBody className='breakline'>
-            {observacoes}
-          </TableBody>
+          <TableBody className="breakline">{observacoes}</TableBody>
         </TableContainer>
       </Grid>
     </Container>
