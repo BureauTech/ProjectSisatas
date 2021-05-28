@@ -197,23 +197,22 @@ public class EscritorExcel {
 		styleObservacao.setFont(font);
 		observacao.setCellStyle(styleObservacao);
 
-		Cell conteudoPauta = sheet.getRow(++rownum).getCell(1);
+		Cell conteudoObservacao = sheet.getRow(++rownum).getCell(1);
 		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
-		conteudoPauta.setCellValue(ata.getAtaPauta());
-		//conteudoPauta.setCellValue(ata.getAtaObservacao());
-		conteudoPauta.getRow().setHeight((short) (200 * sheet.getDefaultRowHeightInPoints()));
+		conteudoObservacao.setCellValue(ata.getAtaObservacao());
+		conteudoObservacao.getRow().setHeight((short) (200 * sheet.getDefaultRowHeightInPoints()));
 
-		XSSFCellStyle styleConteudoPauta = workbook.createCellStyle();
-		styleConteudoPauta.setBorderLeft(BorderStyle.THIN);
-		styleConteudoPauta.setBorderTop(BorderStyle.THIN);
-		styleConteudoPauta.setBorderBottom(BorderStyle.THIN);
-		styleConteudoPauta.setBorderRight(BorderStyle.THIN);
-		styleConteudoPauta.setVerticalAlignment(VerticalAlignment.TOP);
-		styleConteudoPauta.setWrapText(true);
-		conteudoPauta.setCellStyle(styleConteudoPauta);
+		XSSFCellStyle styleConteudoObs = workbook.createCellStyle();
+		styleConteudoObs.setBorderLeft(BorderStyle.THIN);
+		styleConteudoObs.setBorderTop(BorderStyle.THIN);
+		styleConteudoObs.setBorderBottom(BorderStyle.THIN);
+		styleConteudoObs.setBorderRight(BorderStyle.THIN);
+		styleConteudoObs.setVerticalAlignment(VerticalAlignment.TOP);
+		styleConteudoObs.setWrapText(true);
+		conteudoObservacao.setCellStyle(styleConteudoObs);
 
 		for(int col = 1; col < 6; col++)
-			conteudoPauta.getRow().getCell(col).setCellStyle(styleConteudoPauta);
+			conteudoObservacao.getRow().getCell(col).setCellStyle(styleConteudoObs);
 
 	}
 
