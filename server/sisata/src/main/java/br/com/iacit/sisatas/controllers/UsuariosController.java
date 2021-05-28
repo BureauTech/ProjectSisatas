@@ -325,14 +325,20 @@ public class UsuariosController {
 
 	@ResponseBody
 	@RequestMapping(value = "/pegarUsuario/{usu_id}", method = RequestMethod.GET)
-	public UsuariosModel pegarUsuario(@PathVariable long usu_id) {
-		UsuariosModel usuarioSelecionado = null;
+	public MessageReturn<?> pegarUsuario(@PathVariable long usu_id) {
+		MessageReturn<UsuariosModel> result = new MessageReturn<UsuariosModel>();
+
+		result.setOperacao("pegarUsuario");
+		
 		try {
-			usuarioSelecionado = up.findByusuId(usu_id);
+			up.delete(up.findByusuId(usu_id));
+			result.setMensagem("Exclusão realizada com sucesso.");
+			result.setErro(false);
 		} catch (Exception e) {
-			e.printStackTrace();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
 		}
-		return usuarioSelecionado;
+		return result;
 	}
 
 	/**
@@ -351,14 +357,19 @@ public class UsuariosController {
 
 	@ResponseBody
 	@RequestMapping(value = "/excluirUsuarios/{usu_id}", method = RequestMethod.DELETE)
-	public String excluirUsuarios(@PathVariable long usu_id) {
-		String result = null;
+	public MessageReturn<?> excluirUsuarios(@PathVariable long usu_id) {
+		MessageReturn<String> result = new MessageReturn<String>();
+
+		result.setOperacao("excluirUsuarios");
+		
 		try {
 			UsuariosModel usuarioSelecionado = up.findByusuId(usu_id);
 			up.delete(usuarioSelecionado);
-			result = "Exclusão realizada com sucesso.";
+			result.setMensagem("Exclusão realizada com sucesso.");
+			result.setErro(false);
 		} catch (Exception e) {
-			result = e.getMessage();
+			result.setMensagem(e.getMessage());
+			result.setErro(true);
 		}
 		return result;
 	}
