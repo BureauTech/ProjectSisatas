@@ -3,7 +3,6 @@ import {Link, useHistory, useLocation} from "react-router-dom";
 
 import AtaHeader from "../../../components/Ata/ViewAta/AtaHeader";
 import ProjectParticipants from "../../../components/Ata/ViewAta/ProjectParticipants";
-import Pauta from "../../../components/Ata/ViewAta/Pauta";
 import Topics from "../../../components/Ata/ViewAta/Topics";
 import {useEffect, useState} from "react";
 import "../CreateAta/Style.css";
@@ -11,6 +10,7 @@ import ataServices from "../../../services/ata";
 import {useInfoAta} from "../../../context/InfoAta";
 import Loading from "../../Loading/Loading";
 import revisaoServices from "../../../services/revisao";
+import TextareaView from "../../../components/Ata/ViewAta/TextareaView";
 
 const ViewAta = ({ ajustarLayout }) => {
   const theme = useTheme();
@@ -119,7 +119,11 @@ const ViewAta = ({ ajustarLayout }) => {
           </Grid>
           <Grid container style={{ marginBottom: 10 }}>
             <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Pauta</Typography>
-            <Pauta infoPauta={infoAta.pauta} />
+            <TextareaView infoValue={infoAta.pauta} />
+          </Grid>
+          <Grid container style={{ marginBottom: 10 }}>
+            <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Observações</Typography>
+            <TextareaView infoValue='' />
           </Grid>
           <Grid container style={{ marginBottom: 10 }}>
             <Topics isOpen={isOpen} handleClick={handleClick} infoTopics={infoAta.assuntos} />
