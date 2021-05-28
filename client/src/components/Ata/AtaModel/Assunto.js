@@ -74,7 +74,7 @@ const Assunto = (props) => {
                       border: "1px solid black",
                     }}
                   >
-                    {index}.
+                    {index + 1}.
                   </TableCell>
                   <TableCell
                     style={{

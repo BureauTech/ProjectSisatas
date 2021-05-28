@@ -66,7 +66,7 @@ const CreateAta = (props) => {
       ...header,
       ataProjeto: tema,
       participaAtas: participantesIds,
-      ataObs: observacao,
+      ataObservacao: observacao,
       ataPauta: infoPauta,
       assuntos: ass,
     };

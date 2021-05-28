@@ -10,8 +10,7 @@ import {
 
 const Observacoes = (props) => {
   const { observacoes } = props.dados;
-  const observs = [];
-  observacoes.forEach((obs, index) => observs.push(`${index + 1} - ${obs}`));
+  console.log(props, observacoes)
   return (
     <Container style={{ marginTop: 20, border: "1px solid black", padding: 0 }}>
       <Grid container justify="flex-start" style={{ padding: 5 }}>
@@ -20,13 +19,7 @@ const Observacoes = (props) => {
         </Typography>
         <TableContainer>
           <TableBody>
-            {observs.map((obs) => (
-              <TableRow>
-                <TableCell style={{ padding: 0, borderBottom: "none" }}>
-                  {obs}
-                </TableCell>
-              </TableRow>
-            ))}
+            <Typography>{observacoes}</Typography>
           </TableBody>
         </TableContainer>
       </Grid>
