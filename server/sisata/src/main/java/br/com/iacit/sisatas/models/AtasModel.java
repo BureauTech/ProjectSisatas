@@ -64,6 +64,8 @@ public class AtasModel implements Serializable{
 	private String ataProjeto;
 	@Column(nullable = false, columnDefinition="TEXT")
 	private String ataPauta;
+	@Column(columnDefinition="TEXT")
+	private String ataObservacao;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fk_UsuId"))
