@@ -3,9 +3,9 @@ import { useState } from "react";
 import { styles } from "../../../assets/styles/Styles";
 import "./Components.css";
 
-const Pauta = (props) => {
-  const { classes, setInfoPauta } = props;
-  const [pauta, setPauta] = useState("");
+const Textarea = (props) => {
+  const { classes, setInfo, idText, required } = props;
+  const [value, setValue] = useState("");
 
   return (
     <Container>
@@ -15,11 +15,11 @@ const Pauta = (props) => {
             <TextareaAutosize
               rowsMin={4}
               rowsMax={4}
-              id="pauta"
-              value={pauta}
+              id={idText}
+              value={value}
               onChange={(e) => {
-                setPauta(e.target.value);
-                setInfoPauta(e.target.value);
+                setValue(e.target.value);
+                setInfo(e.target.value);
               }}
               style={{
                 width: "100%",
@@ -27,7 +27,7 @@ const Pauta = (props) => {
                 borderBottomLeftRadius: "20px",
                 borderTopLeftRadius: "20px",
               }}
-              required
+              required={required}
             />
           </Grid>
         </Grid>
@@ -36,4 +36,4 @@ const Pauta = (props) => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Pauta);
+export default withStyles(styles, { withTheme: true })(Textarea);

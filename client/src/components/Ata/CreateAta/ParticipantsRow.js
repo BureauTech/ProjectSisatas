@@ -21,7 +21,7 @@ const ParticipantsRow = (props) => {
         {/* INPUT - PARTICIPANTE */}
         <Grid item xs={12} sm={5} md={3} className="inputsGrid">
           <FormLabel htmlFor="participante" className={classes.normalText}>
-            Participante
+            Participante*
           </FormLabel>
           <Grid item md={11}>
             <Autocomplete
@@ -46,21 +46,21 @@ const ParticipantsRow = (props) => {
         </Grid>
         {/* INPUT - AREA */}
         <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-          <FormLabel className={classes.normalText}>Área</FormLabel>
+          <FormLabel className={classes.normalText}>Área*</FormLabel>
           <Grid item md={11}>
             <Input className={classes.textField} id="usuAreaEmpresa" value={atual.usuAreaEmpresa} disableUnderline />
           </Grid>
         </Grid>
         {/* INPUT - TELEFONE */}
         <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-          <FormLabel className={classes.normalText}>Telefone</FormLabel>
+          <FormLabel className={classes.normalText}>Telefone*</FormLabel>
           <Grid item md={11}>
             <Input className={classes.textField} id="usuTelefone" value={atual.usuTelefone} disableUnderline />
           </Grid>
         </Grid>
         {/* INPUT - EMAIL */}
         <Grid item xs={12} sm={5} md={3} className="inputsGrid">
-          <FormLabel className={classes.normalText}>E-mail</FormLabel>
+          <FormLabel className={classes.normalText}>E-mail*</FormLabel>
           <Grid item md={11}>
             <Input className={classes.textField} id="usuEmail" value={atual.usuEmail} disableUnderline />
           </Grid>
