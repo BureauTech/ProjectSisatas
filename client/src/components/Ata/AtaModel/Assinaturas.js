@@ -12,14 +12,14 @@ const Assinaturas = (props) => {
               <Typography>Representante: {participante.usuAreaEmpresa}</Typography>
             </Grid>
             <Grid container justify="flex-start" style={{ paddingTop: 20 }}>
-              {participante.usuAssinatura && (
+              {false && (
                 <img
                   src={"data:image/png;base64," + participante.usuAssinatura}
                   alt="Assinatura"
                   style={{ maxHeight: "1.5cm" }}
                 />
               )}
-              {!participante.usuAssinatura && <div className="space black"></div>}
+              {true && <div className="space black"></div>}
             </Grid>
             <Grid container justify="flex-start" style={{ marginBottom: 30 }}>
               <Typography>
