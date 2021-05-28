@@ -91,7 +91,7 @@ const MenuDrawer = (props) => {
           <Link
             to={{
               pathname: "/perfil",
-              state: { id: 1 },
+              state: {id: usuario.usuId},
             }}
             className={classes.link}
             onClick={(e) => handleIconSelected(4)}
