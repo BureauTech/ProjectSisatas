@@ -10,7 +10,6 @@ import {
 
 const Observacoes = (props) => {
   const { observacoes } = props.dados;
-  console.log(props, observacoes)
   return (
     <Container style={{ marginTop: 20, border: "1px solid black", padding: 0 }}>
       <Grid container justify="flex-start" style={{ padding: 5 }}>
@@ -18,8 +17,8 @@ const Observacoes = (props) => {
           <strong>Observações:</strong>
         </Typography>
         <TableContainer>
-          <TableBody>
-            <Typography>{observacoes}</Typography>
+          <TableBody className='breakline'>
+            {observacoes}
           </TableBody>
         </TableContainer>
       </Grid>

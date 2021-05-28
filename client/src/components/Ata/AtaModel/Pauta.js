@@ -1,6 +1,7 @@
 import {
   Container,
   Grid,
+  Table,
   TableBody,
   TableCell,
   TableContainer,
@@ -17,11 +18,14 @@ const Pauta = (props) => {
         </Typography>
       </Grid>
       <Grid style={{ border: "1px solid black", borderTop: "none" }}>
+          <Table>
         <TableContainer>
+
           <TableBody>
-            <TableCell style={{ padding: "5px 20px" }}>{pauta}</TableCell>
+            <TableCell className='breakline' style={{ padding: "5px 20px" }}>{pauta}</TableCell>
           </TableBody>
         </TableContainer>
+          </Table>
       </Grid>
     </Container>
   );
