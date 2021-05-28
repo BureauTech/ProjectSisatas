@@ -7,9 +7,11 @@ import Loading from "../Loading/Loading";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
 import { BrokenImage } from "@material-ui/icons";
+import {useAutenticacao} from "../../context/Autenticacao";
 
 const UserProfile = (props) => {
   const { classes } = props;
+  const usuario_logado = useAutenticacao().usuario;
   const [usuario, setUsuario] = useState({
     usuNome: "",
     usuId: "",
@@ -39,12 +41,7 @@ const UserProfile = (props) => {
 
   useEffect(() => {
     // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
-    let idBuscar = "";
-    try {
-      idBuscar = location.state.id;
-    } catch (error) {
-      idBuscar = props.id;
-    }
+    let idBuscar = location.state.id !== usuario_logado.usuId ? location.state.id : usuario_logado.usuId;
 
     userServices
       .pegarUsuario(idBuscar)
@@ -283,7 +280,7 @@ const UserProfile = (props) => {
                       padding: "10px 50px",
                       margin: "10px 0px",
                     }}
-                    disabled={String(usuario.usuId).length ? false : true}
+                    disabled={!String(usuario.usuId).length}
                   >
                     Editar
                   </Button>
