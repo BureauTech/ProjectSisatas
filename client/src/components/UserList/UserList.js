@@ -135,11 +135,19 @@ export default function UserList() {
     userServices
       .deletarUsuario(id)
       .then((res) => {
-        setMsgSucesso("Usuário deletado com sucesso!");
-        setMsgErro(false);
-        const newRows = rows.filter((user) => user.usuId !== id);
-        setRows(newRows);
-        setOpenSnack(true);
+        if (res.data.erro) {
+          setMsgSucesso(false);
+          if (res.data.mensagem.includes("constraint"))
+            setMsgErro("Ocorreu um erro ao deletar o usuário. Motivo: Usuário participante de um documento");
+          setOpenSnack(true);
+        }
+        else {
+          setMsgSucesso("Usuário deletado com sucesso!");
+          setMsgErro(false);
+          const newRows = rows.filter((user) => user.usuId !== id);
+          setRows(newRows);
+          setOpenSnack(true);
+        }
       })
       .catch((err) => {
         console.log(err.message);
