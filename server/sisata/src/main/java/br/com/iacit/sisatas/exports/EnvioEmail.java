@@ -1,11 +1,13 @@
 package br.com.iacit.sisatas.exports;
 
 import org.apache.commons.mail.EmailAttachment;
+import org.apache.commons.mail.EmailException;
 //import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 //import org.apache.commons.mail.MultiPartEmail;
 //import org.apache.commons.mail.SimpleEmail;
 
+import java.net.MalformedURLException;
 import java.net.URL; 
 
 import br.com.iacit.sisatas.models.ConexaoEmail;
@@ -62,7 +64,7 @@ public class EnvioEmail {
 //		 }
 //	}
 	
-	public static void TestHtml (ConexaoEmail cone) {
+	public static void TestHtml (ConexaoEmail cone) throws MalformedURLException {
 		try {
 			EmailAttachment attachment = new EmailAttachment();
 			// Cria o e-mail
@@ -116,8 +118,176 @@ public class EnvioEmail {
 
 			// envia o e-mail
 			email.send();
-		} catch (Exception e) {
+		} catch (EmailException e) {
+			System.out.println(e.getMessage());
+		}
+	}	
+	
+	
+	
+	public static void NovaRevisao (ConexaoEmail cone) {
+		try {
+			// Cria o e-mail
+			HtmlEmail email = new HtmlEmail();
+		  	email.setDebug(true);
+		    email.setHostName("smtp.gmail.com");  //host do servidor email
+		    email.setSmtpPort(587);
+		    email.setSSL(true);//
+		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
+		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setSubject("Nova Revisao"); //assunto
+		    
+			// configura a mensagem para o formato HTML
+		    email.setHtmlMsg("<html></html>");
+
+			// configure uma mensagem alternativa caso o servidor não suporte HTML
+			email.setTextMsg("Seu servidor de e-mail não suporta mensagem HTML");
+
+			// envia o e-mail
+			email.send();
+		} catch (EmailException e) {
+			System.out.println(e.getMessage());
+		}
+	}	
+	
+	
+	public static void NovoAssunto (ConexaoEmail cone) {
+		try {
+			// Cria o e-mail
+			HtmlEmail email = new HtmlEmail();
+		  	email.setDebug(true);
+		    email.setHostName("smtp.gmail.com");  //host do servidor email
+		    email.setSmtpPort(587);
+		    email.setSSL(true);//
+		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
+		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setSubject("Nova Revisao"); //assunto
+		    
+			// configura a mensagem para o formato HTML
+		    email.setHtmlMsg("<html></html>");
+
+			// configure uma mensagem alternativa caso o servidor não suporte HTML
+			email.setTextMsg("Seu servidor de e-mail não suporta mensagem HTML");
+
+			// envia o e-mail
+			email.send();
+		} catch (EmailException e) {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
+	public static void NovoComentario (ConexaoEmail cone) {
+		try {
+			// Cria o e-mail
+			HtmlEmail email = new HtmlEmail();
+		  	email.setDebug(true);
+		    email.setHostName("smtp.gmail.com");  //host do servidor email
+		    email.setSmtpPort(587);
+		    email.setSSL(true);//
+		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
+		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setSubject("Nova Revisao"); //assunto
+		    
+			// configura a mensagem para o formato HTML
+		    email.setHtmlMsg("<html></html>");
+
+			// configure uma mensagem alternativa caso o servidor não suporte HTML
+			email.setTextMsg("Seu servidor de e-mail não suporta mensagem HTML");
+
+			// envia o e-mail
+			email.send();
+		} catch (EmailException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	public static void ParticipanteAta (ConexaoEmail cone) {
+		try {
+			// Cria o e-mail
+			HtmlEmail email = new HtmlEmail();
+		  	email.setDebug(true);
+		    email.setHostName("smtp.gmail.com");  //host do servidor email
+		    email.setSmtpPort(587);
+		    email.setSSL(true);//
+		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
+		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setSubject("Nova Revisao"); //assunto
+		    
+			// configura a mensagem para o formato HTML
+		    email.setHtmlMsg("<html></html>");
+
+			// configure uma mensagem alternativa caso o servidor não suporte HTML
+			email.setTextMsg("Seu servidor de e-mail não suporta mensagem HTML");
+
+			// envia o e-mail
+			email.send();
+		} catch (EmailException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	public static void SenhaAlterada (ConexaoEmail cone) {
+		try {
+			// Cria o e-mail
+			HtmlEmail email = new HtmlEmail();
+		  	email.setDebug(true);
+		    email.setHostName("smtp.gmail.com");  //host do servidor email
+		    email.setSmtpPort(587);
+		    email.setSSL(true);//
+		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
+		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setSubject("Nova Revisao"); //assunto
+		    
+			// configura a mensagem para o formato HTML
+		    email.setHtmlMsg("<html></html>");
+
+			// configure uma mensagem alternativa caso o servidor não suporte HTML
+			email.setTextMsg("Seu servidor de e-mail não suporta mensagem HTML");
+
+			// envia o e-mail
+			email.send();
+		} catch (EmailException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	public static void UsuarioCadastrado (ConexaoEmail cone) {
+		try {
+			// Cria o e-mail
+			HtmlEmail email = new HtmlEmail();
+		  	email.setDebug(true);
+		    email.setHostName("smtp.gmail.com");  //host do servidor email
+		    email.setSmtpPort(587);
+		    email.setSSL(true);//
+		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
+		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setSubject("Nova Revisao"); //assunto
+		    
+			// configura a mensagem para o formato HTML
+		    email.setHtmlMsg("<html></html>");
+
+			// configure uma mensagem alternativa caso o servidor não suporte HTML
+			email.setTextMsg("Seu servidor de e-mail não suporta mensagem HTML");
+
+			// envia o e-mail
+			email.send();
+		} catch (EmailException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	
+	
+
 }
