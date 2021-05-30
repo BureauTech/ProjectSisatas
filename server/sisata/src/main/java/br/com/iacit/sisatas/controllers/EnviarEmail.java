@@ -33,7 +33,7 @@ public class EnviarEmail {
 			public void run() {
 				for (int i=0; i<con.size();i++) {
 					try {
-					EnvioEmail.TestHtml(con.get(i));
+					EnvioEmail.NovaAta(con.get(i));
 					}
 					catch (Exception e) {
 						System.out.println(e);
