@@ -18,33 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/envio-email")
+@RequestMapping("/email")
 public class EnviarEmail {
 	
-	@ResponseBody
-	@RequestMapping(value = "/enviar", method = RequestMethod.POST, consumes = "application/json")
-	public String enviarEmail(@RequestBody ConexaoEmail con) {
-		//ConexaoEmail con = new ConexaoEmail();
-		
-		
-		
-		try {
-			EnvioEmail.TestHtml(con);
-		} catch (Exception e) {
-			System.out.println(e);;
-		}
-		return "enviado";
-	}
-	
-	
-	@RequestMapping(value="/teste", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value="/envioAtaEmail", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public String teste(@RequestBody List<ConexaoEmail> con) {
 		
-//		for (int i=0; i<con.size();i++) {
-//			con.get(i);
-//			EnvioEmail.TestHtml(con.get(i));
-//		}
+		//Thread para enviar os emails e nao travar o sistema
 		Runnable t1 = new Runnable() {
 
 			@Override
@@ -56,6 +37,7 @@ public class EnviarEmail {
 			}
 		};
 		new Thread(t1).start();
+		//alteracao futura
 		return "pode ser que tenha ido";
 	}
 }
