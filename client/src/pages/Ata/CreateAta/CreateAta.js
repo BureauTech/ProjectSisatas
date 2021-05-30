@@ -55,7 +55,8 @@ const CreateAta = (props) => {
         emailReceber: infoProject[i].usuEmail,
         nomeReceber: infoProject[i].usuNome,
         ataId: ultimoId,
-        linkDown: `http://localhost:8080/download/ata/excel/${ultimoId}`
+        linkDown: `http://localhost:8080/download/ata/excel/${ultimoId}`,
+        ataProjeto: tema
       }
 
       emails.push(bodyEmail)
