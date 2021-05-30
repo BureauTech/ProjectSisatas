@@ -72,7 +72,8 @@ public class EnvioEmail {
 		  	email.setDebug(true);
 		    email.setHostName("smtp.gmail.com");  //host do servidor email
 		    email.setSmtpPort(587);
-		    email.setSSL(true);//
+		    email.setSSL(true);
+			email.setCharset("utf-8");
 		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
 		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
@@ -91,7 +92,8 @@ public class EnvioEmail {
 		    //String cid = email.embed(url, "Apache logo");
 
 			// configura a mensagem para o formato HTML
-		    email.setHtmlMsg("<html><table cellpadding=\"0\" cellspacing=\"10\" width=\"100%\" style=\" text-align: center; font-family: Cascadia Code Pl; color: #fff; border: none; font-size: 20px;\">\r\n"
+		    email.setHtmlMsg("<html>" +
+					"<table cellpadding=\"0\" cellspacing=\"10\" width=\"100%\" style=\" text-align: center; font-family: Cascadia Code Pl; color: #fff; border: none; font-size: 20px;\">\r\n"
 		    		+ " <tr>\r\n"
 		    		+ "  <td>\r\n"
 		    		+ "    <img src=\"https://avatars.githubusercontent.com/u/70586794?s=200&v=4\" style=\"width: 10%;\"/>\r\n"
