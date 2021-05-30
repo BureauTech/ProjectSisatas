@@ -3,9 +3,10 @@ import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core
 import AtaHeader from "../../../components/Ata/CreateAta/AtaHeader";
 import ProjectParticipants from "../../../components/Ata/CreateAta/ProjectParticipants";
 import Topics from "../../../components/Ata/CreateAta/Topics";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Style.css";
 import ataServices from "../../../services/ata";
+import emailServices from "../../../services/email";
 
 import Alerta from "../../../components/Snackbar/Alerta";
 import Textarea from "../../../components/Ata/CreateAta/Textarea";
@@ -25,6 +26,49 @@ const CreateAta = (props) => {
   const [msgErro, setMsgErro] = useState("");
   const [id, setId] = useState("1");
   const [observacao, setObservacao] = useState("");
+  const [emails, setEmails] =useState([]);
+  const [ultimoId, setUltimoId] = useState("");
+
+  // recebe último ID do banco e soma 1
+  //funcao feita pelo Denis, so foi copiada aqui
+  const somarIdAta = (id) => {
+    let parte1 = id.split("/")[0];
+    const parte2 = id.split("/")[1];
+    parte1 = (Number(parte1) + 1).toString();
+    if (parte1.length === 1) parte1 = "0" + parte1;
+    return parte1 + "/" + parte2;
+  };
+  //busca a ultima ata criada
+  useEffect(() => {
+    ataServices.ultimoId().then(res => setUltimoId(somarIdAta(res.data.ataId)))
+  })
+
+  //funcao para fazer o envio do email, ela é chamada depois que a ata é criada com sucesso
+  const enviarPorEmail = () => {
+
+    for (var i = 0; i < infoProject.length; i++) {
+      var bodyEmail = {
+        userEnviar: "Umtttteste",
+        senhaEnviar: "SemSenha",
+        emailEnviar: "umtttteste@gmail.com",
+        nomeEnviar: "Sisatas",
+        emailReceber: infoProject[i].usuEmail,
+        nomeReceber: infoProject[i].usuNome,
+        ataId: ultimoId,
+        linkDown: `http://localhost:8080/download/ata/excel/${ultimoId}`
+      }
+
+      emails.push(bodyEmail)
+    }
+    console.log(emails)
+    emailServices.enviaAtaEmail(emails)
+      .then(res => console.log("email: " + res))
+      .catch(err => console.log("email: " + err))
+    console.log(emails)
+    setEmails([])
+    console.log("id: " + ultimoId)
+
+  }
 
   const clear = () => {
     setId(Math.random().toString());
@@ -78,6 +122,9 @@ const CreateAta = (props) => {
         setMsgErro(false);
         setOpenSnack(true);
         clear();
+        if (res.data.erro == false){//se a ata for criada com sucesso, chama a funcao /enviar email
+          enviarPorEmail();
+        }
       })
       .catch((error) => {
         console.log(error.message);
