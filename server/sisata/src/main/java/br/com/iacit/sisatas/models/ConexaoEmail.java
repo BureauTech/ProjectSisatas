@@ -17,6 +17,7 @@ public class ConexaoEmail {
 	public String nomeReceber = ""; //nome de quem vai receber a mensagem
 	public String ataId = "";
 	public String linkDown = "";
+	public String ataProjeto = "";
 	
 	//public Map<String, Object> props;
 	

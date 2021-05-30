@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/email")
 public class EnviarEmail {
 	
+	//enviar email para os participantes da ata
 	@RequestMapping(value="/envioAtaEmail", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public String teste(@RequestBody List<ConexaoEmail> con) {
@@ -31,7 +32,12 @@ public class EnviarEmail {
 			@Override
 			public void run() {
 				for (int i=0; i<con.size();i++) {
-					EnvioEmail.TestHtml(con.get(i));
+					try {
+					EnvioEmail.NovaAta(con.get(i));
+					}
+					catch (Exception e) {
+						System.out.println(e);
+					}
 				}
 
 			}
@@ -40,4 +46,6 @@ public class EnviarEmail {
 		//alteracao futura
 		return "pode ser que tenha ido";
 	}
+	
+	
 }
