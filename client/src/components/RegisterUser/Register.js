@@ -20,6 +20,7 @@ import clsx from "clsx";
 import "./Register.css";
 import userServices from "../../services/user";
 import Alerta from "../Snackbar/Alerta";
+import { Delete } from "@material-ui/icons";
 
 const Register = (props) => {
   const { classes } = props;
@@ -54,10 +55,16 @@ const Register = (props) => {
     setPreview("");
   };
 
+  const deletePreview = () => {
+    setPreview(null);
+  };
+
   const changePreview = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => setPreview(reader.result);
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => setPreview(reader.result);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -82,12 +89,11 @@ const Register = (props) => {
       .cadastrarUsuario(formData)
       /* / Alterações Daniel */
       .then((res) => {
-        if (res.data.erro == true){
+        if (res.data.erro === true) {
           setMsgSucesso(false);
           setMsgErro(res.data.mensagem);
           setOpenSnack(true);
-        }
-        else{
+        } else {
           clear();
           setMsgSucesso("Usuário cadastrado com sucesso!");
           setMsgErro(false);
@@ -358,8 +364,19 @@ const Register = (props) => {
                 </Grid>
                 {preview && (
                   <Grid item xs={11} sm={10} style={{ marginTop: 10 }}>
-                    <Typography style={{ color: "white" }}>Prévia: </Typography>
-                    <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
+                    <Grid container>
+                      <Typography style={{ color: "white" }}>Prévia: </Typography>
+                      <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
+                    </Grid>
+                    <Grid container>
+                      <IconButton
+                        onClick={deletePreview}
+                        style={{ borderRadius: 20, color: "white", fontSize: "1.2rem", padding: "10px 0px" }}
+                      >
+                        Remover
+                        <Delete color="secondary" />
+                      </IconButton>
+                    </Grid>
                   </Grid>
                 )}
               </Grid>
