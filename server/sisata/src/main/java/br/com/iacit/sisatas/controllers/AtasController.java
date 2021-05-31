@@ -10,19 +10,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.iacit.sisatas.conversor.Conversor;
 import br.com.iacit.sisatas.models.AtasModel;
 import br.com.iacit.sisatas.projections.AtasProjectionDataGrid;
 import br.com.iacit.sisatas.projections.AtasProjectionExibir;
-import br.com.iacit.sisatas.projections.AtasProjectionId;
+import br.com.iacit.sisatas.projections.AtasProjectionRevisao;
 import br.com.iacit.sisatas.repository.AtasRepository;
 import br.com.iacit.sisatas.returns.MessageReturn;
 
 @Controller
 @RequestMapping("/atas")
 public class AtasController {
+	
+	private String msgSucesso = "Sucesso ao realizar a operação.";
+	private String msgFalha = "Falha ao realizar a operação.";
 	
 	/**
 	 * @Author Daniel Oliveira
@@ -45,14 +49,15 @@ public class AtasController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/ultimoRegistro", method = RequestMethod.GET)
-	public AtasProjectionId ultimoRegistro() {
+	public AtasProjectionRevisao ultimoRegistro() {
 		return ap.findTopByOrderByAtaIdDesc();
 	}
 	
 	/**
 	 * @Author Caique
+	 * @Updade Denis Lima
 	 * 
-	 * METHOD: PUT; Para cadastrar Atas.
+	 * METHOD: POST; Para cadastrar Atas.
 	 * URL: http://localhost:8080/atas/cadastrarAta
 	 * BODY: 
 	 * {
@@ -89,10 +94,11 @@ public class AtasController {
 
 	 * 
 	 * RETURN: Retorna um objeto <result> MessageReturn(
-	 * 														String operacao;
-	 *  													Boolean erro;
-	 *  													String mensagem;
-	 * 													)
+		 														String operacao;
+															    Boolean erro;
+															    String mensagem;
+															    T data;
+		 												)
 	 * operacao: "cadastrarAta";
 	 * erro: true, erro ao realizar a persistência; false: Ata atualizada com sucesso.
 	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
@@ -118,12 +124,13 @@ public class AtasController {
 		ata.setAtaId(novoId);
 
 		try {
+			ata.setAtaEstado("Nova");
 			ap.save(ata);
-			result.setMensagem("Ata cadastrada com sucesso.");
+			result.setMensagem(msgSucesso);
 			result.setErro(false);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			result.setMensagem(e.getMessage());
+			result.setMensagem(msgFalha + " Causa: " + e.getMessage());
 			result.setErro(true);
 		}
 		return result;
@@ -171,10 +178,11 @@ public class AtasController {
 		<ataId> deverá ser informado, pois será utilizado como referência para realizar a atualização;
 	 * 
 	 * RETURN: Retorna um objeto <result> MessageReturn(
-	 * 		String operacao;
-	 *  	Boolean erro;
-	 *  	String mensagem;
-	 * )
+		 														String operacao;
+															    Boolean erro;
+															    String mensagem;
+															    T data;
+		 												)
 	 * operacao: "atualizarAtas";
 	 * erro: true, erro ao realizar a persistência; false: Ata atualizada com sucesso.
 	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
@@ -184,17 +192,17 @@ public class AtasController {
 	@ResponseBody
 	@RequestMapping(value = "/atualizarAtas", method = RequestMethod.PUT)
 	public MessageReturn<?> atualizarAtas(@RequestBody AtasModel ata) {
-		MessageReturn<?> result = new MessageReturn<String>();
 
+		MessageReturn<String> result = new MessageReturn<>();
 		result.setOperacao("atualizarAtas");
 
 		try {
 			ap.save(ata);
-			result.setMensagem("Ata atualizada com sucesso.");
+			result.setMensagem(msgSucesso);
 			result.setErro(false);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			result.setMensagem(e.getMessage());
+			result.setMensagem(msgFalha + " Causa: " + e.getMessage());
 			result.setErro(true);
 		}
 		return result;
@@ -206,51 +214,86 @@ public class AtasController {
 	 * METHOD: GET; Para listar atas.
 	 * URL: http://localhost:8080/atas/listarAtas
 	 * 
-	 * RETURN: Retorna uma Projeção <AtasProjectionDataGrid>;
-	 *
-	 */
-
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+		 														String operacao;
+															    Boolean erro;
+															    String mensagem;
+															    T data;
+		 												)
+	 * operacao: "listarAtas";
+	 * erro: true, erro ao realizar a busca; false: busca realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 * data: Retorna List<AtasProjectionDataGrid> do(s) objetos correspondentes encontrados.
+	 */ 
+	
 	@ResponseBody
 	@RequestMapping(value = "/listarAtas", method = RequestMethod.GET)
-	public List<?> listarAtas() {
-		List<?> atas = null;
+	public MessageReturn<?> listarAtas() {
+		MessageReturn<List<AtasProjectionDataGrid>> result = new MessageReturn<>();
+		result.setOperacao("listarAtas");
+
 		try {
-			atas = ap.findBy(AtasProjectionDataGrid.class);
+			List<AtasProjectionDataGrid> atas = ap.findBy(AtasProjectionDataGrid.class);
+			result.setMensagem(msgSucesso);
+			result.setErro(false);
+			result.setData(atas);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			result.setMensagem(msgFalha + " Causa: " + e.getMessage());
+			result.setErro(true);
 		}
-		return atas;
+		return result;
 	}
 	
 	/**
-	 * @Author
+	 * @Author Denis Lima
+	 * @Update Daniel Oliveira
 	 * 
 	 * METHOD: GET; Para pegar apenas 1 Ata.
 	 * URL: http://localhost:8080/atas/pegarAta/{numeroId}
-	 * 
 	 * PathVariable: {numeroId}
 	 * 
-	 * RETURN: Retorna uma Projeção <AtasProjectionExibir>;
-	 *
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+		 														String operacao;
+															    Boolean erro;
+															    String mensagem;
+															    T data;
+		 												)
+	 * operacao: "pegarAta";
+	 * erro: true, erro ao realizar a busca; false: busca realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 * data: Retorna <AtasProjectionExibir> do objeto correspondente encontrado.
 	 */
 		
 	@ResponseBody
 	@RequestMapping(value = "/pegarAta/{numeroId}", method = RequestMethod.GET)
-	public AtasProjectionExibir pegarAta(@PathVariable String numeroId) {
+	public MessageReturn<?> pegarAta(@PathVariable String numeroId) {
 
+		MessageReturn<AtasProjectionExibir> result = new MessageReturn<>();
+		result.setOperacao("pegarAta");
 		String ata_id = numeroId.substring(0, numeroId.length() - 2) + "/" + numeroId.substring(numeroId.length() - 2);
-		AtasProjectionExibir ataSelecionada = null;
+
 		try {
 			if (ap.existsByataId(ata_id)) {
-				ataSelecionada = ap.findByataId(ata_id);
+				AtasProjectionExibir ataSelecionada = ap.findByataId(ata_id);
+				result.setMensagem(msgSucesso);
+				result.setErro(false);
+				result.setData(ataSelecionada);
+			} else {
+				result.setMensagem(msgFalha + " Causa: Não há Ata para o ID informado.");
+				result.setErro(true);
 			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			result.setMensagem(msgFalha + " Causa: " + e.getMessage());
+			result.setErro(true);
 		}
-		return ataSelecionada;
+		return result;
 	}
 
 	/**
+	 * @Author Denis Lima
+	 * @Update Daniel Oliveira
 	 * 
 	 * METHOD: DELETE; Para excluir Atas.
 	 * URL: http://localhost:8080/atas/excluirAtas/{ata_id}
@@ -258,38 +301,91 @@ public class AtasController {
 	 * PathVariable: {usu_id}
 	 * 
 	 * RETURN: Retorna um objeto <result> MessageReturn(
-	 * 	String operacao;
-	 *  Boolean erro;
-	 *  String mensagem;
-	 * )
+		 														String operacao;
+															    Boolean erro;
+															    String mensagem;
+		 												)
 	 * operacao: "excluirAtas";
-	 * erro: true, ata não encontrada; false: deleção realizada com sucesso.
+	 * erro: true, erro ao realizar a busca; false: busca realizada com sucesso.
 	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
-	 *
 	 */
+	
 	@ResponseBody
 	@RequestMapping(value = "/excluirAtas/{ata_id}", method = RequestMethod.DELETE)
 	public MessageReturn<?> excluirAtas(@PathVariable String ata_id) {
+		
 		MessageReturn<?> result = new MessageReturn<String>();
-
-		//	/{cod}/{ano}
-		//	AtasModel ata = ap.getOne(cod + "/" + ano);
 		result.setOperacao("excluirAtas");
+
+		// /{cod}/{ano}
+		// AtasModel ata = ap.getOne(cod + "/" + ano);
 
 		try {
 			if (ap.existsByataId(ata_id)) {
 				AtasModel ataSelecionada = (AtasModel) ap.findByataId(ata_id);
 				ap.delete(ataSelecionada);
-				result.setMensagem("Ata excluída com sucesso.");
+				result.setMensagem(msgSucesso);
 				result.setErro(false);
+			} else {
+				result.setMensagem(msgFalha + " Causa: Não há Ata para o ID informado.");
+				result.setErro(true);
 			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			result.setMensagem(e.getMessage());
+			result.setMensagem(msgFalha + " Causa: " + e.getMessage());
 			result.setErro(true);
 		}
-
 		return result;
 	}
+	
+	
+	/**
+	 * @Author Daniel Oliveira
+	 * 
+	 * METHOD: DELETE; Para aprovar Atas.
+	 * URL: http://localhost:8080/atas/aprovarAta
+	 * 
+	 * PARAM: usu_email e ata_id
+	 * 
+	 * RETURN: Retorna um objeto <result> MessageReturn(
+		 														String operacao;
+															    Boolean erro;
+															    String mensagem;
+		 												)
+	 * operacao: "aprovarAta";
+	 * erro: true, erro ao aprovar a ata; false: aprovação realizada com sucesso.
+	 * mensagem: mensagem definida manualmente ou caso haja exceção <e.getMessage()>
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "/aprovarAta", method = RequestMethod.POST)
+	public MessageReturn<?> aprovarAta(@RequestParam String usu_email, @RequestParam String ata_id) {
 
+		MessageReturn<?> result = new MessageReturn<String>();
+		result.setOperacao("aprovarAta");
+
+		try {
+			AtasModel ataBD = (AtasModel) ap.findByataId(ata_id);
+			if (ataBD != null) {
+				ataBD.setAtaQuemAprovou(usu_email + ";");
+				ataBD.setAtaQtdAprovacao(ataBD.getAtaQtdAprovacao() + 1);
+				if (ataBD.getAtaQtdAprovacao() == ataBD.getParticipaAtas().size()) {
+					ataBD.setAtaEstado("Assinada");
+					ap.save(ataBD);
+				} else {
+					ap.save(ataBD);
+					result.setMensagem(msgSucesso);
+					result.setErro(false);
+				}
+			} else {
+				result.setMensagem(msgFalha + " Causa: Não há Ata para o ID informado.");
+				result.setErro(true);
+			}
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			result.setMensagem(msgFalha + " Causa: " + e.getMessage());
+			result.setErro(true);
+		}
+		return result;
+	}
 }

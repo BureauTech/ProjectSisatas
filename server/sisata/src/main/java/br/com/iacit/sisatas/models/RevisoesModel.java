@@ -46,6 +46,12 @@ public class RevisoesModel implements Serializable {
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate revData;
+	@Column
+	private long revQtdAprovacao;
+	@Column
+	private String revQuemAprovou;
+	@Column
+	private String revEstado;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fk_UsuId"))
