@@ -1,5 +1,10 @@
 import { Container, Grid, Typography } from "@material-ui/core";
 
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente para assinaturas no modelo de Ata em PDF
+ */
 const Assinaturas = (props) => {
   const { listaParticipantes } = props.dados;
 

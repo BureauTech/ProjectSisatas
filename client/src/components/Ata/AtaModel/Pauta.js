@@ -1,5 +1,10 @@
 import { Container, Grid, Table, TableBody, TableCell, TableContainer, Typography } from "@material-ui/core";
 
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente com a Pauta da Ata no modelo de Ata em PDF
+ */
 const Pauta = (props) => {
   const { pauta } = props.dados;
   return (

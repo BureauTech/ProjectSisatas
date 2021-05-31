@@ -19,6 +19,12 @@ import "./Menu.css";
 import { useStyles } from "./Menu";
 import { useAutenticacao } from "../../context/Autenticacao";
 
+/**
+ * 
+ * @author Beatriz Coutinho
+ * @param {any} props 
+ * @returns Componente do Menu contendo os ícones para as rotas
+ */
 const MenuDrawer = (props) => {
   const { handleDrawerToggle } = props;
   const theme = useTheme();

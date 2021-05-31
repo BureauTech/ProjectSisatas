@@ -10,6 +10,11 @@ import {
   Typography,
 } from "@material-ui/core";
 
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente para o tema da pauta e a listagem de participantes da Ata no modelo de Ata em PDF
+ */
 const Participantes = (props) => {
   const { tema, listaParticipantes } = props.dados;
   return (

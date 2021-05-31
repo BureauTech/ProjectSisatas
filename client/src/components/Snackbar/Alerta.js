@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 /**
  * Arquivo para o elemento de Alerta  
  * Deve ser passado como props:  
- * sucesso=String (mensagem de sucesso, vazia ou false em caso de erro)  
- * erro=String (mensagem de erro, vazia ou false em caso de sucesso)  
- * isOpen=Boolean  
- * setIsOpen=React set state function
+ * sucesso = String (mensagem de sucesso, vazia ou false em caso de erro)  
+ * erro = String (mensagem de erro, vazia ou false em caso de sucesso)  
+ * isOpen = Boolean  
+ * setIsOpen = React set state function
  * @author Denis Lima
  * @param {any} props props
  * @returns Retorna o elemento de Alerta (snackbar)
