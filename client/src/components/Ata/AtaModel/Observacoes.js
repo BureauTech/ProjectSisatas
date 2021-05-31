@@ -1,5 +1,10 @@
 import { Container, Grid, TableBody, TableContainer, Typography } from "@material-ui/core";
 
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente com as observações no modelo de Ata em PDF
+ */
 const Observacoes = (props) => {
   const { observacoes } = props.dados;
   return (

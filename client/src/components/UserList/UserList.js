@@ -51,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Arquivo para página de lista de usuários
+ * @author Beatriz Coutinho
+ * @returns Componente para listagem de usuários
+ */
 export default function UserList() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
@@ -84,10 +89,15 @@ export default function UserList() {
       });
   }, [setRows]);
 
+  // Fecha o popup de confirmação de exclusão de usuário
   const handleClose = () => {
     setOpen(false);
   };
 
+  /**
+   * Pega o ID do usuário e abre a confirmação de exclusão
+   * @param {Number} id Número do id do usuário
+   */
   const handleAskDelete = (id) => {
     setIdDelete(id);
     setOpen(true);
@@ -131,6 +141,11 @@ export default function UserList() {
     },
   ];
 
+  /**
+   * Realiza a requsição de exclusão de usuário para o servidor, e devolve na tela uma mensagem de sucesso ou erro
+   * @author Denis Lima
+   * @param {Number} id Número do id do usuário para exclusão
+   */
   const handleDelete = (id) => {
     userServices
       .deletarUsuario(id)

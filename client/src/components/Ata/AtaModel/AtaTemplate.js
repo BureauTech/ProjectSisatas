@@ -10,6 +10,12 @@ import Assunto from "./Assunto";
 import Assinaturas from "./Assinaturas";
 import { useInfoAta } from "../../../context/InfoAta";
 
+/**
+ * Arquivo base para o modelo de Ata em PDF
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente de modelo de Ata em PDF
+ */
 const AtaTemplate = (props) => {
   const { infoAta } = useInfoAta();
 

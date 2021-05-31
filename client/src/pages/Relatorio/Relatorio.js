@@ -48,6 +48,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Arquivo para página de relatório do gerente
+ * 
+ * @author Denis Lima
+ * @param {any} props
+ * @returns Componente para Relatório do Gerente
+ */
 const Relatorio = (props) => {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
