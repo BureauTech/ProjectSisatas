@@ -77,8 +77,8 @@ const MenuDrawer = (props) => {
         </Typography>
         {allowed("GER") && (
           <Typography className={classes.font}>
-            <Link to="/reports" className={classes.link} onClick={(e) => handleIconSelected(3)}>
-              <ListItem button key="reports" className={active === 3 ? classes.blueColor : {}}>
+            <Link to="/relatorio" className={classes.link} onClick={(e) => handleIconSelected(3)}>
+              <ListItem button key="relatorio" className={active === 3 ? classes.blueColor : {}}>
                 <ListItemIcon className={active === 3 ? classes.iconselected : classes.iconitem}>
                   <AssessmentOutlinedIcon className={classes.icons} />
                 </ListItemIcon>
