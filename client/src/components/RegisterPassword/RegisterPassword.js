@@ -13,14 +13,13 @@ import Alerta from "../Snackbar/Alerta";
 import "./RegisterPassword.css";
 
 /**
- * @author Denis Lima
- * @param {any} props
- * @returns Componente de cadastro de senha
- *
  * Componente para página de cadastro de senha.
  * Ao entrar, é necessário pegar o token que virá por meio da URL.
  * O token precisa ser validado com o servidor para garantir que o mesmo é válido e único.
- *
+ * 
+ * @author Denis Lima
+ * @param {any} props
+ * @returns Componente de cadastro de senha
  */
 
 const RegisterPassword = (props) => {
