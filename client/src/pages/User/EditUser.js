@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
 import { BrokenImage } from "@material-ui/icons";
-import {useAutenticacao} from "../../context/Autenticacao";
+import { useAutenticacao } from "../../context/Autenticacao";
 
 const EditUser = (props) => {
   const { classes } = props;
@@ -43,8 +43,13 @@ const EditUser = (props) => {
     userServices
       .pegarUsuario(location.state.id)
       .then((user) => {
-        setUsuario(user.data);
-        setIsLoading(false);
+        if (user.data.erro === false) {
+          setUsuario(user.data.data);
+          setIsLoading(false);
+        } else {
+          console.log(user.data.message);
+          setIsLoading(false);
+        }
       })
       .catch((err) => {
         console.log(err.message);
@@ -86,11 +91,18 @@ const EditUser = (props) => {
     userServices
       .atualizarUsuario(formData)
       .then((res) => {
-        setIsLoadingBtn(false);
-        setMsgSucesso("Sucesso ao salvar alterações!");
-        setMsgErro(false);
+        if (res.data.erro === false) {
+          setIsLoadingBtn(false);
+          setMsgSucesso("Sucesso ao salvar alterações!");
+          setMsgErro(false);
+          history.push("perfil", { id: usuario.usuId });
+        } else {
+          console.log(res.data.message);
+          setIsLoadingBtn(false);
+          setMsgSucesso(false);
+          setMsgErro(res.data.message);
+        }
         setOpenSnack(true);
-        history.push("perfil", { id: usuario.usuId });
       })
       .catch((err) => {
         console.log(err.message);
@@ -104,22 +116,32 @@ const EditUser = (props) => {
   const solicitarAlteracaoSenha = (event) => {
     event.preventDefault();
     setIsLoadingBtn(true);
+    // tratar possíveis falhas oriundas do backend
     userServices
-    .solicitarAlteracaoSenha(usuario.usuEmail)
-    .then((res) => {
-      setIsLoadingBtn(false);
-      setMsgSucesso("Sucesso ao salvar alterações!");
-      setMsgErro(false);
-      setOpenSnack(true);
-      history.push(`/cadastrar-senha?token=${res.data.data}`);
-    })
-    .catch((err) => {
-      console.log(err.message);
-      setIsLoadingBtn(false);
-      setOpenSnack(true);
-      setMsgSucesso(false);
-      setMsgErro("Ocorreu um erro ao salvar alterações");
-    });    }
+      .solicitarAlteracaoSenha(usuario.usuEmail)
+      .then((res) => {
+        if (res.data.erro !== false) {
+          setIsLoadingBtn(false);
+          setMsgSucesso("Sucesso ao salvar alterações!");
+          setMsgErro(false);
+          setOpenSnack(true);
+          history.push(`/cadastrar-senha?token=${res.data.data}`);
+        } else {
+          console.log(res.data.message);
+          setIsLoadingBtn(false);
+          setOpenSnack(true);
+          setMsgSucesso(false);
+          setMsgErro(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setIsLoadingBtn(false);
+        setOpenSnack(true);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao salvar alterações");
+      });
+  }
 
   return (
     <Container style={{ marginTop: 30, marginBottom: 20 }}>

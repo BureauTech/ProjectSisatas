@@ -45,7 +45,7 @@ const ViewAta = ({ ajustarLayout }) => {
     revisaoServices
       .listarRevisoes()
       .then((res) => {
-        setInfos(res.data);
+        setInfos(res.data.data);
         //console.log("sbdhb"+res.data)
       })
       .catch((err) => console.log(err));

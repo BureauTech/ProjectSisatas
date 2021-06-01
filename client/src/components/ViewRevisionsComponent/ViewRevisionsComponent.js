@@ -50,12 +50,19 @@ const ViewRevisionsComponent = (props) => {
     revisaoServices
       .excluirRevisao(revisoes.revId)
       .then((res) => {
-        setMsgSucesso(`Revisão ${customId} excluida com sucesso! Você será redirecionado para a ata`);
-        setMsgErro(false);
+        if (res.data.erro === false) {
+          setMsgSucesso(`Revisão ${customId} excluida com sucesso! Você será redirecionado para a ata`);
+          setMsgErro(false);
+          setOpenSnack(true);
+          setTimeout(function () {
+            history.push("ata", { id: revisoes.contemRevisoes.ataId });
+          }, 1250);
+        } else {
+          console.log(res.data.message);
+          setMsgSucesso(false);
+          setMsgErro(res.data.message);
+        }
         setOpenSnack(true);
-        setTimeout(function () {
-          history.push("ata", { id: revisoes.contemRevisoes.ataId });
-        }, 1250);
       })
       .catch((err) => {
         console.log(err.message);
@@ -255,23 +262,23 @@ const ViewRevisionsComponent = (props) => {
               </Grid>
             </Grid> */}
             <Grid container justify="space-around">
-            <Link to="/comentarios" style={{ textDecoration: "none" }}>
-              <Grid item style={{ margin: "15px 0px" }}>
-                <Button
-                  variant="contained"
-                  className="bold"
-                  style={{
-                    backgroundColor: "white",
-                    color: theme.palette.secondary.main,
-                    fontWeight: 700,
-                    fontSize: "1.5rem",
-                    borderRadius: 16,
-                    padding: "0 5px",
-                  }}
-                >
-                  Exibir Comentários
+              <Link to="/comentarios" style={{ textDecoration: "none" }}>
+                <Grid item style={{ margin: "15px 0px" }}>
+                  <Button
+                    variant="contained"
+                    className="bold"
+                    style={{
+                      backgroundColor: "white",
+                      color: theme.palette.secondary.main,
+                      fontWeight: 700,
+                      fontSize: "1.5rem",
+                      borderRadius: 16,
+                      padding: "0 5px",
+                    }}
+                  >
+                    Exibir Comentários
                 </Button>
-              </Grid>
+                </Grid>
               </Link>
               <Grid item style={{ margin: "15px 0px" }}>
                 <Button

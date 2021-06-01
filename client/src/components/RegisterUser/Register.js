@@ -92,13 +92,13 @@ const Register = (props) => {
         if (res.data.erro === true) {
           setMsgSucesso(false);
           setMsgErro(res.data.mensagem);
-          setOpenSnack(true);
+
         } else {
           clear();
           setMsgSucesso("Usuário cadastrado com sucesso!");
           setMsgErro(false);
-          setOpenSnack(true);
         }
+        setOpenSnack(true);
       })
       .catch((err) => {
         console.log(err.message);
