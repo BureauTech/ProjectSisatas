@@ -31,6 +31,7 @@ const CreateAta = (props) => {
 
   // recebe último ID do banco e soma 1
   //funcao feita pelo Denis, so foi copiada aqui
+  //isso aqui sera removido depois
   const somarIdAta = (id) => {
     let parte1 = id.split("/")[0];
     const parte2 = id.split("/")[1];
@@ -42,7 +43,7 @@ const CreateAta = (props) => {
   useEffect(() => {
     ataServices.ultimoId().then(res => {
       if (res.data.ataId == null){
-        setUltimoId("00/00");
+        setUltimoId(somarIdAta("00/21"))
       }
       else {
         setUltimoId(somarIdAta(res.data.ataId))
