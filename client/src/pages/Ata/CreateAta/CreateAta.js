@@ -31,6 +31,7 @@ const CreateAta = (props) => {
 
   // recebe último ID do banco e soma 1
   //funcao feita pelo Denis, so foi copiada aqui
+  //isso aqui sera removido depois
   const somarIdAta = (id) => {
     let parte1 = id.split("/")[0];
     const parte2 = id.split("/")[1];
@@ -40,7 +41,14 @@ const CreateAta = (props) => {
   };
   //busca a ultima ata criada
   useEffect(() => {
-    ataServices.ultimoId().then(res => setUltimoId(somarIdAta(res.data.ataId)))
+    ataServices.ultimoId().then(res => {
+      if (res.data.ataId == null){
+        setUltimoId(somarIdAta("00/21"))
+      }
+      else {
+        setUltimoId(somarIdAta(res.data.ataId))
+      }
+    })
   })
 
   //funcao para fazer o envio do email, ela é chamada depois que a ata é criada com sucesso
@@ -123,6 +131,7 @@ const CreateAta = (props) => {
         setMsgErro(false);
         setOpenSnack(true);
         clear();
+        console.log(JSON.stringify(res.data))
         if (res.data.erro == false){//se a ata for criada com sucesso, chama a funcao /enviar email
           enviarPorEmail();
         }
