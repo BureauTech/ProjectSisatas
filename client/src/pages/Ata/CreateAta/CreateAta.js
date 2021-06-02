@@ -40,7 +40,14 @@ const CreateAta = (props) => {
   };
   //busca a ultima ata criada
   useEffect(() => {
-    ataServices.ultimoId().then(res => setUltimoId(somarIdAta(res.data.ataId)))
+    ataServices.ultimoId().then(res => {
+      if (res.data.ataId == null){
+        setUltimoId("00/00");
+      }
+      else {
+        setUltimoId(somarIdAta(res.data.ataId))
+      }
+    })
   })
 
   //funcao para fazer o envio do email, ela é chamada depois que a ata é criada com sucesso
@@ -123,6 +130,7 @@ const CreateAta = (props) => {
         setMsgErro(false);
         setOpenSnack(true);
         clear();
+        console.log(JSON.stringify(res.data))
         if (res.data.erro == false){//se a ata for criada com sucesso, chama a funcao /enviar email
           enviarPorEmail();
         }
