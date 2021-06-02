@@ -18,6 +18,10 @@ public class ConexaoEmail {
 	public String ataId = "";
 	public String linkDown = "";
 	public String ataProjeto = "";
+	public String revisao = "";
+	public String assunto = "";
+	public String comentario = "";
+	public String linkSenha = "";
 	
 	//public Map<String, Object> props;
 	
