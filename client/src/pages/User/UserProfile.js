@@ -43,9 +43,9 @@ const UserProfile = (props) => {
 
     userServices
       .pegarUsuario(location.state.id)
-      .then((user) => {
-        if (!isEmpty(user.data)) {
-          setUsuario(user.data);
+      .then(({data}) => {
+        if (!isEmpty(data.data)) {
+          setUsuario(data.data);
           setIsLoading(false);
         } else {
           setIsLoading(false);

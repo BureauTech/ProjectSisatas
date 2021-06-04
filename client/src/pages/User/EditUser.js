@@ -18,13 +18,23 @@ import userServices from "../../services/user";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
-import { BrokenImage } from "@material-ui/icons";
-import {useAutenticacao} from "../../context/Autenticacao";
+import { BrokenImage, Label } from "@material-ui/icons";
+import { useAutenticacao } from "../../context/Autenticacao";
+import { getLocalStorage, setLocalStorage } from "../../auth/auth";
 
 const EditUser = (props) => {
   const { classes } = props;
-  const usuario_logado = useAutenticacao();
-  const [usuario, setUsuario] = useState(null);
+  const usuario_logado = useAutenticacao().usuario;
+  const setUsuario_logado = useAutenticacao().setUsuario;
+  const [usuario, setUsuario] = useState({
+    usuNome: "",
+    usuId: "",
+    usuEmail: "",
+    usuCargo: "",
+    usuAreaEmpresa: "",
+    usuTelefone: "",
+    usuPerfil: "",
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [open, setOpen] = useState(false);
@@ -39,11 +49,10 @@ const EditUser = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-
     userServices
       .pegarUsuario(location.state.id)
-      .then((user) => {
-        setUsuario(user.data);
+      .then(({ data }) => {
+        setUsuario(data.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -69,14 +78,28 @@ const EditUser = (props) => {
   };
 
   const changePreview = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => setPreview(reader.result);
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => setPreview(reader.result);
+    }
   };
 
   const atualizarUsuario = (event) => {
     event.preventDefault();
     setIsLoadingBtn(true);
+
+    async function atualizarUsuarioLogado() {
+      const token = getLocalStorage("sisata_token");
+      if (token) {
+        const { data } = await userServices.validarTokenSessao(token);
+        if (!data.erro) {
+          const dados = data.data;
+          setUsuario_logado({ ...dados, estaLogado: true });
+          setLocalStorage("sisata_token", dados.usuSessionToken, 120);
+        }
+      }
+    }
 
     var imagem = document.querySelector("#assinatura").files[0];
     var formData = new FormData();
@@ -90,6 +113,7 @@ const EditUser = (props) => {
         setMsgSucesso("Sucesso ao salvar alterações!");
         setMsgErro(false);
         setOpenSnack(true);
+        atualizarUsuarioLogado()
         history.push("perfil", { id: usuario.usuId });
       })
       .catch((err) => {
@@ -105,21 +129,22 @@ const EditUser = (props) => {
     event.preventDefault();
     setIsLoadingBtn(true);
     userServices
-    .solicitarAlteracaoSenha(usuario.usuEmail)
-    .then((res) => {
-      setIsLoadingBtn(false);
-      setMsgSucesso("Sucesso ao salvar alterações!");
-      setMsgErro(false);
-      setOpenSnack(true);
-      history.push(`/cadastrar-senha?token=${res.data.data}`);
-    })
-    .catch((err) => {
-      console.log(err.message);
-      setIsLoadingBtn(false);
-      setOpenSnack(true);
-      setMsgSucesso(false);
-      setMsgErro("Ocorreu um erro ao salvar alterações");
-    });    }
+      .solicitarAlteracaoSenha(usuario.usuEmail)
+      .then((res) => {
+        setIsLoadingBtn(false);
+        setMsgSucesso("Sucesso ao salvar alterações!");
+        setMsgErro(false);
+        setOpenSnack(true);
+        history.push(`/cadastrar-senha?token=${res.data.data}`);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setIsLoadingBtn(false);
+        setOpenSnack(true);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao salvar alterações");
+      });
+  };
 
   return (
     <Container style={{ marginTop: 30, marginBottom: 20 }}>
@@ -291,21 +316,26 @@ const EditUser = (props) => {
                   </FormLabel>
                 </Grid>
                 <Grid item xs>
-                  <Select
-                    id="profile"
-                    open={open}
-                    onClose={handleClose}
-                    onOpen={handleOpen}
-                    // Ateração Daniel
-                    value={usuario.usuPerfil}
-                    onChange={handleChange}
-                    className={classes.textField}
-                    style={{ width: "7rem" }}
-                  >
-                    <MenuItem value={"ADM"}>ADM</MenuItem>
-                    <MenuItem value={"GER"}>GER</MenuItem>
-                    <MenuItem value={"USU"}>USU</MenuItem>
-                  </Select>
+                  {usuario_logado.usuPerfil === "ADM" && (
+                    <Select
+                      id="profile"
+                      open={open}
+                      onClose={handleClose}
+                      onOpen={handleOpen}
+                      // Ateração Daniel
+                      value={usuario.usuPerfil}
+                      onChange={handleChange}
+                      className={classes.textField}
+                      style={{ width: "7rem" }}
+                    >
+                      <MenuItem value={"ADM"}>ADM</MenuItem>
+                      <MenuItem value={"GER"}>GER</MenuItem>
+                      <MenuItem value={"USU"}>USU</MenuItem>
+                    </Select>
+                  )}
+                  {usuario_logado.usuPerfil !== "ADM" && (
+                    <Typography className={classes.normalText}>{usuario.usuPerfil}</Typography>
+                  )}
                 </Grid>
               </Grid>
               {/* upload assinatura */}
