@@ -2,7 +2,7 @@ package br.com.iacit.sisatas.projections;
 
 public interface UsuariosProjectionParticipante {
 
-	long getUsuId();
+	Long getUsuId();
 
 	String getUsuNome();
 
