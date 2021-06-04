@@ -9,9 +9,14 @@ const enviaRevEmail = (users) => {
     return api.post(`${endpoint}/novaRevisao`, users);
 }
 
+const novoUsuario = (user) => {
+    return api.post(`${endpoint}/usuarioCadastrado`, user);
+}
+
 const emailServices = {
     enviaAtaEmail,
-    enviaRevEmail
+    enviaRevEmail,
+    novoUsuario
 }
 
 export default emailServices;
