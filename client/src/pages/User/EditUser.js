@@ -18,9 +18,10 @@ import userServices from "../../services/user";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
-import { BrokenImage, Label } from "@material-ui/icons";
+import { BrokenImage } from "@material-ui/icons";
 import { useAutenticacao } from "../../context/Autenticacao";
 import { getLocalStorage, setLocalStorage } from "../../auth/auth";
+import { isEmpty } from "./UserProfile";
 
 const EditUser = (props) => {
   const { classes } = props;
@@ -51,18 +52,23 @@ const EditUser = (props) => {
   useEffect(() => {
     userServices
       .pegarUsuario(location.state.id)
-      .then((user) => {
-        if (user.data.erro === false) {
-          setUsuario(user.data.data);
+      .then(({ data }) => {
+        if (!data.erro && !isEmpty(data.data)) {
+          setUsuario(data.data);
           setIsLoading(false);
         } else {
-          console.log(user.data.message);
           setIsLoading(false);
+          setMsgSucesso(false);
+          setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
+          setOpenSnack(true);
         }
       })
       .catch((err) => {
         console.log(err.message);
         setIsLoading(false);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao na requisição ao servidor");
+        setOpenSnack(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
@@ -90,6 +96,11 @@ const EditUser = (props) => {
     }
   };
 
+  // Redireciona o usuário para a página de login
+  const redirectDelay = () => {
+    setTimeout(() => history.push("/perfil", { id: usuario.usuId }), 2000);
+  };
+
   const atualizarUsuario = (event) => {
     event.preventDefault();
     setIsLoadingBtn(true);
@@ -113,28 +124,26 @@ const EditUser = (props) => {
 
     userServices
       .atualizarUsuario(formData)
-      .then((res) => {
-        if (res.data.erro === false) {
+      .then(({ data }) => {
+        if (!data.erro) {
           setIsLoadingBtn(false);
+          atualizarUsuarioLogado();
           setMsgSucesso("Sucesso ao salvar alterações!");
           setMsgErro(false);
-          history.push("perfil", { id: usuario.usuId });
         } else {
-          console.log(res.data.message);
           setIsLoadingBtn(false);
           setMsgSucesso(false);
-          setMsgErro(res.data.message);
+          setMsgErro(data.message);
         }
         setOpenSnack(true);
-        atualizarUsuarioLogado()
-        history.push("perfil", { id: usuario.usuId });
+        redirectDelay();
       })
       .catch((err) => {
         console.log(err.message);
         setIsLoadingBtn(false);
         setOpenSnack(true);
         setMsgSucesso(false);
-        setMsgErro("Ocorreu um erro ao salvar alterações");
+        setMsgErro("Ocorreu um erro na requisição ao servidor");
       });
   };
 
