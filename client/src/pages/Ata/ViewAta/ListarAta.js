@@ -70,9 +70,10 @@ export default function Data() {
 
   useEffect(() => {
     ataServices
+    // validar se está funcionando.
       .listarAtas("DataGrid")
       .then((res) => {
-        let lista = res.data;
+        let lista = res.data.data;
         let lista2 = [];
         lista.forEach((ata) => {
           ata.ataDataCriacao = formatDate(ata.ataDataCriacao);

@@ -23,7 +23,7 @@ const ViewRevisions = (props) => {
     revisaoServices
       .listarRevisoes()
       .then((res) => {
-        const revisoesDaAta = res.data.filter((revisao) => revisao.contemRevisoes.ataId === idAta);
+        const revisoesDaAta = res.data.data.filter((revisao) => revisao.contemRevisoes.ataId === idAta);
         setRevisoes(revisoesDaAta);
       })
       .catch((err) => console.log(err));
