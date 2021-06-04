@@ -22,6 +22,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class EnviarEmail {
 	
 	//enviar email para os participantes da ata
+	/*
+	 * enviar esse body
+	 * body = [
+    {
+        "userEnviar": "",
+        "senhaEnviar": "",
+        "emailEnviar": "",
+        "nomeEnviar": "",
+        "emailReceber": "",
+        "nomeReceber": "",
+        "ataId": "",
+        "linkDown": "http://localhost:8080/download/ata/excel/{ataid}",
+        "ataProjeto": ""
+      }
+]
+	 * */
 	@RequestMapping(value="/envioAtaEmail", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public String NovaAta(@RequestBody List<ConexaoEmail> con) {
@@ -48,7 +64,21 @@ public class EnviarEmail {
 	}
 	
 	
-	//enviar email para os participantes da ata (revisao)
+	///novaRevisao
+	/*Enviar esse body
+	 * body = [
+    {
+        "userEnviar": "",
+        "senhaEnviar": "",
+        "emailEnviar": "",
+        "nomeEnviar": "",
+        "emailReceber": "",
+        "nomeReceber": "",
+
+        "ataProjeto": "",
+    }
+]
+	 * */
 		@RequestMapping(value="/novaRevisao", method = RequestMethod.POST, consumes = "application/json")
 		@ResponseBody
 		public String NovaRevisao(@RequestBody List<ConexaoEmail> con) {
@@ -74,6 +104,22 @@ public class EnviarEmail {
 			return "pode ser que tenha ido";
 		}
 		
+		/* novaAssunto
+		 * body = {
+		 * [
+		    {
+		        "userEnviar": "",
+		        "senhaEnviar": "",
+		        "emailEnviar": "",
+		        "nomeEnviar": "",
+		        "emailReceber": "",
+		        "nomeReceber": "",
+		
+		        "ataProjeto": "",
+		        "assunto": "",
+		        "ataId": ""
+			}
+		   ]*/
 		@RequestMapping(value="/novaAssunto", method = RequestMethod.POST, consumes = "application/json")
 		@ResponseBody
 		public String NovaAssunto(@RequestBody List<ConexaoEmail> con) {
@@ -99,6 +145,24 @@ public class EnviarEmail {
 			return "pode ser que tenha ido";
 		}
 		
+		
+		//novoComentario
+		/*
+		 * body = [
+		    {
+		        "userEnviar": "",
+		        "senhaEnviar": "",
+		        "emailEnviar": "",
+		        "nomeEnviar": "",
+		        "emailReceber": "",
+		        "nomeReceber": "",
+		
+		        "ataProjeto": "",
+		        "comentario": "",
+		        "revisao": ""
+		
+		    }
+		]*/
 		@RequestMapping(value="/novoComentario", method = RequestMethod.POST, consumes = "application/json")
 		@ResponseBody
 		public String NovoComentario(@RequestBody List<ConexaoEmail> con) {
@@ -125,6 +189,22 @@ public class EnviarEmail {
 		}
 		
 		
+		//participanteAta
+		/* enviar esse body
+		 * body = [
+		    {
+		        "userEnviar": "",
+		        "senhaEnviar": "",
+		        "emailEnviar": "",
+		        "nomeEnviar": "",
+		        "emailReceber": "",
+		        "nomeReceber": "",
+		
+		        "ataProjeto": "",
+		        "ataId": ""
+	
+		    }
+		]*/
 		@RequestMapping(value="/participanteAta", method = RequestMethod.POST, consumes = "application/json")
 		@ResponseBody
 		public String ParticipanteAta(@RequestBody List<ConexaoEmail> con) {
@@ -150,6 +230,21 @@ public class EnviarEmail {
 			return "pode ser que tenha ido";
 		}
 		
+		
+		/*/senhaAlterada
+		 * enviar esse body
+		*body = [
+		    {
+		        "userEnviar": "",
+		        "senhaEnviar": "",
+		        "emailEnviar": "",
+		        "nomeEnviar": "",
+		        "emailReceber": "",
+		        "nomeReceber": ""
+		
+		
+		    }
+		]*/
 		@RequestMapping(value="/senhaAlterada", method = RequestMethod.POST, consumes = "application/json")
 		@ResponseBody
 		public String SenhaAlterada(@RequestBody List<ConexaoEmail> con) {
@@ -175,6 +270,23 @@ public class EnviarEmail {
 			return "pode ser que tenha ido";
 		}
 		
+		/*/usuarioCadastrado
+		 * enviar esse body
+		 * [
+		    {
+		        "userEnviar": "",
+		        "senhaEnviar": "",
+		        "emailEnviar": "",
+		        "nomeEnviar": "",
+		        "emailReceber": "",
+		        "nomeReceber": "",
+		        
+		        "linkSenha" : ""
+		
+		
+		    }
+		]
+		 * */
 		@RequestMapping(value="/usuarioCadastrado", method = RequestMethod.POST, consumes = "application/json")
 		@ResponseBody
 		public String UsuarioCadastrado(@RequestBody List<ConexaoEmail> con) {
