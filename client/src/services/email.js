@@ -5,8 +5,18 @@ const enviaAtaEmail = (users) => {
     return api.post(`${endpoint}/envioAtaEmail`, users);
 }
 
+const enviaRevEmail = (users) => {
+    return api.post(`${endpoint}/novaRevisao`, users);
+}
+
+const novoUsuario = (user) => {
+    return api.post(`${endpoint}/usuarioCadastrado`, user);
+}
+
 const emailServices = {
-    enviaAtaEmail
+    enviaAtaEmail,
+    enviaRevEmail,
+    novoUsuario
 }
 
 export default emailServices;
