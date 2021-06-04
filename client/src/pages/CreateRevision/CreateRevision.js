@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import "./Style.css";
 import revisaoServices from "../../services/revisao";
 import Alerta from "../../components/Snackbar/Alerta";
+import ataServices from "../../services/ata";
+import emailServices from "../../services/email";
 
 const CreateRevision = (props) => {
   const theme = useTheme();
@@ -19,12 +21,16 @@ const CreateRevision = (props) => {
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
 
-  const [user, setUser] = useState("");
   const [ataid, setAtaid] = useState("");
+
+  const [enviar, setEnviar] = useState([]);
+  const [dadosTemp, setDadosTemp] = useState([]);
+  const [ataProjeto, setataProjeto] = useState("");
 
   const location = useLocation();
 
   const history = useHistory();
+  
 
   const body = {
     ...infoHeader,
@@ -32,6 +38,53 @@ const CreateRevision = (props) => {
   };
   //body.infoHeader.contemRevisoes.ataId = props.ataid;
   //body.responsavelRevisoes.usuId = props.user;
+
+  const EmailRevisao = () => {
+    var k = 0
+  setAtaid(location.state.ataid)
+  const ataSemBarra = ataid.replace("/", "")
+  console.log(ataSemBarra)
+  ataServices.pegarAta(ataSemBarra)
+    .then(res => {
+      setDadosTemp(res.data.data.participaAtas)
+      setataProjeto(res.data.data.ataProjeto)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+
+    for(k=0; k<dadosTemp.length; k++) {
+      console.log(k)
+      var infTemp = {
+        userEnviar: "Umtttteste",
+        senhaEnviar: "SemSenha",
+        emailEnviar: "umtttteste@gmail.com",
+        nomeEnviar: "Sisatas",
+  
+        emailReceber: "",
+        nomeReceber: "",
+  
+        ataProjeto: "",
+        revisao: ""
+    }
+      infTemp.emailReceber = dadosTemp[k].usuEmail
+      infTemp.nomeReceber = dadosTemp[k].usuNome
+      infTemp.ataProjeto = ataProjeto
+      enviar.push(infTemp)
+      console.log(infTemp)
+    }
+
+    console.log('emails aqui: '+JSON.stringify(enviar))
+
+     emailServices
+      .enviaRevEmail(enviar)
+      .then(res => console.log("email enviado\nres: "+res))
+      .catch (err => console.log("email nao enviado\nerro: "+err))
+
+    setDadosTemp([]);
+    setEnviar([]);
+  }
+
 
   const CriarRevisao = (e) => {
     e.preventDefault();
@@ -42,6 +95,7 @@ const CreateRevision = (props) => {
         setMsgSucesso("Revisão cadastrada com sucesso!");
         setMsgErro(false);
         setOpenSnack(true);
+        EmailRevisao()
       })
       .catch((err) => {
         console.log(err);
@@ -54,7 +108,7 @@ const CreateRevision = (props) => {
       history.push("ata", { id: location.state.ataid });
     }, 4000);
   };
-  console.log(location.state);
+  //console.log(location.state);
 
   return (
     <Container>
