@@ -51,9 +51,14 @@ const EditUser = (props) => {
   useEffect(() => {
     userServices
       .pegarUsuario(location.state.id)
-      .then(({ data }) => {
-        setUsuario(data.data);
-        setIsLoading(false);
+      .then((user) => {
+        if (user.data.erro === false) {
+          setUsuario(user.data.data);
+          setIsLoading(false);
+        } else {
+          console.log(user.data.message);
+          setIsLoading(false);
+        }
       })
       .catch((err) => {
         console.log(err.message);
@@ -109,9 +114,17 @@ const EditUser = (props) => {
     userServices
       .atualizarUsuario(formData)
       .then((res) => {
-        setIsLoadingBtn(false);
-        setMsgSucesso("Sucesso ao salvar alterações!");
-        setMsgErro(false);
+        if (res.data.erro === false) {
+          setIsLoadingBtn(false);
+          setMsgSucesso("Sucesso ao salvar alterações!");
+          setMsgErro(false);
+          history.push("perfil", { id: usuario.usuId });
+        } else {
+          console.log(res.data.message);
+          setIsLoadingBtn(false);
+          setMsgSucesso(false);
+          setMsgErro(res.data.message);
+        }
         setOpenSnack(true);
         atualizarUsuarioLogado()
         history.push("perfil", { id: usuario.usuId });
@@ -128,14 +141,23 @@ const EditUser = (props) => {
   const solicitarAlteracaoSenha = (event) => {
     event.preventDefault();
     setIsLoadingBtn(true);
+    // tratar possíveis falhas oriundas do backend
     userServices
       .solicitarAlteracaoSenha(usuario.usuEmail)
       .then((res) => {
-        setIsLoadingBtn(false);
-        setMsgSucesso("Sucesso ao salvar alterações!");
-        setMsgErro(false);
-        setOpenSnack(true);
-        history.push(`/cadastrar-senha?token=${res.data.data}`);
+        if (res.data.erro !== false) {
+          setIsLoadingBtn(false);
+          setMsgSucesso("Sucesso ao salvar alterações!");
+          setMsgErro(false);
+          setOpenSnack(true);
+          history.push(`/cadastrar-senha?token=${res.data.data}`);
+        } else {
+          console.log(res.data.message);
+          setIsLoadingBtn(false);
+          setOpenSnack(true);
+          setMsgSucesso(false);
+          setMsgErro(res.data.message);
+        }
       })
       .catch((err) => {
         console.log(err.message);

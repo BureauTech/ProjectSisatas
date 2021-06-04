@@ -45,7 +45,7 @@ const ViewAta = ({ ajustarLayout }) => {
     revisaoServices
       .listarRevisoes()
       .then((res) => {
-        setInfos(res.data);
+        setInfos(res.data.data);
         //console.log("sbdhb"+res.data)
       })
       .catch((err) => console.log(err));
@@ -54,7 +54,7 @@ const ViewAta = ({ ajustarLayout }) => {
     ataServices
       .pegarAta(idBuscar.split("/").join(""))
       .then((res) => {
-        const dados = res.data;
+        const dados = res.data.data;
         setIdAta(dados.ataId);
         const infoHeader = {
           ataId: dados.ataId,

@@ -22,7 +22,7 @@ const RevisionHeader = (props) => {
 
   useEffect(() => {
     userServices.pegarUsuario(props.resp).then((res) => {
-      setResp(res.data.usuNome);
+      setResp(res.data.data.usuNome);
     });
   }, []);
 
