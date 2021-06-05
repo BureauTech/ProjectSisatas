@@ -444,7 +444,7 @@ const EditUser = (props) => {
                     variant="contained"
                     color="secondary"
                     className="bold"
-                    onClick={solicitarAlteracaoSenha}
+                    onClick={() => history.push({ pathname: '/alterar-senha' })}
                     style={{
                       color: "white",
                       fontSize: "1.5rem",

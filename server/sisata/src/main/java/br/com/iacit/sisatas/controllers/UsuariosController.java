@@ -529,7 +529,7 @@ public class UsuariosController {
 
 	@ResponseBody
 	@RequestMapping(value = "/alterarSenhaLogado", method = RequestMethod.POST)
-	public MessageReturn<?> alterarSenhaLogado(@RequestParam long usu_id, @RequestParam String usu_senha_nova, @RequestParam String usu_senha_antiga) {
+	public MessageReturn<?> alterarSenhaLogado(@RequestParam Long usu_id, @RequestParam String usu_senha_nova, @RequestParam String usu_senha_antiga) {
 		
 		MessageReturn<String> result = new MessageReturn<String>();
 		result.setOperacao("alterarSenhaLogado");
