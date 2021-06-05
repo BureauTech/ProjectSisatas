@@ -10,15 +10,15 @@ const Autenticacao = createContext();
  */
 export default function AutenticacaoProvider({ children }) {
   const [usuario, setUsuario] = useState({
-    estaLogado: false,
+    estaLogado: true,
     usuSessionToken: "",
-    usuNome: "",
+    usuNome: "Charles",
     usuId: "",
     usuEmail: "",
     usuCargo: "",
     usuAreaEmpresa: "",
     usuTelefone: "",
-    usuPerfil: "",
+    usuPerfil: "ADM",
   });
   return <Autenticacao.Provider value={{ usuario, setUsuario }}>{children}</Autenticacao.Provider>;
 }
