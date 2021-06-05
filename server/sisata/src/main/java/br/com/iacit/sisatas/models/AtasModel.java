@@ -67,7 +67,7 @@ public class AtasModel implements Serializable{
 	@Column(columnDefinition="TEXT")
 	private String ataObservacao;
 	@Column
-	private long ataQtdAprovacao;
+	private Long ataQtdAprovacao;
 	@Column
 	private String ataQuemAprovou;
 	@Column

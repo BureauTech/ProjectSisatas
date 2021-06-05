@@ -1,6 +1,6 @@
 package br.com.iacit.sisatas.projections;
 
-public interface UsuariosProjectionParticipante {
+public interface UsuariosProjectionPerfil {
 
 	Long getUsuId();
 
@@ -11,5 +11,11 @@ public interface UsuariosProjectionParticipante {
 	String getUsuTelefone();
 
 	String getUsuEmail();
+
+	String getUsuCargo();
+
+	String getUsuPerfil();
+
+	byte[] getUsuAssinatura();
 
 }

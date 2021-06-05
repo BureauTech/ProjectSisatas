@@ -19,6 +19,7 @@ import ForgotPassword from "../pages/Login/ForgotPassword";
 import Notificacoes from "../pages/Notificacoes/Notificacoes";
 import RestrictedRoute from "./RestrictedRoute";
 import Relatorio from "../pages/Relatorio/Relatorio";
+import EditPassword from "../pages/User/EditPassword";
 
 /**
  * Arquivo com rotas para o frontend
@@ -44,6 +45,7 @@ const Routes = ({ ajustarLayout }) => (
       <RestrictedRoute allowed="GER" exact ajustarLayout={ajustarLayout} path="/relatorio" component={() => <Relatorio />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/perfil" component={() => <UserProfile />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/editar-usuario" component={() => <EditUser />} />
+      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/alterar-senha" component={() => <EditPassword />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/nova-revisao" component={() => <CreateRevision />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/revisoes" component={() => <ViewRevisions />} />
       <PrivateRoute
