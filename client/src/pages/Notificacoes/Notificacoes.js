@@ -84,7 +84,7 @@ export default function Data() {
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => history.push("ata", { id: params.getValue("id") })}>
+        <Button onClick={() => history.push("ata", { id: params.id })}>
           <VisibilityIcon className="icon" />
         </Button>
       ),

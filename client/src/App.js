@@ -5,6 +5,7 @@ import { useAutenticacao } from "./context/Autenticacao";
 import Routes from "./routes/Routes";
 import { getLocalStorage, setLocalStorage } from "./auth/auth";
 import userServices from "./services/user";
+import MenuProvider from "./context/Menu";
 
 /**
  * Arquivo base da aplicação
@@ -41,9 +42,8 @@ function App() {
   window.addEventListener("resize", ajustarLayout);
 
   useEffect(() => {
-
     /**
-     * Função para verificar se há token salvo  
+     * Função para verificar se há token salvo
      * Caso haja e não está expirado, recupera as informações com o servidor
      * @author Denis Lima
      */
@@ -65,10 +65,12 @@ function App() {
 
   return (
     <InfoAtaProvider>
-      <div className="App no-print">
-        <Routes ajustarLayout={ajustarLayout} />
-      </div>
-      <AtaTemplate />
+      <MenuProvider>
+        <div className="App no-print">
+          <Routes ajustarLayout={ajustarLayout} />
+        </div>
+        <AtaTemplate />
+      </MenuProvider>
     </InfoAtaProvider>
   );
 }

@@ -114,7 +114,7 @@ export default function UserList() {
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => history.push("perfil", { id: params.getValue("id") })}>
+        <Button onClick={() => history.push("perfil", { id: params.id })}>
           <VisibilityIcon className="icon" />
         </Button>
       ),
@@ -124,7 +124,7 @@ export default function UserList() {
       headerName: "Editar",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => history.push("editar-usuario", { id: params.getValue("id") })}>
+        <Button onClick={() => history.push("editar-usuario", { id: params.id })}>
           <EditIcon className="icon" />
         </Button>
       ),
@@ -134,7 +134,7 @@ export default function UserList() {
       headerName: "Excluir",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => handleAskDelete(params.getValue("id"))}>
+        <Button onClick={() => handleAskDelete(params.id)}>
           <DeleteIcon className="icon" />
         </Button>
       ),

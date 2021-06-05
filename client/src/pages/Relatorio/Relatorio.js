@@ -76,7 +76,7 @@ const Relatorio = (props) => {
       width: 130,
       renderCell: (params) => (
         <Button 
-        // onClick={() => history.push("perfil", { id: params.getValue("id") })}
+        // onClick={() => history.push("perfil", { id: params.id })}
         >
           <VisibilityIcon className="icon" />
         </Button>

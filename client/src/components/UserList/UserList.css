@@ -10,3 +10,7 @@
 .icon:hover {
   color: #26BAF4;
 }
+
+.MuiDataGrid-renderingZone {
+  max-height: 52px !important;
+}
