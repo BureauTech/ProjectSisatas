@@ -16,7 +16,7 @@ import "./RegisterPassword.css";
  * Componente para página de cadastro de senha.
  * Ao entrar, é necessário pegar o token que virá por meio da URL.
  * O token precisa ser validado com o servidor para garantir que o mesmo é válido e único.
- *
+ * 
  * @author Denis Lima
  * @param {any} props
  * @returns Componente de cadastro de senha
@@ -79,13 +79,15 @@ const RegisterPassword = (props) => {
   }, []);
 
   /**
+   * @author Denis Lima
+   * @param {Event} e Recebe o evento
+   *
    * Método para cadastrar senha.
    * Chamado ao clicar no botão de enviar.
    * Verifica se as senhas são iguais, caso não sejam, informa o usuário.
    * Requisita ao servidor a troca de senha, informando a nova senha e o token.
    * Em caso de sucesso ou erro, informa o usuário e redireciona para a página de Login.
-   * @author Denis Lima
-   * @param {Event} e Recebe o evento
+   *
    */
   const cadastrarSenha = (e) => {
     e.preventDefault();
@@ -134,21 +136,6 @@ const RegisterPassword = (props) => {
         <Grid item xs={11} style={{ paddingBottom: 20 }}>
           <form onSubmit={cadastrarSenha}>
             <Grid container justify="center" style={{ paddingTop: 25, paddingBottom: 15 }}>
-              <Grid container style={{ paddingLeft: 10 }}>
-                <Typography variant="subtitle2" style={{ color: "white" }}>
-                  *A senha deve conter de 8 a 30 caracteres
-                </Typography>
-              </Grid>
-              <Grid container style={{ paddingLeft: 10 }}>
-                <Typography variant="subtitle2" style={{ color: "white" }}>
-                  *Uma letra maiúscula e uma letra minúscula
-                </Typography>
-              </Grid>
-              <Grid container style={{ paddingLeft: 10 }}>
-                <Typography variant="subtitle2" style={{ color: "white" }}>
-                  *Um número e um símbolo especial
-                </Typography>
-              </Grid>
               <Grid item xs={11}>
                 <InputLogin
                   required

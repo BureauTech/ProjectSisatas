@@ -20,22 +20,11 @@ import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
 import { BrokenImage } from "@material-ui/icons";
 import { useAutenticacao } from "../../context/Autenticacao";
-import { getLocalStorage, setLocalStorage } from "../../auth/auth";
-import { isEmpty } from "./UserProfile";
 
 const EditUser = (props) => {
   const { classes } = props;
-  const usuario_logado = useAutenticacao().usuario;
-  const setUsuario_logado = useAutenticacao().setUsuario;
-  const [usuario, setUsuario] = useState({
-    usuNome: "",
-    usuId: "",
-    usuEmail: "",
-    usuCargo: "",
-    usuAreaEmpresa: "",
-    usuTelefone: "",
-    usuPerfil: "",
-  });
+  const usuario_logado = useAutenticacao();
+  const [usuario, setUsuario] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [open, setOpen] = useState(false);
@@ -50,25 +39,21 @@ const EditUser = (props) => {
   const location = useLocation();
 
   useEffect(() => {
+
     userServices
       .pegarUsuario(location.state.id)
-      .then(({ data }) => {
-        if (!data.erro && !isEmpty(data.data)) {
-          setUsuario(data.data);
+      .then((user) => {
+        if (user.data.erro === false) {
+          setUsuario(user.data.data);
           setIsLoading(false);
         } else {
+          console.log(user.data.message);
           setIsLoading(false);
-          setMsgSucesso(false);
-          setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
-          setOpenSnack(true);
         }
       })
       .catch((err) => {
         console.log(err.message);
         setIsLoading(false);
-        setMsgSucesso(false);
-        setMsgErro("Ocorreu um erro ao na requisição ao servidor");
-        setOpenSnack(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
@@ -89,33 +74,14 @@ const EditUser = (props) => {
   };
 
   const changePreview = (file) => {
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => setPreview(reader.result);
-    }
-  };
-
-  // Redireciona o usuário para a página de login
-  const redirectDelay = () => {
-    setTimeout(() => history.push("/perfil", { id: usuario.usuId }), 2000);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => setPreview(reader.result);
   };
 
   const atualizarUsuario = (event) => {
     event.preventDefault();
     setIsLoadingBtn(true);
-
-    async function atualizarUsuarioLogado() {
-      const token = getLocalStorage("sisata_token");
-      if (token) {
-        const { data } = await userServices.validarTokenSessao(token);
-        if (!data.erro) {
-          const dados = data.data;
-          setUsuario_logado({ ...dados, estaLogado: true });
-          setLocalStorage("sisata_token", dados.usuSessionToken, 120);
-        }
-      }
-    }
 
     var imagem = document.querySelector("#assinatura").files[0];
     var formData = new FormData();
@@ -124,26 +90,26 @@ const EditUser = (props) => {
 
     userServices
       .atualizarUsuario(formData)
-      .then(({ data }) => {
-        if (!data.erro) {
+      .then((res) => {
+        if (res.data.erro === false) {
           setIsLoadingBtn(false);
-          atualizarUsuarioLogado();
           setMsgSucesso("Sucesso ao salvar alterações!");
           setMsgErro(false);
+          history.push("perfil", { id: usuario.usuId });
         } else {
+          console.log(res.data.message);
           setIsLoadingBtn(false);
           setMsgSucesso(false);
-          setMsgErro(data.message);
+          setMsgErro(res.data.message);
         }
         setOpenSnack(true);
-        redirectDelay();
       })
       .catch((err) => {
         console.log(err.message);
         setIsLoadingBtn(false);
         setOpenSnack(true);
         setMsgSucesso(false);
-        setMsgErro("Ocorreu um erro na requisição ao servidor");
+        setMsgErro("Ocorreu um erro ao salvar alterações");
       });
   };
 
@@ -175,7 +141,7 @@ const EditUser = (props) => {
         setMsgSucesso(false);
         setMsgErro("Ocorreu um erro ao salvar alterações");
       });
-  };
+  }
 
   return (
     <Container style={{ marginTop: 30, marginBottom: 20 }}>
@@ -347,26 +313,21 @@ const EditUser = (props) => {
                   </FormLabel>
                 </Grid>
                 <Grid item xs>
-                  {usuario_logado.usuPerfil === "ADM" && (
-                    <Select
-                      id="profile"
-                      open={open}
-                      onClose={handleClose}
-                      onOpen={handleOpen}
-                      // Ateração Daniel
-                      value={usuario.usuPerfil}
-                      onChange={handleChange}
-                      className={classes.textField}
-                      style={{ width: "7rem" }}
-                    >
-                      <MenuItem value={"ADM"}>ADM</MenuItem>
-                      <MenuItem value={"GER"}>GER</MenuItem>
-                      <MenuItem value={"USU"}>USU</MenuItem>
-                    </Select>
-                  )}
-                  {usuario_logado.usuPerfil !== "ADM" && (
-                    <Typography className={classes.normalText}>{usuario.usuPerfil}</Typography>
-                  )}
+                  <Select
+                    id="profile"
+                    open={open}
+                    onClose={handleClose}
+                    onOpen={handleOpen}
+                    // Ateração Daniel
+                    value={usuario.usuPerfil}
+                    onChange={handleChange}
+                    className={classes.textField}
+                    style={{ width: "7rem" }}
+                  >
+                    <MenuItem value={"ADM"}>ADM</MenuItem>
+                    <MenuItem value={"GER"}>GER</MenuItem>
+                    <MenuItem value={"USU"}>USU</MenuItem>
+                  </Select>
                 </Grid>
               </Grid>
               {/* upload assinatura */}
@@ -444,7 +405,7 @@ const EditUser = (props) => {
                     variant="contained"
                     color="secondary"
                     className="bold"
-                    onClick={() => history.push({ pathname: '/alterar-senha' })}
+                    onClick={solicitarAlteracaoSenha}
                     style={{
                       color: "white",
                       fontSize: "1.5rem",

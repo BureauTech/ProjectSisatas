@@ -19,11 +19,15 @@ const ViewAta = ({ ajustarLayout }) => {
   const [infos, setInfos] = useState([]);
 
   const [idAta, setIdAta] = useState();
+  const [revis, setRevis] = useState({});
 
+  var dados = {};
   const listaRevisoes = [];
 
   const location = useLocation();
   const history = useHistory();
+
+  const [Revisoes, setRevisoes] = useState({});
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString();
@@ -42,14 +46,15 @@ const ViewAta = ({ ajustarLayout }) => {
       .listarRevisoes()
       .then((res) => {
         setInfos(res.data.data);
+        //console.log("sbdhb"+res.data)
       })
       .catch((err) => console.log(err));
 
     // Id sem a barra "/"
     ataServices
       .pegarAta(idBuscar.split("/").join(""))
-      .then(({data}) => {
-        const dados = data.data;
+      .then((res) => {
+        const dados = res.data.data;
         setIdAta(dados.ataId);
         const infoHeader = {
           ataId: dados.ataId,
