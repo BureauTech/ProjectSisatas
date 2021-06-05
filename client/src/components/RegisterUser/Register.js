@@ -451,7 +451,6 @@ const Register = (props) => {
         </Link>
       </Grid>
       <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
-      <button onClick={EnviarEmail}>clacai</button>
     </Container>
   );
 };
