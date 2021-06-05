@@ -21,6 +21,7 @@ import "./Register.css";
 import userServices from "../../services/user";
 import Alerta from "../Snackbar/Alerta";
 import { Delete } from "@material-ui/icons";
+import emailServices from "../../services/email";
 
 const Register = (props) => {
   const { classes } = props;
@@ -67,6 +68,30 @@ const Register = (props) => {
     }
   };
 
+  const EnviarEmail = () => {
+    var body = [
+      {
+          userEnviar: "Umtttteste",
+          senhaEnviar: "SemSenha",
+          emailEnviar: "umtttteste@gmail.com",
+          nomeEnviar: "Sisatas",
+          emailReceber: email,
+          nomeReceber: nome,         
+          linkSenha : "http://localhost:3000"
+      }
+  ]
+
+  emailServices
+  .novoUsuario(body)
+  .then(res => {
+    console.log("email enviado\nresp: "+res.data)
+  })
+  .catch(err => {
+    console.log("não foi o email\nerr: "+err)
+  })
+
+
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {
@@ -97,6 +122,7 @@ const Register = (props) => {
           clear();
           setMsgSucesso("Usuário cadastrado com sucesso!");
           setMsgErro(false);
+          EnviarEmail()
         }
         setOpenSnack(true);
       })
