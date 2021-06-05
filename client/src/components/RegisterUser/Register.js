@@ -77,10 +77,11 @@ const Register = (props) => {
     userServices.solicitarAlteracaoSenha(email)
       .then(res => {
 
-        var body = [{
-          userEnviar: "Umtttteste",
-          senhaEnviar: "SemSenha",
-          emailEnviar: "umtttteste@gmail.com",
+    var body = [
+      {
+          userEnviar: "Noreply.bureautech",
+          senhaEnviar: "bureautech",
+          emailEnviar: "noreply.bureautech@gmail.com",
           nomeEnviar: "Sisatas",
           emailReceber: email,
           nomeReceber: nome,         

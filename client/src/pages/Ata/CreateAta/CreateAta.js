@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import "./Style.css";
 import ataServices from "../../../services/ata";
 import emailServices from "../../../services/email";
+import logServices from "../../../services/log";
+import { useAutenticacao } from "../../../context/Autenticacao";
 
 import Alerta from "../../../components/Snackbar/Alerta";
 import Textarea from "../../../components/Ata/CreateAta/Textarea";
@@ -26,8 +28,11 @@ const CreateAta = (props) => {
   const [msgErro, setMsgErro] = useState("");
   const [id, setId] = useState("1");
   const [observacao, setObservacao] = useState("");
-  const [emails, setEmails] =useState([]);
+  const [emails, setEmails] = useState([]);
   const [ultimoId, setUltimoId] = useState("");
+  const [autor, setAutor] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const { usuario } = useAutenticacao()
 
   // recebe último ID do banco e soma 1
   //funcao feita pelo Denis, so foi copiada aqui
@@ -42,7 +47,7 @@ const CreateAta = (props) => {
   //busca a ultima ata criada
   useEffect(() => {
     ataServices.ultimoId().then(res => {
-      if (res.data.ataId == null){
+      if (res.data.ataId == null) {
         setUltimoId(somarIdAta("00/21"))
       }
       else {
@@ -56,9 +61,9 @@ const CreateAta = (props) => {
 
     for (var i = 0; i < infoProject.length; i++) {
       var bodyEmail = {
-        userEnviar: "Umtttteste",
-        senhaEnviar: "SemSenha",
-        emailEnviar: "umtttteste@gmail.com",
+        userEnviar: "Noreply.bureautech",
+        senhaEnviar: "bureautech",
+        emailEnviar: "noreply.bureautech@gmail.com",
         nomeEnviar: "Sisatas",
         emailReceber: infoProject[i].usuEmail,
         nomeReceber: infoProject[i].usuNome,
@@ -78,6 +83,27 @@ const CreateAta = (props) => {
     console.log("id: " + ultimoId)
 
   }
+
+//Salvar log de criação de ata
+
+  var data = new Date();
+  var dia = String(data.getDate()).padStart(2, '0');
+  var mes = String(data.getMonth() + 1).padStart(2, '0');
+  var ano = data.getFullYear();
+  var dataAtual = ano + '-' + mes + '-' + dia;
+
+  const salvarLogs = () => {
+    var bodyLogs = {
+      logAutor: usuario.usuNome,
+      logDescricao: `Ata ${ultimoId} criada por`,
+      logDataHora: dataAtual,
+    }
+    console.log(bodyLogs)
+    logServices.salvarLogs(bodyLogs)
+      .then(res => console.log("res: ", res))
+      .catch(err => console.log("res de erro: ", err))
+  }
+
 
   const clear = () => {
     setId(Math.random().toString());
@@ -132,8 +158,9 @@ const CreateAta = (props) => {
         setOpenSnack(true);
         clear();
         console.log(JSON.stringify(res.data))
-        if (res.data.erro == false){//se a ata for criada com sucesso, chama a funcao /enviar email
+        if (res.data.erro == false) {//se a ata for criada com sucesso, chama a funcao /enviar email
           enviarPorEmail();
+          salvarLogs();
         }
       })
       .catch((error) => {
@@ -175,7 +202,7 @@ const CreateAta = (props) => {
           <Textarea setInfo={setObservacao} idText='obs' required={false} />
         </Grid>
         <Grid container style={{ marginBottom: 10 }}>
-        <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Assuntos*</Typography>
+          <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Assuntos*</Typography>
           <Topics
             listaAdicionados={listaAdicionados}
             setInfoTopics={setInfoTopics}

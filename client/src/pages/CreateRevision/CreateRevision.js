@@ -56,9 +56,9 @@ const CreateRevision = (props) => {
     for(k=0; k<dadosTemp.length; k++) {
       console.log(k)
       var infTemp = {
-        userEnviar: "Umtttteste",
-        senhaEnviar: "SemSenha",
-        emailEnviar: "umtttteste@gmail.com",
+        userEnviar: "Noreply.bureautech",
+        senhaEnviar: "bureautech",
+        emailEnviar: "noreply.bureautech@gmail.com",
         nomeEnviar: "Sisatas",
   
         emailReceber: "",
