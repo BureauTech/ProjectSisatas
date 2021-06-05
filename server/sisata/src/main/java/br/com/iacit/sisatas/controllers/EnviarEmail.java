@@ -312,6 +312,32 @@ public class EnviarEmail {
 			return "pode ser que tenha ido";
 		}
 		
+		
+		@RequestMapping(value="/esqueciSenha", method = RequestMethod.POST, consumes = "application/json")
+		@ResponseBody
+		public String EsqueciSenha(@RequestBody List<ConexaoEmail> con) {
+			
+			//Thread para enviar os emails e nao travar o sistema
+			Runnable t1 = new Runnable() {
+
+				@Override
+				public void run() {
+					for (int i=0; i<con.size();i++) {
+						try {
+						EnvioEmail.EsqueciSenha(con.get(i));
+						}
+						catch (Exception e) {
+							System.out.println(e);
+						}
+					}
+
+				}
+			};
+			new Thread(t1).start();
+			//alteracao futura
+			return "pode ser que tenha ido";
+		}
+		
 	
 	
 }

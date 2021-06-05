@@ -395,6 +395,67 @@ public class EnvioEmail {
 	}
 	
 	
+	public static void EsqueciSenha (ConexaoEmail cone) {
+		try {
+			// Cria o e-mail
+			HtmlEmail email = new HtmlEmail();
+		  	email.setDebug(true);
+		    email.setHostName("smtp.gmail.com");  //host do servidor email
+		    email.setSmtpPort(587);
+		    email.setSSL(true);//
+		    email.setCharset("utf-8");
+		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
+		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setSubject("Redefina sua senha"); //assunto
+		    
+			// configura a mensagem para o formato HTML
+		    email.setHtmlMsg("<html><head>\r\n"
+		    		+ "  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\">\r\n"
+		    		+ "  <link href=\"https://fonts.googleapis.com/css2?family=Montserrat&display=swap\" rel=\"stylesheet\">\r\n"
+		    		+ "</head>\r\n"
+		    		+ "\r\n"
+		    		+ "<body>\r\n"
+		    		+ "  <table cellpadding=\"\" cellspacing=\"10\" width=\"100%\"\r\n"
+		    		+ "    style=\" text-align: center; font-family: Montserrat; color: #fff; border: none; font-size: 20px;\">\r\n"
+		    		+ "    <tr>\r\n"
+		    		+ "      <td>\r\n"
+		    		+ "        <img src=\"https://avatars.githubusercontent.com/u/70586794?s=200&v=4\" style=\"width: 10%;\" />\r\n"
+		    		+ "      </td>\r\n"
+		    		+ "    </tr>\r\n"
+		    		+ "    <tr>\r\n"
+		    		+ "      <td style=\"padding: 15px 0 10px 0; color: #4682b4;\">\r\n"
+		    		+ "        Olá <strong>"+cone.nomeReceber+"</strong><br>Você solicitou a alteração da sua senha.\r\n"
+		    		+ "      </td>\r\n"
+		    		+ "    </tr>\r\n"
+		    		+ "    <tr>\r\n"
+		    		+ "      <td style=\"padding: 10px 0 30px 0;color: #4682b4;\">\r\n"
+		    		+ "        <a href=\""+cone.linkSenha+"\"\r\n"
+		    		+ "          style=\"text-decoration:none;background-color:#F49A1D;font-size:25px;color:#fff;padding:15px; border-radius: 15px;\">\r\n"
+		    		+ "          Clique aqui para alterar a sua senha!</a>\r\n"
+		    		+ "      </td>\r\n"
+		    		+ "    </tr>\r\n"
+		    		+ "    <tr>\r\n"
+		    		+ "      <td style=\"padding: 5px 0 30px 0; color: #4682b4;text-decoration:underline;font-size: 15px;\">\r\n"
+		    		+ "        <p><a href=\"https://github.com/BureauTech\" style=\"text-decoration:underline; color: #4682b4\">Desenvolvido por\r\n"
+		    		+ "            BureauTech</a>\r\n"
+		    		+ "        </p>\r\n"
+		    		+ "      </td>\r\n"
+		    		+ "    </tr>\r\n"
+		    		+ "  </table>\r\n"
+		    		+ "</body></html>");
+
+			// configure uma mensagem alternativa caso o servidor não suporte HTML
+			email.setTextMsg("Seu servidor de e-mail não suporta mensagem HTML");
+
+			// envia o e-mail
+			email.send();
+		} catch (EmailException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
 	public static void UsuarioCadastrado (ConexaoEmail cone) {
 		try {
 			// Cria o e-mail
@@ -455,7 +516,6 @@ public class EnvioEmail {
 			System.out.println(e.getMessage());
 		}
 	}
-	
 	
 	
 	

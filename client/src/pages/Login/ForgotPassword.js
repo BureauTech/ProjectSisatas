@@ -7,6 +7,7 @@ import Botao from "../../components/Login/Botao";
 import InputLogin from "../../components/Login/InputLogin";
 import Alerta from "../../components/Snackbar/Alerta";
 import { useAutenticacao } from "../../context/Autenticacao";
+import emailServices from "../../services/email";
 import userServices from "../../services/user";
 
 /**
@@ -50,6 +51,27 @@ const ForgotPassword = (props) => {
       try {
         const { data } = await userServices.solicitarAlteracaoSenha(email);
         if (!data.erro) {
+          var body = [
+            {
+                userEnviar: "Noreply.bureautech",
+                senhaEnviar: "bureautech",
+                emailEnviar: "noreply.bureautech@gmail.com",
+                nomeEnviar: "Sisatas",
+                emailReceber: email,
+                nomeReceber: "",         
+                linkSenha : `http://localhost:3000/cadastrar-senha?usu_token=${data.data}`
+              }]
+      
+              emailServices
+                .esqueciSenha(body)
+                .then(res => {
+                  console.log("email enviado\nresp: " + res.data)
+                  console.log("email env: " + JSON.stringify(body))
+                })
+                .catch(err => {
+                  console.log("não foi o email\nerr: " + err)
+                })
+
           setMsgSucesso(data.mensagem + " Por favor, confira seu email.");
           setMsgErro(false);
           setIsOpen(true);
