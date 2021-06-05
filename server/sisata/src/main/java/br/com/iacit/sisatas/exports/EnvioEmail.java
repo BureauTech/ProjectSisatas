@@ -407,7 +407,7 @@ public class EnvioEmail {
 		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
 		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
-		    email.setSubject("Novo Usuário"); //assunto
+		    email.setSubject("Cadastre sua senha"); //assunto
 		    
 			// configura a mensagem para o formato HTML
 		    email.setHtmlMsg("<html>\r\n"

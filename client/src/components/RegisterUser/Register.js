@@ -71,9 +71,9 @@ const Register = (props) => {
   const EnviarEmail = () => {
     var body = [
       {
-          userEnviar: "Umtttteste",
-          senhaEnviar: "SemSenha",
-          emailEnviar: "umtttteste@gmail.com",
+          userEnviar: "Noreply.bureautech",
+          senhaEnviar: "bureautech",
+          emailEnviar: "noreply.bureautech@gmail.com",
           nomeEnviar: "Sisatas",
           emailReceber: email,
           nomeReceber: nome,         

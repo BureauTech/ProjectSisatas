@@ -56,9 +56,9 @@ const CreateAta = (props) => {
 
     for (var i = 0; i < infoProject.length; i++) {
       var bodyEmail = {
-        userEnviar: "Umtttteste",
-        senhaEnviar: "SemSenha",
-        emailEnviar: "umtttteste@gmail.com",
+        userEnviar: "Noreply.bureautech",
+        senhaEnviar: "bureautech",
+        emailEnviar: "noreply.bureautech@gmail.com",
         nomeEnviar: "Sisatas",
         emailReceber: infoProject[i].usuEmail,
         nomeReceber: infoProject[i].usuNome,
