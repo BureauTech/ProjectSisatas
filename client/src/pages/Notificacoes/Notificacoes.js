@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import ptBR from "../../components/ptBR/DataGrid";
-import notificacoes from "../../services/notificacoes";
+import logServices from "../../services/log";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -55,40 +55,27 @@ export default function Data() {
     return data;
   };
 
-/*  useEffect(() => {
-    ataServices
-      .listarAtas("DataGrid")
+  useEffect(() => {
+    logServices
+      .pegarLogs("DataGrid")
       .then((res) => {
         let lista = res.data;
         let lista2 = [];
-        lista.forEach((ata) => {
-          ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
-          lista2.push({ id: ata["ataId"], ...ata });
+        lista.forEach((log) => {
+          log.logDataHora = formatDate(log.logDataHora);
+          lista2.push({ id: log["logId"], ...log });
         });
         setRows(lista2);
       })
       .catch((err) => {
         console.log(err.message);
       });
-  }, [setRows]);*/
+  }, [setRows]);
 
   const columns = [
-    { field: "", headerName: "Data", width: 100 },
-    { field: "", headerName: "Ação", width: 200 },
-    { field: "", headerName: "Documento", width: 200 },
-    { field: "", headerName: "Usuário", width: 150 },
-    /*{ field: "ataLocal", headerName: "Local", width: 150 },    { field: "tipo", headerName: "Tipo", width: 150 }, 
-    { field: "estado", headerName: "Estado", width: 150 },*/
-    /*{
-      field: "Exibir",
-      headerName: "Exibir",
-      width: 130,
-      renderCell: (params) => (
-        <Button onClick={() => history.push("ata", { id: params.getValue("id") })}>
-          <VisibilityIcon className="icon" />
-        </Button>
-      ),
-    },*/
+    { field: "logDataHora", headerName: "Data", width: 250 },
+    { field: "logDescricao", headerName: "Descrição", width: 300 }, 
+    { field: "logAutor", headerName: "Autor", width: 150 },
   ];
 
   return (
