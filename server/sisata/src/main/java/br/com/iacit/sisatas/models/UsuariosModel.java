@@ -32,7 +32,7 @@ public class UsuariosModel implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long usuId;
+	private Long usuId;
 	@Column(nullable = false, length = 50)
 	private String usuNome;
 	@Column(nullable = false, length = 50)

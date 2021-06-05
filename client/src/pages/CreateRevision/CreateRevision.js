@@ -106,7 +106,7 @@ const CreateRevision = (props) => {
 
     let seu_tempo_ta_acabando = setTimeout(function () {
       history.push("ata", { id: location.state.ataid });
-    }, 4000);
+    }, 3000);
   };
   //console.log(location.state);
 

@@ -20,6 +20,9 @@ const InputLogin = (props) => {
         placeholder={placeholder ? placeholder : ""}
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        // eslint-disable-next-line no-useless-escape
+        inputProps={type === 'password' ? { pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{8,30}$" } : {}}
+        
       />
     </>
   );
