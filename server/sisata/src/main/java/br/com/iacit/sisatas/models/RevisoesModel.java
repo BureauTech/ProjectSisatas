@@ -47,7 +47,7 @@ public class RevisoesModel implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate revData;
 	@Column
-	private Long revQtdAprovacao;
+	private long revQtdAprovacao;
 	@Column
 	private String revQuemAprovou;
 	@Column

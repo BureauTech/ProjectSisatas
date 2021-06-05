@@ -2,7 +2,8 @@ import { Container, Grid, withStyles, Typography, FormLabel, Input } from "@mate
 import "./Components.css";
 import { styles } from "../../assets/styles/Styles";
 import { useState, useEffect } from "react";
-import { useAutenticacao } from "../../context/Autenticacao";
+import userServices from "../../services/user";
+import { useInfoAta } from "../../context/InfoAta";
 
 // Alterando css de componentes
 
@@ -11,7 +12,6 @@ const RevisionHeader = (props) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
   const [infoHeader, setInfoheader] = useState();
-  const { usuario } = useAutenticacao()
   const [resp, setResp] = useState("");
   const [revPrazo, setRevPrazo] = useState("");
   const handleResize = () => {
@@ -21,7 +21,9 @@ const RevisionHeader = (props) => {
   window.addEventListener("resize", handleResize);
 
   useEffect(() => {
-    setResp(usuario.usuNome)
+    userServices.pegarUsuario(props.resp).then((res) => {
+      setResp(res.data.data.usuNome);
+    });
   }, []);
 
   const dat = {

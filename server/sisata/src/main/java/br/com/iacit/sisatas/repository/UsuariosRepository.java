@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.projections.UsuariosProjectionLogin;
-import br.com.iacit.sisatas.projections.UsuariosProjectionPerfil;
 
 public interface UsuariosRepository extends JpaRepository<UsuariosModel, String> {
 
@@ -21,8 +20,6 @@ public interface UsuariosRepository extends JpaRepository<UsuariosModel, String>
 	UsuariosModel findTopBy();
 	
 	UsuariosModel findByusuId(long usuId);
-	
-	UsuariosProjectionPerfil findByUsuId(long usuId);
 	
 	UsuariosModel findByusuEmail(String usuEmail);
 	

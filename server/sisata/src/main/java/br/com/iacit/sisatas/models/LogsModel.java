@@ -30,7 +30,7 @@ public class LogsModel implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long logId;
+	private long logId;
 	@Column(nullable = false, length = 50)
 	private String logAutor;
 	@Column(nullable = false, length = 100)

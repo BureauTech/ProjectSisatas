@@ -24,7 +24,6 @@ import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.projections.UsuariosProjectionDataGrid;
 import br.com.iacit.sisatas.projections.UsuariosProjectionLogin;
 import br.com.iacit.sisatas.projections.UsuariosProjectionParticipante;
-import br.com.iacit.sisatas.projections.UsuariosProjectionPerfil;
 import br.com.iacit.sisatas.repository.UsuariosRepository;
 import br.com.iacit.sisatas.returns.MessageReturn;
 
@@ -338,13 +337,13 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/pegarUsuario/{usu_id}", method = RequestMethod.GET)
-	public MessageReturn<?> pegarUsuario(@PathVariable Long usu_id) {
+	public MessageReturn<?> pegarUsuario(@PathVariable long usu_id) {
 		
-		MessageReturn<UsuariosProjectionPerfil> result = new MessageReturn<UsuariosProjectionPerfil>();
+		MessageReturn<UsuariosModel> result = new MessageReturn<UsuariosModel>();
 		result.setOperacao("pegarUsuario");
 		
 		try {
-			UsuariosProjectionPerfil usuarioSelecionado = up.findByUsuId(usu_id);
+			UsuariosModel usuarioSelecionado = up.findByusuId(usu_id);
 			result.setMensagem(msgSucesso);
 			result.setErro(false);
 			result.setData(usuarioSelecionado);
@@ -529,7 +528,7 @@ public class UsuariosController {
 
 	@ResponseBody
 	@RequestMapping(value = "/alterarSenhaLogado", method = RequestMethod.POST)
-	public MessageReturn<?> alterarSenhaLogado(@RequestParam Long usu_id, @RequestParam String usu_senha_nova, @RequestParam String usu_senha_antiga) {
+	public MessageReturn<?> alterarSenhaLogado(@RequestParam long usu_id, @RequestParam String usu_senha_nova, @RequestParam String usu_senha_antiga) {
 		
 		MessageReturn<String> result = new MessageReturn<String>();
 		result.setOperacao("alterarSenhaLogado");

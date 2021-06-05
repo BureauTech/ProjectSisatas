@@ -7,17 +7,11 @@ import Loading from "../Loading/Loading";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
 import { BrokenImage } from "@material-ui/icons";
-
-export const isEmpty = (user) => {
-  const keys = Object.keys(user);
-  if (keys.length === 0) {
-    return 1;
-  }
-  return 0;
-};
+import {useAutenticacao} from "../../context/Autenticacao";
 
 const UserProfile = (props) => {
   const { classes } = props;
+  const usuario_logado = useAutenticacao().usuario;
   const [usuario, setUsuario] = useState({
     usuNome: "",
     usuId: "",
@@ -37,25 +31,31 @@ const UserProfile = (props) => {
   };
   const location = useLocation();
 
+  const isEmpty = (user) => {
+    const keys = Object.keys(user);
+    if (keys.length === 0) {
+      return 1;
+    }
+    return 0;
+  };
+
   useEffect(() => {
+
     userServices
       .pegarUsuario(location.state.id)
-      .then(({ data }) => {
-        if (!data.erro && !isEmpty(data.data)) {
-          setUsuario(data.data);
+      .then((user) => {
+        if (!isEmpty(user.data.data)) {
+          setUsuario(user.data.data);
           setIsLoading(false);
         } else {
           setIsLoading(false);
-          setMsgSucesso(false);
-          setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
-          setOpenSnack(true);
         }
       })
       .catch((err) => {
         console.log(err.message);
         setIsLoading(false);
         setMsgSucesso(false);
-        setMsgErro("Ocorreu um erro ao na requisição ao servidor");
+        setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
         setOpenSnack(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -109,18 +109,6 @@ const validarTokenSessao = (usu_token) => {
   return api.get(`${endpoint}/validadorSessionToken?usu_sessionToken=${usu_token}`);
 };
 
-/**
- * Altera a senha do usuário que está logado
- * @author Denis Lima
- * @param {number} usu_id Id do usuário
- * @param {string} usu_senha_nova senha nova
- * @param {string} usu_senha_antiga senha antiga (atual)
- * @returns Retorna uma promessa do AxiosResponse informando se foi um sucesso ou qual o erro
- */
-const alterarSenhaLogado = (usu_id, usu_senha_nova, usu_senha_antiga) => {
-  return api.post(`${endpoint}/alterarSenhaLogado?usu_id=${usu_id}&usu_senha_nova=${usu_senha_nova}&usu_senha_antiga=${usu_senha_antiga}`);
-};
-
 const userServices = {
   pegarUsuario,
   listarUsuarios,
@@ -132,7 +120,6 @@ const userServices = {
   validadorToken,
   logIn,
   validarTokenSessao,
-  alterarSenhaLogado
 };
 
 export default userServices;
