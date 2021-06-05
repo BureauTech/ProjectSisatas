@@ -74,7 +74,7 @@ export default function Data() {
 
   const columns = [
     { field: "logDataHora", headerName: "Data", width: 250 },
-    { field: "logDescricao", headerName: "Descrição", width: 150 }, 
+    { field: "logDescricao", headerName: "Descrição", width: 300 }, 
     { field: "logAutor", headerName: "Autor", width: 150 },
   ];
 

@@ -95,7 +95,7 @@ const CreateAta = (props) => {
   const salvarLogs = () => {
     var bodyLogs = {
       logAutor: usuario.usuNome,
-      logDescricao: "Ata Criada",
+      logDescricao: `Ata ${ultimoId} Criada por`,
       logDataHora: dataAtual,
     }
     console.log(bodyLogs)
