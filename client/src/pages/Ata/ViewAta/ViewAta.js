@@ -1,14 +1,15 @@
-import {Button, Container, Grid, Typography, useTheme} from "@material-ui/core";
-import {Link, useHistory, useLocation} from "react-router-dom";
+import { Button, Container, Grid, Typography, useTheme } from "@material-ui/core";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import AtaHeader from "../../../components/Ata/ViewAta/AtaHeader";
 import ProjectParticipants from "../../../components/Ata/ViewAta/ProjectParticipants";
+import AprovacaoAta from "../../../components/Ata/ViewAta/AprovacaoAta";
 import Pauta from "../../../components/Ata/ViewAta/Pauta";
 import Topics from "../../../components/Ata/ViewAta/Topics";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "../CreateAta/Style.css";
 import ataServices from "../../../services/ata";
-import {useInfoAta} from "../../../context/InfoAta";
+import { useInfoAta } from "../../../context/InfoAta";
 import Loading from "../../Loading/Loading";
 import revisaoServices from "../../../services/revisao";
 
@@ -115,6 +116,10 @@ const ViewAta = ({ ajustarLayout }) => {
       {!isLoading && (
         <>
           <Grid container style={{ marginBottom: 10 }}>
+            <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Aprovação</Typography>
+            <AprovacaoAta />
+          </Grid>
+          <Grid container style={{ marginBottom: 10 }}>
             <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Cabeçalho</Typography>
             <AtaHeader header={infoAta.header} ajustarLayout={ajustarLayout} />
           </Grid>
@@ -134,20 +139,20 @@ const ViewAta = ({ ajustarLayout }) => {
             <Status />
           </Grid> */}
           <Grid container justify="space-between" style={{ padding: 24 }}>
-              <Button
-                variant="contained"
-                className="bold"
-                style={{
-                  backgroundColor: "white",
-                  color: theme.palette.secondary.main,
-                  fontWeight: 700,
-                  fontSize: "1.5rem",
-                  borderRadius: 16,
-                  padding: "0 5px",
-                }}
-                onClick={voltar}
-              >
-                Voltar
+            <Button
+              variant="contained"
+              className="bold"
+              style={{
+                backgroundColor: "white",
+                color: theme.palette.secondary.main,
+                fontWeight: 700,
+                fontSize: "1.5rem",
+                borderRadius: 16,
+                padding: "0 5px",
+              }}
+              onClick={voltar}
+            >
+              Voltar
               </Button>
             <Button
               variant="contained"
