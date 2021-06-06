@@ -79,13 +79,11 @@ const Register = (props) => {
 
     var body = [
       {
-          userEnviar: "Noreply.bureautech",
-          senhaEnviar: "bureautech",
-          emailEnviar: "noreply.bureautech@gmail.com",
           nomeEnviar: "Sisatas",
           emailReceber: email,
           nomeReceber: nome,         
-          linkSenha : `http://localhost:3000/cadastrar-senha?usu_token=${res.data.data}`
+          linkSenha : `http://localhost:3000/cadastrar-senha?usu_token=${res.data.data}`,
+          idEmail : 1
         }]
 
         emailServices
