@@ -262,7 +262,7 @@ const ViewRevisionsComponent = (props) => {
               </Grid>
             </Grid> */}
             <Grid container justify="space-around">
-              <Link to="/comentarios" style={{ textDecoration: "none" }}>
+{/*              <Link to="/comentarios" style={{ textDecoration: "none" }}>
                 <Grid item style={{ margin: "15px 0px" }}>
                   <Button
                     variant="contained"
@@ -279,7 +279,7 @@ const ViewRevisionsComponent = (props) => {
                     Exibir Comentários
                 </Button>
                 </Grid>
-              </Link>
+              </Link>*/}
               <Grid item style={{ margin: "15px 0px" }}>
                 <Button
                   variant="contained"
