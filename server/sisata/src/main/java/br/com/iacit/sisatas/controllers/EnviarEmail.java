@@ -1,7 +1,9 @@
 package br.com.iacit.sisatas.controllers;
 
 
+import br.com.iacit.sisatas.models.AuthEmailModel;
 import br.com.iacit.sisatas.models.ConexaoEmail;
+import br.com.iacit.sisatas.repository.AuthEmailRespository;
 //import mail.Config;
 //import mail.Model;
 import br.com.iacit.sisatas.exports.EnvioEmail;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.lang.Runnable;
 import java.lang.Thread;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/email")
 public class EnviarEmail {
+	
+	@Autowired
+	private AuthEmailRespository ae;
 	
 	//enviar email para os participantes da ata
 	/*
@@ -34,22 +40,24 @@ public class EnviarEmail {
         "nomeReceber": "",
         "ataId": "",
         "linkDown": "http://localhost:8080/download/ata/excel/{ataid}",
-        "ataProjeto": ""
+        "ataProjeto": "",
+         "idEmail" : ""
       }
 ]
 	 * */
 	@RequestMapping(value="/envioAtaEmail", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public String NovaAta(@RequestBody List<ConexaoEmail> con) {
-		
 		//Thread para enviar os emails e nao travar o sistema
 		Runnable t1 = new Runnable() {
-
+			AuthEmailModel res = null;
 			@Override
 			public void run() {
 				for (int i=0; i<con.size();i++) {
 					try {
-					EnvioEmail.NovaAta(con.get(i));
+					//ae.findByEmailId(con.get(i).idEmail);
+						res = ae.findByEmailId(con.get(i).idEmail);
+						EnvioEmail.NovaAta(con.get(i), res.usuario, res.email, res.senha);
 					}
 					catch (Exception e) {
 						System.out.println(e);
@@ -76,6 +84,7 @@ public class EnviarEmail {
         "nomeReceber": "",
 
         "ataProjeto": "",
+          "idEmail" : ""
     }
 ]
 	 * */
@@ -85,12 +94,15 @@ public class EnviarEmail {
 			
 			//Thread para enviar os emails e nao travar o sistema
 			Runnable t1 = new Runnable() {
+				AuthEmailModel resu = null;
 
 				@Override
 				public void run() {
 					for (int i=0; i<con.size();i++) {
 						try {
-						EnvioEmail.NovaRevisao(con.get(i));
+							resu = ae.findByEmailId(con.get(i).idEmail);
+							System.out.println(resu);
+							EnvioEmail.NovaRevisao(con.get(i), resu.usuario, resu.email, resu.senha);
 						}
 						catch (Exception e) {
 							System.out.println(e);
@@ -117,7 +129,8 @@ public class EnviarEmail {
 		
 		        "ataProjeto": "",
 		        "assunto": "",
-		        "ataId": ""
+		        "ataId": "",
+          		"idEmail" : ""
 			}
 		   ]*/
 		@RequestMapping(value="/novaAssunto", method = RequestMethod.POST, consumes = "application/json")
@@ -126,12 +139,14 @@ public class EnviarEmail {
 			
 			//Thread para enviar os emails e nao travar o sistema
 			Runnable t1 = new Runnable() {
+				AuthEmailModel res = null;
 
 				@Override
 				public void run() {
 					for (int i=0; i<con.size();i++) {
 						try {
-						EnvioEmail.NovoAssunto(con.get(i));
+							res = ae.findByEmailId(con.get(i).idEmail);
+							EnvioEmail.NovoAssunto(con.get(i), res.usuario, res.email, res.senha);
 						}
 						catch (Exception e) {
 							System.out.println(e);
@@ -159,7 +174,8 @@ public class EnviarEmail {
 		
 		        "ataProjeto": "",
 		        "comentario": "",
-		        "revisao": ""
+		        "revisao": "",
+          		"idEmail" : ""
 		
 		    }
 		]*/
@@ -169,12 +185,14 @@ public class EnviarEmail {
 			
 			//Thread para enviar os emails e nao travar o sistema
 			Runnable t1 = new Runnable() {
+				AuthEmailModel res = null;
 
 				@Override
 				public void run() {
 					for (int i=0; i<con.size();i++) {
 						try {
-						EnvioEmail.NovoComentario(con.get(i));
+							res = ae.findByEmailId(con.get(i).idEmail);
+							EnvioEmail.NovoComentario(con.get(i), res.usuario, res.email, res.senha);
 						}
 						catch (Exception e) {
 							System.out.println(e);
@@ -201,7 +219,8 @@ public class EnviarEmail {
 		        "nomeReceber": "",
 		
 		        "ataProjeto": "",
-		        "ataId": ""
+		        "ataId": "",
+          		"idEmail" : ""
 	
 		    }
 		]*/
@@ -211,12 +230,14 @@ public class EnviarEmail {
 			
 			//Thread para enviar os emails e nao travar o sistema
 			Runnable t1 = new Runnable() {
+				AuthEmailModel res = null;
 
 				@Override
 				public void run() {
 					for (int i=0; i<con.size();i++) {
 						try {
-						EnvioEmail.ParticipanteAta(con.get(i));
+							res = ae.findByEmailId(con.get(i).idEmail);
+							EnvioEmail.ParticipanteAta(con.get(i), res.usuario, res.email, res.senha);
 						}
 						catch (Exception e) {
 							System.out.println(e);
@@ -240,7 +261,8 @@ public class EnviarEmail {
 		        "emailEnviar": "",
 		        "nomeEnviar": "",
 		        "emailReceber": "",
-		        "nomeReceber": ""
+		        "nomeReceber": "",
+          		"idEmail" : ""
 		
 		
 		    }
@@ -251,12 +273,14 @@ public class EnviarEmail {
 			
 			//Thread para enviar os emails e nao travar o sistema
 			Runnable t1 = new Runnable() {
+				AuthEmailModel res = null;
 
 				@Override
 				public void run() {
 					for (int i=0; i<con.size();i++) {
 						try {
-						EnvioEmail.SenhaAlterada(con.get(i));
+							res = ae.findByEmailId(con.get(i).idEmail);
+							EnvioEmail.SenhaAlterada(con.get(i), res.usuario, res.email, res.senha);
 						}
 						catch (Exception e) {
 							System.out.println(e);
@@ -281,7 +305,8 @@ public class EnviarEmail {
 		        "emailReceber": "",
 		        "nomeReceber": "",
 		        
-		        "linkSenha" : ""
+		        "linkSenha" : "",
+          		"idEmail" : ""
 		
 		
 		    }
@@ -293,12 +318,14 @@ public class EnviarEmail {
 			
 			//Thread para enviar os emails e nao travar o sistema
 			Runnable t1 = new Runnable() {
+				AuthEmailModel res = null;
 
 				@Override
 				public void run() {
 					for (int i=0; i<con.size();i++) {
 						try {
-						EnvioEmail.UsuarioCadastrado(con.get(i));
+							res = ae.findByEmailId(con.get(i).idEmail);
+							EnvioEmail.UsuarioCadastrado(con.get(i), res.usuario, res.email, res.senha);
 						}
 						catch (Exception e) {
 							System.out.println(e);
@@ -319,12 +346,14 @@ public class EnviarEmail {
 			
 			//Thread para enviar os emails e nao travar o sistema
 			Runnable t1 = new Runnable() {
+				AuthEmailModel res = null;
 
 				@Override
 				public void run() {
 					for (int i=0; i<con.size();i++) {
 						try {
-						EnvioEmail.EsqueciSenha(con.get(i));
+							res = ae.findByEmailId(con.get(i).idEmail);
+							EnvioEmail.EsqueciSenha(con.get(i), res.usuario, res.email, res.senha);
 						}
 						catch (Exception e) {
 							System.out.println(e);
