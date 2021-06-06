@@ -90,7 +90,7 @@ Baseado no nosso backlog, as histórias que não foram concluídas, foram:
 
 # Burndown
 
-- ![Gráfico Burndown](assets/png/Burndown%20-%20Sprint%204.png)
+![Gráfico Burndown](assets/png/Burndown%20-%20Sprint%204.png)
 
 # Backlog 
 
