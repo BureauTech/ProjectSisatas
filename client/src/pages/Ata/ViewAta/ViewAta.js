@@ -170,6 +170,13 @@ const ViewAta = ({ ajustarLayout }) => {
                 borderRadius: 16,
                 padding: "0 5px",
               }}
+              onClick={() => {
+                ll();
+                history.push("revisoes-pendentes", {
+                  listaRevisoes: listaRevisoes,
+                  idAta: idAta,
+                });
+              }}
             >
               Revisões Pendentes
             </Button>

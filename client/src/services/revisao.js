@@ -5,6 +5,10 @@ const criarRevisao = (data) => {
   return api.post(`${endpoint}/cadastrarRevisoes`, data);
 };
 
+const aprovarRevisao = (revId) => {
+  return api.post(`${endpoint}/aprovarRevisao`, revId);
+};
+
 const listarRevisoes = () => {
   return api.get(`${endpoint}/listarRevisoes`)
 }
@@ -16,7 +20,8 @@ const excluirRevisao = (revId) => {
 const revisaoServices = {
   criarRevisao,
   listarRevisoes,
-  excluirRevisao
+  excluirRevisao,
+  aprovarRevisao
 };
 
 export default revisaoServices;

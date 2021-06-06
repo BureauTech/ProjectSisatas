@@ -54,7 +54,7 @@ function App() {
         if (!data.erro) {
           const dados = data.data;
           setUsuario({ ...dados, estaLogado: true });
-          setLocalStorage("sisata_token", dados.usuSessionToken, 120);
+          //setLocalStorage("sisata_token", dados.usuSessionToken, 120);
         }
       }
     }

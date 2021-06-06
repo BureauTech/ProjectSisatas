@@ -6,6 +6,7 @@ import UserProfile from "../pages/User/UserProfile";
 import CreateRevision from "../pages/CreateRevision/CreateRevision";
 import ViewAta from "../pages/Ata/ViewAta/ViewAta";
 import ViewRevisions from "../pages/ViewRevisions/ViewRevisions";
+import Pendentes from "../pages/ViewRevisions/Pendentes";
 import Comentarios from "../components/Comentarios/Comentarios";
 import Register from "../components/RegisterUser/Register";
 import RegisterPassword from "../components/RegisterPassword/RegisterPassword";
@@ -48,6 +49,7 @@ const Routes = ({ ajustarLayout }) => (
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/alterar-senha" component={() => <EditPassword />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/nova-revisao" component={() => <CreateRevision />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/revisoes" component={() => <ViewRevisions />} />
+      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/revisoes-pendentes" component={() => <Pendentes />} />
       <PrivateRoute
         exact
         ajustarLayout={ajustarLayout}
