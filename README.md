@@ -22,7 +22,6 @@ Desenvolvido pela Bureau Tech.
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
-        * [Docker Image](#docker-image)
       * [Cliente](#cliente)
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
@@ -62,10 +61,6 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 ![cards](./assets/png/Sprint%204%20-%20Cards-1.png)
 ![cards](./assets/png/Sprint%204%20-%20Cards-2.png)
 ![cards](./assets/png/Sprint%204%20-%20Cards-3.png)
-
-**Entregas realizadas:**
-
-O que foi entregue pelo time até a data término desta sprint está disponível em nossa [Release Note](https://github.com/BureauTech/ProjectSisatas/releases/tag/0.4.0)
 
 **Histórias em aberto:**
 
