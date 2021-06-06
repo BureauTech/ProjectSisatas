@@ -86,7 +86,7 @@ Baseado no nosso backlog, as histórias que não foram concluídas, foram:
 
 - [Manual de Usuário](./docs/)
 
-- [Plano de Desenvolvimento e Melhoria do SISATAS - Sistema de Gerenciamento de Atas](./docs/)
+- [Plano de Desenvolvimento e Melhoria do SISATAS - Sistema de Gerenciamento de Atas](./docs/Plano%20de%Melhoria.pdf)
 
 # Burndown
 
