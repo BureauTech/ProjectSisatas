@@ -23,17 +23,17 @@ const CreateRevision = (props) => {
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
 
-  const [ataid, setAtaid] = useState("");
 
   const [enviar, setEnviar] = useState([]);
-  const [dadosTemp, setDadosTemp] = useState([]);
-  const [ataProjeto, setataProjeto] = useState("");
 
   const location = useLocation();
 
   const history = useHistory();
 
   const { usuario } = useAutenticacao();
+
+  let dados = ""
+  let projeto = ""
 
 
   const body = {
@@ -69,47 +69,47 @@ const CreateRevision = (props) => {
 
   const EmailRevisao = () => {
     var k = 0
-    setAtaid(location.state.ataid)
-    const ataSemBarra = ataid.replace("/", "")
-    console.log(ataSemBarra)
+    let idAta = location.state.ataid
+    const ataSemBarra = idAta.replace("/", "")
     ataServices.pegarAta(ataSemBarra)
       .then(res => {
-        setDadosTemp(res.data.data.participaAtas)
-        setataProjeto(res.data.data.ataProjeto)
+        projeto = res.data.data.ataProjeto
+        dados = res.data.data.participaAtas
+
+        for (k = 0; k < dados.length; k++) {
+          console.log(k)
+          var infTemp = {
+            userEnviar: "Noreply.bureautech",
+            senhaEnviar: "bureautech",
+            emailEnviar: "noreply.bureautech@gmail.com",
+            nomeEnviar: "Sisatas",
+    
+            emailReceber: "",
+            nomeReceber: "",
+    
+            ataProjeto: "",
+            revisao: ""
+          }
+          infTemp.emailReceber = dados[k].usuEmail
+          infTemp.nomeReceber = dados[k].usuNome
+          infTemp.ataProjeto = projeto
+          enviar.push(infTemp)
+          console.log(infTemp)
+        }
+
+        emailServices
+        .enviaRevEmail(enviar)
+        .then(res => console.log("email enviado\nres: " + res))
+       .catch(err => console.log("email nao enviado\nerro: " + err))
+
+        //console.log("os dados"+JSON.stringify(res.data.data.participaAtas))
+        //console.log("dados "+JSON.stringify(dados))
       })
       .catch(err => {
         console.log(err)
       })
 
-    for (k = 0; k < dadosTemp.length; k++) {
-      console.log(k)
-      var infTemp = {
-        userEnviar: "Noreply.bureautech",
-        senhaEnviar: "bureautech",
-        emailEnviar: "noreply.bureautech@gmail.com",
-        nomeEnviar: "Sisatas",
-
-        emailReceber: "",
-        nomeReceber: "",
-
-        ataProjeto: "",
-        revisao: ""
-      }
-      infTemp.emailReceber = dadosTemp[k].usuEmail
-      infTemp.nomeReceber = dadosTemp[k].usuNome
-      infTemp.ataProjeto = ataProjeto
-      enviar.push(infTemp)
-      console.log(infTemp)
-    }
-
-    console.log('emails aqui: ' + JSON.stringify(enviar))
-
-    emailServices
-      .enviaRevEmail(enviar)
-      .then(res => console.log("email enviado\nres: " + res))
-      .catch(err => console.log("email nao enviado\nerro: " + err))
-
-    setDadosTemp([]);
+    dados = ""
     setEnviar([]);
   }
 
