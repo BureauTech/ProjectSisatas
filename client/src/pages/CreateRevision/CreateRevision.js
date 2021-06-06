@@ -44,7 +44,7 @@ const CreateRevision = (props) => {
   setAtaid(location.state.ataid)
   const ataSemBarra = ataid.replace("/", "")
   console.log(ataSemBarra)
-  ataServices.pegarAta(ataSemBarra)
+  ataServices.pegarAta("01/21")
     .then(res => {
       setDadosTemp(res.data.data.participaAtas)
       setataProjeto(res.data.data.ataProjeto)
@@ -54,24 +54,22 @@ const CreateRevision = (props) => {
     })
 
     for(k=0; k<dadosTemp.length; k++) {
-      console.log(k)
+      console.log("ola "+k)
       var infTemp = {
-        userEnviar: "Noreply.bureautech",
-        senhaEnviar: "bureautech",
-        emailEnviar: "noreply.bureautech@gmail.com",
         nomeEnviar: "Sisatas",
   
         emailReceber: "",
         nomeReceber: "",
   
         ataProjeto: "",
-        revisao: ""
+        revisao: "",
+        idEmail : 1
     }
       infTemp.emailReceber = dadosTemp[k].usuEmail
       infTemp.nomeReceber = dadosTemp[k].usuNome
       infTemp.ataProjeto = ataProjeto
       enviar.push(infTemp)
-      console.log(infTemp)
+      console.log("oi "+infTemp)
     }
 
     console.log('emails aqui: '+JSON.stringify(enviar))
