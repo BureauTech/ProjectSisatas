@@ -61,15 +61,13 @@ const CreateAta = (props) => {
 
     for (var i = 0; i < infoProject.length; i++) {
       var bodyEmail = {
-        userEnviar: "Noreply.bureautech",
-        senhaEnviar: "bureautech",
-        emailEnviar: "noreply.bureautech@gmail.com",
         nomeEnviar: "Sisatas",
         emailReceber: infoProject[i].usuEmail,
         nomeReceber: infoProject[i].usuNome,
         ataId: ultimoId,
         linkDown: `http://localhost:8080/download/ata/excel/${ultimoId}`,
-        ataProjeto: tema
+        ataProjeto: tema,
+        idEmail : 1
       }
 
       emails.push(bodyEmail)
