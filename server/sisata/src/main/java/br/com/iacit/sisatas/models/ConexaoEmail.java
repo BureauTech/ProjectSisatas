@@ -22,6 +22,7 @@ public class ConexaoEmail {
 	public String assunto = "";
 	public String comentario = "";
 	public String linkSenha = "";
+	public long idEmail;
 	
 	//public Map<String, Object> props;
 	
