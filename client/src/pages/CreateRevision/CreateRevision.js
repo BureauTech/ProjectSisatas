@@ -10,6 +10,8 @@ import revisaoServices from "../../services/revisao";
 import Alerta from "../../components/Snackbar/Alerta";
 import ataServices from "../../services/ata";
 import emailServices from "../../services/email";
+import logServices from "../../services/log";
+import { useAutenticacao } from "../../context/Autenticacao";
 
 const CreateRevision = (props) => {
   const theme = useTheme();
@@ -30,43 +32,69 @@ const CreateRevision = (props) => {
   const location = useLocation();
 
   const history = useHistory();
-  
+
+  const { usuario } = useAutenticacao();
+
 
   const body = {
     ...infoHeader,
     revAssunto,
   };
+
+
+  //Salvar log de criação de ata
+
+  var data = new Date();
+  var dia = String(data.getDate()).padStart(2, '0');
+  var mes = String(data.getMonth() + 1).padStart(2, '0');
+  var ano = data.getFullYear();
+  var dataAtual = ano + '-' + mes + '-' + dia;
+
+  const salvarLogs = () => {
+    var bodyLogs = {
+      logAutor: usuario.usuNome,
+      logDescricao: `Uma nova Revisão da ata ${location.state.ataid} criada por`,
+      logDataHora: dataAtual,
+    }
+    console.log(bodyLogs)
+    logServices.salvarLogs(bodyLogs)
+      .then(res => console.log("res: ", res))
+      .catch(err => console.log("res de erro: ", err))
+  }
+
+
+
   //body.infoHeader.contemRevisoes.ataId = props.ataid;
   //body.responsavelRevisoes.usuId = props.user;
 
   const EmailRevisao = () => {
     var k = 0
-  setAtaid(location.state.ataid)
-  const ataSemBarra = ataid.replace("/", "")
-  console.log(ataSemBarra)
-  ataServices.pegarAta(ataSemBarra)
-    .then(res => {
-      setDadosTemp(res.data.data.participaAtas)
-      setataProjeto(res.data.data.ataProjeto)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
+    setAtaid(location.state.ataid)
+    const ataSemBarra = ataid.replace("/", "")
+    console.log(ataSemBarra)
+    ataServices.pegarAta(ataSemBarra)
+      .then(res => {
+        setDadosTemp(res.data.data.participaAtas)
+        setataProjeto(res.data.data.ataProjeto)
+      })
+      .catch(err => {
+        console.log(err)
+      })
 
-    for(k=0; k<dadosTemp.length; k++) {
+    for (k = 0; k < dadosTemp.length; k++) {
       console.log(k)
       var infTemp = {
         userEnviar: "Noreply.bureautech",
         senhaEnviar: "bureautech",
         emailEnviar: "noreply.bureautech@gmail.com",
         nomeEnviar: "Sisatas",
-  
+
         emailReceber: "",
         nomeReceber: "",
-  
+
         ataProjeto: "",
         revisao: ""
-    }
+      }
       infTemp.emailReceber = dadosTemp[k].usuEmail
       infTemp.nomeReceber = dadosTemp[k].usuNome
       infTemp.ataProjeto = ataProjeto
@@ -74,12 +102,12 @@ const CreateRevision = (props) => {
       console.log(infTemp)
     }
 
-    console.log('emails aqui: '+JSON.stringify(enviar))
+    console.log('emails aqui: ' + JSON.stringify(enviar))
 
-     emailServices
+    emailServices
       .enviaRevEmail(enviar)
-      .then(res => console.log("email enviado\nres: "+res))
-      .catch (err => console.log("email nao enviado\nerro: "+err))
+      .then(res => console.log("email enviado\nres: " + res))
+      .catch(err => console.log("email nao enviado\nerro: " + err))
 
     setDadosTemp([]);
     setEnviar([]);
@@ -95,7 +123,8 @@ const CreateRevision = (props) => {
         setMsgSucesso("Revisão cadastrada com sucesso!");
         setMsgErro(false);
         setOpenSnack(true);
-        EmailRevisao()
+        EmailRevisao();
+        salvarLogs();
       })
       .catch((err) => {
         console.log(err);
