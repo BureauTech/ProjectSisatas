@@ -14,7 +14,7 @@ import br.com.iacit.sisatas.models.ConexaoEmail;
 @SuppressWarnings("deprecation")
 public class EnvioEmail {
 	
-	public static void NovaAta (ConexaoEmail cone) throws MalformedURLException {
+	public static void NovaAta (ConexaoEmail cone, String user, String Email, String Senha) throws MalformedURLException {
 		try {
 			EmailAttachment attachment = new EmailAttachment();
 			// Cria o e-mail
@@ -24,9 +24,9 @@ public class EnvioEmail {
 		    email.setSmtpPort(587);
 		    email.setSSL(true);
 			email.setCharset("utf-8");
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.setAuthentication(user, Senha); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setFrom(Email, cone.nomeEnviar); //email que fez a autenticação
 		    email.setSubject("Ata do Sisatas"); //assunto
 		    //attachment.setPath(cone.arq);
 		    
@@ -85,7 +85,7 @@ public class EnvioEmail {
 	}	
 		
 	
-	public static void NovaRevisao (ConexaoEmail cone) {
+	public static void NovaRevisao (ConexaoEmail cone, String user, String Email, String Senha) {
 		try {
 			// Cria o e-mail
 			HtmlEmail email = new HtmlEmail();
@@ -94,9 +94,9 @@ public class EnvioEmail {
 		    email.setSmtpPort(587);
 		    email.setSSL(true);//
 		    email.setCharset("utf-8");
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.setAuthentication(user, Senha); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setFrom(Email, cone.nomeEnviar); //email que fez a autenticação
 		    email.setSubject("Nova Revisao"); //assunto
 		    
 			// configura a mensagem para o formato HTML
@@ -146,7 +146,7 @@ public class EnvioEmail {
 	}	
 	
 	
-	public static void NovoAssunto (ConexaoEmail cone) {
+	public static void NovoAssunto (ConexaoEmail cone, String user, String Email, String Senha) {
 		try {
 			// Cria o e-mail
 			HtmlEmail email = new HtmlEmail();
@@ -155,9 +155,9 @@ public class EnvioEmail {
 		    email.setSmtpPort(587);
 		    email.setSSL(true);//
 		    email.setCharset("utf-8");
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.setAuthentication(user, Senha); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setFrom(Email, cone.nomeEnviar); //email que fez a autenticação
 		    email.setSubject("Novo Assunto"); //assunto
 		    
 			// configura a mensagem para o formato HTML
@@ -208,7 +208,7 @@ public class EnvioEmail {
 	}
 	
 	
-	public static void NovoComentario (ConexaoEmail cone) {
+	public static void NovoComentario (ConexaoEmail cone, String user, String Email, String Senha) {
 		try {
 			// Cria o e-mail
 			HtmlEmail email = new HtmlEmail();
@@ -217,9 +217,9 @@ public class EnvioEmail {
 		    email.setSmtpPort(587);
 		    email.setSSL(true);//
 		    email.setCharset("utf-8");
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.setAuthentication(user, Senha); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setFrom(Email, cone.nomeEnviar); //email que fez a autenticação
 		    email.setSubject("Novo Comentário"); //assunto
 		    
 			// configura a mensagem para o formato HTML
@@ -271,7 +271,7 @@ public class EnvioEmail {
 	}
 	
 	
-	public static void ParticipanteAta (ConexaoEmail cone) {
+	public static void ParticipanteAta (ConexaoEmail cone, String user, String Email, String Senha) {
 		try {
 			// Cria o e-mail
 			HtmlEmail email = new HtmlEmail();
@@ -280,9 +280,9 @@ public class EnvioEmail {
 		    email.setSmtpPort(587);
 		    email.setSSL(true);//
 		    email.setCharset("utf-8");
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.setAuthentication(user, Senha); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setFrom(Email, cone.nomeEnviar); //email que fez a autenticação
 		    email.setSubject("Nova Ata"); //assunto
 		    
 			// configura a mensagem para o formato HTML
@@ -333,7 +333,7 @@ public class EnvioEmail {
 	}
 	
 	
-	public static void SenhaAlterada (ConexaoEmail cone) {
+	public static void SenhaAlterada (ConexaoEmail cone, String user, String Email, String Senha) {
 		try {
 			// Cria o e-mail
 			HtmlEmail email = new HtmlEmail();
@@ -342,9 +342,9 @@ public class EnvioEmail {
 		    email.setSmtpPort(587);
 		    email.setSSL(true);//
 		    email.setCharset("utf-8");
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.setAuthentication(user, Senha); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setFrom(Email, cone.nomeEnviar); //email que fez a autenticação
 		    email.setSubject("Alteração de Senha"); //assunto
 		    
 			// configura a mensagem para o formato HTML
@@ -395,7 +395,7 @@ public class EnvioEmail {
 	}
 	
 	
-	public static void EsqueciSenha (ConexaoEmail cone) {
+	public static void EsqueciSenha (ConexaoEmail cone, String user, String Email, String Senha) {
 		try {
 			// Cria o e-mail
 			HtmlEmail email = new HtmlEmail();
@@ -404,9 +404,9 @@ public class EnvioEmail {
 		    email.setSmtpPort(587);
 		    email.setSSL(true);//
 		    email.setCharset("utf-8");
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.setAuthentication(user, Senha); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setFrom(Email, cone.nomeEnviar); //email que fez a autenticação
 		    email.setSubject("Redefina sua senha"); //assunto
 		    
 			// configura a mensagem para o formato HTML
@@ -456,7 +456,7 @@ public class EnvioEmail {
 	}
 	
 	
-	public static void UsuarioCadastrado (ConexaoEmail cone) {
+	public static void UsuarioCadastrado (ConexaoEmail cone, String user, String Email, String Senha) {
 		try {
 			// Cria o e-mail
 			HtmlEmail email = new HtmlEmail();
@@ -465,9 +465,9 @@ public class EnvioEmail {
 		    email.setSmtpPort(587);
 		    email.setSSL(true);//
 		    email.setCharset("utf-8");
-		    email.setAuthentication(cone.userEnviar, cone.senhaEnviar); //email que vai enviar o email
+		    email.setAuthentication(user, Senha); //email que vai enviar o email
 		    email.addTo(cone.emailReceber, cone.nomeReceber); //email que vai receber, nome
-		    email.setFrom(cone.emailEnviar, cone.nomeEnviar); //email que fez a autenticação
+		    email.setFrom(Email, cone.nomeEnviar); //email que fez a autenticação
 		    email.setSubject("Cadastre sua senha"); //assunto
 		    
 			// configura a mensagem para o formato HTML
