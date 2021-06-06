@@ -57,28 +57,31 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - **Sprint 4**
 
-**Entregas realizadas:**
+**Entregas propostas:**
 
 ![cards](./assets/png/Sprint%204%20-%20Cards-1.png)
 ![cards](./assets/png/Sprint%204%20-%20Cards-2.png)
 ![cards](./assets/png/Sprint%204%20-%20Cards-3.png)
 
-**Representação da entrega:**
-<p align="center">
-  <img src="./assets/gifs/Representacao%20-%20Sprint3.gif">
-</p>
+**Entregas realizadas:**
 
+O que foi entregue pelo time até a data término desta sprint está disponível em nossa [Release Note](https://github.com/BureauTech/ProjectSisatas/releases/tag/0.4.0)
 
 **Documentação entregue:**
+
 - [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software%20-%20Caixa%20Preta.pdf)
+
+- [Manual de Usuário](./docs/)
+
+- [Plano de Desenvolvimento e Melhoria do SISATAS - Sistema de Gerenciamento de Atas](./docs/)
 
 # Burndown
 
-- ![Gráfico Burndown](assets/png/Burndown%20-%20Sprint%203.png)
+- ![Gráfico Burndown](assets/png/Burndown%20-%20Sprint%204.png)
 
 # Backlog 
 
-- [Product Backlog](./docs/Product%20Backlog%20do%20Projeto%20-%20SISATAS%20-%20v5.pdf)
+- [Product Backlog](./docs/Product%20Backlog%20do%20Projeto%20-%20SISATAS%20-%20v6.pdf)
 
 # Como executar localmente
 
@@ -94,7 +97,6 @@ Java - Versão: 11
 PostgreSQL - Versão: 10.16
 Spring Framework
 Maven
-Docker (opcional)
 ```
 
 Além disto é bom ter um editor para trabalhar com o código como VSCode.
@@ -110,22 +112,6 @@ mvn spring-boot:run
 ```
 
 Ficará disponível em [localhost:8080](http://localhost/8080)
-
-### Docker Image
-
-Também é possível executar utilizando Docker, conforme processos descritos abaixo:
-
-1. Criação da Imagem do Docker::
-
-```
-docker build -t bureau/sisata
-```
-
-2. Para execução do container:
-
-```
-docker run -p 8080:8080 {image-id}
-```
 
 ## Cliente
 
