@@ -54,7 +54,7 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - [Sprint 3](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-2) entrega realizada em 16/05/2021.
 
-- **Sprint 4**
+- **Sprint 4** (Entrega realizada em 06/06/2021).
 
 **Entregas propostas:**
 
