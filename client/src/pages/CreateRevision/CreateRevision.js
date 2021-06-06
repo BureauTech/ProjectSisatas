@@ -23,11 +23,8 @@ const CreateRevision = (props) => {
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
 
-  const [ataid, setAtaid] = useState("");
 
   const [enviar, setEnviar] = useState([]);
-  const [dadosTemp, setDadosTemp] = useState([]);
-  const [ataProjeto, setataProjeto] = useState("");
 
   const location = useLocation();
 
@@ -36,6 +33,7 @@ const CreateRevision = (props) => {
   const { usuario } = useAutenticacao();
 
   let dados = ""
+  let projeto = ""
 
 
   const body = {
@@ -72,13 +70,10 @@ const CreateRevision = (props) => {
   const EmailRevisao = () => {
     var k = 0
     let idAta = location.state.ataid
-    setAtaid(location.state.ataid)
     const ataSemBarra = idAta.replace("/", "")
-    console.log(ataSemBarra)
     ataServices.pegarAta(ataSemBarra)
       .then(res => {
-        setDadosTemp(res.data.data.participaAtas)
-        setataProjeto(res.data.data.ataProjeto)
+        projeto = res.data.data.ataProjeto
         dados = res.data.data.participaAtas
 
         for (k = 0; k < dados.length; k++) {
@@ -97,12 +92,10 @@ const CreateRevision = (props) => {
           }
           infTemp.emailReceber = dados[k].usuEmail
           infTemp.nomeReceber = dados[k].usuNome
-          infTemp.ataProjeto = ataProjeto
+          infTemp.ataProjeto = projeto
           enviar.push(infTemp)
           console.log(infTemp)
         }
-    
-        console.log('emails aqui: ' + JSON.stringify(enviar))
 
         emailServices
         .enviaRevEmail(enviar)
@@ -116,7 +109,7 @@ const CreateRevision = (props) => {
         console.log(err)
       })
 
-    setDadosTemp([]);
+    dados = ""
     setEnviar([]);
   }
 
