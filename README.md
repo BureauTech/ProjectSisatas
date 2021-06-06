@@ -67,6 +67,19 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 O que foi entregue pelo time até a data término desta sprint está disponível em nossa [Release Note](https://github.com/BureauTech/ProjectSisatas/releases/tag/0.4.0)
 
+**Histórias em aberto:**
+
+Baseado no nosso backlog, as histórias que não foram concluídas, foram:
+
+- US13:
+  - Critério 1: Ferramenta de validação de ata.
+  - Critério 2: Ferramenta de aprovação ou recusa de atas e revisões.
+
+- US18:
+  - Critério 1: Identificar usuários que revisaram ou possuem revisão pendente sobre determinada ata/revisão.
+  - Critério 2: Controle de estado da Ata (Criada, Revisada, Assinada, Enviada).
+  - Critério 3: Envio de ata.
+
 **Documentação entregue:**
 
 - [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software%20-%20Caixa%20Preta.pdf)
