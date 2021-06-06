@@ -51,14 +51,17 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entrega realizada em 28/03/2021.
 
-- [Sprint 2](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-2) entrega realizada em 16/05/2021.
+- [Sprint 2](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-2) entrega realizada em 18/04/2021.
 
-- **Sprint 3**
+- [Sprint 3](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-2) entrega realizada em 16/05/2021.
+
+- **Sprint 4**
 
 **Entregas realizadas:**
 
-![cards](./assets/png/Sprint%203%20-%20Cards-1.png)
-![cards](./assets/png/Sprint%203%20-%20Cards-2.png)
+![cards](./assets/png/Sprint%204%20-%20Cards-1.png)
+![cards](./assets/png/Sprint%204%20-%20Cards-2.png)
+![cards](./assets/png/Sprint%204%20-%20Cards-3.png)
 
 **Representação da entrega:**
 <p align="center">
