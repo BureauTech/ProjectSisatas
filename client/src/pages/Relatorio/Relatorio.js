@@ -9,6 +9,7 @@ import ptBR from "../../components/ptBR/DataGrid";
 import { Link, useHistory } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta.js";
 import Loading from "../../pages/Loading/Loading.js";
+import logServices from "../../services/log";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -66,50 +67,43 @@ const Relatorio = (props) => {
   const history = useHistory();
 
   const columns = [
-    { field: "data", headerName: "Data", width: 150 },
-    { field: "estado", headerName: "Estado", width: 130 },
-    { field: "projeto", headerName: "Projeto", width: 250 },
-    { field: "usuResponsavel", headerName: "Usuário responsável", width: 300 },
+    { field: "logDataHora", headerName: "Data", width: 150 },
+    { field: "logDescricao", headerName: "Descrição", width: 350 },
+    { field: "logAutor", headerName: "Autor", width: 400 },
     {
       field: "Exibir",
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button 
-        // onClick={() => history.push("perfil", { id: params.id })}
+        <Button
+          onClick={() => history.push("visualizar-atas")}
         >
           <VisibilityIcon className="icon" />
         </Button>
       ),
     },
   ];
+  const formatDate = (date) => {
+    const data = new Date(date).toLocaleDateString();
+    return data;
+  };
 
   useEffect(() => {
-
-    setRows([
-      {
-        id: 1,
-        data: new Date().toLocaleDateString(),
-        estado: 'Revisada',
-        projeto: 'Titulo do projeto',
-        usuResponsavel: 'Denis Ferreira Lima'
-      },
-      {
-        id: 2,
-        data: new Date().toLocaleDateString(),
-        estado: 'Nova',
-        projeto: 'Titulo do projeto 2',
-        usuResponsavel: 'Charles Ramos Ferreira'
-      },
-      {
-        id: 3,
-        data: new Date().toLocaleDateString(),
-        estado: 'Assinada',
-        projeto: 'Titulo do projeto 3',
-        usuResponsavel: 'Wesley Ribeiro Dias'
-      },
-    ])
-  }, [])
+    logServices
+      .pegarLogs("DataGrid")
+      .then((res) => {
+        let lista = res.data;
+        let lista2 = [];
+        lista.forEach((log) => {
+          log.logDataHora = formatDate(log.logDataHora);
+          lista2.push({ id: log["logId"], ...log });
+        });
+        setRows(lista2);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [setRows]);
 
 
   return (
