@@ -23,64 +23,65 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Controller
 @RequestMapping("/aprovacaoata")
-@CrossOrigin
 public class AprovacaoAtaController {
 
-			@Autowired
-			private EstadosRepository ep;
-      @Autowired
-			private AprovacaoAtaRepository aar;
-      @Autowired
-			private AtasRepository ar;
+	@Autowired
+	private EstadosRepository ep;
+	@Autowired
+	private AprovacaoAtaRepository aar;
+	@Autowired
+	private AtasRepository ar;
 
-			@ResponseBody
-			@RequestMapping(value = "/cadastrarEstados", method = RequestMethod.POST, consumes = "application/json")
-			public String cadastrarEstados(@RequestBody AprovacaoAtaModel estado) {
-				String result = null;
-				try {
-					aar.save(estado);
-				} catch (DataAccessException e) {
-					e.printStackTrace();
-					result = e.getMessage();
-				}
-				return result;
-			}
-			
-			@ResponseBody
-			@RequestMapping(value = "/atualizarEstados", method = RequestMethod.GET)
-			public void atualizarEstados() {
-				// Desenvolver
-			}
+	@ResponseBody
+	@RequestMapping(value = "/cadastrarEstados", method = RequestMethod.POST, consumes = "application/json")
+	public String cadastrarEstados(@RequestBody AprovacaoAtaModel estado) {
+		String result = null;
+	
+		try {
+			aar.save(estado);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			result = e.getMessage();
+		}
+	
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/atualizarEstados", method = RequestMethod.GET)
+	public void atualizarEstados() {
+		// Desenvolver
+	}
 
-			@ResponseBody
-			@RequestMapping(value = "/estadoAprovacao/{usuId}/{ataId}", method = RequestMethod.GET)
-			public List<AprovacaoAtaProjection> estadoAprovacao(@PathVariable Long usuId, @PathVariable String ataId) {
-				List<AprovacaoAtaProjection> estados = null;
-				List<AprovacaoAtaProjection> filtrado = new ArrayList<>();
-        String ata_id = ataId.substring(0, ataId.length() - 2) + "/" + ataId.substring(ataId.length() - 2);
-				try {
-          estados = aar.findAllProjectedBy();
-          for (AprovacaoAtaProjection item : estados) {
-            if (item.getAprovaAta().getUsuId() == usuId && item.getAtaReferencia().getAtaId().equals(ata_id)) {
-              filtrado.add(item);
-            }
-          }
-				} catch (DataAccessException e) {
-					e.printStackTrace();
+	@ResponseBody
+	@RequestMapping(value = "/estadoAprovacao/{usuId}/{ataId}", method = RequestMethod.GET)
+	public List<AprovacaoAtaProjection> estadoAprovacao(@PathVariable Long usuId, @PathVariable String ataId) {
+		List<AprovacaoAtaProjection> estados = null;
+		List<AprovacaoAtaProjection> filtrado = new ArrayList<>();
+		String ata_id = ataId.substring(0, ataId.length() - 2) + "/" + ataId.substring(ataId.length() - 2);
+		try {
+			estados = aar.findAllProjectedBy();
+			for (AprovacaoAtaProjection item : estados) {
+				if (item.getAprovaAta().getUsuId() == usuId && item.getAtaReferencia().getAtaId().equals(ata_id)) {
+					filtrado.add(item);
 				}
-				return filtrado;
 			}
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return filtrado;
+	}
 
-			@ResponseBody
-			@RequestMapping(value = "/excluirEstados/{est_id}", method = RequestMethod.GET)
-			public String excluirEstados(@PathVariable long est_id) {
-				String result = null;
-				try {
-					EstadosModel estadoSelecionado = ep.findByestId(est_id);
-					ep.delete(estadoSelecionado);
-				} catch (DataAccessException e) {
-					result = e.getMessage();
-				}
-				return result;
-			}
+	@ResponseBody
+	@RequestMapping(value = "/excluirEstados/{est_id}", method = RequestMethod.GET)
+	public String excluirEstados(@PathVariable long est_id) {
+		String result = null;
+		try {
+			EstadosModel estadoSelecionado = ep.findByestId(est_id);
+			ep.delete(estadoSelecionado);
+		} catch (DataAccessException e) {
+			result = e.getMessage();
+		}
+		return result;
+	}
 }

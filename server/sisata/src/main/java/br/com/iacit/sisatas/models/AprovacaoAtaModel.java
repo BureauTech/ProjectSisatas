@@ -45,13 +45,13 @@ public class AprovacaoAtaModel implements Serializable{
 	@Id
   @ManyToOne(optional = false)
 	@JoinColumn(name = "fkUsuId", referencedColumnName = "usuId", foreignKey = @ForeignKey(name = "fk_UsuId"))
-	@JsonBackReference
+	@JsonBackReference(value = "aprovaAta")
 	private UsuariosModel aprovaAta;
 	
 	@Id
   @ManyToOne(optional = false)
 	@JoinColumn(name = "fkAtaId", referencedColumnName = "ataId", foreignKey = @ForeignKey(name = "fk_AtaId"))
-	@JsonBackReference
+	@JsonBackReference(value = "ataReferencia")
 	private AtasModel ataReferencia;
 
 }
