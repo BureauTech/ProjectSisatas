@@ -78,7 +78,19 @@ public class RevisoesController {
 		public String cadastrarRevisoes(@RequestBody RevisoesModel revisao) {
 			String result = null;
 			try {
-				rp.save(revisao);
+				revisao = rp.save(revisao);
+
+				String ataId = revisao.getContemRevisoes().getAtaId();
+				List<AtasModel> ataBanco =  ap.findBy(AtasModel.class);
+				AtasModel ataBd = null;
+				for (AtasModel ata : ataBanco) {
+					System.out.println(ata.getAtaId() + ataId);
+					if (ata.getAtaId().equals(ataId)) {
+						ataBd = ata;
+					}
+				}
+				ataBd.setAtaEstado("Revisada");
+				ap.save(ataBd);
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 				result = e.getMessage();

@@ -138,7 +138,12 @@ const ViewAta = ({ ajustarLayout }) => {
         <>
           <Grid container style={{ marginBottom: 10 }}>
             <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Aprovação</Typography>
-            <AprovacaoAta estado={estado} cadastrarAprovacaoAta={cadastrarAprovacaoAta} />
+            <AprovacaoAta
+              estado={estado}
+              cadastrarAprovacaoAta={cadastrarAprovacaoAta}
+              ataId={idAta}
+              ataDataInicio={infoAta.header.ataDataInicio}
+            />
           </Grid>
           <Grid container style={{ marginBottom: 10 }}>
             <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Cabeçalho</Typography>
@@ -241,7 +246,7 @@ const ViewAta = ({ ajustarLayout }) => {
                 padding: "0 5px",
               }}
               onClick={() =>
-                history.push("nova-revisao", { user: 1, ataid: idAta, ataDataInicio: infoAta.header.ataDataInicio })
+                history.push("nova-revisao", { ataid: idAta, ataDataInicio: infoAta.header.ataDataInicio })
               }
             >
               Nova Revisão

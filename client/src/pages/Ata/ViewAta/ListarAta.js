@@ -70,6 +70,16 @@ export default function Data() {
     return data;
   };
 
+  const usuarioParticipa = (lista) => {
+    let retorno = false
+    lista.forEach(participante => {
+      if (participante.usuId === usuario.usuId) {
+        retorno = true
+      }
+    })
+    return retorno
+  }
+
   useEffect(() => {
     ataServices
       .listarAtas("DataGrid")
@@ -78,7 +88,8 @@ export default function Data() {
         let lista2 = [];
         lista.forEach((ata) => {
           ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
-          if (ata.geraAtas.usuId === usuario.usuId) {
+          if (usuarioParticipa(ata.participaAtas)) {
+            console.log('push')
             lista2.push({ id: ata["ataId"], ...ata });
           }
         });

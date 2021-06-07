@@ -2,6 +2,7 @@ import { Container, Grid, withStyles, Button, useTheme } from "@material-ui/core
 import "./Components.css";
 import { styles } from "../../../assets/styles/Styles";
 import { useHistory } from "react-router-dom";
+import { useAutenticacao } from "../../../context/Autenticacao";
 
 /**
  * @author Beatriz Coutinho
@@ -14,9 +15,10 @@ import { useHistory } from "react-router-dom";
  */
 
 const AprovacaoAta = (props) => {
-  const { estado, cadastrarAprovacaoAta } = props;
+  const { estado, cadastrarAprovacaoAta, ataId, ataDataInicio } = props;
   const classes = useTheme();
   const history = useHistory();
+  const { usuario } = useAutenticacao()
 
   return (
     <Container>
@@ -75,7 +77,7 @@ const AprovacaoAta = (props) => {
                     }}
                     // onClick={() => history.push("nova-revisao", { user: 1, ataid: idAta, ataDataInicio: infoAta.header.ataDataInicio })}
                     onClick={() =>
-                      history.push("nova-revisao", { user: 1, ataid: "12/21", ataDataInicio: "12/12/2012" })
+                      history.push("nova-revisao", { ataid: ataId, ataDataInicio: ataDataInicio, cadastrarAprovacaoAta: true })
                     }
                   >
                     Recusar
