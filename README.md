@@ -22,7 +22,6 @@ Desenvolvido pela Bureau Tech.
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
-        * [Docker Image](#docker-image)
       * [Cliente](#cliente)
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
@@ -51,31 +50,43 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 
 - [Sprint 1](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-1) entrega realizada em 28/03/2021.
 
-- [Sprint 2](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-2) entrega realizada em 16/05/2021.
+- [Sprint 2](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-2) entrega realizada em 18/04/2021.
 
-- **Sprint 3**
+- [Sprint 3](https://github.com/BureauTech/ProjectSisatas/tree/prod/sprint-3) entrega realizada em 16/05/2021.
 
-**Entregas realizadas:**
+- **Sprint 4** (Entrega realizada em 06/06/2021):
 
-![cards](./assets/png/Sprint%203%20-%20Cards-1.png)
-![cards](./assets/png/Sprint%203%20-%20Cards-2.png)
+**Entregas propostas:**
 
-**Representação da entrega:**
-<p align="center">
-  <img src="./assets/gifs/Representacao%20-%20Sprint3.gif">
-</p>
+![cards](./assets/png/Sprint%204%20-%20Cards-1.png)
+![cards](./assets/png/Sprint%204%20-%20Cards-2.png)
+![cards](./assets/png/Sprint%204%20-%20Cards-3.png)
 
+**Histórias em aberto:**
+
+Baseado no nosso backlog, as histórias que não foram concluídas, foram:
+
+- US13:
+  - Critério 2: Ferramenta de aprovação ou recusa de revisões.
+
+- US18:
+  - Critério 1: Identificar usuários que revisaram ou possuem revisão pendente sobre determinada revisão.
 
 **Documentação entregue:**
+
 - [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software%20-%20Caixa%20Preta.pdf)
+
+- [Manual de Usuário](./docs/)
+
+- [Plano de Desenvolvimento e Melhoria do SISATAS - Sistema de Gerenciamento de Atas](./docs/Plano%20de%20Melhoria.pdf)
 
 # Burndown
 
-- ![Gráfico Burndown](assets/png/Burndown%20-%20Sprint%203.png)
+![Gráfico Burndown](assets/png/Burndown%20-%20Sprint%204.png)
 
 # Backlog 
 
-- [Product Backlog](./docs/Product%20Backlog%20do%20Projeto%20-%20SISATAS%20-%20v5.pdf)
+- [Product Backlog](./docs/Product%20Backlog%20do%20Projeto%20-%20SISATAS%20-%20v6.pdf)
 
 # Como executar localmente
 
@@ -91,7 +102,6 @@ Java - Versão: 11
 PostgreSQL - Versão: 10.16
 Spring Framework
 Maven
-Docker (opcional)
 ```
 
 Além disto é bom ter um editor para trabalhar com o código como VSCode.
@@ -107,22 +117,6 @@ mvn spring-boot:run
 ```
 
 Ficará disponível em [localhost:8080](http://localhost/8080)
-
-### Docker Image
-
-Também é possível executar utilizando Docker, conforme processos descritos abaixo:
-
-1. Criação da Imagem do Docker::
-
-```
-docker build -t bureau/sisata
-```
-
-2. Para execução do container:
-
-```
-docker run -p 8080:8080 {image-id}
-```
 
 ## Cliente
 
