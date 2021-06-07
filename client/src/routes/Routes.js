@@ -48,12 +48,12 @@ const Routes = ({ ajustarLayout }) => (
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/alterar-senha" component={() => <EditPassword />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/nova-revisao" component={() => <CreateRevision />} />
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/revisoes" component={() => <ViewRevisions />} />
-      <PrivateRoute
+{/*      <PrivateRoute
         exact
         ajustarLayout={ajustarLayout}
         path="/cadastrar-comentarios"
         component={() => <Comentarios />}
-      />
+      />*/}
       <RestrictedRoute
         allowed="ADM"
         exact
@@ -61,7 +61,7 @@ const Routes = ({ ajustarLayout }) => (
         path="/cadastrar-usuario"
         component={() => <Register />}
       />
-      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/comentarios" component={() => <ViewComments />} />
+{/*      <PrivateRoute exact ajustarLayout={ajustarLayout} path="/comentarios" component={() => <ViewComments />} /> */}
       <PrivateRoute exact ajustarLayout={ajustarLayout} path="/assuntos" component={() => <ViewSubjects />} />
       <RestrictedRoute
         allowed="ADM"

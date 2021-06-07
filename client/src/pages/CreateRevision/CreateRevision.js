@@ -12,6 +12,7 @@ import ataServices from "../../services/ata";
 import emailServices from "../../services/email";
 import { useAutenticacao } from "../../context/Autenticacao";
 import aprovacaoAtaServices from "../../services/aprovacaoAta";
+import logServices from "../../services/log";
 
 const CreateRevision = (props) => {
   const theme = useTheme();
@@ -23,16 +24,18 @@ const CreateRevision = (props) => {
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
 
-  const [ataid, setAtaid] = useState("");
 
   const [enviar, setEnviar] = useState([]);
-  const [dadosTemp, setDadosTemp] = useState([]);
-  const [ataProjeto, setataProjeto] = useState("");
+
   const { usuario } = useAutenticacao()
 
   const location = useLocation();
 
   const history = useHistory();
+
+  let dados = ""
+  let projeto = ""
+
 
   const cadastrarAprovAta = location.state.cadastrarAprovacaoAta
   
@@ -40,52 +43,76 @@ const CreateRevision = (props) => {
     ...infoHeader,
     revAssunto,
   };
+
+
+  //Salvar log de criação de ata
+
+  var data = new Date();
+  var dia = String(data.getDate()).padStart(2, '0');
+  var mes = String(data.getMonth() + 1).padStart(2, '0');
+  var ano = data.getFullYear();
+  var dataAtual = ano + '-' + mes + '-' + dia;
+
+  const salvarLogs = () => {
+    var bodyLogs = {
+      logAutor: usuario.usuNome,
+      logDescricao: `Uma nova Revisão da ata ${location.state.ataid} criada por`,
+      logDataHora: dataAtual,
+    }
+    console.log(bodyLogs)
+    logServices.salvarLogs(bodyLogs)
+      .then(res => console.log("res: ", res))
+      .catch(err => console.log("res de erro: ", err))
+  }
+
+
+
   //body.infoHeader.contemRevisoes.ataId = props.ataid;
   //body.responsavelRevisoes.usuId = props.user;
 
   const EmailRevisao = () => {
     var k = 0
-  setAtaid(location.state.ataid)
-  const ataSemBarra = ataid.replace("/", "")
-  console.log(ataSemBarra)
-  ataServices.pegarAta(ataSemBarra)
-    .then(res => {
-      setDadosTemp(res.data.data.participaAtas)
-      setataProjeto(res.data.data.ataProjeto)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
+    let idAta = location.state.ataid
+    const ataSemBarra = idAta.replace("/", "")
+    ataServices.pegarAta(ataSemBarra)
+      .then(res => {
+        projeto = res.data.data.ataProjeto
+        dados = res.data.data.participaAtas
 
-    for(k=0; k<dadosTemp.length; k++) {
-      console.log(k)
-      var infTemp = {
-        userEnviar: "Noreply.bureautech",
-        senhaEnviar: "bureautech",
-        emailEnviar: "noreply.bureautech@gmail.com",
-        nomeEnviar: "Sisatas",
-  
-        emailReceber: "",
-        nomeReceber: "",
-  
-        ataProjeto: "",
-        revisao: ""
-    }
-      infTemp.emailReceber = dadosTemp[k].usuEmail
-      infTemp.nomeReceber = dadosTemp[k].usuNome
-      infTemp.ataProjeto = ataProjeto
-      enviar.push(infTemp)
-      console.log(infTemp)
-    }
+        for (k = 0; k < dados.length; k++) {
+          console.log(k)
+          var infTemp = {
+            userEnviar: "Noreply.bureautech",
+            senhaEnviar: "bureautech",
+            emailEnviar: "noreply.bureautech@gmail.com",
+            nomeEnviar: "Sisatas",
+    
+            emailReceber: "",
+            nomeReceber: "",
+    
+            ataProjeto: "",
+            revisao: ""
+          }
+          infTemp.emailReceber = dados[k].usuEmail
+          infTemp.nomeReceber = dados[k].usuNome
+          infTemp.ataProjeto = projeto
+          enviar.push(infTemp)
+          console.log(infTemp)
+        }
 
-    console.log('emails aqui: '+JSON.stringify(enviar))
+        emailServices
+        .enviaRevEmail(enviar)
+        .then(res => console.log("email enviado\nres: " + res))
+       .catch(err => console.log("email nao enviado\nerro: " + err))
 
-     emailServices
-      .enviaRevEmail(enviar)
-      .then(res => console.log("email enviado\nres: "+res))
-      .catch (err => console.log("email nao enviado\nerro: "+err))
+        //console.log("os dados"+JSON.stringify(res.data.data.participaAtas))
+        //console.log("dados "+JSON.stringify(dados))
+      })
+      .catch(err => {
+        console.log(err)
+      })
 
-    setDadosTemp([]);
+    dados = ""
     setEnviar([]);
   }
 
@@ -123,7 +150,8 @@ const CreateRevision = (props) => {
         }
         setMsgErro(false);
         setOpenSnack(true);
-        EmailRevisao()
+        EmailRevisao();
+        salvarLogs();
       })
       .catch((err) => {
         console.log(err);

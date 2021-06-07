@@ -13,10 +13,15 @@ const novoUsuario = (user) => {
     return api.post(`${endpoint}/usuarioCadastrado`, user);
 }
 
+const esqueciSenha = (user) => {
+    return api.post(`${endpoint}/esqueciSenha`, user);
+}
+
 const emailServices = {
     enviaAtaEmail,
     enviaRevEmail,
-    novoUsuario
+    novoUsuario,
+    esqueciSenha
 }
 
 export default emailServices;

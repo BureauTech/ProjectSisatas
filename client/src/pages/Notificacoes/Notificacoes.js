@@ -73,9 +73,9 @@ export default function Data() {
   }, [setRows]);
 
   const columns = [
-    { field: "logDataHora", headerName: "Data", width: 250 },
-    { field: "logDescricao", headerName: "Descrição", width: 300 }, 
-    { field: "logAutor", headerName: "Autor", width: 150 },
+    { field: "logDataHora", headerName: "Data", width: 150 },
+    { field: "logDescricao", headerName: "Descrição", width: 350 }, 
+    { field: "logAutor", headerName: "Autor", width: 400 },
   ];
 
   return (

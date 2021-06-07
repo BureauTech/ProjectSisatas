@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { styles } from "../../assets/styles/Styles";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import "./Register.css";
 import userServices from "../../services/user";
@@ -37,6 +37,7 @@ const Register = (props) => {
   const [openSnack, setOpenSnack] = useState(false);
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
+
 
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -68,7 +69,14 @@ const Register = (props) => {
     }
   };
 
+
+
   const EnviarEmail = () => {
+    //console.log(body)
+
+    userServices.solicitarAlteracaoSenha(email)
+      .then(res => {
+
     var body = [
       {
           userEnviar: "Noreply.bureautech",
@@ -77,23 +85,28 @@ const Register = (props) => {
           nomeEnviar: "Sisatas",
           emailReceber: email,
           nomeReceber: nome,         
-          linkSenha : "http://localhost:3000"
-      }
-  ]
+          linkSenha : `http://localhost:3000/cadastrar-senha?usu_token=${res.data.data}`
+        }]
 
-  emailServices
-  .novoUsuario(body)
-  .then(res => {
-    console.log("email enviado\nresp: "+res.data)
-  })
-  .catch(err => {
-    console.log("não foi o email\nerr: "+err)
-  })
+        emailServices
+          .novoUsuario(body)
+          .then(res => {
+            console.log("email enviado\nresp: " + res.data)
+            console.log("email env: " + JSON.stringify(body))
+          })
+          .catch(err => {
+            console.log("não foi o email\nerr: " + err)
+          })
+
+      })
+      .catch(err => console.log("erro ao solicitar" + err))
 
 
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const body = {
       usuNome: nome,
       usuEmail: email,

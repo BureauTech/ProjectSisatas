@@ -199,7 +199,7 @@ const ViewAta = ({ ajustarLayout }) => {
             >
               Visualizar Assuntos
             </Button>
-            <Button
+{/*            <Button
               variant="contained"
               color="secondary"
               className="bold"
@@ -211,7 +211,7 @@ const ViewAta = ({ ajustarLayout }) => {
               }}
             >
               Revisões Pendentes
-            </Button>
+            </Button> */}
             {/*<Link to="/revisoes" style={{ textDecoration: "none" }}>*/}
             <Button
               variant="contained"
