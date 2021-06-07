@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.iacit.sisatas.conversor.Conversor;
+import br.com.iacit.sisatas.models.AprovacaoAtaModel;
 import br.com.iacit.sisatas.models.AtasModel;
+import br.com.iacit.sisatas.models.UsuariosModel;
 import br.com.iacit.sisatas.projections.AtasProjectionDataGrid;
 import br.com.iacit.sisatas.projections.AtasProjectionExibir;
 import br.com.iacit.sisatas.projections.AtasProjectionRevisao;
+import br.com.iacit.sisatas.repository.AprovacaoAtaRepository;
 import br.com.iacit.sisatas.repository.AtasRepository;
 import br.com.iacit.sisatas.returns.MessageReturn;
 
@@ -39,6 +42,9 @@ public class AtasController {
 
 	@Autowired
 	private AtasRepository ap;
+
+	@Autowired
+	private AprovacaoAtaRepository aar;
 		
 	/**
 	 * @Author Daniel Oliveira
@@ -125,9 +131,21 @@ public class AtasController {
 
 		try {
 			ata.setAtaEstado("Nova");
-			ap.save(ata);
+			ata = ap.save(ata);
+			System.out.println(ata.getAtaId());
 			result.setMensagem(msgSucesso);
 			result.setErro(false);
+
+			List<UsuariosModel> participantes = ata.getParticipaAtas();
+			for (UsuariosModel participante : participantes) {
+				System.out.println(participante.getUsuId());
+				AprovacaoAtaModel aam = new AprovacaoAtaModel("Pendente", participante, ata);
+				// aam.setAprDescricao("Pendente");
+				// aam.setAtaReferencia(ata);
+				// aam.setAprovaAta(participante);
+
+				aar.save(aam);
+			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			result.setMensagem(msgFalha + " Causa: " + e.getMessage());

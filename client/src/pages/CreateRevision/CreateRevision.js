@@ -10,8 +10,9 @@ import revisaoServices from "../../services/revisao";
 import Alerta from "../../components/Snackbar/Alerta";
 import ataServices from "../../services/ata";
 import emailServices from "../../services/email";
-import logServices from "../../services/log";
 import { useAutenticacao } from "../../context/Autenticacao";
+import aprovacaoAtaServices from "../../services/aprovacaoAta";
+import logServices from "../../services/log";
 
 const CreateRevision = (props) => {
   const theme = useTheme();
@@ -26,16 +27,18 @@ const CreateRevision = (props) => {
 
   const [enviar, setEnviar] = useState([]);
 
+  const { usuario } = useAutenticacao()
+
   const location = useLocation();
 
   const history = useHistory();
-
-  const { usuario } = useAutenticacao();
 
   let dados = ""
   let projeto = ""
 
 
+  const cadastrarAprovAta = location.state.cadastrarAprovacaoAta
+  
   const body = {
     ...infoHeader,
     revAssunto,
@@ -113,6 +116,27 @@ const CreateRevision = (props) => {
     setEnviar([]);
   }
 
+  const cadastrarAprovacaoAta = (descricao) => {
+    const body = {
+      aprDescricao: descricao,
+      aprovaAta: {
+        usuId: usuario.usuId,
+      },
+      ataReferencia: {
+        ataId: location.state.ataid,
+      },
+    };
+    aprovacaoAtaServices
+      .cadastrarAprovacaoAta(body)
+      .then(
+        aprovacaoAtaServices
+          .pegarAprovacaoUsuario(usuario.usuId, location.state.ataid)
+          .then()
+          .catch((e) => console.log(e.message))
+      )
+      .catch((err) => err.message);
+  };
+
 
   const CriarRevisao = (e) => {
     e.preventDefault();
@@ -121,6 +145,9 @@ const CreateRevision = (props) => {
       .criarRevisao(body)
       .then((res) => {
         setMsgSucesso("Revisão cadastrada com sucesso!");
+        if (cadastrarAprovAta) {
+          cadastrarAprovacaoAta('Recusado')
+        }
         setMsgErro(false);
         setOpenSnack(true);
         EmailRevisao();
@@ -145,7 +172,7 @@ const CreateRevision = (props) => {
         <Grid container style={{ marginBottom: 10 }}>
           <RevisionHeader
             setRevHeader={setRevHeader}
-            resp={location.state.user}
+            resp={usuario.usuId}
             ataid={location.state.ataid}
             ataDataInicio={location.state.ataDataInicio}
             setMsgSucesso={setMsgSucesso}

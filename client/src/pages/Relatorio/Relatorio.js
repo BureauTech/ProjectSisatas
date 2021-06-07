@@ -9,6 +9,8 @@ import ptBR from "../../components/ptBR/DataGrid";
 import { Link, useHistory } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta.js";
 import Loading from "../../pages/Loading/Loading.js";
+import ataServices from "../../services/ata.js";
+import { useAutenticacao } from "../../context/Autenticacao.js";
 import logServices from "../../services/log";
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * Arquivo para página de relatório do gerente
- * 
+ *
  * @author Denis Lima
  * @param {any} props
  * @returns Componente para Relatório do Gerente
@@ -75,9 +77,7 @@ const Relatorio = (props) => {
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button
-          onClick={() => history.push("visualizar-atas")}
-        >
+        <Button onClick={() => history.push("ata", { id: params.id })}>
           <VisibilityIcon className="icon" />
         </Button>
       ),
@@ -88,6 +88,7 @@ const Relatorio = (props) => {
     return data;
   };
 
+  const { usuario } = useAutenticacao();
   useEffect(() => {
     logServices
       .pegarLogs("DataGrid")
@@ -105,6 +106,30 @@ const Relatorio = (props) => {
       });
   }, [setRows]);
 
+  useEffect(() => {
+    ataServices
+      .listarAtas("DataGrid")
+      .then((res) => {
+        let lista = res.data.data;
+        let lista2 = [];
+        lista.forEach((ata) => {
+          ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
+          if (ata.geraAtas.usuId === usuario.usuId) {
+            lista2.push({
+              id: ata.ataId,
+              data: ata.ataDataCriacao,
+              estado: ata.ataEstado,
+              projeto: ata.ataProjeto,
+              usuResponsavel: ata.geraAtas.usuNome,
+            });
+          }
+        });
+        setRows(lista2);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   return (
     <Grid container justify="center">
@@ -128,6 +153,6 @@ const Relatorio = (props) => {
       </Grid> */}
     </Grid>
   );
-}
+};
 
-export default Relatorio
+export default Relatorio;

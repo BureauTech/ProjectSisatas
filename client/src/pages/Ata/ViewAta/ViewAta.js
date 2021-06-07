@@ -11,12 +11,17 @@ import { useInfoAta } from "../../../context/InfoAta";
 import Loading from "../../Loading/Loading";
 import revisaoServices from "../../../services/revisao";
 import TextareaView from "../../../components/Ata/ViewAta/TextareaView";
+import AprovacaoAta from "../../../components/Ata/ViewAta/AprovacaoAta";
+import aprovacaoAtaServices from "../../../services/aprovacaoAta";
+import { useAutenticacao } from "../../../context/Autenticacao";
 
 const ViewAta = ({ ajustarLayout }) => {
   const theme = useTheme();
   const { setInfoAta, infoAta } = useInfoAta();
   const [isLoading, setIsLoading] = useState(true);
   const [infos, setInfos] = useState([]);
+  const { usuario } = useAutenticacao();
+  const [estado, setEstado] = useState("");
 
   const [idAta, setIdAta] = useState();
 
@@ -24,6 +29,27 @@ const ViewAta = ({ ajustarLayout }) => {
 
   const location = useLocation();
   const history = useHistory();
+
+  const cadastrarAprovacaoAta = (descricao) => {
+    const body = {
+      aprDescricao: descricao,
+      aprovaAta: {
+        usuId: usuario.usuId,
+      },
+      ataReferencia: {
+        ataId: idAta,
+      },
+    };
+    aprovacaoAtaServices
+      .cadastrarAprovacaoAta(body)
+      .then(
+        aprovacaoAtaServices
+          .pegarAprovacaoUsuario(usuario.usuId, idAta)
+          .then((r) => setEstado(r.data[0].aprDescricao))
+          .catch((e) => console.log(e.message))
+      )
+      .catch((err) => err.message);
+  };
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString();
@@ -48,8 +74,12 @@ const ViewAta = ({ ajustarLayout }) => {
     // Id sem a barra "/"
     ataServices
       .pegarAta(idBuscar.split("/").join(""))
-      .then(({data}) => {
+      .then(({ data }) => {
         const dados = data.data;
+        aprovacaoAtaServices
+          .pegarAprovacaoUsuario(usuario.usuId, dados.ataId)
+          .then((r) => setEstado(r.data[0].aprDescricao))
+          .catch((e) => console.log(e.message));
         setIdAta(dados.ataId);
         const infoHeader = {
           ataId: dados.ataId,
@@ -106,6 +136,15 @@ const ViewAta = ({ ajustarLayout }) => {
       {isLoading && <Loading />}
       {!isLoading && (
         <>
+          <Grid container style={{ marginBottom: 10 }}>
+            <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Aprovação</Typography>
+            <AprovacaoAta
+              estado={estado}
+              cadastrarAprovacaoAta={cadastrarAprovacaoAta}
+              ataId={idAta}
+              ataDataInicio={infoAta.header.ataDataInicio}
+            />
+          </Grid>
           <Grid container style={{ marginBottom: 10 }}>
             <Typography style={{ paddingLeft: 24, fontSize: "1.4rem" }}>Cabeçalho</Typography>
             <AtaHeader header={infoAta.header} ajustarLayout={ajustarLayout} />
@@ -207,7 +246,7 @@ const ViewAta = ({ ajustarLayout }) => {
                 padding: "0 5px",
               }}
               onClick={() =>
-                history.push("nova-revisao", { user: 1, ataid: idAta, ataDataInicio: infoAta.header.ataDataInicio })
+                history.push("nova-revisao", { ataid: idAta, ataDataInicio: infoAta.header.ataDataInicio })
               }
             >
               Nova Revisão

@@ -8,6 +8,7 @@ import "../../../components/ExibirAta/ListarAta.css";
 import ptBR from "../../../components/ptBR/DataGrid";
 import ataServices from "../../../services/ata.js";
 import Alerta from "../../../components/Snackbar/Alerta.js";
+import { useAutenticacao } from "../../../context/Autenticacao";
 
 /*
  * @author Charles Ramos
@@ -62,22 +63,35 @@ export default function Data() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
   const history = useHistory();
+  const { usuario } = useAutenticacao()
 
   const formatDate = (date) => {
     const data = new Date(date).toLocaleDateString();
     return data;
   };
 
+  const usuarioParticipa = (lista) => {
+    let retorno = false
+    lista.forEach(participante => {
+      if (participante.usuId === usuario.usuId) {
+        retorno = true
+      }
+    })
+    return retorno
+  }
+
   useEffect(() => {
     ataServices
-    // validar se está funcionando.
       .listarAtas("DataGrid")
       .then((res) => {
         let lista = res.data.data;
         let lista2 = [];
         lista.forEach((ata) => {
           ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
-          lista2.push({ id: ata["ataId"], ...ata });
+          if (usuarioParticipa(ata.participaAtas)) {
+            console.log('push')
+            lista2.push({ id: ata["ataId"], ...ata });
+          }
         });
         setRows(lista2);
       })
