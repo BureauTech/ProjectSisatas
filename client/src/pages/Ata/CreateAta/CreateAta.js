@@ -148,6 +148,9 @@ const CreateAta = (props) => {
       ataObservacao: observacao,
       ataPauta: infoPauta,
       assuntos: ass,
+      geraAtas: {
+        usuId: usuario.usuId
+      }
     };
 
     ataServices
