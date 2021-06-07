@@ -10,9 +10,14 @@ const pegarAprovacaoUsuario = (usuId, ataId) => {
   return api.get(`${endpoint}/estadoAprovacao/${usuId}/${ataId.replace('/', '')}`)
 }
 
+const pegarRelatorio = (ataId) => {
+  return api.get(`${endpoint}/relatorio/${ataId.replace('/', '')}`)
+}
+
 const aprovacaoAtaServices = {
   cadastrarAprovacaoAta,
-  pegarAprovacaoUsuario
+  pegarAprovacaoUsuario,
+  pegarRelatorio
 };
 
 export default aprovacaoAtaServices;

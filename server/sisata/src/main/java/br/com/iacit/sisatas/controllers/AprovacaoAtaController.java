@@ -96,6 +96,25 @@ public class AprovacaoAtaController {
 	}
 
 	@ResponseBody
+	@RequestMapping(value = "/relatorio/{ataId}", method = RequestMethod.GET)
+	public List<AprovacaoAtaProjection> relatorio(@PathVariable String ataId) {
+		List<AprovacaoAtaProjection> estados = null;
+		List<AprovacaoAtaProjection> filtrado = new ArrayList<>();
+		String ata_id = ataId.substring(0, ataId.length() - 2) + "/" + ataId.substring(ataId.length() - 2);
+		try {
+			estados = aar.findAllProjectedBy();
+			for (AprovacaoAtaProjection item : estados) {
+				if (item.getAtaReferencia().getAtaId().equals(ata_id)) {
+					filtrado.add(item);
+				}
+			}
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return filtrado;
+	}
+
+	@ResponseBody
 	@RequestMapping(value = "/excluirEstados/{est_id}", method = RequestMethod.GET)
 	public String excluirEstados(@PathVariable long est_id) {
 		String result = null;

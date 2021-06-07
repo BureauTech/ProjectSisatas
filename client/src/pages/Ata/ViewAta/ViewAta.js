@@ -40,15 +40,17 @@ const ViewAta = ({ ajustarLayout }) => {
         ataId: idAta,
       },
     };
-    aprovacaoAtaServices
-      .cadastrarAprovacaoAta(body)
-      .then(
-        aprovacaoAtaServices
-          .pegarAprovacaoUsuario(usuario.usuId, idAta)
-          .then((r) => setEstado(r.data[0].aprDescricao))
-          .catch((e) => console.log(e.message))
-      )
-      .catch((err) => err.message);
+
+    const cadastrar = async () => {
+      try {
+        await aprovacaoAtaServices.cadastrarAprovacaoAta(body)
+        const r = await aprovacaoAtaServices.pegarAprovacaoUsuario(usuario.usuId, idAta)
+        setEstado(r.data[0].aprDescricao)
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+    cadastrar()  
   };
 
   const formatDate = (date) => {

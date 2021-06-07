@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Dialog, DialogContent, DialogContentText, Typography, Slide } from "@material-ui/core";
 import "../../index.js";
 import "../../components/UserList/UserList.css";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -12,6 +12,11 @@ import Loading from "../../pages/Loading/Loading.js";
 import ataServices from "../../services/ata.js";
 import { useAutenticacao } from "../../context/Autenticacao.js";
 import logServices from "../../services/log";
+import aprovacaoAtaServices from "../../services/aprovacaoAta.js";
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -64,20 +69,35 @@ const Relatorio = (props) => {
   const [openSnack, setOpenSnack] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dados, setDados] = useState([]);
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
   const history = useHistory();
 
   const columns = [
-    { field: "logDataHora", headerName: "Data", width: 150 },
-    { field: "logDescricao", headerName: "Descrição", width: 350 },
-    { field: "logAutor", headerName: "Autor", width: 400 },
+    { field: "data", headerName: "Data", width: 150 },
+    { field: "estado", headerName: "Estado", width: 150 },
+    { field: "projeto", headerName: "Projeto", width: 300 },
+    { field: "usuResponsavel", headerName: "Responsável", width: 300 },
     {
       field: "Exibir",
-      headerName: "Exibir",
-      width: 130,
+      headerName: "Exibir Ata",
+      width: 140,
       renderCell: (params) => (
         <Button onClick={() => history.push("ata", { id: params.id })}>
+          <VisibilityIcon className="icon" />
+        </Button>
+      ),
+    },
+    {
+      field: "Pendentes",
+      headerName: "Pendências",
+      width: 200,
+      renderCell: (params) => (
+        <Button onClick={() => {
+          getDados(params.id)
+          handleClick()
+        }}>
           <VisibilityIcon className="icon" />
         </Button>
       ),
@@ -114,6 +134,7 @@ const Relatorio = (props) => {
         let lista2 = [];
         lista.forEach((ata) => {
           ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
+          console.log(ata.geraAtas.usuId, usuario.usuId)
           if (ata.geraAtas.usuId === usuario.usuId) {
             lista2.push({
               id: ata.ataId,
@@ -131,6 +152,14 @@ const Relatorio = (props) => {
       });
   }, []);
 
+  const getDados = (idAta) => {
+    aprovacaoAtaServices.pegarRelatorio(idAta).then(r => setDados(r.data)).catch(err => console.log(err))
+  }
+
+  const handleClick = () => {
+    setOpen(!open)
+  }
+ 
   return (
     <Grid container justify="center">
       {/* <Grid item sm={12} lg={12}>
@@ -148,6 +177,22 @@ const Relatorio = (props) => {
           disableSelectionOnClick={true}
         />
         <Alerta isOpen={openSnack} setIsOpen={setOpenSnack} sucesso={msgSucesso} erro={msgErro} />
+        <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClick}>
+          <DialogContent>
+            <DialogContentText>
+              <Grid container justify="space-around">
+                {dados &&
+                  dados.map((dds, index) => {
+                    return (
+                      <Grid item xs={12} key={index + 1} style={{ padding: "10px" }}>
+                        <Typography>{dds.aprDescricao} - {dds.aprovaAta.usuNome}</Typography>
+                      </Grid>
+                    );
+                  })}
+              </Grid>
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
       </Grid>
       {/* </Grid>
       </Grid> */}
