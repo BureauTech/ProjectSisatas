@@ -1,12 +1,12 @@
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente para lista de assuntos no modelo de Ata em PDF
+ */
 const Assunto = (props) => {
   const { assuntos } = props.dados;
-
-  // const formatDate = (date) => {
-  //   const formated = date.split("-").reverse().join("/");
-  //   return formated;
-  // };
 
   const formatDate = (date) => {
     const data = new Date(date).toLocaleDateString();
@@ -74,7 +74,7 @@ const Assunto = (props) => {
                       border: "1px solid black",
                     }}
                   >
-                    {index}.
+                    {index + 1}.
                   </TableCell>
                   <TableCell
                     style={{

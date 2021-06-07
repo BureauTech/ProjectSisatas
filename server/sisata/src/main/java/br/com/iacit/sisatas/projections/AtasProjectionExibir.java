@@ -14,6 +14,7 @@ public interface AtasProjectionExibir {
 	LocalDate getAtaDataFim();
 	LocalTime getAtaHoraInicio();
 	LocalTime getAtaHoraFim();
+	String getAtaObservacao();
 	
 	List<AtasProjectionUsuarios> getParticipaAtas();
 

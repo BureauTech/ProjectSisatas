@@ -1,5 +1,10 @@
 import { Grid, Paper, Typography } from "@material-ui/core";
 
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente de cabeçalho no modelo de Ata em PDF
+ */
 const AtaHeader = (props) => {
   const { id, data, inicio, fim, local, logo } = props.dados;
 
@@ -29,9 +34,11 @@ const AtaHeader = (props) => {
                 <strong>Fim:</strong> {fim}
               </Typography>
             </Grid>
-            <Typography>
-              <strong>Local:</strong> {local}
-            </Typography>
+            <Grid container>
+              <Typography>
+                <strong>Local:</strong> {local}
+              </Typography>
+            </Grid>
           </Grid>
         </Paper>
       </Grid>

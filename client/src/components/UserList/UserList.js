@@ -51,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Arquivo para página de lista de usuários
+ * @author Beatriz Coutinho
+ * @returns Componente para listagem de usuários
+ */
 export default function UserList() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
@@ -84,10 +89,15 @@ export default function UserList() {
       });
   }, [setRows]);
 
+  // Fecha o popup de confirmação de exclusão de usuário
   const handleClose = () => {
     setOpen(false);
   };
 
+  /**
+   * Pega o ID do usuário e abre a confirmação de exclusão
+   * @param {Number} id Número do id do usuário
+   */
   const handleAskDelete = (id) => {
     setIdDelete(id);
     setOpen(true);
@@ -104,7 +114,7 @@ export default function UserList() {
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => history.push("perfil", { id: params.getValue("id") })}>
+        <Button onClick={() => history.push("perfil", { id: params.id })}>
           <VisibilityIcon className="icon" />
         </Button>
       ),
@@ -114,7 +124,7 @@ export default function UserList() {
       headerName: "Editar",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => history.push("editar-usuario", { id: params.getValue("id") })}>
+        <Button onClick={() => history.push("editar-usuario", { id: params.id })}>
           <EditIcon className="icon" />
         </Button>
       ),
@@ -124,22 +134,35 @@ export default function UserList() {
       headerName: "Excluir",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => handleAskDelete(params.getValue("id"))}>
+        <Button onClick={() => handleAskDelete(params.id)}>
           <DeleteIcon className="icon" />
         </Button>
       ),
     },
   ];
 
+  /**
+   * Realiza a requsição de exclusão de usuário para o servidor, e devolve na tela uma mensagem de sucesso ou erro
+   * @author Denis Lima
+   * @param {Number} id Número do id do usuário para exclusão
+   */
   const handleDelete = (id) => {
     userServices
       .deletarUsuario(id)
       .then((res) => {
-        setMsgSucesso("Usuário deletado com sucesso!");
-        setMsgErro(false);
-        const newRows = rows.filter((user) => user.usuId !== id);
-        setRows(newRows);
-        setOpenSnack(true);
+        if (res.data.erro) {
+          setMsgSucesso(false);
+          if (res.data.mensagem.includes("constraint"))
+            setMsgErro("Ocorreu um erro ao deletar o usuário. Motivo: Usuário participante de um documento");
+          setOpenSnack(true);
+        }
+        else {
+          setMsgSucesso("Usuário deletado com sucesso!");
+          setMsgErro(false);
+          const newRows = rows.filter((user) => user.usuId !== id);
+          setRows(newRows);
+          setOpenSnack(true);
+        }
       })
       .catch((err) => {
         console.log(err.message);

@@ -1,17 +1,12 @@
-import {
-  Container,
-  Grid,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-} from "@material-ui/core";
+import { Container, Grid, TableBody, TableContainer, Typography } from "@material-ui/core";
 
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente com as observações no modelo de Ata em PDF
+ */
 const Observacoes = (props) => {
   const { observacoes } = props.dados;
-  const observs = [];
-  observacoes.forEach((obs, index) => observs.push(`${index + 1} - ${obs}`));
   return (
     <Container style={{ marginTop: 20, border: "1px solid black", padding: 0 }}>
       <Grid container justify="flex-start" style={{ padding: 5 }}>
@@ -19,15 +14,7 @@ const Observacoes = (props) => {
           <strong>Observações:</strong>
         </Typography>
         <TableContainer>
-          <TableBody>
-            {observs.map((obs) => (
-              <TableRow>
-                <TableCell style={{ padding: 0, borderBottom: "none" }}>
-                  {obs}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          <TableBody className="breakline">{observacoes}</TableBody>
         </TableContainer>
       </Grid>
     </Container>

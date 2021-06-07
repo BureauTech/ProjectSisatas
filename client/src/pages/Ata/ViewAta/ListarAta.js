@@ -8,6 +8,18 @@ import "../../../components/ExibirAta/ListarAta.css";
 import ptBR from "../../../components/ptBR/DataGrid";
 import ataServices from "../../../services/ata.js";
 import Alerta from "../../../components/Snackbar/Alerta.js";
+import { useAutenticacao } from "../../../context/Autenticacao";
+
+/*
+ * @author Charles Ramos
+ * @param {any} params
+ * @returns Listagem de atas cadastradas
+ *
+ * Listagem de atas cadastradas no banco.
+ * 
+ * O token precisa ser validado com o servidor para garantir que o mesmo é válido e único.
+ */
+
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -51,42 +63,56 @@ export default function Data() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
   const history = useHistory();
+  const { usuario } = useAutenticacao()
 
   const formatDate = (date) => {
     const data = new Date(date).toLocaleDateString();
     return data;
   };
 
+  const usuarioParticipa = (lista) => {
+    let retorno = false
+    lista.forEach(participante => {
+      if (participante.usuId === usuario.usuId) {
+        retorno = true
+      }
+    })
+    return retorno
+  }
+
   useEffect(() => {
     ataServices
       .listarAtas("DataGrid")
       .then((res) => {
-        let lista = res.data;
+        let lista = res.data.data;
         let lista2 = [];
         lista.forEach((ata) => {
           ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
-          lista2.push({ id: ata["ataId"], ...ata });
+          if (usuarioParticipa(ata.participaAtas)) {
+            console.log('push')
+            lista2.push({ id: ata["ataId"], ...ata });
+          }
         });
         setRows(lista2);
       })
       .catch((err) => {
         console.log(err.message);
       });
-  }, [setRows]);
+  }, []);
 
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
     { field: "ataProjeto", headerName: "Projeto", width: 200 },
     { field: "ataPauta", headerName: "Pauta", width: 200 },
     { field: "ataDataCriacao", headerName: "Criado em", width: 150 },
-    /*{ field: "ataLocal", headerName: "Local", width: 150 },    { field: "tipo", headerName: "Tipo", width: 150 }, 
-    { field: "estado", headerName: "Estado", width: 150 },*/
+    /*{ field: "ataLocal", headerName: "Local", width: 150 },    { field: "tipo", headerName: "Tipo", width: 150 }, */
+    { field: "ataEstado", headerName: "Estado", width: 150 },
     {
       field: "Exibir",
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button onClick={() => history.push("ata", { id: params.getValue("id") })}>
+        <Button onClick={() => history.push("ata", { id: params.id })}>
           <VisibilityIcon className="icon" />
         </Button>
       ),

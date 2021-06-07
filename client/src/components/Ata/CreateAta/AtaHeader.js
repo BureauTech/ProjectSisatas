@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import "./Components.css";
 import { styles } from "../../../assets/styles/Styles";
 
-// Alterando css de componentes
-
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente para o cabeçalho da criação da Ata
+ */
 const AtaHeader = (props) => {
   const { classes, setInfoHeader, setIsOpen, setMsgErro, setMsgSucesso } = props;
   const [dtInicio, setDtInicio] = useState("");
@@ -27,6 +30,15 @@ const AtaHeader = (props) => {
     });
   }, [dtFinal, dtInicio, hrFinal, hrInicio, local, setInfoHeader]);
 
+  /**
+   * Verifica se a data Final é menor que a data Inicial,  
+   * caso seja, devolve uma mensagem para o usuário,  
+   * caso contrário, seta a Data Final
+   * @author Denis Lima
+   * @param {Number} valor Valor de data selecionada pelo usuário 
+   * @param {Function} setarValor Função que seta o valor anterior (setState)
+   * @param {Number} dataInicio Data de ínicio
+   */
   const setarDataFinal = (valor, setarValor, dataInicio) => {
     if (dataInicio && valor) {
       const dInicio = dataInicio.split("-");
@@ -47,6 +59,15 @@ const AtaHeader = (props) => {
     }
   };
 
+   /**
+   * Verifica se a data Final é menor que a data Inicial,  
+   * caso seja, devolve uma mensagem para o usuário,  
+   * caso contrário, seta a Data Incial
+   * @author Denis Lima
+   * @param {Number} valor Valor de data selecionada pelo usuário 
+   * @param {Function} setarValor Função que seta o valor anterior (setState)
+   * @param {Number} dataInicio Data de Fim
+   */
   const setarDataInicio = (valor, setarValor, dataFinal) => {
     if (dataFinal && valor) {
       const dInicio = valor.split("-");
@@ -71,24 +92,11 @@ const AtaHeader = (props) => {
     <Container>
       <Grid container>
         <Grid container className={classes.grid} alignItems="center" justify="center" style={{ padding: 15 }}>
-          {/* LATERAL ESQUERDA (NÚMERO DA ATA)*/}
-          {/* <Grid item sm={10} md={3} lg={3}>
-            <Grid container justify="center">
-              <Grid container justify="center">
-                <Typography className={classes.biggerText}>ATA Nº:</Typography>
-              </Grid>
-              <Grid container justify="center">
-                <Typography className={classes.biggerText}>{id}</Typography>
-              </Grid>
-            </Grid>
-          </Grid> */}
-          {/* CONTEINER DA DIREITA (INPUTS)*/}
           <Grid item xs={12} sm={10} md={10} lg={10}>
-            {/* <Grid item xs={11} md={11} lg={10}> */}
             {/* ROW DATA INÍCIO */}
             <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item md={4} lg={3}>
-                <FormLabel className={classes.normalText}>Data Início</FormLabel>
+                <FormLabel className={classes.normalText}>Data Início*</FormLabel>
               </Grid>
               <Grid item xs={12} md={8} lg={7}>
                 <Grid container justify="space-between">
@@ -120,7 +128,7 @@ const AtaHeader = (props) => {
             {/* ROW DATA FINAL */}
             <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item md={4} lg={3}>
-                <FormLabel className={classes.normalText}>Data Final</FormLabel>
+                <FormLabel className={classes.normalText}>Data Final*</FormLabel>
               </Grid>
               <Grid item xs={12} md={8} lg={7}>
                 <Grid container justify="space-between">
@@ -152,7 +160,7 @@ const AtaHeader = (props) => {
             {/* ROW LOCAL */}
             <Grid container justify="center" style={{ marginBottom: 10 }}>
               <Grid item xs={10} md={2} lg={2}>
-                <FormLabel className={classes.normalText}>Local</FormLabel>
+                <FormLabel className={classes.normalText}>Local*</FormLabel>
               </Grid>
               <Grid item xs={12} md={10} lg={8}>
                 <Input

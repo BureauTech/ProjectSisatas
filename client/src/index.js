@@ -4,7 +4,9 @@ import "./index.css";
 import App from "./App";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { ptBR } from "@material-ui/core/locale";
+import AutenticacaoProvider from "./context/Autenticacao";
 
+// Configuração de UI para os componentes
 const theme = createMuiTheme(
   {
     palette: {
@@ -28,9 +30,11 @@ const theme = createMuiTheme(
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <AutenticacaoProvider>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </AutenticacaoProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

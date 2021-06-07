@@ -19,10 +19,23 @@ import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
 import { BrokenImage } from "@material-ui/icons";
+import { useAutenticacao } from "../../context/Autenticacao";
+import { getLocalStorage, setLocalStorage } from "../../auth/auth";
+import { isEmpty } from "./UserProfile";
 
 const EditUser = (props) => {
   const { classes } = props;
-  const [usuario, setUsuario] = useState(null);
+  const usuario_logado = useAutenticacao().usuario;
+  const setUsuario_logado = useAutenticacao().setUsuario;
+  const [usuario, setUsuario] = useState({
+    usuNome: "",
+    usuId: "",
+    usuEmail: "",
+    usuCargo: "",
+    usuAreaEmpresa: "",
+    usuTelefone: "",
+    usuPerfil: "",
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [open, setOpen] = useState(false);
@@ -37,23 +50,25 @@ const EditUser = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
-    let idBuscar = "";
-    try {
-      idBuscar = location.state.id;
-    } catch (error) {
-      idBuscar = props.id;
-    }
-
     userServices
-      .pegarUsuario(idBuscar)
-      .then((user) => {
-        setUsuario(user.data);
-        setIsLoading(false);
+      .pegarUsuario(location.state.id)
+      .then(({ data }) => {
+        if (!data.erro && !isEmpty(data.data)) {
+          setUsuario(data.data);
+          setIsLoading(false);
+        } else {
+          setIsLoading(false);
+          setMsgSucesso(false);
+          setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
+          setOpenSnack(true);
+        }
       })
       .catch((err) => {
         console.log(err.message);
         setIsLoading(false);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro ao na requisição ao servidor");
+        setOpenSnack(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
@@ -74,14 +89,33 @@ const EditUser = (props) => {
   };
 
   const changePreview = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => setPreview(reader.result);
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => setPreview(reader.result);
+    }
+  };
+
+  // Redireciona o usuário para a página de login
+  const redirectDelay = () => {
+    setTimeout(() => history.push("/perfil", { id: usuario.usuId }), 2000);
   };
 
   const atualizarUsuario = (event) => {
     event.preventDefault();
     setIsLoadingBtn(true);
+
+    async function atualizarUsuarioLogado() {
+      const token = getLocalStorage("sisata_token");
+      if (token) {
+        const { data } = await userServices.validarTokenSessao(token);
+        if (!data.erro) {
+          const dados = data.data;
+          setUsuario_logado({ ...dados, estaLogado: true });
+          setLocalStorage("sisata_token", dados.usuSessionToken, 120);
+        }
+      }
+    }
 
     var imagem = document.querySelector("#assinatura").files[0];
     var formData = new FormData();
@@ -90,12 +124,49 @@ const EditUser = (props) => {
 
     userServices
       .atualizarUsuario(formData)
-      .then((res) => {
-        setIsLoadingBtn(false);
-        setMsgSucesso("Sucesso ao salvar alterações!");
-        setMsgErro(false);
+      .then(({ data }) => {
+        if (!data.erro) {
+          setIsLoadingBtn(false);
+          atualizarUsuarioLogado();
+          setMsgSucesso("Sucesso ao salvar alterações!");
+          setMsgErro(false);
+        } else {
+          setIsLoadingBtn(false);
+          setMsgSucesso(false);
+          setMsgErro(data.message);
+        }
         setOpenSnack(true);
-        history.push("perfil", { id: usuario.usuId });
+        redirectDelay();
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setIsLoadingBtn(false);
+        setOpenSnack(true);
+        setMsgSucesso(false);
+        setMsgErro("Ocorreu um erro na requisição ao servidor");
+      });
+  };
+
+  const solicitarAlteracaoSenha = (event) => {
+    event.preventDefault();
+    setIsLoadingBtn(true);
+    // tratar possíveis falhas oriundas do backend
+    userServices
+      .solicitarAlteracaoSenha(usuario.usuEmail)
+      .then((res) => {
+        if (res.data.erro !== false) {
+          setIsLoadingBtn(false);
+          setMsgSucesso("Sucesso ao salvar alterações!");
+          setMsgErro(false);
+          setOpenSnack(true);
+          history.push(`/cadastrar-senha?token=${res.data.data}`);
+        } else {
+          console.log(res.data.message);
+          setIsLoadingBtn(false);
+          setOpenSnack(true);
+          setMsgSucesso(false);
+          setMsgErro(res.data.message);
+        }
       })
       .catch((err) => {
         console.log(err.message);
@@ -276,21 +347,26 @@ const EditUser = (props) => {
                   </FormLabel>
                 </Grid>
                 <Grid item xs>
-                  <Select
-                    id="profile"
-                    open={open}
-                    onClose={handleClose}
-                    onOpen={handleOpen}
-                    // Ateração Daniel
-                    value={usuario.usuPerfil}
-                    onChange={handleChange}
-                    className={classes.textField}
-                    style={{ width: "7rem" }}
-                  >
-                    <MenuItem value={"ADM"}>ADM</MenuItem>
-                    <MenuItem value={"GER"}>GER</MenuItem>
-                    <MenuItem value={"USU"}>USU</MenuItem>
-                  </Select>
+                  {usuario_logado.usuPerfil === "ADM" && (
+                    <Select
+                      id="profile"
+                      open={open}
+                      onClose={handleClose}
+                      onOpen={handleOpen}
+                      // Ateração Daniel
+                      value={usuario.usuPerfil}
+                      onChange={handleChange}
+                      className={classes.textField}
+                      style={{ width: "7rem" }}
+                    >
+                      <MenuItem value={"ADM"}>ADM</MenuItem>
+                      <MenuItem value={"GER"}>GER</MenuItem>
+                      <MenuItem value={"USU"}>USU</MenuItem>
+                    </Select>
+                  )}
+                  {usuario_logado.usuPerfil !== "ADM" && (
+                    <Typography className={classes.normalText}>{usuario.usuPerfil}</Typography>
+                  )}
                 </Grid>
               </Grid>
               {/* upload assinatura */}
@@ -363,6 +439,21 @@ const EditUser = (props) => {
                     }}
                   >
                     {isLoadingBtn ? <Loading /> : "Salvar"}
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className="bold"
+                    onClick={() => history.push({ pathname: '/alterar-senha' })}
+                    style={{
+                      color: "white",
+                      fontSize: "1.5rem",
+                      borderRadius: 40,
+                      padding: "10px 50px",
+                      margin: "10px 0px",
+                    }}
+                  >
+                    {isLoadingBtn ? <Loading /> : "Editar senha"}
                   </Button>
                   <Button
                     variant="contained"

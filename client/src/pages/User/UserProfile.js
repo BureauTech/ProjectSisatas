@@ -8,6 +8,14 @@ import { useHistory, useLocation } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta";
 import { BrokenImage } from "@material-ui/icons";
 
+export const isEmpty = (user) => {
+  const keys = Object.keys(user);
+  if (keys.length === 0) {
+    return 1;
+  }
+  return 0;
+};
+
 const UserProfile = (props) => {
   const { classes } = props;
   const [usuario, setUsuario] = useState({
@@ -29,38 +37,25 @@ const UserProfile = (props) => {
   };
   const location = useLocation();
 
-  const isEmpty = (user) => {
-    const keys = Object.keys(user);
-    if (keys.length === 0) {
-      return 1;
-    }
-    return 0;
-  };
-
   useEffect(() => {
-    // Se tiver parâmetro, busca o usuário do parâmetro, se não tiver, busca o usuário logado
-    let idBuscar = "";
-    try {
-      idBuscar = location.state.id;
-    } catch (error) {
-      idBuscar = props.id;
-    }
-
     userServices
-      .pegarUsuario(idBuscar)
-      .then((user) => {
-        if (!isEmpty(user.data)) {
-          setUsuario(user.data);
+      .pegarUsuario(location.state.id)
+      .then(({ data }) => {
+        if (!data.erro && !isEmpty(data.data)) {
+          setUsuario(data.data);
           setIsLoading(false);
         } else {
           setIsLoading(false);
+          setMsgSucesso(false);
+          setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
+          setOpenSnack(true);
         }
       })
       .catch((err) => {
         console.log(err.message);
         setIsLoading(false);
         setMsgSucesso(false);
-        setMsgErro("Ocorreu um erro ao carregar informações deste perfil");
+        setMsgErro("Ocorreu um erro ao na requisição ao servidor");
         setOpenSnack(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -283,7 +278,7 @@ const UserProfile = (props) => {
                       padding: "10px 50px",
                       margin: "10px 0px",
                     }}
-                    disabled={String(usuario.usuId).length ? false : true}
+                    disabled={!String(usuario.usuId).length}
                   >
                     Editar
                   </Button>

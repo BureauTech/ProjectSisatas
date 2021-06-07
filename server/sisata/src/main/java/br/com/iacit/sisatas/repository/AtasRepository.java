@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.iacit.sisatas.models.AtasModel;
 import br.com.iacit.sisatas.projections.AtasProjectionExibir;
-import br.com.iacit.sisatas.projections.AtasProjectionId;
+import br.com.iacit.sisatas.projections.AtasProjectionRevisao;
 
 public interface AtasRepository extends JpaRepository<AtasModel, String> {
 	
@@ -17,7 +17,7 @@ public interface AtasRepository extends JpaRepository<AtasModel, String> {
 	
 	Boolean existsByataId(String ataId);
 
-	AtasProjectionId findTopByOrderByAtaIdDesc();
+	AtasProjectionRevisao findTopByOrderByAtaIdDesc();
 	
 	// Utilizado tipo genérico, o tipo será definido ao chamar o método.
 	<T> List<T> findBy(Class<T> projection);

@@ -1,12 +1,10 @@
-import {
-  Container,
-  Grid,
-  TableBody,
-  TableCell,
-  TableContainer,
-  Typography,
-} from "@material-ui/core";
+import { Container, Grid, Table, TableBody, TableCell, TableContainer, Typography } from "@material-ui/core";
 
+/**
+ * @author Denis Lima
+ * @param {any} props 
+ * @returns Componente com a Pauta da Ata no modelo de Ata em PDF
+ */
 const Pauta = (props) => {
   const { pauta } = props.dados;
   return (
@@ -17,11 +15,15 @@ const Pauta = (props) => {
         </Typography>
       </Grid>
       <Grid style={{ border: "1px solid black", borderTop: "none" }}>
-        <TableContainer>
-          <TableBody>
-            <TableCell style={{ padding: "5px 20px" }}>{pauta}</TableCell>
-          </TableBody>
-        </TableContainer>
+        <Table>
+          <TableContainer>
+            <TableBody>
+              <TableCell className="breakline" style={{ padding: "5px 20px" }}>
+                {pauta}
+              </TableCell>
+            </TableBody>
+          </TableContainer>
+        </Table>
       </Grid>
     </Container>
   );

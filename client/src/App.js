@@ -1,66 +1,76 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import ListarAta from "./pages/Ata/ViewAta/ListarAta";
-import Register from "./components/RegisterUser/Register";
-import CreateAta from "./pages/Ata/CreateAta/CreateAta";
-import ViewAta from "./pages/Ata/ViewAta/ViewAta";
-import ViewRevisions from "./pages/ViewRevisions/ViewRevisions";
-import Menu from "./components/Menu/Menu";
-import EditUser from "./pages/User/EditUser";
-import UserList from "./components/UserList/UserList";
-import UserProfile from "./pages/User/UserProfile";
-import CreateRevision from "./pages/CreateRevision/CreateRevision";
 import AtaTemplate from "./components/Ata/AtaModel/AtaTemplate";
 import InfoAtaProvider from "./context/InfoAta";
-import ViewComments from "./pages/Comment/ViewComments";
-import ViewSubjects from "./pages/Subject/ViewSubjects";
-import Comentarios from "./pages/Revisao/Comentarios";
-import RegisterPassword from "./components/RegisterPassword/RegisterPassword";
 import { useEffect } from "react";
+import { useAutenticacao } from "./context/Autenticacao";
+import Routes from "./routes/Routes";
+import { getLocalStorage, setLocalStorage } from "./auth/auth";
+import userServices from "./services/user";
+import MenuProvider from "./context/Menu";
 
+/**
+ * Arquivo base da aplicação
+ * @author Denis Lima
+ * @returns Retorna os elementos base da aplicação e suas rotas
+ */
 function App() {
+  const { usuario, setUsuario } = useAutenticacao();
+
   const ajustarLayout = (n) => {
-    if (n === "0") {
-      document.body.style.padding = "0px 0px 0px 0px";
-    } else {
-      if (window.innerWidth < 600) {
-        document.body.style.padding = "80px 0px 0px 0px";
+    if (usuario.estaLogado) {
+      if (n === "0") {
+        document.body.style.padding = "0px 0px 0px 0px";
+        document.body.style.margin = "0";
+        document.body.style.overflow = "auto";
       } else {
-        document.body.style.padding = "80px 0px 0px 100px";
+        if (window.innerWidth < 600) {
+          document.body.style.padding = "80px 0px 0px 0px";
+          document.body.style.margin = "0";
+          document.body.style.overflow = "auto";
+        } else {
+          document.body.style.padding = "80px 0px 0px 100px";
+          document.body.style.margin = "0";
+          document.body.style.overflow = "auto";
+        }
       }
+    } else {
+      document.body.style.margin = "10% auto";
+      document.body.style.padding = "0";
+      document.body.style.overflow = "hidden";
     }
   };
 
   window.addEventListener("resize", ajustarLayout);
 
   useEffect(() => {
+    /**
+     * Função para verificar se há token salvo
+     * Caso haja e não está expirado, recupera as informações com o servidor
+     * @author Denis Lima
+     */
+    async function verificarLogado() {
+      const token = getLocalStorage("sisata_token");
+      if (token) {
+        const { data } = await userServices.validarTokenSessao(token);
+        if (!data.erro) {
+          const dados = data.data;
+          setUsuario({ ...dados, estaLogado: true });
+          setLocalStorage("sisata_token", dados.usuSessionToken, 120);
+        }
+      }
+    }
+    verificarLogado();
     ajustarLayout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <InfoAtaProvider>
-      <Router>
+      <MenuProvider>
         <div className="App no-print">
-          <Menu />
-          <Switch>
-            <Route path="/nova-ata" component={() => <CreateAta />} />
-            <Route path="/visualizar-atas" component={() => <ListarAta />} />
-            <Route path="/nova-revisao" component={() => <CreateRevision />} />
-            <Route path="/ata" component={() => <ViewAta ajustarLayout={ajustarLayout} />} />
-            <Route path="/revisoes" component={() => <ViewRevisions />} />
-            <Route path="/cadastrar-comentarios" component={() => <Comentarios />} />
-
-            <Route exact path="/" />
-            <Route path="/cadastrar-usuario" component={() => <Register />} />
-            <Route path="/cadastrar-senha" component={() => <RegisterPassword />} />
-            <Route path="/editar-usuario" component={() => <EditUser />} />
-            <Route path="/perfil" component={() => <UserProfile id={1} />} />
-            <Route path="/comentarios" component={() => <ViewComments />} />
-            <Route path="/assuntos" component={() => <ViewSubjects />} />
-            <Route path="/listar-usuarios" component={() => <UserList />} />
-          </Switch>
+          <Routes ajustarLayout={ajustarLayout} />
         </div>
         <AtaTemplate />
-      </Router>
+      </MenuProvider>
     </InfoAtaProvider>
   );
 }

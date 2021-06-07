@@ -7,8 +7,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.iacit.sisatas.models.AssuntosModel;
+import br.com.iacit.sisatas.models.RevisoesModel;
 import br.com.iacit.sisatas.models.UsuariosModel;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -20,14 +22,16 @@ import javax.imageio.ImageIO;
 public class EscritorExcel {
 
 	private final AtasModel ata;
+	private final List<RevisoesModel> revisoes;
 	private final XSSFWorkbook workbook;
 	private final XSSFSheet sheet;
 	private int rownum;
 	
-	public EscritorExcel(AtasModel ata) throws IOException, URISyntaxException {
+	public EscritorExcel(AtasModel ata, List<RevisoesModel> revisoes) throws IOException, URISyntaxException {
 		this.ata = ata;
+		this.revisoes = revisoes;
+
 		String templatePath = "templates/template.xlsx";
-		
 		ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(templatePath);
 		assert resource != null;
@@ -40,7 +44,7 @@ public class EscritorExcel {
 
 	private static BufferedImage resizeImage(BufferedImage originalImage) {
 		Image resultingImage = originalImage.getScaledInstance(190, 90, Image.SCALE_DEFAULT);
-		BufferedImage outputImage = new BufferedImage(190, 90, BufferedImage.TYPE_INT_RGB);
+		BufferedImage outputImage = new BufferedImage(190, 90, BufferedImage.TYPE_INT_ARGB);
 		outputImage.getGraphics().drawImage(resultingImage, 0, 0, null);
 		return outputImage;
 	}
@@ -62,7 +66,7 @@ public class EscritorExcel {
 	
 	private void writeCabecalho() {
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm:ss");
+		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm");
 
 		Cell numero = sheet.getRow(1).getCell(1);
 		numero.setCellValue("ATA Nº.: " + ata.getAtaId());
@@ -125,7 +129,7 @@ public class EscritorExcel {
 		for(int col = 2; col < 5; col++)
 			sheet.getRow(rownum-1).getCell(col).setCellStyle(borderBottom);
 	}
-	
+
 	private void writePauta() {
 		Cell pauta = sheet.getRow(++rownum).getCell(1);
 		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
@@ -166,6 +170,103 @@ public class EscritorExcel {
 
 		for(int col = 1; col < 6; col++)
 			conteudoPauta.getRow().getCell(col).setCellStyle(styleConteudoPauta);
+
+	}
+
+	private void writeObservacao() {
+		rownum++;
+		Cell observacao = sheet.getRow(++rownum).getCell(1);
+		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
+		observacao.setCellValue("OBSERVAÇÕES");
+
+		XSSFCellStyle styleObservacao = workbook.createCellStyle();
+		styleObservacao.setBorderBottom(BorderStyle.THIN);
+		styleObservacao.setBorderLeft(BorderStyle.THIN);
+		styleObservacao.setAlignment(HorizontalAlignment.CENTER);
+		styleObservacao.setBorderTop(BorderStyle.THIN);
+		styleObservacao.setBorderRight(BorderStyle.THIN);
+
+		for(int col = 1; col < 6; col++)
+			observacao.getRow().getCell(col).setCellStyle(styleObservacao);
+
+		XSSFFont font = workbook.createFont();
+		font.setFontHeightInPoints((short)10);
+		font.setFontName("Arial");
+		font.setItalic(false);
+		font.setBold(true);
+		styleObservacao.setFont(font);
+		observacao.setCellStyle(styleObservacao);
+
+		Cell conteudoObservacao = sheet.getRow(++rownum).getCell(1);
+		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
+		conteudoObservacao.setCellValue(ata.getAtaObservacao());
+		conteudoObservacao.getRow().setHeight((short) (200 * sheet.getDefaultRowHeightInPoints()));
+
+		XSSFCellStyle styleConteudoObs = workbook.createCellStyle();
+		styleConteudoObs.setBorderLeft(BorderStyle.THIN);
+		styleConteudoObs.setBorderTop(BorderStyle.THIN);
+		styleConteudoObs.setBorderBottom(BorderStyle.THIN);
+		styleConteudoObs.setBorderRight(BorderStyle.THIN);
+		styleConteudoObs.setVerticalAlignment(VerticalAlignment.TOP);
+		styleConteudoObs.setWrapText(true);
+		conteudoObservacao.setCellStyle(styleConteudoObs);
+
+		for(int col = 1; col < 6; col++)
+			conteudoObservacao.getRow().getCell(col).setCellStyle(styleConteudoObs);
+
+	}
+
+	private void writeRevisoes() {
+		rownum++;
+		Cell revisao = sheet.getRow(++rownum).getCell(1);
+		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
+		revisao.setCellValue("REVISÕES");
+
+		XSSFCellStyle styleRevisao = workbook.createCellStyle();
+		styleRevisao.setBorderBottom(BorderStyle.THIN);
+		styleRevisao.setBorderLeft(BorderStyle.THIN);
+		styleRevisao.setBorderTop(BorderStyle.THIN);
+		styleRevisao.setBorderRight(BorderStyle.THIN);
+		styleRevisao.setAlignment(HorizontalAlignment.CENTER);
+
+		for(int coluna = 1; coluna < 6; coluna++)
+			revisao.getRow().getCell(coluna).setCellStyle(styleRevisao);
+
+		XSSFFont font = workbook.createFont();
+		font.setFontHeightInPoints((short)10);
+		font.setItalic(false);
+		font.setBold(true);
+		font.setFontName("Arial");
+		styleRevisao.setFont(font);
+		revisao.setCellStyle(styleRevisao);
+
+		Cell conteudoRevisao = sheet.getRow(++rownum).getCell(1);
+		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
+
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		StringBuilder texto = new StringBuilder();
+		int cont = 0;
+		for (RevisoesModel revisaoModel : revisoes) {
+			texto.append("\"").append(revisaoModel.getRevAssunto()).append("\"")
+				 .append(" - ").append(revisaoModel.getResponsavelRevisoes().getUsuNome())
+				 .append(", no dia ").append(revisaoModel.getRevData().format(dateFormat))
+				 .append(" - ID: ").append(++cont).append(".\n\n");
+		}
+		conteudoRevisao.setCellValue(texto.toString());
+
+
+		conteudoRevisao.getRow().setHeight((short) (200 * sheet.getDefaultRowHeightInPoints()));
+		XSSFCellStyle styleConteudoPauta = workbook.createCellStyle();
+		styleConteudoPauta.setBorderLeft(BorderStyle.THIN);
+		styleConteudoPauta.setBorderBottom(BorderStyle.THIN);
+		styleConteudoPauta.setBorderRight(BorderStyle.THIN);
+		styleConteudoPauta.setBorderTop(BorderStyle.THIN);
+		styleConteudoPauta.setVerticalAlignment(VerticalAlignment.TOP);
+		styleConteudoPauta.setWrapText(true);
+		conteudoRevisao.setCellStyle(styleConteudoPauta);
+
+		for(int col = 1; col < 6; col++)
+			conteudoRevisao.getRow().getCell(col).setCellStyle(styleConteudoPauta);
 
 	}
 	
@@ -210,6 +311,7 @@ public class EscritorExcel {
         assuntosPrazoCab.setCellValue("PRAZO");
         assuntosPrazoCab.setCellStyle(borderRight);
 
+        int idAssunto = 0;
 		for (AssuntosModel assunto : ata.getAssuntos()) {
 			borderLeft = workbook.createCellStyle();
 			borderLeft.setBorderLeft(BorderStyle.THIN);
@@ -218,7 +320,7 @@ public class EscritorExcel {
 			borderRight.setBorderRight(BorderStyle.THIN);
 
 			Cell idAssunto1 = sheet.getRow(++rownum).getCell(1);
-			idAssunto1.setCellValue(assunto.getAssId().toString());
+			idAssunto1.setCellValue(String.valueOf(++idAssunto));
 			idAssunto1.setCellStyle(borderLeft);
 
 			sheet.addMergedRegion(new CellRangeAddress(rownum, rownum, 2, 3));
@@ -232,7 +334,6 @@ public class EscritorExcel {
 				nomes.add(participante.getUsuNome());
 			responsavelAssunto1.setCellValue(String.join(", ", nomes));
 
-			//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			Cell prazoAssunto1 = sheet.getRow(rownum).getCell(5);
 			prazoAssunto1.setCellValue(assunto.getAssPrazo().format(dateFormat));
@@ -293,16 +394,47 @@ public class EscritorExcel {
 
 			rownum += 9;
 		}
-		// http://localhost:8080/download/ata/excel/01/21
 
 	}
 
-	public byte[] getByteArray() throws IOException {
-		writeCabecalho(); writeParticipantes();
-		writePauta(); writeAssuntos(); writeAsssinaturas();
+	private void writeAviso() {
+		rownum++;
+		Cell aviso = sheet.getRow(++rownum).getCell(1);
+		sheet.addMergedRegion(new CellRangeAddress(rownum, rownum,1,5));
+		aviso.getRow().setHeight((short) (50 * sheet.getDefaultRowHeightInPoints()));
+		aviso.setCellValue("ESTA É UMA VERSÃO DE CONSULTA DA ATA DE REUNIÃO. " +
+				"PARA ACESSO AO DOCUMENTO OFICIAL É NECESSÁRIO ACESSAR O SISATAS.");
+
+		XSSFCellStyle styleAviso = workbook.createCellStyle();
+		styleAviso.setBorderBottom(BorderStyle.THIN);
+		styleAviso.setBorderTop(BorderStyle.THIN);
+		styleAviso.setBorderRight(BorderStyle.THIN);
+		styleAviso.setAlignment(HorizontalAlignment.CENTER);
+		styleAviso.setVerticalAlignment(VerticalAlignment.CENTER);
+		styleAviso.setBorderLeft(BorderStyle.THIN);
+		styleAviso.setWrapText(true);
+
+		for(int colu = 1; colu < 6; colu++)
+			aviso.getRow().getCell(colu).setCellStyle(styleAviso);
+
+		XSSFFont fonte = workbook.createFont();
+		fonte.setItalic(false);
+		fonte.setBold(true);
+		fonte.setFontName("Arial");
+		fonte.setFontHeightInPoints((short)10);
+		styleAviso.setFont(fonte);
+		aviso.setCellStyle(styleAviso);
+
+	}
+
+	public byte[] getByteArray(boolean comAssinatura) throws IOException {
+		writeCabecalho(); writeParticipantes(); writePauta();
+		writeObservacao(); writeAssuntos(); writeRevisoes(); writeAviso();
+		if (comAssinatura) writeAsssinaturas();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		workbook.write(bos); workbook.close();
 		return bos.toByteArray();
 	}
 
 }
+// http://localhost:8080/download/ata/excel/01/21

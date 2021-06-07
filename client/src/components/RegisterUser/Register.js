@@ -15,11 +15,13 @@ import {
 import { Link } from "react-router-dom";
 import { styles } from "../../assets/styles/Styles";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import "./Register.css";
 import userServices from "../../services/user";
 import Alerta from "../Snackbar/Alerta";
+import { Delete } from "@material-ui/icons";
+import emailServices from "../../services/email";
 
 const Register = (props) => {
   const { classes } = props;
@@ -35,6 +37,7 @@ const Register = (props) => {
   const [openSnack, setOpenSnack] = useState(false);
   const [msgSucesso, setMsgSucesso] = useState("");
   const [msgErro, setMsgErro] = useState("");
+
 
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -54,14 +57,56 @@ const Register = (props) => {
     setPreview("");
   };
 
-  const changePreview = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => setPreview(reader.result);
+  const deletePreview = () => {
+    setPreview(null);
   };
+
+  const changePreview = (file) => {
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => setPreview(reader.result);
+    }
+  };
+
+
+
+  const EnviarEmail = () => {
+    //console.log(body)
+
+    userServices.solicitarAlteracaoSenha(email)
+      .then(res => {
+
+    var body = [
+      {
+          userEnviar: "Noreply.bureautech",
+          senhaEnviar: "bureautech",
+          emailEnviar: "noreply.bureautech@gmail.com",
+          nomeEnviar: "Sisatas",
+          emailReceber: email,
+          nomeReceber: nome,         
+          linkSenha : `http://localhost:3000/cadastrar-senha?usu_token=${res.data.data}`
+        }]
+
+        emailServices
+          .novoUsuario(body)
+          .then(res => {
+            console.log("email enviado\nresp: " + res.data)
+            console.log("email env: " + JSON.stringify(body))
+          })
+          .catch(err => {
+            console.log("não foi o email\nerr: " + err)
+          })
+
+      })
+      .catch(err => console.log("erro ao solicitar" + err))
+
+
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const body = {
       usuNome: nome,
       usuEmail: email,
@@ -82,17 +127,17 @@ const Register = (props) => {
       .cadastrarUsuario(formData)
       /* / Alterações Daniel */
       .then((res) => {
-        if (res.data.erro == true){
+        if (res.data.erro === true) {
           setMsgSucesso(false);
           setMsgErro(res.data.mensagem);
-          setOpenSnack(true);
-        }
-        else{
+
+        } else {
           clear();
           setMsgSucesso("Usuário cadastrado com sucesso!");
           setMsgErro(false);
-          setOpenSnack(true);
+          EnviarEmail()
         }
+        setOpenSnack(true);
       })
       .catch((err) => {
         console.log(err.message);
@@ -358,8 +403,19 @@ const Register = (props) => {
                 </Grid>
                 {preview && (
                   <Grid item xs={11} sm={10} style={{ marginTop: 10 }}>
-                    <Typography style={{ color: "white" }}>Prévia: </Typography>
-                    <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
+                    <Grid container>
+                      <Typography style={{ color: "white" }}>Prévia: </Typography>
+                      <img src={preview} alt="Prévia da assinatura" style={{ maxWidth: 200, maxHeight: 200 }} />
+                    </Grid>
+                    <Grid container>
+                      <IconButton
+                        onClick={deletePreview}
+                        style={{ borderRadius: 20, color: "white", fontSize: "1.2rem", padding: "10px 0px" }}
+                      >
+                        Remover
+                        <Delete color="secondary" />
+                      </IconButton>
+                    </Grid>
                   </Grid>
                 )}
               </Grid>
