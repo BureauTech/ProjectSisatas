@@ -69,9 +69,10 @@ const Relatorio = (props) => {
   const history = useHistory();
 
   const columns = [
-    { field: "logDataHora", headerName: "Data", width: 150 },
-    { field: "logDescricao", headerName: "Descrição", width: 350 },
-    { field: "logAutor", headerName: "Autor", width: 400 },
+    { field: "data", headerName: "Data", width: 150 },
+    { field: "estado", headerName: "Estado", width: 150 },
+    { field: "projeto", headerName: "Projeto", width: 400 },
+    { field: "usuResponsavel", headerName: "Responsável", width: 400 },
     {
       field: "Exibir",
       headerName: "Exibir",
@@ -114,6 +115,7 @@ const Relatorio = (props) => {
         let lista2 = [];
         lista.forEach((ata) => {
           ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
+          console.log(ata.geraAtas.usuId, usuario.usuId)
           if (ata.geraAtas.usuId === usuario.usuId) {
             lista2.push({
               id: ata.ataId,
