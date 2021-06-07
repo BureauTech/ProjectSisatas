@@ -11,5 +11,6 @@ public interface AprovacaoAtaProjection {
 
   interface AprovaAtaProjection {
     Long getUsuId();
+    String getUsuNome();
   }
 }
