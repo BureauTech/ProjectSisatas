@@ -8,6 +8,7 @@ import "../../../components/ExibirAta/ListarAta.css";
 import ptBR from "../../../components/ptBR/DataGrid";
 import ataServices from "../../../services/ata.js";
 import Alerta from "../../../components/Snackbar/Alerta.js";
+import { useAutenticacao } from "../../../context/Autenticacao";
 
 /*
  * @author Charles Ramos
@@ -62,6 +63,7 @@ export default function Data() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
   const history = useHistory();
+  const { usuario } = useAutenticacao()
 
   const formatDate = (date) => {
     const data = new Date(date).toLocaleDateString();
@@ -70,14 +72,15 @@ export default function Data() {
 
   useEffect(() => {
     ataServices
-    // validar se está funcionando.
       .listarAtas("DataGrid")
       .then((res) => {
         let lista = res.data.data;
         let lista2 = [];
         lista.forEach((ata) => {
           ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
-          lista2.push({ id: ata["ataId"], ...ata });
+          if (ata.geraAtas.usuId === usuario.usuId) {
+            lista2.push({ id: ata["ataId"], ...ata });
+          }
         });
         setRows(lista2);
       })

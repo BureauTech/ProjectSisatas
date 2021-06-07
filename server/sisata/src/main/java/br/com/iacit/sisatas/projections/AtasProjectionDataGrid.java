@@ -8,7 +8,11 @@ public interface AtasProjectionDataGrid {
 	String getAtaProjeto();
 	String getAtaPauta();
 	String getAtaEstado();
-	String getAtaQuemAprovou();
+	UsuariosProjectionNomeId getGeraAtas();
 	LocalDate getAtaDataCriacao();
 
+	interface UsuariosProjectionNomeId {
+		Long getUsuId();
+		String getUsuNome();
+	}
 }

@@ -9,6 +9,8 @@ import ptBR from "../../components/ptBR/DataGrid";
 import { Link, useHistory } from "react-router-dom";
 import Alerta from "../../components/Snackbar/Alerta.js";
 import Loading from "../../pages/Loading/Loading.js";
+import ataServices from "../../services/ata.js";
+import { useAutenticacao } from "../../context/Autenticacao.js";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -50,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * Arquivo para página de relatório do gerente
- * 
+ *
  * @author Denis Lima
  * @param {any} props
  * @returns Componente para Relatório do Gerente
@@ -75,42 +77,43 @@ const Relatorio = (props) => {
       headerName: "Exibir",
       width: 130,
       renderCell: (params) => (
-        <Button 
-        // onClick={() => history.push("perfil", { id: params.id })}
-        >
+        <Button onClick={() => history.push("ata", { id: params.id })}>
           <VisibilityIcon className="icon" />
         </Button>
       ),
     },
   ];
+  const formatDate = (date) => {
+    const data = new Date(date).toLocaleDateString();
+    return data;
+  };
+
+  const { usuario } = useAutenticacao();
 
   useEffect(() => {
-
-    setRows([
-      {
-        id: 1,
-        data: new Date().toLocaleDateString(),
-        estado: 'Revisada',
-        projeto: 'Titulo do projeto',
-        usuResponsavel: 'Denis Ferreira Lima'
-      },
-      {
-        id: 2,
-        data: new Date().toLocaleDateString(),
-        estado: 'Nova',
-        projeto: 'Titulo do projeto 2',
-        usuResponsavel: 'Charles Ramos Ferreira'
-      },
-      {
-        id: 3,
-        data: new Date().toLocaleDateString(),
-        estado: 'Assinada',
-        projeto: 'Titulo do projeto 3',
-        usuResponsavel: 'Wesley Ribeiro Dias'
-      },
-    ])
-  }, [])
-
+    ataServices
+      .listarAtas("DataGrid")
+      .then((res) => {
+        let lista = res.data.data;
+        let lista2 = [];
+        lista.forEach((ata) => {
+          ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
+          if (ata.geraAtas.usuId === usuario.usuId) {
+            lista2.push({
+              id: ata.ataId,
+              data: ata.ataDataCriacao,
+              estado: ata.ataEstado,
+              projeto: ata.ataProjeto,
+              usuResponsavel: ata.geraAtas.usuNome,
+            });
+          }
+        });
+        setRows(lista2);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   return (
     <Grid container justify="center">
@@ -134,6 +137,6 @@ const Relatorio = (props) => {
       </Grid> */}
     </Grid>
   );
-}
+};
 
-export default Relatorio
+export default Relatorio;
