@@ -406,4 +406,29 @@ public class AtasController {
 		}
 		return result;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/alterarEstadoAta", method = RequestMethod.POST)
+	public String alterarEstadoAta(@RequestParam String ataId, @RequestParam String estado) {
+
+		String result = null;
+		String ata_id = ataId.substring(0, ataId.length() - 2) + "/" + ataId.substring(ataId.length() - 2);
+
+		try {
+			List<AtasModel> ataBanco = ap.findBy(AtasModel.class);
+			AtasModel ataBd = null;
+			for (AtasModel ata : ataBanco) {
+				System.out.println(ata.getAtaId() + ata_id);
+				if (ata.getAtaId().equals(ata_id)) {
+					ataBd = ata;
+				}
+			}
+			ataBd.setAtaEstado(estado);
+			ap.save(ataBd);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			result = e.getMessage();
+		}
+		return result;
+	}
 }

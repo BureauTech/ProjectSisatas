@@ -154,6 +154,7 @@ const Relatorio = (props) => {
             setMsgSucesso("Ata enviada por email!")
             setMsgErro(false)
             setOpenSnack(true)
+            ataServices.alterarEstado(ata.ataId.split("/").join(""), 'Enviada').then(res => console.log(res)).catch(err => console.log(err))
           })
           .catch((err) => {
             setMsgSucesso(false)
