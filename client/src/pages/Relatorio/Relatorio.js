@@ -13,6 +13,7 @@ import ataServices from "../../services/ata.js";
 import { useAutenticacao } from "../../context/Autenticacao.js";
 import logServices from "../../services/log";
 import aprovacaoAtaServices from "../../services/aprovacaoAta.js";
+import emailServices from "../../services/email.js";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -92,12 +93,24 @@ const Relatorio = (props) => {
     {
       field: "Pendentes",
       headerName: "Pendências",
-      width: 200,
+      width: 160,
       renderCell: (params) => (
-        <Button onClick={() => {
-          getDados(params.id)
-          handleClick()
-        }}>
+        <Button
+          onClick={() => {
+            getDados(params.id);
+            handleClick();
+          }}
+        >
+          <VisibilityIcon className="icon" />
+        </Button>
+      ),
+    },
+    {
+      field: "Envio",
+      headerName: "Enviar ata",
+      width: 160,
+      renderCell: (params) => (
+        <Button onClick={() => enviarPorEmail(params.id)}>
           <VisibilityIcon className="icon" />
         </Button>
       ),
@@ -106,6 +119,53 @@ const Relatorio = (props) => {
   const formatDate = (date) => {
     const data = new Date(date).toLocaleDateString();
     return data;
+  };
+
+  //funcao para fazer o envio do email
+  const enviarPorEmail = (id) => {
+    console.log("ataid", id);
+    const pegarAta = async () => {
+      try {
+        const dados = await ataServices.pegarAta(id.split("/").join(""));
+        const ata = dados.data.data;
+
+        const infoProject = ata.participaAtas;
+
+        const listaEmail = [];
+
+        for (var i = 0; i < infoProject.length; i++) {
+          var bodyEmail = {
+            userEnviar: "Noreply.bureautech",
+            senhaEnviar: "bureautech",
+            emailEnviar: "noreply.bureautech@gmail.com",
+            nomeEnviar: "Sisatas",
+            emailReceber: infoProject[i].usuEmail,
+            nomeReceber: infoProject[i].usuNome,
+            ataId: ata.ataId,
+            linkDown: `http://localhost:8080/download/ata/excel/${ata.ataId}`,
+            ataProjeto: ata.ataProjeto,
+          };
+
+          listaEmail.push(bodyEmail);
+        }
+        emailServices
+          .enviaAtaEmail(listaEmail)
+          .then((res) => {
+            setMsgSucesso("Ata enviada por email!")
+            setMsgErro(false)
+            setOpenSnack(true)
+          })
+          .catch((err) => {
+            setMsgSucesso(false)
+            setMsgErro("Erro ao enviar ata por email")
+            setOpenSnack(true)
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    pegarAta();
   };
 
   const { usuario } = useAutenticacao();
@@ -134,7 +194,7 @@ const Relatorio = (props) => {
         let lista2 = [];
         lista.forEach((ata) => {
           ata.ataDataCriacao = formatDate(ata.ataDataCriacao);
-          console.log(ata.geraAtas.usuId, usuario.usuId)
+          console.log(ata.geraAtas.usuId, usuario.usuId);
           if (ata.geraAtas.usuId === usuario.usuId) {
             lista2.push({
               id: ata.ataId,
@@ -153,13 +213,16 @@ const Relatorio = (props) => {
   }, []);
 
   const getDados = (idAta) => {
-    aprovacaoAtaServices.pegarRelatorio(idAta).then(r => setDados(r.data)).catch(err => console.log(err))
-  }
+    aprovacaoAtaServices
+      .pegarRelatorio(idAta)
+      .then((r) => setDados(r.data))
+      .catch((err) => console.log(err));
+  };
 
   const handleClick = () => {
-    setOpen(!open)
-  }
- 
+    setOpen(!open);
+  };
+
   return (
     <Grid container justify="center">
       {/* <Grid item sm={12} lg={12}>
@@ -185,7 +248,9 @@ const Relatorio = (props) => {
                   dados.map((dds, index) => {
                     return (
                       <Grid item xs={12} key={index + 1} style={{ padding: "10px" }}>
-                        <Typography>{dds.aprDescricao} - {dds.aprovaAta.usuNome}</Typography>
+                        <Typography>
+                          {dds.aprDescricao} - {dds.aprovaAta.usuNome}
+                        </Typography>
                       </Grid>
                     );
                   })}
