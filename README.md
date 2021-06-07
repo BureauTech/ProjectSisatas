@@ -67,13 +67,10 @@ Para acompanhamento do desenvolvimento do projeto, [acesse o Board](https://www.
 Baseado no nosso backlog, as histórias que não foram concluídas, foram:
 
 - US13:
-  - Critério 1: Ferramenta de validação de ata.
-  - Critério 2: Ferramenta de aprovação ou recusa de atas e revisões.
+  - Critério 2: Ferramenta de aprovação ou recusa de revisões.
 
 - US18:
-  - Critério 1: Identificar usuários que revisaram ou possuem revisão pendente sobre determinada ata/revisão.
-  - Critério 2: Controle de estado da Ata (Criada, Revisada, Assinada, Enviada).
-  - Critério 3: Envio de ata.
+  - Critério 1: Identificar usuários que revisaram ou possuem revisão pendente sobre determinada revisão.
 
 **Documentação entregue:**
 
