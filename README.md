@@ -76,7 +76,7 @@ Baseado no nosso backlog, as histórias que não foram concluídas, foram:
 
 - [Testes de Software - Caixa Preta](./docs/Testes%20de%20Software%20-%20Caixa%20Preta.pdf)
 
-- [Manual de Usuário](./docs/)
+- [Manual de Usuário](./docs/Manual%20de%20Usuario.pdf)
 
 - [Plano de Desenvolvimento e Melhoria do SISATAS - Sistema de Gerenciamento de Atas](./docs/Plano%20de%20Melhoria.pdf)
 
